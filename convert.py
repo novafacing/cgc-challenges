@@ -16,6 +16,8 @@ for challenge_dir in challenges_dir.iterdir():
         ".", "_"
     )
 
+    challenge_exec_name = challenge_dir.name
+
     if not challenge_dir.is_dir():
         continue
 
@@ -51,10 +53,10 @@ for challenge_dir in challenges_dir.iterdir():
         rmtree(lib_dir)
 
     src_list = list(
-        filter(
-            lambda s: s.is_file(),
-            map(lambda s: s.relative_to(challenge_dir), src_dir.rglob("**/*")),
-        )
+        map(
+            lambda s: s.relative_to(challenge_dir),
+            filter(lambda s: s.is_file(), src_dir.rglob("**/*")),
+        ),
     )
     src_list_text = "\n".join(map(lambda s: f"""    '{s}',""", src_list))
 
@@ -65,9 +67,9 @@ for challenge_dir in challenges_dir.iterdir():
         f"{src_list_text}\n"
         "]\n"
         f"{challenge_name} = executable(\n"
-        f"    '{challenge_name}',\n"
+        f"    '{challenge_exec_name}',\n"
         f"    {challenge_name}_src,\n"
-        f"    include_directories: {challenge_name}_inc,\n"
+        f"    include_directories: [{challenge_name}_inc, libcgc_inc]\n"
         "    link_with: [libcgc]\n"
         ")\n"
     )
