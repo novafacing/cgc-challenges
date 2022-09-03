@@ -58,7 +58,7 @@ for challenge_dir in challenges_dir.iterdir():
 
     meson_build = (
         f"# {challenge_name}\n"
-        f"{challenge_name}_inc = include_dir('include')\n"
+        f"{challenge_name}_inc = include_directories('include')\n"
         f"{challenge_name}_src = [\n"
         f"{src_list_text}\n"
         "]\n"
