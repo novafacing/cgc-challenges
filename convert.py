@@ -54,7 +54,7 @@ for challenge_dir in challenges_dir.iterdir():
         content = (
             f"#ifndef {ifndef_name}\n"
             f"#define {ifndef_name}\n"
-            f"{content}"
+            f"{content}\n"
             f"#endif // {ifndef_name}\n"
         )
         header_file.write_text(content)
