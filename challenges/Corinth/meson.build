@@ -1,5 +1,4 @@
 # challenge_Corinth
-challenge_Corinth_inc = include_directories('include')
 challenge_Corinth_src = [
     'src/block.c',
     'src/handler.c',
@@ -12,6 +11,6 @@ challenge_Corinth_src = [
 challenge_Corinth = executable(
     'Corinth',
     challenge_Corinth_src,
-    include_directories: [challenge_Corinth_inc, libcgc_inc],
+    include_directories: [libcgc_inc],
     link_with: [libcgc]
 )
