@@ -48,6 +48,17 @@ for challenge_dir in challenges_dir.iterdir():
     for lib_header in lib_headers:
         lib_header.rename(include_dir / lib_header.name)
 
+    for header_file in include_dir.iterdir():
+        content = header_file.read_text()
+        ifndef_name = header_file.stem.upper().replace("-", "_").replace(".", "_")
+        content = (
+            f"#ifndef {ifndef_name}\n"
+            f"#define {ifndef_name}\n"
+            f"{content}"
+            f"#endif // {ifndef_name}\n"
+        )
+        header_file.write_text(content)
+
     if lib_dir.exists():
         copytree(lib_dir, src_dir / lib_dir.name)
         rmtree(lib_dir)
