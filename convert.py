@@ -5,15 +5,25 @@ Convert cmake challenges to meson
 from os import mkdir
 from pathlib import Path
 
+from string import ascii_letters
+
 challenges_dir = Path(__file__).with_name("challenges")
 
 for challenge_dir in challenges_dir.iterdir():
+
+    challenge_name = "challenge_" + challenge_dir.name
+
     if not challenge_dir.is_dir():
         continue
 
     print(f"Converting {challenge_dir}")
 
     src_dir = challenge_dir / "src"
+
+    if not src_dir.is_dir():
+        print(f"{challenge_dir} has no src directory")
+        continue
+
     lib_dir = challenge_dir / "lib"
     include_dir = challenge_dir / "include"
 
@@ -21,7 +31,11 @@ for challenge_dir in challenges_dir.iterdir():
         include_dir.mkdir()
 
     src_headers = list(filter(lambda x: x.suffix == ".h", src_dir.iterdir()))
-    lib_headers = list(filter(lambda x: x.suffix == ".h", lib_dir.iterdir()))
+
+    if lib_dir.is_dir():
+        lib_headers = list(filter(lambda x: x.suffix == ".h", lib_dir.iterdir()))
+    else:
+        lib_headers = []
 
     for src_header in src_headers:
         src_header.rename(include_dir / src_header.name)
@@ -36,15 +50,15 @@ for challenge_dir in challenges_dir.iterdir():
     src_list_text = "\n".join(map(lambda s: f"""    '{s}',""", src_list))
 
     meson_build = (
-        f"# {challenge_dir.name}\n"
-        f"{challenge_dir.name}_inc = include_dir('include')\n"
-        f"{challenge_dir.name}_src = [\n"
+        f"# {challenge_name}\n"
+        f"{challenge_name}_inc = include_dir('include')\n"
+        f"{challenge_name}_src = [\n"
         f"{src_list_text}\n"
         "]\n"
-        f"{challenge_dir.name} = executable(\n"
-        f"    '{challenge_dir.name}',\n"
-        f"    {challenge_dir.name}_src,\n"
-        f"    include_directories: {challenge_dir.name}_inc\n"
+        f"{challenge_name} = executable(\n"
+        f"    '{challenge_name}',\n"
+        f"    {challenge_name}_src,\n"
+        f"    include_directories: {challenge_name}_inc\n"
         ")\n"
     )
 
