@@ -69,7 +69,7 @@ for challenge_dir in challenges_dir.iterdir():
         f"{challenge_name} = executable(\n"
         f"    '{challenge_exec_name}',\n"
         f"    {challenge_name}_src,\n"
-        f"    include_directories: [{challenge_name}_inc, libcgc_inc]\n"
+        f"    include_directories: [{challenge_name}_inc, libcgc_inc],\n"
         "    link_with: [libcgc]\n"
         ")\n"
     )
