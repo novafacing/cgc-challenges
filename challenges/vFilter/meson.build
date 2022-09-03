@@ -5,7 +5,6 @@ challenge_vFilter_src = [
     'src/validator.c',
     'src/vm.c',
     'src/lib/calloc.c',
-    'src/lib/cgc_malloc_private_g_heap.c',
     'src/lib/ctype.c',
     'src/lib/exit.c',
     'src/lib/fflush.c',
@@ -38,6 +37,7 @@ challenge_vFilter_src = [
     'src/lib/strstr.c',
     'src/lib/strtol.c',
     'src/lib/strtoul.c',
+    'src/lib/cgc_malloc_private_g_heap.c',
 ]
 challenge_vFilter = executable(
     'vFilter',

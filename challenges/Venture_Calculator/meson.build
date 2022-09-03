@@ -3,7 +3,6 @@ challenge_Venture_Calculator_inc = include_directories('include')
 challenge_Venture_Calculator_src = [
     'src/service.cc',
     'src/lib/calloc.c',
-    'src/lib/cgc_malloc_private_g_heap.c',
     'src/lib/ctype.c',
     'src/lib/cxa.cc',
     'src/lib/exit.c',
@@ -37,6 +36,7 @@ challenge_Venture_Calculator_src = [
     'src/lib/strstr.c',
     'src/lib/strtol.c',
     'src/lib/strtoul.c',
+    'src/lib/cgc_malloc_private_g_heap.c',
 ]
 challenge_Venture_Calculator = executable(
     'Venture_Calculator',

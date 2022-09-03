@@ -5,7 +5,6 @@ challenge_XStore_src = [
     'src/tr.c',
     'src/xpack.c',
     'src/lib/calloc.c',
-    'src/lib/cgc_malloc_private_g_heap.c',
     'src/lib/ctype.c',
     'src/lib/exit.c',
     'src/lib/fflush.c',
@@ -37,6 +36,7 @@ challenge_XStore_src = [
     'src/lib/strstr.c',
     'src/lib/strtol.c',
     'src/lib/strtoul.c',
+    'src/lib/cgc_malloc_private_g_heap.c',
 ]
 challenge_XStore = executable(
     'XStore',

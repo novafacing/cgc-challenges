@@ -5,7 +5,6 @@ challenge_Neural_House_src = [
     'src/nnet.cc',
     'src/service.cc',
     'src/lib/calloc.c',
-    'src/lib/cgc_malloc_private_g_heap.c',
     'src/lib/ctype.c',
     'src/lib/cxa.cc',
     'src/lib/exit.c',
@@ -39,6 +38,7 @@ challenge_Neural_House_src = [
     'src/lib/strstr.c',
     'src/lib/strtol.c',
     'src/lib/strtoul.c',
+    'src/lib/cgc_malloc_private_g_heap.c',
 ]
 challenge_Neural_House = executable(
     'Neural_House',

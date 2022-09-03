@@ -4,7 +4,6 @@ challenge_Sorter_src = [
     'src/service.c',
     'src/sort.c',
     'src/lib/calloc.c',
-    'src/lib/cgc_malloc_private_g_heap.c',
     'src/lib/ctype.c',
     'src/lib/exit.c',
     'src/lib/fflush.c',
@@ -36,6 +35,7 @@ challenge_Sorter_src = [
     'src/lib/strstr.c',
     'src/lib/strtol.c',
     'src/lib/strtoul.c',
+    'src/lib/cgc_malloc_private_g_heap.c',
 ]
 challenge_Sorter = executable(
     'Sorter',

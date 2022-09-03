@@ -9,7 +9,6 @@ challenge_Pattern_Finder_src = [
     'src/sigdb.c',
     'src/trie.c',
     'src/lib/calloc.c',
-    'src/lib/cgc_malloc_private_g_heap.c',
     'src/lib/ctype.c',
     'src/lib/exit.c',
     'src/lib/fflush.c',
@@ -42,6 +41,7 @@ challenge_Pattern_Finder_src = [
     'src/lib/strstr.c',
     'src/lib/strtol.c',
     'src/lib/strtoul.c',
+    'src/lib/cgc_malloc_private_g_heap.c',
 ]
 challenge_Pattern_Finder = executable(
     'Pattern_Finder',

@@ -7,7 +7,6 @@ challenge_Azurad_src = [
     'src/parser.cc',
     'src/service.cc',
     'src/lib/calloc.c',
-    'src/lib/cgc_malloc_private_g_heap.c',
     'src/lib/ctype.c',
     'src/lib/cxa.cc',
     'src/lib/exit.c',
@@ -41,6 +40,7 @@ challenge_Azurad_src = [
     'src/lib/strstr.c',
     'src/lib/strtol.c',
     'src/lib/strtoul.c',
+    'src/lib/cgc_malloc_private_g_heap.c',
 ]
 challenge_Azurad = executable(
     'Azurad',

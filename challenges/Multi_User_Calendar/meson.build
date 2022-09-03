@@ -9,7 +9,6 @@ challenge_Multi_User_Calendar_src = [
     'src/read.c',
     'src/user.c',
     'src/lib/calloc.c',
-    'src/lib/cgc_malloc_private_g_heap.c',
     'src/lib/ctype.c',
     'src/lib/exit.c',
     'src/lib/fflush.c',
@@ -42,6 +41,7 @@ challenge_Multi_User_Calendar_src = [
     'src/lib/strstr.c',
     'src/lib/strtol.c',
     'src/lib/strtoul.c',
+    'src/lib/cgc_malloc_private_g_heap.c',
 ]
 challenge_Multi_User_Calendar = executable(
     'Multi_User_Calendar',

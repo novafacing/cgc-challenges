@@ -3,7 +3,6 @@ challenge_Headscratch_inc = include_directories('include')
 challenge_Headscratch_src = [
     'src/service.c',
     'src/lib/calloc.c',
-    'src/lib/cgc_malloc_private_g_heap.c',
     'src/lib/ctype.c',
     'src/lib/exit.c',
     'src/lib/fflush.c',
@@ -36,6 +35,7 @@ challenge_Headscratch_src = [
     'src/lib/strstr.c',
     'src/lib/strtol.c',
     'src/lib/strtoul.c',
+    'src/lib/cgc_malloc_private_g_heap.c',
 ]
 challenge_Headscratch = executable(
     'Headscratch',
