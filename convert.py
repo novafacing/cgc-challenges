@@ -48,7 +48,12 @@ for challenge_dir in challenges_dir.iterdir():
         copytree(lib_dir, src_dir / lib_dir.name)
         rmtree(lib_dir)
 
-    src_list = list(map(lambda s: s.relative_to(challenge_dir), src_dir.rglob("**/*")))
+    src_list = list(
+        filter(
+            lambda s: s.is_file(),
+            map(lambda s: s.relative_to(challenge_dir), src_dir.rglob("**/*")),
+        )
+    )
     src_list_text = "\n".join(map(lambda s: f"""    '{s}',""", src_list))
 
     meson_build = (
