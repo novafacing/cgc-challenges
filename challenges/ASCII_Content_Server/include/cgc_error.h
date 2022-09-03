@@ -1,3 +1,5 @@
+#ifndef CGC_ERROR
+#define CGC_ERROR
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -30,3 +32,4 @@ void cgc_PrintErrorAndTerminate(char *message);
 void cgc_VerifyPointerOrTerminate(void *ptr, char *message);
 
 #endif // ERROR_H
+#endif // CGC_ERROR

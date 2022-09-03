@@ -1,3 +1,5 @@
+#ifndef CGC_COMMON
+#define CGC_COMMON
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -35,3 +37,4 @@ THE SOFTWARE.
 #define MAX_PASS_LEN 15 
 
 #endif
+#endif // CGC_COMMON

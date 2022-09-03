@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -33,3 +35,5 @@ THE SOFTWARE.
 #define MAX_WRONG_MOVES 3
 
 #endif
+
+#endif // CGC_SERVICE

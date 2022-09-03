@@ -1,3 +1,5 @@
+#ifndef CGC_PACKET
+#define CGC_PACKET
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -143,3 +145,4 @@ int cgc_encrypt_data(char *packet, int len, int type);
 int cgc_check_win(int);
 
 #endif
+#endif // CGC_PACKET

@@ -1,3 +1,5 @@
+#ifndef CGC_CGC_MALLOC
+#define CGC_CGC_MALLOC
 #ifndef CGC_MALLOC_H
 #define CGC_MALLOC_H
 
@@ -6,3 +8,5 @@ void  cgc_free(void *ptr);
 void *cgc_malloc(cgc_size_t size);
 void *realloc(void *ptr, cgc_size_t size);
 #endif
+
+#endif // CGC_CGC_MALLOC

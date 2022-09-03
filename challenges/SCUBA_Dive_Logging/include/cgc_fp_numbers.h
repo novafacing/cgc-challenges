@@ -1,3 +1,5 @@
+#ifndef CGC_FP_NUMBERS
+#define CGC_FP_NUMBERS
 /*
 
 Author: Steve Wood <swood@cromulence.co>
@@ -35,3 +37,4 @@ void print_fp(fp_number);
 int strtofp(char *, fp_number *);
 fp_number div_fp(fp_number a, fp_number b);
 fp_number mod_fp(fp_number a, fp_number b);
+#endif // CGC_FP_NUMBERS

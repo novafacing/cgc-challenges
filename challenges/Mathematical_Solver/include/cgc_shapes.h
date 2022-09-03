@@ -1,3 +1,5 @@
+#ifndef CGC_SHAPES
+#define CGC_SHAPES
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -35,3 +37,4 @@ int cgc_request_area();
 int cgc_request_2d_area_dim();
 
 #endif //SHAPES_H_DEFINED
+#endif // CGC_SHAPES

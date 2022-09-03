@@ -1,3 +1,5 @@
+#ifndef CGC_MENU
+#define CGC_MENU
 /*
 
 Author: Steve Wood <swood@cromulence.co>
@@ -41,3 +43,4 @@ int cgc_find_char(char c, char *string);
 
 
 #endif
+#endif // CGC_MENU

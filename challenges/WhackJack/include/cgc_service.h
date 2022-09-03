@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 
 /*
 
@@ -73,3 +75,5 @@ char cgc_superDuperAlgo( unsigned char dealer_show_card, unsigned char *player_c
 #endif
 
 
+
+#endif // CGC_SERVICE

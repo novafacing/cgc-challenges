@@ -1,3 +1,5 @@
+#ifndef CGC_MALLOC
+#define CGC_MALLOC
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -33,7 +35,7 @@
  * @return VA of allocated space, 
  *   or NULL if size is 0 or there is an error allocating more space.
  */
-void *malloc(cgc_size_t size);
+void *cgc_malloc(cgc_size_t size);
 
 /**
  * A relatively simple calloc implementation.
@@ -42,7 +44,7 @@ void *malloc(cgc_size_t size);
  * @return VA of allocated space, 
  *   or NULL if size is 0 or there is an error allocating more space.
  */
-void *calloc(cgc_size_t size);
+void *cgc_calloc(cgc_size_t size);
 
 
 /**
@@ -52,6 +54,8 @@ void *calloc(cgc_size_t size);
  *
  * @param VA of allocated memory.
  */
-void free(void *ptr);
+void cgc_free(void *ptr);
 
 #endif
+
+#endif // CGC_MALLOC

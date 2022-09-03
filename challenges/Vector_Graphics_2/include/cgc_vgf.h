@@ -1,3 +1,5 @@
+#ifndef CGC_VGF
+#define CGC_VGF
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -107,3 +109,4 @@ int cgc_VGFVerify(VGF_Header *header);
 int cgc_VGFProcess(uint8_t **file_data_in, uint8_t *file_end, Canvas *c);
 
 #endif
+#endif // CGC_VGF

@@ -1,3 +1,5 @@
+#ifndef CGC_BLACKJACK
+#define CGC_BLACKJACK
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -44,3 +46,4 @@ static const int bj_value[SIZE_OF_DECK + 1] = {
 void cgc_blackjack(player_info *player);
 
 #endif // BLACKJACK_H
+#endif // CGC_BLACKJACK

@@ -1,3 +1,5 @@
+#ifndef CGC_COMMANDS
+#define CGC_COMMANDS
 /*
 
 Author: Steve Wood <swood@cromulence.com>
@@ -45,3 +47,5 @@ THE SOFTWARE.
 
 #endif
 
+
+#endif // CGC_COMMANDS

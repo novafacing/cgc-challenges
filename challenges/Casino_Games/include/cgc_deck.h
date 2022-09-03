@@ -1,3 +1,5 @@
+#ifndef CGC_DECK
+#define CGC_DECK
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -66,3 +68,4 @@ static const char *card_names[SIZE_OF_DECK + 1] = {
 
 
 #endif // DECK_H
+#endif // CGC_DECK

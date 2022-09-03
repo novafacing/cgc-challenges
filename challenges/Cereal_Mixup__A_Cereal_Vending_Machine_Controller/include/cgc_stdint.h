@@ -1,3 +1,5 @@
+#ifndef CGC_STDINT
+#define CGC_STDINT
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -38,3 +40,4 @@ typedef enum {
 #define SUCCESS 0
 
 #endif
+#endif // CGC_STDINT

@@ -1,3 +1,5 @@
+#ifndef CGC_MESSAGE
+#define CGC_MESSAGE
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -46,3 +48,4 @@ int cgc_get_draft_count(char *);
 int cgc_get_inbox_count(char *);
 void cgc_print_draft_for_send(char *);
 void cgc_print_draft_for_del(char *);
+#endif // CGC_MESSAGE

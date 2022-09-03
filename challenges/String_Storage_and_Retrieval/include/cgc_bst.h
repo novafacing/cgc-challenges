@@ -1,3 +1,5 @@
+#ifndef CGC_BST
+#define CGC_BST
 /*
 
 Author: Steve Wood <swood@cromulence.co>
@@ -67,3 +69,5 @@ int cgc_count_nodes(bst_node_type *node, bst_stats_type *stats);
 int cgc_count_bst_stats(bst_node_type *head, bst_stats_type *stats);
 
 #endif
+
+#endif // CGC_BST

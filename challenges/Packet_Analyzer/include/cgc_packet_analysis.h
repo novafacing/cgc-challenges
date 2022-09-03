@@ -1,3 +1,5 @@
+#ifndef CGC_PACKET_ANALYSIS
+#define CGC_PACKET_ANALYSIS
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -93,3 +95,4 @@ int cgc_AnalyzePacket(SystemState *state, Packet *packet);
 void cgc_ProcessAllFilters(Packet *packet, SystemState *state, int *negative_match, int *positive_match);
 int cgc_FilterMatch(PacketFilter *filter, Packet *packet);
 #endif
+#endif // CGC_PACKET_ANALYSIS

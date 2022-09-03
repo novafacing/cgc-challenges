@@ -1,3 +1,5 @@
+#ifndef CGC_PACKET_IO
+#define CGC_PACKET_IO
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -36,3 +38,4 @@ int cgc_ReceiveAndProcessStream(SystemState *state);
 void cgc_DisplayStatistics(SystemState *state);
 
 #endif
+#endif // CGC_PACKET_IO

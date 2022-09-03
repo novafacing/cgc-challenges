@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
 
 Author: Steve Wood <swood@cromulence.co>
@@ -97,3 +99,5 @@ int cgc_update_dive(dive_log_type *);
 
 
 #endif
+
+#endif // CGC_SERVICE

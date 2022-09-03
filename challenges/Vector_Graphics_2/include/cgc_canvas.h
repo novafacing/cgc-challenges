@@ -1,3 +1,5 @@
+#ifndef CGC_CANVAS
+#define CGC_CANVAS
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -51,3 +53,4 @@ void cgc_FlattenCanvas(Canvas *c);
 void cgc_DestroyCanvas(Canvas **c);
 
 #endif
+#endif // CGC_CANVAS

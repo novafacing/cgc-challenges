@@ -1,3 +1,5 @@
+#ifndef CGC_MYMATH
+#define CGC_MYMATH
 /*
 
 Author: Jason Williams <jdw@cromulence.co>
@@ -30,3 +32,5 @@ double cgc_floor( double );
 double cgc_round( double, double n );
 
 #endif // __MYMATH_H__
+
+#endif // CGC_MYMATH

@@ -1,3 +1,5 @@
+#ifndef CGC_EXTERNAL
+#define CGC_EXTERNAL
 #ifndef _EXTERNAL_H
 #define _EXTERNAL_H
 
@@ -15,3 +17,5 @@ extern void *malloc(cgc_size_t size);
 extern void free(void *ptr);
 
 #endif /* _EXTERNAL_H */
+
+#endif // CGC_EXTERNAL

@@ -1,3 +1,5 @@
+#ifndef CGC_STDLIB
+#define CGC_STDLIB
 /*
 
 Author: Jason Williams <jdw@cromulence.com>
@@ -97,3 +99,5 @@ char *cgc_strdup( char * );
 int cgc_flush_input(int fd);
 
 #endif // __STDLIB_H__
+
+#endif // CGC_STDLIB

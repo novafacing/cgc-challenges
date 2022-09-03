@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
 
 Author: James Connor (jymbo@cromulence.com)
@@ -109,3 +111,5 @@ unsigned int cgc_validate_fw(pState state);
 int cgc_check_val(unsigned char *buf,unsigned short size);
 int cgc_exit_normal();
 #endif
+
+#endif // CGC_SERVICE

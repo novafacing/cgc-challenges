@@ -1,3 +1,5 @@
+#ifndef CGC_PMP
+#define CGC_PMP
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -60,3 +62,5 @@ int cgc_PMPTransmit(PMP_File *pmp);
 void cgc_PMPDeallocate(PMP_File *pmp);
 
 #endif
+
+#endif // CGC_PMP

@@ -1,3 +1,5 @@
+#ifndef CGC_MATH_LIB
+#define CGC_MATH_LIB
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -58,3 +60,5 @@ THE SOFTWARE.
 int cgc_seed_prng();
 
 #endif
+
+#endif // CGC_MATH_LIB

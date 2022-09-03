@@ -1,3 +1,5 @@
+#ifndef CGC_GAME
+#define CGC_GAME
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -78,3 +80,4 @@ int cgc_create_random_piece(Piece *piece);
 int cgc_get_piece(char pce);
 
 #endif
+#endif // CGC_GAME

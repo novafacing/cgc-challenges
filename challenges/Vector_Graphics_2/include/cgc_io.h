@@ -1,3 +1,5 @@
+#ifndef CGC_IO
+#define CGC_IO
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -31,3 +33,4 @@ int cgc_ReceiveAll(void *buffer, cgc_size_t length);
 int cgc_SendNull(cgc_size_t length);
 
 #endif
+#endif // CGC_IO

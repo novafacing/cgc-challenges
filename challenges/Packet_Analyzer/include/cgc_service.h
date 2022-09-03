@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -54,3 +56,4 @@ typedef struct SystemState_s {
 } SystemState;
 
 #endif
+#endif // CGC_SERVICE

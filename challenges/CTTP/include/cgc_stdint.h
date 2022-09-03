@@ -1,3 +1,5 @@
+#ifndef CGC_STDINT
+#define CGC_STDINT
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -41,3 +43,5 @@ typedef long long int64_t;
 typedef uint8_t bool;
 
 #endif
+
+#endif // CGC_STDINT

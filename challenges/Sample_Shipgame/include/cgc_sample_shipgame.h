@@ -1,3 +1,5 @@
+#ifndef CGC_SAMPLE_SHIPGAME
+#define CGC_SAMPLE_SHIPGAME
 #ifndef SAMPLE_SHIPGAME_H
 #define SAMPLE_SHIPGAME_H
 
@@ -39,3 +41,5 @@ int cgc_processTarget(PlayerState* ps, Command* cmd);
 
 int printHelp();
 #endif//SAMPLE_SHIPGAME_H
+
+#endif // CGC_SAMPLE_SHIPGAME

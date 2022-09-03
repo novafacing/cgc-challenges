@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 
 /*
 
@@ -69,3 +71,5 @@ unsigned int cgc_check_db();
 #endif
 
 
+
+#endif // CGC_SERVICE

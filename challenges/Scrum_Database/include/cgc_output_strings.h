@@ -1,3 +1,5 @@
+#ifndef CGC_OUTPUT_STRINGS
+#define CGC_OUTPUT_STRINGS
 
 /*
 
@@ -43,3 +45,5 @@ extern char cgc_List_Products[];
 #endif
 
 
+
+#endif // CGC_OUTPUT_STRINGS

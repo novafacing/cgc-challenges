@@ -1,3 +1,5 @@
+#ifndef CGC_PAINT
+#define CGC_PAINT
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -40,3 +42,4 @@ void cgc_PaintLine(Canvas *c, uint8_t layer, uint8_t color, uint8_t fill, VGF_Li
 void cgc_PaintCircle(Canvas *c, uint8_t layer, uint8_t color, uint8_t fill, VGF_Circle *circle);
 
 #endif
+#endif // CGC_PAINT

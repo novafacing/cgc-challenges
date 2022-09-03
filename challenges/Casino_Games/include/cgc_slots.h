@@ -1,3 +1,5 @@
+#ifndef CGC_SLOTS
+#define CGC_SLOTS
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -32,3 +34,4 @@ THE SOFTWARE.
 void cgc_slots(player_info *player);
 
 #endif // SLOTS_H
+#endif // CGC_SLOTS

@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
 
 Author: James Connor (jymbo@cromulence.co)
@@ -162,3 +164,4 @@ void destroy_data( pDataStruct );
 
 
 #endif
+#endif // CGC_SERVICE

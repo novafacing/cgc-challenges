@@ -1,3 +1,5 @@
+#ifndef CGC_COMMAND
+#define CGC_COMMAND
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -40,3 +42,4 @@ int cgc_ReceiveCommand(CommandStruct *command, int *more_commands);
 void cgc_HandleCommand(CommandStruct *command);
 
 #endif // COMMAND_H
+#endif // CGC_COMMAND

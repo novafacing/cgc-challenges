@@ -1,3 +1,5 @@
+#ifndef CGC_STDINT
+#define CGC_STDINT
 #ifndef STDINT_H
 #define STDINT_H
 
@@ -12,3 +14,5 @@
 #define int8_t char
 
 #endif
+
+#endif // CGC_STDINT

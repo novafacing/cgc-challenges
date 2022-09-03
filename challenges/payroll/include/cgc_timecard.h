@@ -1,3 +1,5 @@
+#ifndef CGC_TIMECARD
+#define CGC_TIMECARD
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.com>
@@ -106,3 +108,5 @@ void cgc_output_paycheck(pemployee empl, int week);
 #define QUERY_WEEK_ALL 	4
 
 #endif //TIMECARD_H
+
+#endif // CGC_TIMECARD

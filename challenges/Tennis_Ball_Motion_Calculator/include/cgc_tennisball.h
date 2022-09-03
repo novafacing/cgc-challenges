@@ -1,3 +1,5 @@
+#ifndef CGC_TENNISBALL
+#define CGC_TENNISBALL
 #ifndef TENNISBALL_H
 #define TENNISBALL_H
 
@@ -48,3 +50,5 @@ typedef struct _Coords
 } Coords;
 
 #endif//TENNISBALL_H
+
+#endif // CGC_TENNISBALL

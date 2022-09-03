@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -88,3 +90,5 @@ int cgc_parseUserInput(Move*);
 #define COLLISION 0
 #define NO_COLLISION 1
 
+
+#endif // CGC_SERVICE

@@ -1,3 +1,5 @@
+#ifndef CGC_ERRNO
+#define CGC_ERRNO
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -30,3 +32,4 @@
 #define ERRNO_LOCK -14
 
 #endif
+#endif // CGC_ERRNO

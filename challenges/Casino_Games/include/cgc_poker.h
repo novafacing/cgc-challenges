@@ -1,3 +1,5 @@
+#ifndef CGC_POKER
+#define CGC_POKER
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -44,3 +46,4 @@ static const int poker_value[SIZE_OF_DECK + 1] = {
 void cgc_poker(player_info *player);
 
 #endif // POKER_H
+#endif // CGC_POKER

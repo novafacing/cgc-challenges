@@ -1,3 +1,5 @@
+#ifndef CGC_DATES
+#define CGC_DATES
 /*
 
 Author: Steve Wood <swood@cromulence.co>
@@ -71,3 +73,5 @@ int print_date (time_t);
 
 
 #endif
+
+#endif // CGC_DATES

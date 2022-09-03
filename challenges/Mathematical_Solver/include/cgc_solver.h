@@ -1,3 +1,5 @@
+#ifndef CGC_SOLVER
+#define CGC_SOLVER
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -33,3 +35,4 @@ int cgc_solve_equation(char* str, int *answer);
 
 
 #endif // SOLVER_H_DEFINED
+#endif // CGC_SOLVER

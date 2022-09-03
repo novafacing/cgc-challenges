@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 
 /*
 
@@ -81,3 +83,5 @@ int cgc_receive_bytes (unsigned char *buffer, cgc_size_t count);
 #endif
 
 
+
+#endif // CGC_SERVICE

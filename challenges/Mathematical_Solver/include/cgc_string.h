@@ -1,3 +1,5 @@
+#ifndef CGC_STRING
+#define CGC_STRING
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -32,3 +34,4 @@ int cgc_stoi(char *str, int *moved);
 int cgc_itos(int, char *str);
 
 #endif // STRING_H_DEFINED
+#endif // CGC_STRING

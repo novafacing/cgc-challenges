@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -70,3 +72,4 @@ extern Game_Info game_info;
 
 void cgc_print_statistics();
 int cgc_print_menu();
+#endif // CGC_SERVICE

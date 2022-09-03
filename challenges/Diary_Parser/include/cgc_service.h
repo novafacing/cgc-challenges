@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -102,3 +104,5 @@ uint16_t success_info[5][2];
 */
 
 #endif
+
+#endif // CGC_SERVICE

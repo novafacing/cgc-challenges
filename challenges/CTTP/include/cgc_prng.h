@@ -1,3 +1,5 @@
+#ifndef CGC_PRNG
+#define CGC_PRNG
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -28,3 +30,5 @@ uint32_t cgc_randint();
 uint32_t cgc_rand(void *buf, cgc_size_t s, cgc_size_t *out);
 #endif
 
+
+#endif // CGC_PRNG

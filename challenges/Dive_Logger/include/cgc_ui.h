@@ -1,3 +1,5 @@
+#ifndef CGC_UI
+#define CGC_UI
 /*
 
 Author: James Connor (jymbo@cromulence.co)
@@ -45,3 +47,4 @@ void cgc_PrintDiveLogs( pDiverInfo );
 void cgc_RemoveDive( pDiverInfo );
 void cgc_DiverStatistics( pDiverInfo );
 #endif
+#endif // CGC_UI

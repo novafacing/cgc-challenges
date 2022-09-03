@@ -1,3 +1,5 @@
+#ifndef CGC_STDARG
+#define CGC_STDARG
 /*
 
 Author: Jason Williams <jdw@cromulence.co>
@@ -40,3 +42,5 @@ typedef __gnuc_va_list va_list;
 #endif
 
 #endif // __STDARG_H__
+
+#endif // CGC_STDARG

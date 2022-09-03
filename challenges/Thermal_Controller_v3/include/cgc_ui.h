@@ -1,3 +1,5 @@
+#ifndef CGC_UI
+#define CGC_UI
 /*
 
 Author: James Connor (jymbo@cromulence.com)
@@ -37,3 +39,4 @@ void cgc_prime_buf(unsigned char *buf);
 int cgc_get_command(pState state);
 
 #endif
+#endif // CGC_UI

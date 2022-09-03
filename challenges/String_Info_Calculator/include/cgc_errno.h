@@ -1,3 +1,5 @@
+#ifndef CGC_ERRNO
+#define CGC_ERRNO
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -29,3 +31,4 @@
 #define ERRNO_RAND -13
 
 #endif
+#endif // CGC_ERRNO

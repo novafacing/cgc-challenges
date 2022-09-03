@@ -1,3 +1,5 @@
+#ifndef CGC_ERRNO
+#define CGC_ERRNO
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -31,3 +33,4 @@
 #define ERRNO_INVALID_STATE 65
 
 #endif
+#endif // CGC_ERRNO

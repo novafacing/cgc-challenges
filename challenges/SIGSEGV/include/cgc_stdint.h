@@ -1,3 +1,5 @@
+#ifndef CGC_STDINT
+#define CGC_STDINT
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -36,3 +38,5 @@ typedef int int32_t ;
 typedef short int16_t;
 typedef char int8_t;
 #endif
+
+#endif // CGC_STDINT

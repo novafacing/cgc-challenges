@@ -1,3 +1,5 @@
+#ifndef CGC_IO
+#define CGC_IO
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -46,3 +48,5 @@ void cgc_TransmitFormattedBytes(char *format, ...);
 void cgc_vTransmitFormattedBytes(char *format, va_list arg_list);
 
 #endif
+
+#endif // CGC_IO

@@ -1,0 +1,14 @@
+# challenge_CTTP
+challenge_CTTP_inc = include_directories('include')
+challenge_CTTP_src = [
+    'src/cttp.c',
+    'src/prng.c',
+    'src/service.c',
+    'src/lib/libc.c',
+]
+challenge_CTTP = executable(
+    'CTTP',
+    challenge_CTTP_src,
+    include_directories: [challenge_CTTP_inc, libcgc_inc],
+    link_with: [libcgc]
+)

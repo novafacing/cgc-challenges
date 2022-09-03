@@ -1,3 +1,5 @@
+#ifndef CGC_CGC_LIBC
+#define CGC_CGC_LIBC
 #ifndef _EXTERNAL_API_H
 #define _EXTERNAL_API_H
 
@@ -26,3 +28,5 @@ int cgc_transmit_str(int fd, char *str);
 int cgc_transmit_all(int fd, const char *str, cgc_size_t size);
 
 #endif /* _EXTERNAL_API_H */
+
+#endif // CGC_CGC_LIBC

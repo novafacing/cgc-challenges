@@ -1,3 +1,5 @@
+#ifndef CGC_CGC_TYPES
+#define CGC_CGC_TYPES
 #ifndef _TYPES_H
 #define _TYPES_H
 
@@ -15,3 +17,5 @@ typedef __builtin_va_list va_list;
 // #define NULL 0
 
 #endif /* _TYPES_H */
+
+#endif // CGC_CGC_TYPES

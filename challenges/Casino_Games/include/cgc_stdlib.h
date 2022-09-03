@@ -1,3 +1,5 @@
+#ifndef CGC_STDLIB
+#define CGC_STDLIB
 /*
 
 Author: Jason Williams <jdw@cromulence.co>
@@ -58,3 +60,5 @@ cgc_ssize_t cgc_write( const void *, cgc_size_t );
 char *cgc_strdup( char * );
 
 #endif // __STDLIB_H__
+
+#endif // CGC_STDLIB

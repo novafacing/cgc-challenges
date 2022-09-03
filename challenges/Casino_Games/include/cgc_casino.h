@@ -1,3 +1,5 @@
+#ifndef CGC_CASINO
+#define CGC_CASINO
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -62,3 +64,5 @@ enum payout_names {
 extern int cgc_payouts[NUMBER_OF_PAYOUTS];
 
 #endif // CASINO_H
+
+#endif // CGC_CASINO

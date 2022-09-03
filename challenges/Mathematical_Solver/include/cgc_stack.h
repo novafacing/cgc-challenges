@@ -1,3 +1,5 @@
+#ifndef CGC_STACK
+#define CGC_STACK
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -60,3 +62,4 @@ int cgc_push_op(char op);
 int cgc_pop_op(char *op);
 
 #endif
+#endif // CGC_STACK

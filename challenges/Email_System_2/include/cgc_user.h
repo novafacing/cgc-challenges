@@ -1,3 +1,5 @@
+#ifndef CGC_USER
+#define CGC_USER
 /*
 
 Author: James Nuttall (james@cromulence.co)
@@ -47,3 +49,4 @@ int cgc_logout();
 void cgc_create_user();
 void cgc_list_users();
 int cgc_get_user_index(char *);
+#endif // CGC_USER

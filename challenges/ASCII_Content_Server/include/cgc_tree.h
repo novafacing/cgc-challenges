@@ -1,3 +1,5 @@
+#ifndef CGC_TREE
+#define CGC_TREE
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -47,3 +49,4 @@ int cgc_InsertNodeInTree(TreeNode *node);
 int cgc_InitializeTree();
 
 #endif // TREE_H
+#endif // CGC_TREE

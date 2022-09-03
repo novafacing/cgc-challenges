@@ -1,3 +1,5 @@
+#ifndef CGC_STDINT
+#define CGC_STDINT
 /*
 
 Author: Jason Williams <jdw@cromulence.co>
@@ -37,3 +39,5 @@ typedef unsigned int uint32_t;
 typedef unsigned long long int uint64_t;
 
 #endif // __STDINT_H__
+
+#endif // CGC_STDINT

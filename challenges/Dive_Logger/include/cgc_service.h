@@ -1,3 +1,5 @@
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
 
 Author: James Connor (jymbo@cromulence.co)
@@ -64,3 +66,5 @@ pDiveEntry cgc_AddDive( pDiverInfo );
 pDiveEntryListNode cgc_DeleteDive( pDiverInfo, pDiveEntryListNode );
 void cgc_destroy_data( pDiverInfo );
 #endif
+
+#endif // CGC_SERVICE

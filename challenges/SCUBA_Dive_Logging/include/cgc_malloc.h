@@ -1,3 +1,5 @@
+#ifndef CGC_MALLOC
+#define CGC_MALLOC
 /*
 
 Author: Jason Williams <jdw@cromulence.com>
@@ -55,3 +57,5 @@ void* cgc_malloc( cgc_size_t alloc_size );
 void cgc_free( void *pMem );
 
 #endif // __MALLOC_H__
+
+#endif // CGC_MALLOC

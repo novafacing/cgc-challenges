@@ -1,3 +1,5 @@
+#ifndef CGC_PAGE
+#define CGC_PAGE
 /*
 
 Author: Debbie Nuttall <debbie@cromulence.co>
@@ -40,3 +42,4 @@ int cgc_ServePage(char *page, int page_size);
 int cgc_ServePageWithOverride(char *page, int page_size, PageVar *override_list);
 
 #endif // PAGE_H
+#endif // CGC_PAGE

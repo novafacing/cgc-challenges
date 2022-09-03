@@ -1,3 +1,5 @@
+#ifndef CGC_COMMANDS
+#define CGC_COMMANDS
 /*
 
 Author: Steve Wood <swood@cromulence.com>
@@ -164,3 +166,5 @@ int cgc_send_response( int response_code );
 
 #endif
 
+
+#endif // CGC_COMMANDS

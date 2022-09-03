@@ -1,3 +1,5 @@
+#ifndef CGC_UI
+#define CGC_UI
 /*
 
 Author: James Connor (jymbo@cromulence.co)
@@ -39,3 +41,4 @@ unsigned int cgc_get_time();
 
 
 #endif
+#endif // CGC_UI
