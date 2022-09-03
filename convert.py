@@ -12,7 +12,9 @@ challenges_dir = Path(__file__).with_name("challenges")
 
 for challenge_dir in challenges_dir.iterdir():
 
-    challenge_name = "challenge_" + challenge_dir.name.replace("-", "_")
+    challenge_name = "challenge_" + challenge_dir.name.replace("-", "_").replace(
+        ".", "_"
+    )
 
     if not challenge_dir.is_dir():
         continue
