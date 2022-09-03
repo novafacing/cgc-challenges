@@ -1,5 +1,7 @@
 #ifndef CGC_STREQ
 #define CGC_STREQ
+#ifndef CGC_STREQ
+#define CGC_STREQ
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -38,4 +40,6 @@ int cgc_streq(const char* str1, const char* str2, const char term);
 
 
 #endif
+#endif // CGC_STREQ
+
 #endif // CGC_STREQ

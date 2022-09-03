@@ -1,5 +1,7 @@
 #ifndef CGC_BYTECODE
 #define CGC_BYTECODE
+#ifndef CGC_BYTECODE
+#define CGC_BYTECODE
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -50,4 +52,6 @@
 int cgc_bytecode_exec(uint8_t *buf, uint16_t sz);
 
 #endif
+#endif // CGC_BYTECODE
+
 #endif // CGC_BYTECODE

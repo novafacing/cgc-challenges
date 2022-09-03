@@ -1,5 +1,7 @@
 #ifndef CGC_MULTIPASS_PROTOCOL
 #define CGC_MULTIPASS_PROTOCOL
+#ifndef CGC_MULTIPASS_PROTOCOL
+#define CGC_MULTIPASS_PROTOCOL
 /*
  The MULTIPASS PROTOCOL is used to process the operations of a multi-use
  RFID payment card (i.e. Multi-pass) and record them in a transaction log.
@@ -592,5 +594,7 @@ typedef struct packet_data_transaction {
 } __attribute__((__packed__)) packet_data_transaction_t;
 
 #endif
+
+#endif // CGC_MULTIPASS_PROTOCOL
 
 #endif // CGC_MULTIPASS_PROTOCOL

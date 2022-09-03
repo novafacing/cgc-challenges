@@ -1,5 +1,7 @@
 #ifndef CGC_LIBC
 #define CGC_LIBC
+#ifndef CGC_LIBC
+#define CGC_LIBC
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -425,5 +427,7 @@ int fprintf(FILE * stream, const char *format, ...);
 
 #endif /* LIBC_H_ */
 
+
+#endif // CGC_LIBC
 
 #endif // CGC_LIBC

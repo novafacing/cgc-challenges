@@ -1,5 +1,7 @@
 #ifndef CGC_LIBC
 #define CGC_LIBC
+#ifndef CGC_LIBC
+#define CGC_LIBC
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  * Copyright (C) Chris Eagle at Naval Postgraduate School
@@ -73,5 +75,7 @@ void *cgc_memset(void *dst, int c, unsigned int n);
 
 
 #endif
+
+#endif // CGC_LIBC
 
 #endif // CGC_LIBC

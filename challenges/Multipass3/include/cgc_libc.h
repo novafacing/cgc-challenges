@@ -1,5 +1,7 @@
 #ifndef CGC_LIBC
 #define CGC_LIBC
+#ifndef CGC_LIBC
+#define CGC_LIBC
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -52,5 +54,7 @@ unsigned int cgc_pos_ceil(double num);
 void malloc_reset();
 char * cgc_itoaB10(int value);
 #endif
+
+#endif // CGC_LIBC
 
 #endif // CGC_LIBC

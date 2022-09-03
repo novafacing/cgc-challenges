@@ -1,5 +1,7 @@
 #ifndef CGC_STDINT
 #define CGC_STDINT
+#ifndef CGC_STDINT
+#define CGC_STDINT
 #ifndef STDINT_H_
 #define STDINT_H_
 
@@ -42,5 +44,7 @@ typedef unsigned int uintptr_t;
 # define UINT_MAX       UINT32_MAX
 
 #endif /* !STDINT_H_ */
+
+#endif // CGC_STDINT
 
 #endif // CGC_STDINT

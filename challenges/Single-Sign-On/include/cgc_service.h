@@ -1,5 +1,7 @@
 #ifndef CGC_SERVICE
 #define CGC_SERVICE
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -78,4 +80,6 @@ typedef struct user_t {
 } User;
 
 #endif
+#endif // CGC_SERVICE
+
 #endif // CGC_SERVICE

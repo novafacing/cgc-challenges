@@ -1,5 +1,7 @@
 #ifndef CGC_ACCOUNT
 #define CGC_ACCOUNT
+#ifndef CGC_ACCOUNT
+#define CGC_ACCOUNT
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -73,4 +75,6 @@ int cgc_finalize_transaction(txn_entry_t * te);
 txn_entry_t * cgc_remove_transaction_log_entry(account_entry_t * ae, txn_entry_t * ti);
 
 #endif
+#endif // CGC_ACCOUNT
+
 #endif // CGC_ACCOUNT

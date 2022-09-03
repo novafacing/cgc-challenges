@@ -1,5 +1,7 @@
 #ifndef CGC_STDINT
 #define CGC_STDINT
+#ifndef CGC_STDINT
+#define CGC_STDINT
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -38,5 +40,7 @@
 #define int8_t char
 
 #endif
+
+#endif // CGC_STDINT
 
 #endif // CGC_STDINT

@@ -1,5 +1,7 @@
 #ifndef CGC_EXAMINE
 #define CGC_EXAMINE
+#ifndef CGC_EXAMINE
+#define CGC_EXAMINE
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -33,4 +35,6 @@ uint8_t cgc_is_light_string_overloaded(uint32_t light_string_id);
 uint8_t cgc_is_receptacle_overloaded(uint32_t receptacle_id);
 
 #endif
+#endif // CGC_EXAMINE
+
 #endif // CGC_EXAMINE

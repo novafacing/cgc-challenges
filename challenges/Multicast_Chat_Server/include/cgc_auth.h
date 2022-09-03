@@ -1,5 +1,7 @@
 #ifndef CGC_AUTH
 #define CGC_AUTH
+#ifndef CGC_AUTH
+#define CGC_AUTH
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -54,4 +56,6 @@ User* cgc_newToken(User* user);
 User* cgc_newUser(User** usersPtr, char* name, char* password);
 unsigned int cgc_verifySignature(AuthResponse* response, unsigned char* signingKey);
 char* cgc_computeSignature(User* user);
+#endif // CGC_AUTH
+
 #endif // CGC_AUTH

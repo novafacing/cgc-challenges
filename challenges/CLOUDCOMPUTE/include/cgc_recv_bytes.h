@@ -1,5 +1,7 @@
 #ifndef CGC_RECV_BYTES
 #define CGC_RECV_BYTES
+#ifndef CGC_RECV_BYTES
+#define CGC_RECV_BYTES
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -36,4 +38,6 @@
 int cgc_recv_bytes(int fd, char *buf, unsigned int size);
 
 #endif
+#endif // CGC_RECV_BYTES
+
 #endif // CGC_RECV_BYTES

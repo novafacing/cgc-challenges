@@ -1,5 +1,7 @@
 #ifndef CGC_LIBC
 #define CGC_LIBC
+#ifndef CGC_LIBC
+#define CGC_LIBC
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -57,5 +59,7 @@
 #define FLAG_PAGE 0x4347C000
 
 #endif
+
+#endif // CGC_LIBC
 
 #endif // CGC_LIBC

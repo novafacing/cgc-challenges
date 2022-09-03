@@ -1,5 +1,7 @@
 #ifndef CGC_MEMCPY
 #define CGC_MEMCPY
+#ifndef CGC_MEMCPY
+#define CGC_MEMCPY
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -36,4 +38,6 @@
 unsigned int cgc_memcpy(void *dst, const void *src, unsigned int cnt);
 
 #endif
+#endif // CGC_MEMCPY
+
 #endif // CGC_MEMCPY

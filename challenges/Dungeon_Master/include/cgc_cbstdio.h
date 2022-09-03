@@ -1,5 +1,7 @@
 #ifndef CGC_CBSTDIO
 #define CGC_CBSTDIO
+#ifndef CGC_CBSTDIO
+#define CGC_CBSTDIO
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -50,5 +52,7 @@ typedef __builtin_va_list va_list;
 *          a negative value if there was an error
 */
 int cgc_sprintf(char *buf, const char* fmt, ...);
+
+#endif // CGC_CBSTDIO
 
 #endif // CGC_CBSTDIO

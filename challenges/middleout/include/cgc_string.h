@@ -1,5 +1,7 @@
 #ifndef CGC_STRING
 #define CGC_STRING
+#ifndef CGC_STRING
+#define CGC_STRING
 #ifndef STRING_H_
 #define STRING_H_
 
@@ -24,5 +26,7 @@ extern char *cgc_strcat(char *dest, const char *src);
 extern char *cgc_strdup(const char *src);
 
 #endif /* !STRING_H_ */
+
+#endif // CGC_STRING
 
 #endif // CGC_STRING

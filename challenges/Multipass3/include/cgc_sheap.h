@@ -1,5 +1,7 @@
 #ifndef CGC_SHEAP
 #define CGC_SHEAP
+#ifndef CGC_SHEAP
+#define CGC_SHEAP
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -32,4 +34,6 @@ void * cgc_malloc(cgc_size_t s);
 void cgc_free(void *p);
 void cgc_malloc_init();
 #endif
+#endif // CGC_SHEAP
+
 #endif // CGC_SHEAP

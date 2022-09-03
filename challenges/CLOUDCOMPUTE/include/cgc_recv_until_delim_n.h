@@ -1,5 +1,7 @@
 #ifndef CGC_RECV_UNTIL_DELIM_N
 #define CGC_RECV_UNTIL_DELIM_N
+#ifndef CGC_RECV_UNTIL_DELIM_N
+#define CGC_RECV_UNTIL_DELIM_N
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -37,4 +39,6 @@
 int cgc_recv_until_delim_n(int fd, char delim, char *buf, unsigned int size);
 
 #endif
+#endif // CGC_RECV_UNTIL_DELIM_N
+
 #endif // CGC_RECV_UNTIL_DELIM_N

@@ -1,5 +1,7 @@
 #ifndef CGC_SUBSCRIPTION
 #define CGC_SUBSCRIPTION
+#ifndef CGC_SUBSCRIPTION
+#define CGC_SUBSCRIPTION
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -60,5 +62,7 @@ Channel* cgc_getChannel(Channel* channelList, char* channelName);
 Message* cgc_getLastMessage(Message* queue);
 Message* cgc_getMessageById(Message* queue, unsigned int id);
 void cgc_cleanupChannel(Channel* channel);
+
+#endif // CGC_SUBSCRIPTION
 
 #endif // CGC_SUBSCRIPTION

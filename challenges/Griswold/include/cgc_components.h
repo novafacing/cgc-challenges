@@ -1,5 +1,7 @@
 #ifndef CGC_COMPONENTS
 #define CGC_COMPONENTS
+#ifndef CGC_COMPONENTS
+#define CGC_COMPONENTS
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -120,4 +122,6 @@ light_string_t *cgc_get_new_light_string_by_model_id(LIGHT_STRING_MODELS_T model
 
 
 #endif /* MODELS_H */
+#endif // CGC_COMPONENTS
+
 #endif // CGC_COMPONENTS

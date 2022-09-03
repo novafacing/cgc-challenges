@@ -1,5 +1,7 @@
 #ifndef CGC_COMMS
 #define CGC_COMMS
+#ifndef CGC_COMMS
+#define CGC_COMMS
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -71,4 +73,6 @@ int cgc_read_n_bytes(unsigned int socket, char* buffer, cgc_size_t size, cgc_siz
 * @return 0 if successful, -1 if the transmit call returns an error
 */
 int cgc_transmit_all(int fd, const void *buf, const cgc_size_t size);
+#endif // CGC_COMMS
+
 #endif // CGC_COMMS

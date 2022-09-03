@@ -1,5 +1,7 @@
 #ifndef CGC_LL
 #define CGC_LL
+#ifndef CGC_LL
+#define CGC_LL
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -61,5 +63,7 @@ int cgc_count_entries(alloc_head_t *head);
 
 
 
+
+#endif // CGC_LL
 
 #endif // CGC_LL

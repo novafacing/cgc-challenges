@@ -1,5 +1,7 @@
 #ifndef CGC_STRTOK
 #define CGC_STRTOK
+#ifndef CGC_STRTOK
+#define CGC_STRTOK
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -67,5 +69,7 @@ cgc_size_t strcspn(const char *s1, const char *s2);
 * @return A null-terminated string containing the token
 */
 char *strtok(char* string,const char *delim);
+
+#endif // CGC_STRTOK
 
 #endif // CGC_STRTOK

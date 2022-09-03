@@ -1,5 +1,7 @@
 #ifndef CGC_MALLOC
 #define CGC_MALLOC
+#ifndef CGC_MALLOC
+#define CGC_MALLOC
 /*
  * Author: Garrett Barboza <garrett.barboza@kapricasecurity.com>
  *
@@ -53,5 +55,7 @@ void cgc_insert_into_flist(struct blk_t *blk);
 void cgc_remove_from_flist(struct blk_t *blk);
 
 #endif /* MALLOC_COMMON_H */
+
+#endif // CGC_MALLOC
 
 #endif // CGC_MALLOC

@@ -1,5 +1,7 @@
 #ifndef CGC_ASSEMBLE
 #define CGC_ASSEMBLE
+#ifndef CGC_ASSEMBLE
+#define CGC_ASSEMBLE
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -84,4 +86,6 @@ int8_t cgc_add_n_way_splitter_to_receptacle(SPLITTER_MODELS_T splitter_model_id,
 int8_t cgc_add_light_string_to_receptacle(LIGHT_STRING_MODELS_T light_string_model_id, uint32_t receptacle_id, assemble_result_t *result);
 
 #endif
+#endif // CGC_ASSEMBLE
+
 #endif // CGC_ASSEMBLE

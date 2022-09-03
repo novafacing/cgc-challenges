@@ -1,5 +1,7 @@
 #ifndef CGC_MEMCPY
 #define CGC_MEMCPY
+#ifndef CGC_MEMCPY
+#define CGC_MEMCPY
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -33,4 +35,6 @@
 * @return None
 */
 void *cgc_memcpy(void *dest, const void *src, cgc_size_t n);
+#endif // CGC_MEMCPY
+
 #endif // CGC_MEMCPY

@@ -1,5 +1,7 @@
 #ifndef CGC_DUNGEON
 #define CGC_DUNGEON
+#ifndef CGC_DUNGEON
+#define CGC_DUNGEON
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -171,5 +173,7 @@ static const char room_string[3][ROOM_HEIGHT][ROOM_WIDTH] =
   "|  &|       |&  |      |", 
   "------------------------"}
 };
+
+#endif // CGC_DUNGEON
 
 #endif // CGC_DUNGEON

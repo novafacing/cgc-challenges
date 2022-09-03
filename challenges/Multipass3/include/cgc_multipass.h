@@ -1,5 +1,7 @@
 #ifndef CGC_MULTIPASS
 #define CGC_MULTIPASS
+#ifndef CGC_MULTIPASS
+#define CGC_MULTIPASS
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -244,4 +246,6 @@ pack_and_data_t * cgc_process_client_history(pack_and_data_t *padi, cgc_size_t *
 pack_and_data_t * cgc_process_client_refund_op(pack_and_data_t * pin);
 pack_and_data_t * cgc_process_client_auth(pack_and_data_t * pin);
 #endif
+#endif // CGC_MULTIPASS
+
 #endif // CGC_MULTIPASS

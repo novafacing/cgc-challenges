@@ -1,5 +1,7 @@
 #ifndef CGC_STRNCMP
 #define CGC_STRNCMP
+#ifndef CGC_STRNCMP
+#define CGC_STRNCMP
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -33,4 +35,6 @@
 * @return 0 if buffers are the same, -1 if s1 < s2, 1 if s1 > s2
 */
 int cgc_strncmp(const char* s1, const char* s2, cgc_size_t size);
+#endif // CGC_STRNCMP
+
 #endif // CGC_STRNCMP

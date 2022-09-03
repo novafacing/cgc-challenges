@@ -1,5 +1,7 @@
 #ifndef CGC_STDDEF
 #define CGC_STDDEF
+#ifndef CGC_STDDEF
+#define CGC_STDDEF
 #ifndef STDDEF_H_
 #define STDDEF_H_
 
@@ -17,5 +19,7 @@ typedef long int ptrdiff_t;
 #define offsetof(TYPE, MEMBER) __builtin_offsetof (TYPE, MEMBER)
 
 #endif /* !STDDEF_H_ */
+
+#endif // CGC_STDDEF
 
 #endif // CGC_STDDEF

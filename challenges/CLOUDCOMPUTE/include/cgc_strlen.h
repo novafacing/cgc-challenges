@@ -1,5 +1,7 @@
 #ifndef CGC_STRLEN
 #define CGC_STRLEN
+#ifndef CGC_STRLEN
+#define CGC_STRLEN
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -35,4 +37,6 @@
 unsigned int cgc_strlen(const char *str, const char term);
 
 #endif
+#endif // CGC_STRLEN
+
 #endif // CGC_STRLEN

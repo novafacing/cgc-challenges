@@ -1,5 +1,7 @@
 #ifndef CGC_STDARG
 #define CGC_STDARG
+#ifndef CGC_STDARG
+#define CGC_STDARG
 #ifndef STDARG_H_
 #define STDARG_H_
 
@@ -15,5 +17,7 @@ typedef __gnuc_va_list va_list;
 #endif
 
 #endif /* !STDARG_H_ */
+
+#endif // CGC_STDARG
 
 #endif // CGC_STDARG

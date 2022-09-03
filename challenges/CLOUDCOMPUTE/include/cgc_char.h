@@ -1,5 +1,7 @@
 #ifndef CGC_CHAR
 #define CGC_CHAR
+#ifndef CGC_CHAR
+#define CGC_CHAR
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -89,5 +91,7 @@ unsigned char cgc_is_non_printable(const unsigned char ch);
 unsigned char cgc_is_printable(const unsigned char ch);
 
 #endif
+
+#endif // CGC_CHAR
 
 #endif // CGC_CHAR

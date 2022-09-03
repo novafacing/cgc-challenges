@@ -1,5 +1,7 @@
 #ifndef CGC_SEND_BYTES
 #define CGC_SEND_BYTES
+#ifndef CGC_SEND_BYTES
+#define CGC_SEND_BYTES
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -37,4 +39,6 @@
 int cgc_send_bytes(int fd, const char *buf, unsigned int size);
 
 #endif
+#endif // CGC_SEND_BYTES
+
 #endif // CGC_SEND_BYTES

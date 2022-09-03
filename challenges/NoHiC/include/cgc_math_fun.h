@@ -1,5 +1,7 @@
 #ifndef CGC_MATH_FUN
 #define CGC_MATH_FUN
+#ifndef CGC_MATH_FUN
+#define CGC_MATH_FUN
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -53,4 +55,6 @@ void cgc_do_dbl_odds(list_t * num_list);
 void cgc_do_dbl_evens(list_t * num_list);
 
 #endif
+#endif // CGC_MATH_FUN
+
 #endif // CGC_MATH_FUN

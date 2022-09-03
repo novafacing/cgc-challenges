@@ -1,5 +1,7 @@
 #ifndef CGC_STDINT
 #define CGC_STDINT
+#ifndef CGC_STDINT
+#define CGC_STDINT
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -31,4 +33,6 @@
 #define SUCCESS 0
 
 #endif
+#endif // CGC_STDINT
+
 #endif // CGC_STDINT

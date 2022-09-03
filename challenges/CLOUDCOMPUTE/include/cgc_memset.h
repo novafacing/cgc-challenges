@@ -1,5 +1,7 @@
 #ifndef CGC_MEMSET
 #define CGC_MEMSET
+#ifndef CGC_MEMSET
+#define CGC_MEMSET
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -37,4 +39,6 @@
 unsigned int cgc_memset(void *buf, unsigned char ch, unsigned int n);
 
 #endif
+#endif // CGC_MEMSET
+
 #endif // CGC_MEMSET

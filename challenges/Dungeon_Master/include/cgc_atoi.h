@@ -1,5 +1,7 @@
 #ifndef CGC_ATOI
 #define CGC_ATOI
+#ifndef CGC_ATOI
+#define CGC_ATOI
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -40,5 +42,7 @@ int isdigit(int c);
 * @return an int containing the value represented in str
 */
 int atoi(char* str);
+
+#endif // CGC_ATOI
 
 #endif // CGC_ATOI

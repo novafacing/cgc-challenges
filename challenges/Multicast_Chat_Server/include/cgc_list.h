@@ -1,5 +1,7 @@
 #ifndef CGC_LIST
 #define CGC_LIST
+#ifndef CGC_LIST
+#define CGC_LIST
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -464,5 +466,7 @@ list_pop_back(struct list *list)
     list_entry(type, member, list_pop_back(list))
 
 #endif /* LIST_H_ */
+
+#endif // CGC_LIST
 
 #endif // CGC_LIST

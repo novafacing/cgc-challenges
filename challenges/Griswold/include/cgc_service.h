@@ -1,5 +1,7 @@
 #ifndef CGC_SERVICE
 #define CGC_SERVICE
+#ifndef CGC_SERVICE
+#define CGC_SERVICE
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -30,5 +32,7 @@
 
 
 #endif
+
+#endif // CGC_SERVICE
 
 #endif // CGC_SERVICE

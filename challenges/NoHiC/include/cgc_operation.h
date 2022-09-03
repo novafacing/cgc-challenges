@@ -1,5 +1,7 @@
 #ifndef CGC_OPERATION
 #define CGC_OPERATION
+#ifndef CGC_OPERATION
+#define CGC_OPERATION
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -50,4 +52,6 @@ int cgc_do_eval();
 int cgc_do_nonce();
 
 #endif
+#endif // CGC_OPERATION
+
 #endif // CGC_OPERATION

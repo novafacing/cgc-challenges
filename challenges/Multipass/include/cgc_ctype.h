@@ -1,5 +1,7 @@
 #ifndef CGC_CTYPE
 #define CGC_CTYPE
+#ifndef CGC_CTYPE
+#define CGC_CTYPE
 #ifndef CTYPE_H_
 #define CTYPE_H_
 
@@ -15,5 +17,7 @@ int cgc_tolower(int c);
 int toupper(int c);
 
 #endif /* !CTYPE_H_ */
+
+#endif // CGC_CTYPE
 
 #endif // CGC_CTYPE

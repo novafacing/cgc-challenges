@@ -1,5 +1,7 @@
 #ifndef CGC_STRING
 #define CGC_STRING
+#ifndef CGC_STRING
+#define CGC_STRING
 #ifndef STRING_H_
 #define STRING_H_
 
@@ -19,5 +21,7 @@ extern char *cgc_strsep(char **stringp, const char *delim);
 extern int strcmp(const char *s1, const char *s2);
 
 #endif /* !STRING_H_ */
+
+#endif // CGC_STRING
 
 #endif // CGC_STRING

@@ -1,5 +1,7 @@
 #ifndef CGC_DEBUG
 #define CGC_DEBUG
+#ifndef CGC_DEBUG
+#define CGC_DEBUG
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -162,5 +164,7 @@ static void printf_core(unsigned int (*func)(char, void *, int), void *user, con
 int vdprintf(int fd, const char *format, va_list ap);
 
 #endif
+
+#endif // CGC_DEBUG
 
 #endif // CGC_DEBUG

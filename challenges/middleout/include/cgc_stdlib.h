@@ -1,5 +1,7 @@
 #ifndef CGC_STDLIB
 #define CGC_STDLIB
+#ifndef CGC_STDLIB
+#define CGC_STDLIB
 #ifndef STDLIB_H_
 #define STDLIB_H_
 
@@ -29,5 +31,7 @@ static void cgc_exit(int ret)
 }
 
 #endif /* !STDLIB_H_ */
+
+#endif // CGC_STDLIB
 
 #endif // CGC_STDLIB

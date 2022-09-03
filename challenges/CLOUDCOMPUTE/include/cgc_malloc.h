@@ -1,5 +1,7 @@
 #ifndef CGC_MALLOC
 #define CGC_MALLOC
+#ifndef CGC_MALLOC
+#define CGC_MALLOC
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -48,4 +50,6 @@ void *cgc_malloc(cgc_size_t size);
 void cgc_free(void *ptr);
 
 #endif
+#endif // CGC_MALLOC
+
 #endif // CGC_MALLOC

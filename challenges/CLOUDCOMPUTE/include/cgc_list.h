@@ -1,5 +1,7 @@
 #ifndef CGC_LIST
 #define CGC_LIST
+#ifndef CGC_LIST
+#define CGC_LIST
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -168,5 +170,7 @@ struct node *cgc_list_find_node_with_data(struct list *l, unsigned char (*predFn
 
 
 #endif
+
+#endif // CGC_LIST
 
 #endif // CGC_LIST

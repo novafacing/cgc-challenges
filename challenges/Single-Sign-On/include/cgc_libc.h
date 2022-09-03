@@ -1,5 +1,7 @@
 #ifndef CGC_LIBC
 #define CGC_LIBC
+#ifndef CGC_LIBC
+#define CGC_LIBC
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -366,5 +368,7 @@ int cgc_strncmp(const char *s1, const char *s2, cgc_size_t n); // PCU
 
 #endif
 
+
+#endif // CGC_LIBC
 
 #endif // CGC_LIBC

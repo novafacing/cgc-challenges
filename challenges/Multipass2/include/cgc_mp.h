@@ -1,5 +1,7 @@
 #ifndef CGC_MP
 #define CGC_MP
+#ifndef CGC_MP
+#define CGC_MP
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -176,4 +178,6 @@ int cgc_transaction_ops_done(transaction_t ** tr, packet_head_t * pkt_hdr_ptr, l
 int cgc_packet_from_transaction(transaction_t * tr, packet_head_t ** pkt_hdr, uint32_t auth_code);
 int cgc_packet_from_transaction_and_send(transaction_t * tr, uint32_t auth_code);
  #endif
+#endif // CGC_MP
+
 #endif // CGC_MP

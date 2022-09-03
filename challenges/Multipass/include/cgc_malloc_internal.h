@@ -1,5 +1,7 @@
 #ifndef CGC_MALLOC_INTERNAL
 #define CGC_MALLOC_INTERNAL
+#ifndef CGC_MALLOC_INTERNAL
+#define CGC_MALLOC_INTERNAL
 #ifndef MALLOC_INTERNAL_H_
 #define MALLOC_INTERNAL_H_
 
@@ -28,5 +30,7 @@ typedef struct {
 extern malloc_t cgc_g_malloc;
 
 #endif /* !MALLOC_INTERNAL_H_ */
+
+#endif // CGC_MALLOC_INTERNAL
 
 #endif // CGC_MALLOC_INTERNAL

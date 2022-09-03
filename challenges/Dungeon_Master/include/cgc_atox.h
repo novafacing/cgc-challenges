@@ -1,5 +1,7 @@
 #ifndef CGC_ATOX
 #define CGC_ATOX
+#ifndef CGC_ATOX
+#define CGC_ATOX
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -29,5 +31,7 @@
 * @return The value of the hex string
 */
 unsigned char cgc_atox(char* buf);
+
+#endif // CGC_ATOX
 
 #endif // CGC_ATOX

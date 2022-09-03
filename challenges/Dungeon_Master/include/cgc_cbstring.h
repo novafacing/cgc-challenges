@@ -1,5 +1,7 @@
 #ifndef CGC_CBSTRING
 #define CGC_CBSTRING
+#ifndef CGC_CBSTRING
+#define CGC_CBSTRING
 /*
  * Copyright (C) Narf Industries <info@narfindustries.com>
  *
@@ -47,5 +49,7 @@ void cgc_bzero(char* buf, unsigned int num);
 * @return The value of the hex string
 */
 unsigned char atox(char* buf);
+
+#endif // CGC_CBSTRING
 
 #endif // CGC_CBSTRING
