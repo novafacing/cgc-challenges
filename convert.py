@@ -4,6 +4,7 @@ Convert cmake challenges to meson
 
 from os import mkdir
 from pathlib import Path
+from shutil import copytree, rmtree
 
 from string import ascii_letters
 
@@ -44,7 +45,8 @@ for challenge_dir in challenges_dir.iterdir():
         lib_header.rename(include_dir / lib_header.name)
 
     if lib_dir.exists():
-        lib_dir.rename(src_dir / lib_dir.name)
+        copytree(lib_dir, src_dir / lib_dir.name)
+        rmtree(lib_dir)
 
     src_list = list(map(lambda s: s.relative_to(challenge_dir), src_dir.rglob("**/*")))
     src_list_text = "\n".join(map(lambda s: f"""    '{s}',""", src_list))
