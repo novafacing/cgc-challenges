@@ -16,5 +16,6 @@ libcgc = library(
     libcgc_src,
     include_directories: [libcgc_inc, libtiny_AES128_C_inc],
     link_with: [libtiny_AES128_C],
-    dependencies: [libm_dep]
+    dependencies: [libm_dep],
+    install_dir: install_path
 )

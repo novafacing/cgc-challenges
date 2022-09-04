@@ -799,3 +799,10 @@ option(
     value: false,
     description: 'Whether broken challenges are enabled. Defaults to true. If this option is not set, broken challenges cannot be enabled.'
 )
+
+option(
+    'install_path',
+    type: 'string',
+    value: 'output',
+    description: 'Path to install built challenges into. Defaults to the ./output in the project root.'
+)
