@@ -12,5 +12,6 @@ challenge_Multicast_Chat_Server = executable(
     challenge_Multicast_Chat_Server_src,
     include_directories: [challenge_Multicast_Chat_Server_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

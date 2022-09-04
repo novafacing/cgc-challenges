@@ -38,5 +38,6 @@ challenge_Enslavednode_chat = executable(
     challenge_Enslavednode_chat_src,
     include_directories: [challenge_Enslavednode_chat_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

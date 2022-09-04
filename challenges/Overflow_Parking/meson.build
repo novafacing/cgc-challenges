@@ -12,5 +12,6 @@ challenge_Overflow_Parking = executable(
     challenge_Overflow_Parking_src,
     include_directories: [challenge_Overflow_Parking_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

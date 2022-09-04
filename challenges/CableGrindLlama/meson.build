@@ -12,5 +12,6 @@ challenge_CableGrindLlama = executable(
     challenge_CableGrindLlama_src,
     include_directories: [challenge_CableGrindLlama_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

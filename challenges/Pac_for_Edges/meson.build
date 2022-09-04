@@ -41,5 +41,6 @@ challenge_Pac_for_Edges = executable(
     challenge_Pac_for_Edges_src,
     include_directories: [challenge_Pac_for_Edges_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

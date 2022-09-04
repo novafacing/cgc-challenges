@@ -12,5 +12,6 @@ challenge_Stock_Exchange_Simulator = executable(
     challenge_Stock_Exchange_Simulator_src,
     include_directories: [challenge_Stock_Exchange_Simulator_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

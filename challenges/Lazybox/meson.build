@@ -20,5 +20,6 @@ challenge_Lazybox = executable(
     challenge_Lazybox_src,
     include_directories: [challenge_Lazybox_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

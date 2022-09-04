@@ -16,5 +16,6 @@ challenge_Recipe_and_Pantry_Manager = executable(
     challenge_Recipe_and_Pantry_Manager_src,
     include_directories: [challenge_Recipe_and_Pantry_Manager_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

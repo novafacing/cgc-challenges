@@ -17,5 +17,6 @@ challenge_PRU = executable(
     challenge_PRU_src,
     include_directories: [challenge_PRU_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

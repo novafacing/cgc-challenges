@@ -13,5 +13,6 @@ challenge_Corinth = executable(
     challenge_Corinth_src,
     include_directories: [libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

@@ -35,5 +35,6 @@ challenge_TextSearch = executable(
     challenge_TextSearch_src,
     include_directories: [challenge_TextSearch_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

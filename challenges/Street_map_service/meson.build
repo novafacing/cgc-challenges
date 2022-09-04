@@ -14,5 +14,6 @@ challenge_Street_map_service = executable(
     challenge_Street_map_service_src,
     include_directories: [challenge_Street_map_service_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

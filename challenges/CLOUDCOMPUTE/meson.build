@@ -20,5 +20,6 @@ challenge_CLOUDCOMPUTE = executable(
     challenge_CLOUDCOMPUTE_src,
     include_directories: [challenge_CLOUDCOMPUTE_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

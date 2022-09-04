@@ -10,5 +10,6 @@ challenge_CGC_Hangman_Game = executable(
     challenge_CGC_Hangman_Game_src,
     include_directories: [challenge_CGC_Hangman_Game_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

@@ -44,5 +44,6 @@ challenge_Barcoder = executable(
     challenge_Barcoder_src,
     include_directories: [challenge_Barcoder_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

@@ -37,5 +37,6 @@ challenge_Differ = executable(
     challenge_Differ_src,
     include_directories: [challenge_Differ_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

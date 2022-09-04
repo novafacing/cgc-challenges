@@ -33,5 +33,6 @@ challenge_SLUR_reference_implementation = executable(
     challenge_SLUR_reference_implementation_src,
     include_directories: [challenge_SLUR_reference_implementation_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

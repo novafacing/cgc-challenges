@@ -10,5 +10,6 @@ challenge_SOLFEDGE = executable(
     challenge_SOLFEDGE_src,
     include_directories: [challenge_SOLFEDGE_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

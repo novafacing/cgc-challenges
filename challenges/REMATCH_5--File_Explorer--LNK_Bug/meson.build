@@ -18,5 +18,6 @@ challenge_REMATCH_5__File_Explorer__LNK_Bug = executable(
     challenge_REMATCH_5__File_Explorer__LNK_Bug_src,
     include_directories: [challenge_REMATCH_5__File_Explorer__LNK_Bug_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

@@ -21,5 +21,6 @@ challenge_Rejistar = executable(
     challenge_Rejistar_src,
     include_directories: [challenge_Rejistar_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

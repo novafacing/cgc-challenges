@@ -36,5 +36,6 @@ challenge_anagram_game = executable(
     challenge_anagram_game_src,
     include_directories: [challenge_anagram_game_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

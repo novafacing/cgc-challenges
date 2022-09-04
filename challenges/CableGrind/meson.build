@@ -13,5 +13,6 @@ challenge_CableGrind = executable(
     challenge_CableGrind_src,
     include_directories: [challenge_CableGrind_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

@@ -18,5 +18,6 @@ challenge_REMATCH_6__Secure_Server__Heartbleed = executable(
     challenge_REMATCH_6__Secure_Server__Heartbleed_src,
     include_directories: [challenge_REMATCH_6__Secure_Server__Heartbleed_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

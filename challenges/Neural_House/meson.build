@@ -45,5 +45,6 @@ challenge_Neural_House = executable(
     challenge_Neural_House_src,
     include_directories: [challenge_Neural_House_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

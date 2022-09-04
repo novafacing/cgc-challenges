@@ -10,5 +10,6 @@ challenge_GreatView = executable(
     challenge_GreatView_src,
     include_directories: [challenge_GreatView_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

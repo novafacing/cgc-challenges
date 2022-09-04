@@ -47,5 +47,6 @@ challenge_Azurad = executable(
     challenge_Azurad_src,
     include_directories: [challenge_Azurad_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

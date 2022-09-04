@@ -11,5 +11,6 @@ challenge_reallystream = executable(
     challenge_reallystream_src,
     include_directories: [challenge_reallystream_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

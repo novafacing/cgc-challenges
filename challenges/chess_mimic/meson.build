@@ -11,5 +11,6 @@ challenge_chess_mimic = executable(
     challenge_chess_mimic_src,
     include_directories: [challenge_chess_mimic_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

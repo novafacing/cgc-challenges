@@ -11,5 +11,6 @@ challenge_basic_messaging = executable(
     challenge_basic_messaging_src,
     include_directories: [challenge_basic_messaging_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

@@ -32,5 +32,6 @@ challenge_simpleOCR = executable(
     challenge_simpleOCR_src,
     include_directories: [challenge_simpleOCR_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

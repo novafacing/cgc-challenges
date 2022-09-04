@@ -47,5 +47,6 @@ challenge_Fortress = executable(
     challenge_Fortress_src,
     include_directories: [challenge_Fortress_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

@@ -48,5 +48,6 @@ challenge_FailAV = executable(
     challenge_FailAV_src,
     include_directories: [challenge_FailAV_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

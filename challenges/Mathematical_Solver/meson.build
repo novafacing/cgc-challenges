@@ -17,5 +17,6 @@ challenge_Mathematical_Solver = executable(
     challenge_Mathematical_Solver_src,
     include_directories: [challenge_Mathematical_Solver_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

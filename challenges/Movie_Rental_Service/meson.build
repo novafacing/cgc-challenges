@@ -25,5 +25,6 @@ challenge_Movie_Rental_Service = executable(
     challenge_Movie_Rental_Service_src,
     include_directories: [challenge_Movie_Rental_Service_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

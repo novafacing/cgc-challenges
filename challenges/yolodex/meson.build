@@ -12,5 +12,6 @@ challenge_yolodex = executable(
     challenge_yolodex_src,
     include_directories: [challenge_yolodex_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

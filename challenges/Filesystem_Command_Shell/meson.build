@@ -21,5 +21,6 @@ challenge_Filesystem_Command_Shell = executable(
     challenge_Filesystem_Command_Shell_src,
     include_directories: [challenge_Filesystem_Command_Shell_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )

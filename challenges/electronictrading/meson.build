@@ -11,5 +11,6 @@ challenge_electronictrading = executable(
     challenge_electronictrading_src,
     include_directories: [challenge_electronictrading_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path
+    install_dir: install_path,
+    install: true
 )
