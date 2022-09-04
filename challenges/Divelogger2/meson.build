@@ -18,5 +18,6 @@ challenge_Divelogger2 = executable(
     'Divelogger2',
     challenge_Divelogger2_src,
     include_directories: [challenge_Divelogger2_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

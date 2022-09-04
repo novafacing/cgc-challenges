@@ -12,5 +12,6 @@ challenge_Griswold = executable(
     'Griswold',
     challenge_Griswold_src,
     include_directories: [challenge_Griswold_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

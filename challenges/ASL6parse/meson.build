@@ -25,5 +25,6 @@ challenge_ASL6parse = executable(
     'ASL6parse',
     challenge_ASL6parse_src,
     include_directories: [challenge_ASL6parse_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

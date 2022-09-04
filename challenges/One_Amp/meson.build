@@ -47,5 +47,6 @@ challenge_One_Amp = executable(
     'One_Amp',
     challenge_One_Amp_src,
     include_directories: [challenge_One_Amp_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

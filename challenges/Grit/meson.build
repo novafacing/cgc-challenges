@@ -54,5 +54,6 @@ challenge_Grit = executable(
     'Grit',
     challenge_Grit_src,
     include_directories: [challenge_Grit_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

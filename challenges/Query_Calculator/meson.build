@@ -16,5 +16,6 @@ challenge_Query_Calculator = executable(
     'Query_Calculator',
     challenge_Query_Calculator_src,
     include_directories: [challenge_Query_Calculator_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

@@ -44,5 +44,6 @@ challenge_pizza_ordering_system = executable(
     'pizza_ordering_system',
     challenge_pizza_ordering_system_src,
     include_directories: [challenge_pizza_ordering_system_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

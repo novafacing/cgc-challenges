@@ -11,5 +11,6 @@ challenge_UTF_late = executable(
     'UTF-late',
     challenge_UTF_late_src,
     include_directories: [challenge_UTF_late_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

@@ -22,5 +22,6 @@ challenge_Game_Night = executable(
     'Game_Night',
     challenge_Game_Night_src,
     include_directories: [challenge_Game_Night_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

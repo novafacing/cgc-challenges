@@ -42,5 +42,6 @@ challenge_Secure_Compression = executable(
     'Secure_Compression',
     challenge_Secure_Compression_src,
     include_directories: [challenge_Secure_Compression_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

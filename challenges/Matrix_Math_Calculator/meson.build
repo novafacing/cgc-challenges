@@ -42,5 +42,6 @@ challenge_Matrix_Math_Calculator = executable(
     'Matrix_Math_Calculator',
     challenge_Matrix_Math_Calculator_src,
     include_directories: [challenge_Matrix_Math_Calculator_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

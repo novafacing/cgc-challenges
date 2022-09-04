@@ -15,5 +15,6 @@ challenge_Casino_Games = executable(
     'Casino_Games',
     challenge_Casino_Games_src,
     include_directories: [challenge_Casino_Games_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

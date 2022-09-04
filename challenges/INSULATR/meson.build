@@ -8,5 +8,6 @@ challenge_INSULATR = executable(
     'INSULATR',
     challenge_INSULATR_src,
     include_directories: [challenge_INSULATR_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

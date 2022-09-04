@@ -10,5 +10,6 @@ challenge_NoHiC = executable(
     'NoHiC',
     challenge_NoHiC_src,
     include_directories: [challenge_NoHiC_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

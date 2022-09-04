@@ -32,5 +32,6 @@ challenge_QuadtreeConways = executable(
     'QuadtreeConways',
     challenge_QuadtreeConways_src,
     include_directories: [challenge_QuadtreeConways_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

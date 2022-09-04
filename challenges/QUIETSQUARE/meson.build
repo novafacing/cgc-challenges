@@ -8,5 +8,6 @@ challenge_QUIETSQUARE = executable(
     'QUIETSQUARE',
     challenge_QUIETSQUARE_src,
     include_directories: [challenge_QUIETSQUARE_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

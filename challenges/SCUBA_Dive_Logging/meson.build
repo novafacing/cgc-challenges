@@ -20,5 +20,6 @@ challenge_SCUBA_Dive_Logging = executable(
     'SCUBA_Dive_Logging',
     challenge_SCUBA_Dive_Logging_src,
     include_directories: [challenge_SCUBA_Dive_Logging_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

@@ -36,5 +36,6 @@ challenge_FSK_BBS = executable(
     'FSK_BBS',
     challenge_FSK_BBS_src,
     include_directories: [challenge_FSK_BBS_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

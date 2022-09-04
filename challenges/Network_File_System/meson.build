@@ -16,5 +16,6 @@ challenge_Network_File_System = executable(
     'Network_File_System',
     challenge_Network_File_System_src,
     include_directories: [challenge_Network_File_System_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

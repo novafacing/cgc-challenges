@@ -27,5 +27,6 @@ challenge_root64_and_parcour = executable(
     'root64_and_parcour',
     challenge_root64_and_parcour_src,
     include_directories: [challenge_root64_and_parcour_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

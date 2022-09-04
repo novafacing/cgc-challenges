@@ -26,5 +26,6 @@ challenge_basic_emulator = executable(
     'basic_emulator',
     challenge_basic_emulator_src,
     include_directories: [challenge_basic_emulator_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

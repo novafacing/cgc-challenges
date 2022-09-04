@@ -14,5 +14,6 @@ challenge_Vector_Graphics_2 = executable(
     'Vector_Graphics_2',
     challenge_Vector_Graphics_2_src,
     include_directories: [challenge_Vector_Graphics_2_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

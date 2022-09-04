@@ -44,5 +44,6 @@ challenge_Gridder = executable(
     'Gridder',
     challenge_Gridder_src,
     include_directories: [challenge_Gridder_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

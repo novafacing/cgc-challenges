@@ -11,5 +11,6 @@ challenge_Packet_Analyzer = executable(
     'Packet_Analyzer',
     challenge_Packet_Analyzer_src,
     include_directories: [challenge_Packet_Analyzer_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

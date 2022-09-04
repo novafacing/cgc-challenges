@@ -15,5 +15,6 @@ challenge_Monster_Game = executable(
     'Monster_Game',
     challenge_Monster_Game_src,
     include_directories: [challenge_Monster_Game_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

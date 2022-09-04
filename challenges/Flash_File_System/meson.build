@@ -19,5 +19,6 @@ challenge_Flash_File_System = executable(
     'Flash_File_System',
     challenge_Flash_File_System_src,
     include_directories: [challenge_Flash_File_System_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

@@ -16,5 +16,6 @@ challenge_Material_Temperature_Simulation = executable(
     'Material_Temperature_Simulation',
     challenge_Material_Temperature_Simulation_src,
     include_directories: [challenge_Material_Temperature_Simulation_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

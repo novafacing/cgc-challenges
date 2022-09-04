@@ -8,5 +8,6 @@ challenge_GREYMATTER = executable(
     'GREYMATTER',
     challenge_GREYMATTER_src,
     include_directories: [challenge_GREYMATTER_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

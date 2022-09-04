@@ -17,5 +17,6 @@ challenge_FSK_Messaging_Service = executable(
     'FSK_Messaging_Service',
     challenge_FSK_Messaging_Service_src,
     include_directories: [challenge_FSK_Messaging_Service_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

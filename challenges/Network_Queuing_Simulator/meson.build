@@ -16,5 +16,6 @@ challenge_Network_Queuing_Simulator = executable(
     'Network_Queuing_Simulator',
     challenge_Network_Queuing_Simulator_src,
     include_directories: [challenge_Network_Queuing_Simulator_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

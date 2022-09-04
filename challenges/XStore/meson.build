@@ -42,5 +42,6 @@ challenge_XStore = executable(
     'XStore',
     challenge_XStore_src,
     include_directories: [challenge_XStore_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

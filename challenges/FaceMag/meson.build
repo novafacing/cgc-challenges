@@ -11,5 +11,6 @@ challenge_FaceMag = executable(
     'FaceMag',
     challenge_FaceMag_src,
     include_directories: [challenge_FaceMag_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

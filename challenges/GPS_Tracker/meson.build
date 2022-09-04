@@ -16,5 +16,6 @@ challenge_GPS_Tracker = executable(
     'GPS_Tracker',
     challenge_GPS_Tracker_src,
     include_directories: [challenge_GPS_Tracker_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

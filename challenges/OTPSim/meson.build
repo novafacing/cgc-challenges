@@ -43,5 +43,6 @@ challenge_OTPSim = executable(
     'OTPSim',
     challenge_OTPSim_src,
     include_directories: [challenge_OTPSim_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

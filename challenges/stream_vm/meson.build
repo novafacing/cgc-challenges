@@ -23,5 +23,6 @@ challenge_stream_vm = executable(
     'stream_vm',
     challenge_stream_vm_src,
     include_directories: [challenge_stream_vm_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

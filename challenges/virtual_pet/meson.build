@@ -10,5 +10,6 @@ challenge_virtual_pet = executable(
     'virtual_pet',
     challenge_virtual_pet_src,
     include_directories: [challenge_virtual_pet_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

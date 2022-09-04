@@ -13,5 +13,6 @@ challenge_Board_Game = executable(
     'Board_Game',
     challenge_Board_Game_src,
     include_directories: [challenge_Board_Game_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

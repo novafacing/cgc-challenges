@@ -47,5 +47,6 @@ challenge_Pattern_Finder = executable(
     'Pattern_Finder',
     challenge_Pattern_Finder_src,
     include_directories: [challenge_Pattern_Finder_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

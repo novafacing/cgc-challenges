@@ -27,5 +27,6 @@ challenge_Audio_Visualizer = executable(
     'Audio_Visualizer',
     challenge_Audio_Visualizer_src,
     include_directories: [challenge_Audio_Visualizer_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

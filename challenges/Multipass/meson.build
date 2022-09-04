@@ -26,5 +26,6 @@ challenge_Multipass = executable(
     'Multipass',
     challenge_Multipass_src,
     include_directories: [challenge_Multipass_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

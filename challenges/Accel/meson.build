@@ -32,5 +32,6 @@ challenge_Accel = executable(
     'Accel',
     challenge_Accel_src,
     include_directories: [challenge_Accel_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

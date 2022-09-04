@@ -8,5 +8,6 @@ challenge_Tennis_Ball_Motion_Calculator = executable(
     'Tennis_Ball_Motion_Calculator',
     challenge_Tennis_Ball_Motion_Calculator_src,
     include_directories: [challenge_Tennis_Ball_Motion_Calculator_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

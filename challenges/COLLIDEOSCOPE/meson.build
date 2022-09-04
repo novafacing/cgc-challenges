@@ -19,5 +19,6 @@ challenge_COLLIDEOSCOPE = executable(
     'COLLIDEOSCOPE',
     challenge_COLLIDEOSCOPE_src,
     include_directories: [challenge_COLLIDEOSCOPE_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

@@ -20,5 +20,6 @@ challenge_Multi_Arena_Pursuit_Simulator = executable(
     'Multi_Arena_Pursuit_Simulator',
     challenge_Multi_Arena_Pursuit_Simulator_src,
     include_directories: [challenge_Multi_Arena_Pursuit_Simulator_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

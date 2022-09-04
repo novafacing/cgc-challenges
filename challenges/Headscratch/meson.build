@@ -41,5 +41,6 @@ challenge_Headscratch = executable(
     'Headscratch',
     challenge_Headscratch_src,
     include_directories: [challenge_Headscratch_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

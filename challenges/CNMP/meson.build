@@ -9,5 +9,6 @@ challenge_CNMP = executable(
     'CNMP',
     challenge_CNMP_src,
     include_directories: [challenge_CNMP_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

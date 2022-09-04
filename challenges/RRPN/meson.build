@@ -24,5 +24,6 @@ challenge_RRPN = executable(
     'RRPN',
     challenge_RRPN_src,
     include_directories: [challenge_RRPN_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

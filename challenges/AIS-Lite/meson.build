@@ -22,5 +22,6 @@ challenge_AIS_Lite = executable(
     'AIS-Lite',
     challenge_AIS_Lite_src,
     include_directories: [challenge_AIS_Lite_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

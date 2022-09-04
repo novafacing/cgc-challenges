@@ -17,5 +17,6 @@ challenge_3D_Image_Toolkit = executable(
     '3D_Image_Toolkit',
     challenge_3D_Image_Toolkit_src,
     include_directories: [challenge_3D_Image_Toolkit_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

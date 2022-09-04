@@ -31,5 +31,6 @@ challenge_Kaprica_Go = executable(
     'Kaprica_Go',
     challenge_Kaprica_Go_src,
     include_directories: [challenge_Kaprica_Go_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

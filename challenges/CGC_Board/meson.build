@@ -33,5 +33,6 @@ challenge_CGC_Board = executable(
     'CGC_Board',
     challenge_CGC_Board_src,
     include_directories: [challenge_CGC_Board_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

@@ -18,5 +18,6 @@ challenge_Facilities_Access_Control_System = executable(
     'Facilities_Access_Control_System',
     challenge_Facilities_Access_Control_System_src,
     include_directories: [challenge_Facilities_Access_Control_System_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

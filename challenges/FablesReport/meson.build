@@ -8,5 +8,6 @@ challenge_FablesReport = executable(
     'FablesReport',
     challenge_FablesReport_src,
     include_directories: [challenge_FablesReport_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

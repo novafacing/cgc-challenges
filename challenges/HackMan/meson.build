@@ -24,5 +24,6 @@ challenge_HackMan = executable(
     'HackMan',
     challenge_HackMan_src,
     include_directories: [challenge_HackMan_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

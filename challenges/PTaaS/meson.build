@@ -22,5 +22,6 @@ challenge_PTaaS = executable(
     'PTaaS',
     challenge_PTaaS_src,
     include_directories: [challenge_PTaaS_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

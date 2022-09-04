@@ -8,5 +8,6 @@ challenge_Single_Sign_On = executable(
     'Single-Sign-On',
     challenge_Single_Sign_On_src,
     include_directories: [challenge_Single_Sign_On_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

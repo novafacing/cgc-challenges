@@ -15,5 +15,6 @@ challenge_CGC_Image_Parser = executable(
     'CGC_Image_Parser',
     challenge_CGC_Image_Parser_src,
     include_directories: [challenge_CGC_Image_Parser_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

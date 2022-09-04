@@ -46,5 +46,6 @@ challenge_Mount_Filemore = executable(
     'Mount_Filemore',
     challenge_Mount_Filemore_src,
     include_directories: [challenge_Mount_Filemore_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

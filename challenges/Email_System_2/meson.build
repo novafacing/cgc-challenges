@@ -13,5 +13,6 @@ challenge_Email_System_2 = executable(
     'Email_System_2',
     challenge_Email_System_2_src,
     include_directories: [challenge_Email_System_2_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

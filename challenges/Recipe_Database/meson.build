@@ -22,5 +22,6 @@ challenge_Recipe_Database = executable(
     'Recipe_Database',
     challenge_Recipe_Database_src,
     include_directories: [challenge_Recipe_Database_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

@@ -30,5 +30,6 @@ challenge_KTY_Pretty_Printer = executable(
     'KTY_Pretty_Printer',
     challenge_KTY_Pretty_Printer_src,
     include_directories: [challenge_KTY_Pretty_Printer_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

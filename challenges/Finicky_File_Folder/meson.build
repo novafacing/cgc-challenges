@@ -42,5 +42,6 @@ challenge_Finicky_File_Folder = executable(
     'Finicky_File_Folder',
     challenge_Finicky_File_Folder_src,
     include_directories: [challenge_Finicky_File_Folder_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

@@ -9,5 +9,6 @@ challenge_Document_Rendering_Engine = executable(
     'Document_Rendering_Engine',
     challenge_Document_Rendering_Engine_src,
     include_directories: [challenge_Document_Rendering_Engine_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

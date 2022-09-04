@@ -10,5 +10,6 @@ challenge_DFARS_Sample_Service = executable(
     'DFARS_Sample_Service',
     challenge_DFARS_Sample_Service_src,
     include_directories: [challenge_DFARS_Sample_Service_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

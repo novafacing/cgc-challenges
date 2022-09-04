@@ -8,5 +8,6 @@ challenge_Sample_Shipgame = executable(
     'Sample_Shipgame',
     challenge_Sample_Shipgame_src,
     include_directories: [challenge_Sample_Shipgame_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

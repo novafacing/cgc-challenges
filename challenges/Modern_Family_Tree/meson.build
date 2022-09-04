@@ -23,5 +23,6 @@ challenge_Modern_Family_Tree = executable(
     'Modern_Family_Tree',
     challenge_Modern_Family_Tree_src,
     include_directories: [challenge_Modern_Family_Tree_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

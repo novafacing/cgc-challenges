@@ -19,5 +19,6 @@ challenge_On_Sale = executable(
     'On_Sale',
     challenge_On_Sale_src,
     include_directories: [challenge_On_Sale_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

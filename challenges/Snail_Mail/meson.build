@@ -18,5 +18,6 @@ challenge_Snail_Mail = executable(
     'Snail_Mail',
     challenge_Snail_Mail_src,
     include_directories: [challenge_Snail_Mail_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

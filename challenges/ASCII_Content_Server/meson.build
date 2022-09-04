@@ -15,5 +15,6 @@ challenge_ASCII_Content_Server = executable(
     'ASCII_Content_Server',
     challenge_ASCII_Content_Server_src,
     include_directories: [challenge_ASCII_Content_Server_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

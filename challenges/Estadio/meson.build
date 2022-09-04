@@ -12,5 +12,6 @@ challenge_Estadio = executable(
     'Estadio',
     challenge_Estadio_src,
     include_directories: [challenge_Estadio_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

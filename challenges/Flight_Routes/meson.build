@@ -16,5 +16,6 @@ challenge_Flight_Routes = executable(
     'Flight_Routes',
     challenge_Flight_Routes_src,
     include_directories: [challenge_Flight_Routes_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

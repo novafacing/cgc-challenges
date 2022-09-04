@@ -17,5 +17,6 @@ challenge_REMATCH_3__Address_Resolution_Service__SQL_Slammer = executable(
     'REMATCH_3--Address_Resolution_Service--SQL_Slammer',
     challenge_REMATCH_3__Address_Resolution_Service__SQL_Slammer_src,
     include_directories: [challenge_REMATCH_3__Address_Resolution_Service__SQL_Slammer_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

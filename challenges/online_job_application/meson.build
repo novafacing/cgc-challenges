@@ -25,5 +25,6 @@ challenge_online_job_application = executable(
     'online_job_application',
     challenge_online_job_application_src,
     include_directories: [challenge_online_job_application_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

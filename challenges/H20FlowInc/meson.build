@@ -24,5 +24,6 @@ challenge_H20FlowInc = executable(
     'H20FlowInc',
     challenge_H20FlowInc_src,
     include_directories: [challenge_H20FlowInc_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

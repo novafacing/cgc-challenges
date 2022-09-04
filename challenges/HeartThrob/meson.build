@@ -10,5 +10,6 @@ challenge_HeartThrob = executable(
     'HeartThrob',
     challenge_HeartThrob_src,
     include_directories: [challenge_HeartThrob_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

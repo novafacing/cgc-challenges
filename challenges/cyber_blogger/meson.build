@@ -40,5 +40,6 @@ challenge_cyber_blogger = executable(
     'cyber_blogger',
     challenge_cyber_blogger_src,
     include_directories: [challenge_cyber_blogger_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

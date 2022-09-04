@@ -39,5 +39,6 @@ challenge_Space_Attackers = executable(
     'Space_Attackers',
     challenge_Space_Attackers_src,
     include_directories: [challenge_Space_Attackers_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

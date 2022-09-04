@@ -12,5 +12,6 @@ challenge_PCM_Message_decoder = executable(
     'PCM_Message_decoder',
     challenge_PCM_Message_decoder_src,
     include_directories: [challenge_PCM_Message_decoder_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

@@ -9,5 +9,6 @@ challenge_BudgIT = executable(
     'BudgIT',
     challenge_BudgIT_src,
     include_directories: [challenge_BudgIT_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

@@ -14,5 +14,6 @@ challenge_String_Info_Calculator = executable(
     'String_Info_Calculator',
     challenge_String_Info_Calculator_src,
     include_directories: [challenge_String_Info_Calculator_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

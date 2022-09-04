@@ -9,5 +9,6 @@ challenge_ValveChecks = executable(
     'ValveChecks',
     challenge_ValveChecks_src,
     include_directories: [challenge_ValveChecks_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

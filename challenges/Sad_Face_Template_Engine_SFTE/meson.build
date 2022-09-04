@@ -36,5 +36,6 @@ challenge_Sad_Face_Template_Engine_SFTE = executable(
     'Sad_Face_Template_Engine_SFTE',
     challenge_Sad_Face_Template_Engine_SFTE_src,
     include_directories: [challenge_Sad_Face_Template_Engine_SFTE_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

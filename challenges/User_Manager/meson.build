@@ -17,5 +17,6 @@ challenge_User_Manager = executable(
     'User_Manager',
     challenge_User_Manager_src,
     include_directories: [challenge_User_Manager_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

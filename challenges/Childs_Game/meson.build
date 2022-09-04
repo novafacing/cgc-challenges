@@ -45,5 +45,6 @@ challenge_Childs_Game = executable(
     'Childs_Game',
     challenge_Childs_Game_src,
     include_directories: [challenge_Childs_Game_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )

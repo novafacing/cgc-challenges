@@ -36,5 +36,6 @@ challenge_FileSys = executable(
     'FileSys',
     challenge_FileSys_src,
     include_directories: [challenge_FileSys_inc, libcgc_inc],
-    link_with: [libcgc]
+    link_with: [libcgc],
+    install_dir: install_path
 )
