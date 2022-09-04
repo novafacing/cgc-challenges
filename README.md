@@ -28,6 +28,20 @@ $ meson builddir
 $ meson compile -C builddir
 ```
 
+### "Install" Challenges
+
+By default, challenges will be "installed" to `./output/`.
+
+```sh
+$ meson install -C builddir
+```
+
+## Change Output Directory
+
+You can specify a custom install directory with:
+
+`meson "-Dinstall_path=/path/to/install/dir" builddir`
+
 ## Customizing Build
 
 Because this repository uses `meson` as a build system, you can customize the build
