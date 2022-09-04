@@ -15,10 +15,6 @@ Fuzzing evaluation papers, alongside the
 
 ## Build Instructions
 
-1. Install `meson` and `ninja`: `sudo apt-get install meson ninja-build`
-2. Generate build configuration: `meson builddir`
-3. Compile challenges: `meson compile -C builddir`
-
 ### Install Dependencies
 
 ```sh
