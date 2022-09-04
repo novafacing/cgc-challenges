@@ -25,6 +25,6 @@ challenge_router_simulator = executable(
     challenge_router_simulator_src,
     include_directories: [challenge_router_simulator_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

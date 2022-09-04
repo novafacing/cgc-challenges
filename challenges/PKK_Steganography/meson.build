@@ -26,6 +26,6 @@ challenge_PKK_Steganography = executable(
     challenge_PKK_Steganography_src,
     include_directories: [challenge_PKK_Steganography_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

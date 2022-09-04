@@ -18,6 +18,6 @@ challenge_REMATCH_2__Mail_Server__Crackaddr = executable(
     challenge_REMATCH_2__Mail_Server__Crackaddr_src,
     include_directories: [challenge_REMATCH_2__Mail_Server__Crackaddr_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

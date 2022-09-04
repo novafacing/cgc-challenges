@@ -19,6 +19,6 @@ challenge_Cromulence_All_Service = executable(
     challenge_Cromulence_All_Service_src,
     include_directories: [challenge_Cromulence_All_Service_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

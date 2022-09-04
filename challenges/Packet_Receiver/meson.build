@@ -18,6 +18,6 @@ challenge_Packet_Receiver = executable(
     challenge_Packet_Receiver_src,
     include_directories: [challenge_Packet_Receiver_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

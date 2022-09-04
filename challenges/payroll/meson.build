@@ -10,6 +10,6 @@ challenge_payroll = executable(
     challenge_payroll_src,
     include_directories: [challenge_payroll_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

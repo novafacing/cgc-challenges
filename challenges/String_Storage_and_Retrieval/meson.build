@@ -17,6 +17,6 @@ challenge_String_Storage_and_Retrieval = executable(
     challenge_String_Storage_and_Retrieval_src,
     include_directories: [challenge_String_Storage_and_Retrieval_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

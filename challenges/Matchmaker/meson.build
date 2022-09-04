@@ -16,6 +16,6 @@ challenge_Matchmaker = executable(
     challenge_Matchmaker_src,
     include_directories: [challenge_Matchmaker_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

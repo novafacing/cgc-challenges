@@ -15,6 +15,6 @@ challenge_The_Longest_Road = executable(
     challenge_The_Longest_Road_src,
     include_directories: [challenge_The_Longest_Road_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

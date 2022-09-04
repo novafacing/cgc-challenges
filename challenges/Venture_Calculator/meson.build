@@ -43,6 +43,6 @@ challenge_Venture_Calculator = executable(
     challenge_Venture_Calculator_src,
     include_directories: [challenge_Venture_Calculator_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

@@ -3,6 +3,6 @@ libtiny_AES128_C = library(
     'tiny-AES128-C',
     'aes.c',
     include_directories: libtiny_AES128_C_inc,
-    install_dir: install_path,
+    install_dir: install_path / 'lib',
     install: true
 )

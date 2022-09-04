@@ -34,6 +34,6 @@ challenge_Loud_Square_Instant_Messaging_Protocol_LSIMP = executable(
     challenge_Loud_Square_Instant_Messaging_Protocol_LSIMP_src,
     include_directories: [challenge_Loud_Square_Instant_Messaging_Protocol_LSIMP_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

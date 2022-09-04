@@ -33,6 +33,6 @@ challenge_simplenote = executable(
     challenge_simplenote_src,
     include_directories: [challenge_simplenote_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

@@ -8,6 +8,6 @@ challenge_WordCompletion = executable(
     challenge_WordCompletion_src,
     include_directories: [challenge_WordCompletion_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

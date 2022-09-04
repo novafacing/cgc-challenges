@@ -13,6 +13,6 @@ challenge_RAM_based_filesystem = executable(
     challenge_RAM_based_filesystem_src,
     include_directories: [challenge_RAM_based_filesystem_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

@@ -16,6 +16,6 @@ challenge_university_enrollment = executable(
     challenge_university_enrollment_src,
     include_directories: [challenge_university_enrollment_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

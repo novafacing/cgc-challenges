@@ -1,5 +1,6 @@
 project('cb-multios-meson', 'c', 'cpp')
 
+# Set up install directory
 fs = import('fs')
 
 install_path = get_option('install_path')
@@ -9,10 +10,6 @@ if install_path == 'output'
     else
         install_path = meson.source_root() / install_path
     endif
-endif
-
-if not fs.is_dir(install_path)
-    error('Install directory', install_path, 'does not exist!')
 endif
 
 subdir('lib')

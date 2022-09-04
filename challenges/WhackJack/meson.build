@@ -19,6 +19,6 @@ challenge_WhackJack = executable(
     challenge_WhackJack_src,
     include_directories: [challenge_WhackJack_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

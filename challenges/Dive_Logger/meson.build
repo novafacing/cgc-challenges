@@ -12,6 +12,6 @@ challenge_Dive_Logger = executable(
     challenge_Dive_Logger_src,
     include_directories: [challenge_Dive_Logger_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

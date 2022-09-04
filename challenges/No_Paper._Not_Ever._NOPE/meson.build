@@ -25,6 +25,6 @@ challenge_No_Paper__Not_Ever__NOPE = executable(
     challenge_No_Paper__Not_Ever__NOPE_src,
     include_directories: [challenge_No_Paper__Not_Ever__NOPE_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

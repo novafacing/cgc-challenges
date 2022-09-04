@@ -21,6 +21,6 @@ challenge_REMATCH_4__CGCRPC_Server__MS08_067 = executable(
     challenge_REMATCH_4__CGCRPC_Server__MS08_067_src,
     include_directories: [challenge_REMATCH_4__CGCRPC_Server__MS08_067_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

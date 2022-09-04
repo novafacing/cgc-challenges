@@ -15,6 +15,6 @@ challenge_Carbonate = executable(
     challenge_Carbonate_src,
     include_directories: [challenge_Carbonate_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

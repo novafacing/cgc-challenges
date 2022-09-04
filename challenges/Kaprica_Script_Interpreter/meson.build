@@ -39,6 +39,6 @@ challenge_Kaprica_Script_Interpreter = executable(
     challenge_Kaprica_Script_Interpreter_src,
     include_directories: [challenge_Kaprica_Script_Interpreter_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

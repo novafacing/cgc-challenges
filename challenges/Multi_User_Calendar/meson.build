@@ -48,6 +48,6 @@ challenge_Multi_User_Calendar = executable(
     challenge_Multi_User_Calendar_src,
     include_directories: [challenge_Multi_User_Calendar_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

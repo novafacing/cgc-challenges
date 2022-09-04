@@ -10,6 +10,6 @@ challenge_HIGHCOO = executable(
     challenge_HIGHCOO_src,
     include_directories: [challenge_HIGHCOO_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

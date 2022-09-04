@@ -42,6 +42,6 @@ challenge_Sorter = executable(
     challenge_Sorter_src,
     include_directories: [challenge_Sorter_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

@@ -42,6 +42,6 @@ challenge_SAuth = executable(
     challenge_SAuth_src,
     include_directories: [challenge_SAuth_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

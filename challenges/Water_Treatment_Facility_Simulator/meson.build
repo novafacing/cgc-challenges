@@ -11,6 +11,6 @@ challenge_Water_Treatment_Facility_Simulator = executable(
     challenge_Water_Treatment_Facility_Simulator_src,
     include_directories: [challenge_Water_Treatment_Facility_Simulator_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

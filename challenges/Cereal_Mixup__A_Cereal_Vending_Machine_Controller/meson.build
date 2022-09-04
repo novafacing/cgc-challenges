@@ -26,6 +26,6 @@ challenge_Cereal_Mixup__A_Cereal_Vending_Machine_Controller = executable(
     challenge_Cereal_Mixup__A_Cereal_Vending_Machine_Controller_src,
     include_directories: [challenge_Cereal_Mixup__A_Cereal_Vending_Machine_Controller_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

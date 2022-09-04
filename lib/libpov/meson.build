@@ -44,6 +44,6 @@ libpov = library(
     c_args: ['-pedantic', '-fno-builtin', '-O0'],
     include_directories: [libpov_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'lib',
     install: true
 )

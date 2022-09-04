@@ -35,6 +35,6 @@ challenge_CGC_Symbol_Viewer_CSV = executable(
     challenge_CGC_Symbol_Viewer_CSV_src,
     include_directories: [challenge_CGC_Symbol_Viewer_CSV_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

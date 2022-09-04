@@ -9,6 +9,6 @@ challenge_Diophantine_Password_Wallet = executable(
     challenge_Diophantine_Password_Wallet_src,
     include_directories: [challenge_Diophantine_Password_Wallet_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

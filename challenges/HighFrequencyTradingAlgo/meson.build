@@ -9,6 +9,6 @@ challenge_HighFrequencyTradingAlgo = executable(
     challenge_HighFrequencyTradingAlgo_src,
     include_directories: [challenge_HighFrequencyTradingAlgo_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

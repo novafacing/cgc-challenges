@@ -47,6 +47,6 @@ challenge_ShoutCTF = executable(
     challenge_ShoutCTF_src,
     include_directories: [challenge_ShoutCTF_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )

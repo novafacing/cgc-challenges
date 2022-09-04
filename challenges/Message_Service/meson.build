@@ -13,6 +13,6 @@ challenge_Message_Service = executable(
     challenge_Message_Service_src,
     include_directories: [challenge_Message_Service_inc, libcgc_inc],
     link_with: [libcgc],
-    install_dir: install_path,
+    install_dir: install_path / 'bin',
     install: true
 )
