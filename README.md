@@ -11,7 +11,7 @@ The CGC challenge set is intended to facilitate testing fuzzers, symbolic execut
 engines, and other binary analysis tools on a robust and realistic test set. It is
 recommended by [Klees et. al](https://arxiv.org/pdf/1808.09700.pdf) and most other
 Fuzzing evaluation papers, alongside the
-[LAVA-M](https://sites.google.com/site/steelix2017/home/lava) dataset from Moyix et. al.
+[LAVA-M](https://sites.google.com/site/steelix2017/home/lava) dataset from Gavitt et. al.
 
 ## Build Instructions
 
