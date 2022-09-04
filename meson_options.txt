@@ -299,7 +299,6 @@ option(
         'university_enrollment',
         'virtual_pet',
         'Water_Treatment_Facility_Simulator',
-
     ],
     description: 'A list of disabled challenges, ex: -Ddisabled=[\'vFilter\', \'WhackJack\']. Takes precedence over -Ddisabled.',
 )
@@ -792,4 +791,11 @@ option(
         'yolodex',
     ],
     description: 'A list of enabled challenges, ex: -Denabled=[\'vFilter\', \'WhackJack\'].',
+)
+
+option(
+    'enable_broken',
+    type: 'boolean',
+    value: false,
+    description: 'Whether broken challenges are enabled. Defaults to true. If this option is not set, broken challenges cannot be enabled.'
 )

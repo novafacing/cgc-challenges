@@ -1,6 +1,8 @@
 # CGC Challenges
 
-There are a couple other repos for the CGC binaries, notably [cb-multios](https://github.com/trailofbits/cb-multios) from Trail of Bits (which this is based on).
+There are a couple other repos for the CGC binaries, notably the venerable
+[cb-multios](https://github.com/trailofbits/cb-multios) from Trail of Bits (which this
+is based on).
 
 They all have weird build system hacks going on that make it pretty hard to tune your
 build. This one doesn't!
@@ -11,12 +13,24 @@ recommended by [Klees et. al](https://arxiv.org/pdf/1808.09700.pdf) and most oth
 Fuzzing evaluation papers, alongside the
 [LAVA-M](https://sites.google.com/site/steelix2017/home/lava) dataset from Moyix et. al.
 
-
 ## Build Instructions
 
 1. Install `meson` and `ninja`: `sudo apt-get install meson ninja-build`
 2. Generate build configuration: `meson builddir`
 3. Compile challenges: `meson compile -C builddir`
+
+### Install Dependencies
+
+```sh
+$ sudo apt-get install meson ninja-build build-essential
+```
+
+### Compile Challenges
+
+```sh
+$ meson builddir
+$ meson compile -C builddir
+```
 
 ## Customizing Build
 
@@ -25,6 +39,36 @@ easily:
 
 - Custom `CFLAGS` example: `meson -Dc_args='-fno-pie -no-pie'`
 - Custom `LDFLAGS` example: `meson -Dc_link_args='-fuse-ld=mold`
+
+## Enabling and Disabling Challenges
+
+By default all working challenges are enabled and will be built. The build is reasonably fast, but you may for some reason want to disable challenges.
+
+### Disable Challenges
+
+You can specify a list of challenges to disable with:
+
+`meson "-Ddisable=['TFTTP', 'virtual_pet']" builddir`
+
+All challenges are enabled by default, so adding a challenge to the list of disabled
+challenges will toggle it off. The list of disabled challenges defaults to the list of
+broken challenges, but if this option is passed the passed list will *not* override the
+list of broken challenges unless `"-Denable_broken"` is also passed.
+
+### Enable Challenges
+
+You can specify a list of challenges to enable with:
+
+`meson "-Denable=['TFTTP', 'virtual_pet']" builddir`
+
+*Only* challenges that are explicitly enabled will be built if this option is provided.
+
+### Enable Broken Challenges
+
+You can enable broken challenges (for testing purposes if you are trying to fix one, in
+which case, thanks!) with:
+
+`meson "-Denable_broken" builddir` 
 
 ## Challenge Status
 
@@ -36,6 +80,10 @@ _Working_: *186*
 
 _Not working_: *53*
 
+Legend:
+
+✅: The challenge compiles!
+❌: The challenge does not compile :(
 
 | Challenge                                          | Working? | Original Identifier |
 | -------------------------------------------------- | -------- | ------------------- |
