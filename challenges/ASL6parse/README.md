@@ -37,3 +37,7 @@ The challanges introducted to competitors in this service are a slightly
 complicated protocol which the competitors must adhere to in order to progress
 through the states of the servic, a variety of integrity checks inherent to the
 encoding scheme to which they also must adhere.
+
+### Read Notes
+
+* Read in main, decoding in cgc__decode but several checks called by cgc__decode like cgc_within, cgc_parse_tag_class, cgc_parse_length

@@ -29,3 +29,8 @@ CWE-170: Improper Null Termination
 Analysis of this service will face challenges with state-space explosion due to the size of the input and the multiple effects of each byte. 
 
 In order to increase the probability of a solution, the vulnerability can be triggered by modifying only the bytes in the cartridge header. Additionally, the vulnerability occurs before the main loop and allows for setting an arbitrary byte of a pointer to zero, which may help narrow the search space for a solution.
+
+### Read Notes
+
+* Read in load_rom, parsing and copying in cgc_gb_load and copy_title
+* cgc_process_input reads and checks byte

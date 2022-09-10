@@ -29,3 +29,9 @@ CWE-823: Use of Out-of-range Pointer Offset
 
 ## Challenges
 The first vulnerability was designed to be easy to find, fix, and trigger. The second vulnerability is much more difficult to trigger unless the CRS can determine that the play command (**?**) will advance *current_move* consistently. It would be extremely challenging and unexpected for the CRS to trigger the second vulnerability without using the play command. The goal is not to force the CRS to actually play and understand the game.
+
+### Read Notes
+
+* Read and parse in main
+* Read and parse in handle_sd (strtol)
+* Read and parse in handle_result (strncmp)

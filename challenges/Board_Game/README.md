@@ -49,3 +49,7 @@ CWE-787 Out-of-bounds write
 
 ## Challenges
 Overwriting the first byte of the input validation string must be carefully coordinated with the use of that new valid character as an x,y coordinate.  And, the piece which is being moved, must make valid chess moves over a field which is free of other 'pieces'.  Otherwise, the move is simply rejected.  Only then can the CRS successfully overwrite some useful value in the program.  Given the size of the board, limitations on the valid moves and complexity of the memory layout, identifying a successful pattern of piece moves will be difficult.
+
+### Read Notes
+
+* Read and check in cgc_acceptMove

@@ -190,3 +190,8 @@ The second is CWE-416: Use after free. Referencing memory after it has been free
 These formats require the ability to track bitwise dataflow. It also requires that competitors track user derived and user influenced data.
 
 They must also carefully track memory allocations and frees to catch their use if freed.
+
+### Read Notes
+
+* read image in main
+* parsing in cgc_XXXX_display_img, but there is a lot of business logic too

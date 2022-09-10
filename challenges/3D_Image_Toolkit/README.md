@@ -54,3 +54,8 @@ The Subjective Quantifications for this vulnerability are:
 Discovering - Medium
 Proving - Easy
 Fixing - Easy
+
+### Read Notes
+
+* read and parse choices in cgc_menu
+* read and copy choices in cgc_newfile

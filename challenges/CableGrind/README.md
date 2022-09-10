@@ -41,3 +41,8 @@ CWE-121: Stack-based buffer overflow
 * Competitors must deal with a large (~12MB) CB and discover a vulnerability in one of many, very similar, functions.  
 * Competitors must utilize control over a local variable to avoid triggering stack cookie checks but still causing a crash.
 * Competitors must find and mitigate a large number of potential vulnerabilities.
+
+
+### Read Notes
+
+* Read in main, check and return same data in cgc_dupe_open (interesting, returns ptr to tainted data but doesn't copy!)

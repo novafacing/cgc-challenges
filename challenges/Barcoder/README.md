@@ -52,3 +52,11 @@ work for you, and use it as an ability to generate valid bitmaps to use.
 Discovering = Easy
 Proving = Medium
 Patching = Easy
+
+
+### Read Notes
+
+* read selection and cgc_strtol in main
+* read and copy in cgc_input_barcode
+* cgc_create_barcode_from_str allocs and parses
+* cgc_create_barcode_from_encoded_data allocs and parses

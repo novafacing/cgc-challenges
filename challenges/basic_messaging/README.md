@@ -32,3 +32,7 @@ The root cause of this vulnerablity is CWE-190 but it results in CWE-131 and sin
 
 ## Challenges
 The attacker must be able to determine that the size field is based upon messages sent and that sending messages to themselves will not be enough to trigger the vulnerability.
+
+### Read Notes
+
+* Read in cgc_handle_loggedin, parser check in cgc_get_user, parsing and copy in cgc_create_message

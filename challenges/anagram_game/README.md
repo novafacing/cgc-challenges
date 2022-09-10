@@ -27,3 +27,7 @@ CWE-755: Improper Handling of Exceptional Conditions
 The unique challenge for this service is exploiting an out-of-memory condition. Due to the limitations of the environment, the only reliable way to cause an out-of-memory condition that is exploitable is by exhausting the amount of virtual memory available to the process. The only way to do this reliably is by controlling the allocation in **read_initial_words**.
 
 Patching the bug may be difficult. The trivial patch would be exiting the service if an out-of-memory condition occurs. This is tested for by a poller, however, which should make that patch invalid. Either fixing degree or detecting the out-of-bounds access would be valid patches.
+
+### Read Notes
+
+* Read and do light parsing in cgc_read_initial_words

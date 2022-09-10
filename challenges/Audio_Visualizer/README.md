@@ -89,3 +89,9 @@ the difference between a vulnerable and properly functioning program.
 
 The vulnerability is meant to test a system's ability to reason through the values allocating vs indexing
 a buffer.
+
+### Read Notes
+
+
+* Read opt and use in cgc_select_option
+* Read header in cgc_init_track, call cgc_validate_header to check

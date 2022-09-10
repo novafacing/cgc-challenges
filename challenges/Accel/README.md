@@ -82,3 +82,8 @@ CWE-457: Use of Uninitialized Variable
 ## Challenges
 
 This cb is meant to be difficult to analyze. The program should provide complexities that are will take some work to reason about. The bug is similar, in that it's difficult to detect what is or isn't a heap overflow especially when dealing with an off-by-one error.
+
+
+### Read Notes
+
+* Read line main, parse and perform business logic in cgc_parse_line

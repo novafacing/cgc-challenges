@@ -77,3 +77,9 @@ CWE-822: Untrusted Pointer Dereference
 * Discovering is medium
 * Proving is medium
 * Fixing is hard
+
+
+### Read Notes
+
+* Read and check in cgc_receive_input (interesting: receives input into global heap buffer)
+* Additional check and copy from cgc_deserialize*

@@ -52,5 +52,7 @@ CWE-788 Access of Memory Location After End of Buffer
 * The protocol is a very simple question/answer type protocol. However, the questions are very complex. The question is in the form of a string that has a defined format, length, and includes a checksum. Additionally, part of the question is encoded using 6bits per byte. The complexity of the string makes it difficult for an automated system to generate alternative input. This will make fuzzing incredibly difficult.
 
 
+### Read Notes
 
+* Receive in main, parse in cgc_parse_sentence
 

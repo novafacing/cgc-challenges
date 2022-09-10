@@ -43,3 +43,9 @@ The first vulnerability is a classic buffer overflow that should be straightforw
 An alternate path to reach the end of the main function is to amass enough winnings through gambling to exceed $5000 in which case the program exits normally; however, the odds and payouts of the casino games make it very unlikely that this could be achived through standard fuzzing. 
 
 The second vulnerability is more difficult to reach. Initial user input is hashed to create the seed to the PRNG. If the seed matches a specific value, the service enters a programming mode. The CRS will need to solve for the initial input which leads to the specific hash before this portion of the service can be accessed. Once this portion of the service is reached, a blob of encoded data is accepted and decoded into a stack buffer. For most inputs, the decoding algorithm shrinks the data by half, but for specific values of input, the decoding algorithm generates a same sized output which will overflow the destination stack buffer in the unpatched service. 
+
+### Read Notes
+
+* read in main followed by checks also in main
+* read and check in cgc_blackjack
+* read and check in cgc_slots

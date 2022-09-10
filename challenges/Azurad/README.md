@@ -43,3 +43,8 @@ CWE-680: Integer Overflow to Buffer Overflow
  - **Discovery**: medium
  - **Proving**: medium
  - **Patching**: medium
+
+### Read Notes
+
+* read in builtin_read
+* idk...this one is an interpreter

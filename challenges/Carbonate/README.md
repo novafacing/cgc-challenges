@@ -40,3 +40,8 @@ CWE-129	Improper Validation of Array Index
 
 The primary difficulty with this challenge is solving for specific outputs with
 mixed floating-point and integer operations.
+
+
+### Read Notes
+
+* read in cgc_expect_frame, parse in cgc_handle_check & etc without copy

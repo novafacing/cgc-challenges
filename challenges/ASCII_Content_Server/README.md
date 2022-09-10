@@ -65,3 +65,7 @@ The null pointer dereference and signed to unsigned conversion error should be d
 Identifying the out of bounds write vulnerability is not as straightforward as a standard buffer overflow because the overwrite does not occur with user generated input, but it can be mitigated using the same basic techniques as a standard buffer overflow. 
 
 The challenge in proving it is for the CRS to construct a tree in memory capable of overflowing the node_stack buffer. The CRS must construct a tree that is at least 33 elements deep with each element also containing a peer. This requires adding one element at a time in a hierarchical fashion that is highly unlikely to occur through fuzzing. The CRS must then initiate a QUERY command at the top level of the tree to access the vulnerable WalkTree() function. 
+
+### Read Notes
+
+* Read and lots of parsing (mostly strcmps) in cgc_ReceiveCommand

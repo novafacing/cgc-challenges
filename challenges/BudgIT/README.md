@@ -45,3 +45,8 @@ CWE-787: Out-of-bounds Write
 1) Determine how budget entries are created, stored, and removed by interacting with the service.
 
 2) Understand how the getSize call can be manipulated by creating and removing specific budget entries.
+
+
+### Read Notes
+
+* Read in main followed by check in main

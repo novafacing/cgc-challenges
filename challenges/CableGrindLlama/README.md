@@ -64,3 +64,7 @@ Competitors must uncover, prove, and patch a large number of vulnerabilities. Th
 In the real world, similar/identical vulnerabilities are often duplicated throughout code bases and across organizations, and being able to identify known problems in large code bases still proves challenging at times.
 Autonomously finding, proving, and patching every vulnerability present in the CB will be quite difficult, even given the simple nature of the overflows.
 In addition to reasoning about multiple heaps, competitors must be able to contend with heap cookies, and determine how to either bypass or disable the protections of provided.
+
+### Read Notes
+
+* Read in main, checks and returns ptr to input data without copy. In addition to this, does a magic value check and sets func ptrs.

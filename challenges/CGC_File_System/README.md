@@ -51,3 +51,7 @@ CWE-125 Out-of-bounds Read
 
 ## Challenges
 The tool authors must deal with the difficulties of bubble sort as well as combine the PRNT command with a prior use of the REPO command.
+
+### Read Notes
+
+* A lot of reads but all of the parsing accesses global states

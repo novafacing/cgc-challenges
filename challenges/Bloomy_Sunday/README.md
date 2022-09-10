@@ -43,3 +43,10 @@ CWE-121: Stack-based Buffer Overflow
 ## Challenges
 
 - Competitors need to generate a word that is not in the blacklist table, yet is flagged by the bloom filter (it's using 3 hash functions), such that appending the word will result in a buffer overflow.
+
+
+### Read Notes
+
+* Read in main followed by strtol
+* Read in cgc_submit_lyrics followed by cgc_bloomy_check check but no copy
+

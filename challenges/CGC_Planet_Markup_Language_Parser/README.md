@@ -123,3 +123,8 @@ CWE-476 NULL Pointer Dereference
 ## Challenges
 
 The primary difficulty with this challenge is handling the large number of possible combinations of element data. While the potential state space for this CB is no where near that of a standard browser, it will be useful in separating those who can more effectively manages a larger space.
+
+
+### Read Notes
+
+* read in main and the entire rest of the program is parsing...

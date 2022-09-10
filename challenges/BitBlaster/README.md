@@ -22,3 +22,7 @@ The vulnerability is a an explicit NULL Pointer Dereference by calling NULL as a
 
 This CB is designed to help CRSes determine well they handle bit-wise operations include the bit-based protocol  as the ability to support bit-wise operations (mainly the rotate operations). There is the potential difficulty of the rotate down operation but the clear function boundaries should help with the behavior and logic recovery. The major challenge is in how a CRS might be able to find a "solution" to the puzzle at hand. To minimize this, we ensured that the default starting position is just the bottom two rows having all 1's. This means that only the right shift is needed to generate the POV. A user can change the code in the future accordingly.
 
+
+### Read Notes
+
+* Read in main, parsing and business logic in cgc_makeMove

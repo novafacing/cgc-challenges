@@ -36,3 +36,9 @@ CWE-134
 ## Challenges
 
 This CB requires a CRS to implement a game playing strategy for hangman with a randomly selected word. The entire word list is known to the CRS. A CRS must win the game in order to have a chance to reach the vulnerable code. Three PoVs are provided. pov_3 exercises the stack overflow and negotiates a type 1 pov. pov_2 exercises the format string vulnerability and negotiates a type 2 pov. pov_1 performs a coin flip to randomly choose whether to exercises the stack overflow and do a type 1 or exercises the format string vulnerability and do a type 2. pov_1 demonstrates that a single PoV may be capable of choosing one of several possible vulnerabilities to prove. Additionally it should be noted that the current implementation of the PoVs for the format string vulnerability are subject to occasional failure depending on the distribution of null bytes in the secret data page. This potential for failure might motivate a CRS to chose to throw a PoV several times within a single round to increase the probability that a vulnerability is proved at least once.
+
+
+### Read Notes
+
+* read and parse in main (strcmp)
+* read and parse in cgc_doTurn(), some parsing in cgc_makeguess
