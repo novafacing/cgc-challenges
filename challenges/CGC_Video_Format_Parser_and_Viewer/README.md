@@ -76,3 +76,10 @@ CWE-120 Buffer copy without checking size of input
 ## Challenges
 There is a significant amount of processing on variable length bit fields. They must determine the format of video frame data and how to construct a valid video. Bitwise dataflow will be required.
 
+
+### Read Notes
+
+* Read and checks in cgc_readimagedata
+* Copy without checks in cgc_initstream
+* Checks and all rest of logic in rendercvf
+* Some more checks from rendercgf

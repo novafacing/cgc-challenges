@@ -68,3 +68,8 @@ CWE-201 Information exposure through sent data
 - Proving is medium
 - Fixing is easy
 
+### Read Notes
+
+* read and parsing in main
+* More parsing in cgc_parse_san looks hard, lots of global copies
+* This may be a good example

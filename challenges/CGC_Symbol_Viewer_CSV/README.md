@@ -43,3 +43,10 @@ CWE-190: Integer Overflow or Wraparound
 
 - Lots of mutable fields that can affect the state of the parsing
 - Sometimes mutating one field is not enough to trigger the bug due to other checks. In such case, multiple fields must be carefully manipulated in order to trigger the bug.
+
+
+### Read Notes
+
+* Read in main/cgc_read_n parse in cgc_cgcf_parse_file_header
+* parse in cgc_cgcf_is_valid, parse_section_header, 
+* THis is a GOOD sample

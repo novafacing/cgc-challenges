@@ -12,3 +12,7 @@ The vulnerability is an out of bounds read that is induced by an integer overwri
 
 This vulnerability falls under the CWE-681: Incorrect Conversion between types since the uint32 should have been converted back to an uint8 before committing or memory (or that uint8 add should have been used instead). CWE-189 falls under numeric errors.  
 
+### Read Notes
+
+* Read in main, no function really for copy/parse, most of it in same func as
+* read
