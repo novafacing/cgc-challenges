@@ -80,3 +80,7 @@ Improper cleansing and leaking of sensitive data.
  - **Discovery**: Easy
  - **Proving**: Medium
  - **Patching**: Easy
+
+### Read Notes
+
+* Some Parse* functions but not an ideal target

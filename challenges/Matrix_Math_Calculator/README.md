@@ -64,3 +64,7 @@ The fact that the rref can also cause a crash is meant to be a red herring.
 Discovering = Easy
 Proving = Medium
 Patching = Easy
+
+### Read Notes
+
+* Read, parse, and copy in cgc_input_matrix

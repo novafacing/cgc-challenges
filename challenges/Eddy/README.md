@@ -79,3 +79,6 @@ commands will need to be issued in order to trigger the overflow.
 - Proving is hard
 - Fixing is easy
 
+### Read Notes
+
+* Good read and then parse by cgc_parse_regex_element

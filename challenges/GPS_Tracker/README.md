@@ -49,3 +49,8 @@ Proving: Easy/Medium
 Fixing: Easy/Easy
 
 This CB has two vulnerabilities. The first is a relatively simple stack based buffer overflow. The difficulty in discovering it lies in setting up the state of the system to allow the geofence update command to write point data beyond the size of point array. The next vulnerability is due to a failure to initialize a variable in a structure which causes a resultant memory disclosure from the stack. It is possible to align the stack in such a manner where a portion of the magic page data exists resulting in a type 2 POV. The difficulty here is both discovering the disclosure data is being sent out and reversing the XOR transformation on this data to submit it.
+
+### Read Notes
+
+* Read in packagetracker::Run, then updatechecksum returns checksum data. GOOD candidate
+  !!!

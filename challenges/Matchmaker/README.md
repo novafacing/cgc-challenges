@@ -89,3 +89,7 @@ CWE-129: Improper validation of array index
 - Proving is hard
 - Fixing is easy
 
+### Read Notes
+
+* Read in main, parse with strchr/strcmp, parse with validate_dfa from cgc_dfa_parse_desc
+  but patching cgc_dfa_parse_desc may be pretty bad

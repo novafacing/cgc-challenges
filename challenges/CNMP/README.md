@@ -57,3 +57,8 @@ CWE-134
 
 - Finding the precise joke length and joke contents to reach and then trigger the vuln.
 - Finding that the format specifiers and format string marker used in this version of libc have different meaning from that in stdlib.
+
+### Read Notes
+
+* Read in cgc_do_add into cgc_insert_joke which does copies and checks but also has
+  the bug in it. Read in cgc_do_show that goes into str2uint32, cgc_is_numeric, etc

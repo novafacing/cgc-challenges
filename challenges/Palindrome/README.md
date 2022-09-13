@@ -23,3 +23,7 @@ The palindrome vulnerability is a vanilla buffer overflow on the stack. The prog
 ## Challenges
 
 The only intended challenge posed by this service is that it was written by an inexperienced C programmer and consequently it may look different than other test cases.
+
+### Read Notes
+
+* Read then parsing in cgc_receive_delim

@@ -39,3 +39,9 @@ Proving: Easy
 Fixing: Medium
 
 This CB has 1 vulnerability and can be difficult for a CRS to discover due to the large number of instructions and states of the input. It is however possible that a fuzzer using a proper polling input could duplicate a DMARead or DMAWrite call under the right circumstances and uncover the overflow.
+
+
+### Read Notes
+
+* loadfile does a lot of checks and parsing, some of which we may be able to handle but
+  others which we may not...

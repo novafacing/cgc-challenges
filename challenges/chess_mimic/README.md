@@ -47,3 +47,11 @@ CWE-787 Out of Bounds Write
 
 ## Challenges
 Due to the size of this board, the various pieces, and the allowable moves the possible states of the game quickly explode. This requires the CRS to analyze the source to find the incorrectly bounded piece and focus fuzzing on that piece. The CRS will be required to learn the complicated rules necessary for valid movement. This requires some slightly complex mathematical reasoning due to the way valid moves are calculated. Until this knowledge is deduced, the CRS will not be able to develop a POV. 
+
+
+### Read Notes
+
+* Reads into struct in parse_Userinput and parses input right after read
+* parse_Userinput would be picky if it received input instead of reading
+* parsing and lots of business logic happens in cgc_performMove which is passed
+  the data read into in parse_userinput

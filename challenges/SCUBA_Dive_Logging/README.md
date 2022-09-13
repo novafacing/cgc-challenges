@@ -42,3 +42,7 @@ The second vulnerability has a much shorter code path to reach it.  User data is
 
 
 
+### Read Notes
+
+* This one is only really atoi and such, rest is text stored
+

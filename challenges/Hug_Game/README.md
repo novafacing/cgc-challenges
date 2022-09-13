@@ -34,3 +34,7 @@ CWE-119
 ## Challenges
 
 This CB takes a "less is more" approach to proving vulnerability. The CRS will have very little control over the state of the application at crash - namely, the output from the PRNG is what is used to determine EIP and any other corrupted registers. Because of this, type1 proofs of vulnerability should be less straight forward than typical - instead of being able to use the function epilogue to pop corrupted values into preserved registers, a CRS will have to generate a payload which sets EIP to a sequence of instructions that points the stack into the name buffer, and then pops, for example.
+
+### Read Notes
+
+* Read and check in cgc_getbet

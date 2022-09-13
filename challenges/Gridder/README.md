@@ -48,3 +48,8 @@ CWE-121 Stack based Buffer Overflow
  - **Discovery**: easy
  - **Proving**: medium
  - **Patching**: easy
+
+### Read Notes
+
+* Read in main:SOLVE_GRIDDER:RecvBoard, passed into copygridder and validategridder,
+  could be a GOOD solution

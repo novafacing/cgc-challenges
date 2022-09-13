@@ -68,3 +68,8 @@ CWE-843: Access of Resource Using Incompatible Type 'Type Confusion'
 - Must realize that modifying the type and data for the internal object is possible
 - Cause a type confusion to overwrite the pointer to a buffer
 - Trigger the bug by making it to process the message
+
+### Read Notes
+
+* CGC_Parse_msg is a big parser and copier function that copies into a new heap buffer
+  it could be a GOOD sample. It returns NULL on fail also so it has uneven distrib

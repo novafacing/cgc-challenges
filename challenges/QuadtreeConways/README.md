@@ -42,3 +42,9 @@ CWE-690: Unchecked Return Value
 This challenge attempts to do a few things in order to make it difficult. The first challenge is obscurity, the program gives no real guidance on how the game should be played and it's not obvious what the rules are. Additionally bombs are triggered after 10 steps, but the minimum number of steps run is 100. This was intended to make it slightly less obvious to determine what triggers a bomb. Additionally the runners follow a Conways game of life time trajectory, but that isn't specified to the player.
 
 The second challenge was contraining resources (namely bombs) while creating a large game board. The size of the board is 8192 x 8192, which is meant to make brute forcing slightly more difficult.
+
+
+### Read Notes
+
+* read in Parsing in cgc_game_selection:cgc_parse_coordinate but no checks on data (but
+  result does influence control)), may be a decent sample

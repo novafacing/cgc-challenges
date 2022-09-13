@@ -56,3 +56,9 @@ Vuln 2: CWE-121: Stack-based Buffer Overflow
 
 ## Challenges 
 The challenge of this service is finding the logic flow that sets up the conditions and then allows the first_login to be set in order to allow the last message to cause the overflow.
+
+
+### Read Notes
+
+* cgc_add_message parsing and copy but may be bad, it has a lot of business
+  logic, most other stuff doesn't do much parsing or checking

@@ -46,3 +46,9 @@ CWE-457: Use of Uninitialized Variable
 This service hopes to challenge a teams ability to characterize recursive loops. Naively the length check will work on the majority of cases and prevent the NFA from looping. Additionally the vulnerable input is specific enough that the goal is that it will not be discovered via fuzzing. The intention is to have a participant specifically study the kleene star operator and how it is different than all of the other operators. Even the ? operator does not loop, but instead has 3 unique states that always move in a single direction. Discovering that the * operator is the only one that creates a loop in the directed graph is meant to be a hint as to how to crash the service.
 
 For the unitialized vulnerability error, the challenge here is setting up memory such that the unitialized variable can be taken advantage of.
+
+
+### Read Notes
+
+
+* readopt, readtrex do reads and checks

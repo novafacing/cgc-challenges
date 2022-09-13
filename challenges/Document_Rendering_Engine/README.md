@@ -90,3 +90,7 @@ CWE-788: Access of Memory Location After End of Buffer
 - Proving is medium
 - Patching is easy
 
+### Read Notes
+
+* Read and parse data in cgc_getObject - hard case because it's a malloc buffer and
+  there are a lot of reads interspered with parsing

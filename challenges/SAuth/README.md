@@ -34,3 +34,9 @@ No major challenges. Requires reasoning about integer overflows and function arg
  - **Discovery**: easy
  - **Proving**: easy
  - **Fixing**: medium
+
+
+### Read Notes
+
+* read and checks on data in cgc_recv_packet
+* Checks and additional read in cgc_recv_bytes

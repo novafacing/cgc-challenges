@@ -68,3 +68,8 @@ prove the vulnerability is identified.
 * The content for the lookup service is from the US Government's Federal Acquisition Regulation website:
 
     http://www.acquisition.gov/far/current/html/farhtml.zip
+
+### Read Notes
+
+* cgc_cmd_ch_sec can be passed a path that is heavily parsed and checked
+* Read in cgc_process, parsing with strlen, remove_newline, strtok, strlen, get_command

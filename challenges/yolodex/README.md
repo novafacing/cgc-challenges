@@ -51,3 +51,8 @@ CWE-787: Out-of-bounds Write
 This CB uses "heap cookies" between what is supposed to be user-writable and the metadata about the data structure.  Unlike traditional stack cookies, this cookie is set up once at initialization, and never changed during execution.  Corruption of the cookie forces the application to terminate.
 
 A CRS would have to send crafted data longer than the bounds of the buffer, but short enough to not corrupt the cookie.  A properly crafted input would cause the cookie to be leaked at the end of the phone number.  A CRS would have to then read the cookie, craft a new buffer containing the leaked cookie, plus the overwrite, then trigger a dereference of the overwritten pointer through the detail view.
+
+
+### Read Notes
+
+* Basically nothing lol

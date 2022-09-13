@@ -38,3 +38,7 @@ CWE-121 Stack-based Buffer Overflow
 
 ## Challenges 
 The challenge of this binary is providing proper input to create a connection, encryption, and game choices to reach the vulnerable state.
+
+### Read Notes
+
+* Obvious patch place is cgc_validate_packet

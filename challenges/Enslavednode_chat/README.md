@@ -51,3 +51,11 @@ a fairly complex layer of logic. I.e. the markov chain text generation. An
 attacker must be able to corrently insert text into the system that will result
 in a vulnerability triggering emission for the `/pont` command. This will
 require a fairly decent dataflow analysis system.
+
+
+### Read Notes
+
+* Not a great name frankly
+* Read in main
+* parse in cgc_is_command, strchr, cgc_will_chat compares against random, so is
+  GOOD for patch to derandomize!

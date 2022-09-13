@@ -45,3 +45,7 @@ buffer size shouldn't be difficult.
 Proving: hard. Controlling the buffer size requires precise inputs to a
 complex algorithm using trigonometric functions.
 Fixing: easy.
+
+### Read Notes
+
+* Genuinely I have no idea, I don't think this is a good candidate though

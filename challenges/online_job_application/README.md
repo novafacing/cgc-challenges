@@ -38,3 +38,9 @@ CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')
 ## Challenges
 
 This problem is meant to allow competitors to test their capabilities to systematically check bounding contraints and determine vulnerable input a little smarter than just utilizing random fuzzing, but instead utizling the static strings available in the binary.
+
+
+### Read Notes
+
+* Read and checks in cgc_get_response, returns status, this would be good if it was a
+  read first

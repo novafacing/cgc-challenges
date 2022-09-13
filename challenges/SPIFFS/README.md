@@ -38,3 +38,8 @@ Complex state
 file chunks can be reallocated outside of create and destroy
 perm tree is sanitized during ls but can contain many unexploitable invalid heap pointers at any given time
 Malloc and free are seperated across a recusive call 
+
+
+### Read Notes
+
+* Parse and copy arg in cgc_parse_arg, GOOD GOOD example

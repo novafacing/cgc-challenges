@@ -32,3 +32,10 @@ Although this vulnerability is easily found and corrected, proving it to be expl
 	Fixing Vulnerability 1: easy 
 
 
+### Read Notes
+
+* Read and parse message type
+* The message passed in is a command struct received from cgc_receivemessage
+* Lots of parses and copying (though it may interfere with business logic) of this
+  message
+

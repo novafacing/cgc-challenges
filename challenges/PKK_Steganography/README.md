@@ -63,3 +63,8 @@ Integer Overflow or Wraparound (CWE-190)
 ## Challenges
 
 This CB tests if the competitors can reason about the data flow and bit operations performed upon the input, since the size field needs to be correctly encoded (using LSB) to be parsed by the service.
+
+
+### Read Notes
+
+* Parse and copy in cgc_parse_pkk, may be a VERY GOOD sample!

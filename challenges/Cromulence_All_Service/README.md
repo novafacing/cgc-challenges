@@ -62,3 +62,10 @@ CWE-121: Stack-based Buffer Overflow
 
 This service presents the CRS with a number of possible commands that the CRS can select from. The service is designed to be simple in nature and have multiple bugs for the CRS to exploit. The only challenge is in determining the command table, entering the correct command, and setting the proper states for an exploitable command.
 
+
+### Read Notes
+
+* Read in cgc_encode_command, decode and lots of checks in my64encode -- this is a good
+  example but the return buffer is malloc()ed -- we need to handle new buffer allocation
+  in our code
+* More read and then parse in readmatrix, but it's immediate, same with simon

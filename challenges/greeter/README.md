@@ -89,3 +89,7 @@ algorithm should be identifiable as md5, and the pattern of prepending a secret
 to a token should be discernable, which should be suficient to discover this
 vulnerability.
 
+### Read Name
+
+* Read in main and strcmps on read data, then cgc_bin_to_hex parses and copies but does
+  not return a code

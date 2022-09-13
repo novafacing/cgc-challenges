@@ -40,3 +40,7 @@ CWE-805: Buffer Access with Incorrect Length Value
 In order to leverage the spray shape, the VGF file must contain the 'magic' value of 0x59745974 as part of the spray input. This value is not demonstrated in the sample traffic available to the CRS, so static analysis of the binary is required to uncover its existence. Fuzzing of the available inputs is highly unlikely to uncover the correct inputs required to access the spray shape. Once the spray shape is identified, additional fuzzing of a valid spray input would yield proof of the vulnerability. 
 
 The second vulnerability should be easier to reach. A valid input must be created with the layer field set to 0. 
+
+### Read Notes
+
+* Read in main, checks and return sattus in vgfverify

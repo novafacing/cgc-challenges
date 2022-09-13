@@ -53,3 +53,6 @@ CWE-680: Integer Overflow to Buffer Overflow
 * Utilizing primitive operations in decompression routine repeatedly to trigger overflow.
 * Detecting integer overflow vulnerabilities, specificially one in a 3 byte bitfield.
 * Breaking our excellent DRM.
+
+
+### Read Notes

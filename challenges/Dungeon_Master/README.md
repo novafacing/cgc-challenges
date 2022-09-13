@@ -102,3 +102,7 @@ CWE-788: Access of Memory Location After End of Buffer
 - Proving is medium
 - Patching is easy
 
+### Read Notes
+
+* Read in cgc_Playgame but read is tiny (1-byte move ID)
+* Real read in highscore is vuln but no picky

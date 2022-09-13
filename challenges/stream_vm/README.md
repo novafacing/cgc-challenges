@@ -25,3 +25,10 @@ CWE-127: Buffer Under-read
 The primary challenge for this service is to correctly reason about computed jumps and then protect against the vulnerability. Depending on the implementation, control flow integrity protections may not correctly handle computed gotos.
 
 Discovering the vulnerability should be possible with any means of testing, including both fuzzing and symbolic execution. The protocol is small and simple which should reduce state explosion.
+
+
+
+
+### Read Notes
+
+* nothing to do with this one

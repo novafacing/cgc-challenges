@@ -55,3 +55,7 @@ Understanding how C++ sets up polymophic classes will be important in finding th
 
 The buffer overflow is meant to test how large a team's input testing scales. In order for this bug to be triggered
 it requires a buffer of exactly 4097 bytes to be sent 20+ times.
+
+### Read Notes
+
+* Lots of reads but only really checked with strcmp/strlen/atoi

@@ -53,3 +53,8 @@ The challenge binary poses tests the following abilities of a system:
 
   * Ability to detect issues due to excessive stack space usage
   * Ability to construct control flows that result in excessive stack space usage
+
+
+### Read Notes
+
+* Parsing and copy in nth_word

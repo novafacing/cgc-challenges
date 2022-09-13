@@ -73,3 +73,8 @@ CWE-121 Stack-based Buffer Overflow
 
 ## Challenges 
 The three vulnerabilities presented in this challenge require the CRS to successfully parse and respond with intelligent input ten times per vulnerability. Each vulnerability requires a differing amount of parsing, input generation, and computation. The intent of this format is to reduce the efficacy of random input and exhaustive solvers and to force the CRS to implement a sufficently deep graph for each vulnerability.
+
+
+### Read Notes
+
+* Read in cgc_get_user_equation, parse in cgc_parse_input, this may be a GOOD sample

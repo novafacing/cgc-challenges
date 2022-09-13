@@ -29,3 +29,9 @@ CWE-129: Improper Validation of Array Index
 This service was designed to be solved with a constraint solver. Dynamic memory allocation is very limited (e.g. no use of malloc) and the contents of the dynamic memory are not important for exploiting the service. The enable password is a short hard-coded string that is compared against user-controlled stack memory. The goal would be to find a path that can modify one of the pointers in the data section.
 
 The challenge will be to find the exploitable path and handle the string comparisons that are required to get to the right path. Additionally, patching the bug requires the knowledge that the memory that comes before the *g_routers* array is not part of the *g_routers* array; and thus, the ASN should be limited to values greater than 0.
+
+### Read Notes
+
+* Reads in many places, checks in forex "valid_router", "cgc_parse_ip, etc
+* Good binary for skipping checks, not so good for copies
+

@@ -21,3 +21,6 @@ CWE-822: Untrusted Pointer Dereference
 ## Challenges
 The first challenge that a competitor faces is getting to the vulnerable code. They must construct an input that will issue a new card, authenticate with that card to make a purchase, and then do a refund. Second, there are verifications that make it impossible to use an arbitrary transaction ID. The input must generate a transaction ID that matches with the location of the transactions array in memory. Additionally, before the transaction's data pointer is dereferenced, there are additional checks that the transaction is valid for a refund operation.
 
+### Red Notes
+
+* long read in cgc_read_data with check

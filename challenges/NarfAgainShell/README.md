@@ -71,3 +71,6 @@ allows further access to functions and a wider attack surface. Understanding
 this concept and the intermediate goal of writing to restricted portions of the
 filesystem is also necessary to trigger one of the included vulnerabilities.
 
+### Read Notes
+
+* cgc_append_to_path has user data read in and does some copying but no checks

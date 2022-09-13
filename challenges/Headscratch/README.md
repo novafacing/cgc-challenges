@@ -52,3 +52,8 @@ vulnerability.
 Discovering: Easy
 Proving: Medium
 Fixing: Easy
+
+
+### Read Notes
+
+* Parse and copy in cgc_strip_program, may be a GOOD sample

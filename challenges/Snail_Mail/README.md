@@ -59,3 +59,9 @@ CWE-201: Information Exposure Through Sent Data
 * Discovering is easy
 * Proving is medium
 * Fixing is medium
+
+
+### Read Notes
+
+* Big memcmp check
+* Stamp validity check in cgc_use_stamp may be GOOD

@@ -52,3 +52,7 @@ CWE-122: Heap-based Buffer Overflow
 ## Challenges
 
 - Input is not directly used to generate the output. One must realize that, by carefully crafting the variables, it is possible to manimpulate the output to an exploitable condition.
+
+### Read Notes
+
+* Nothing really to say about this one

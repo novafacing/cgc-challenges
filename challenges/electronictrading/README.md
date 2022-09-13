@@ -108,3 +108,8 @@ are dependant on the global state of the program.
 - The type confusion vulnerability can be triggered in several different ways,
 but represents a distinct class of issue with this program.
 
+### Read Notes
+
+* Read and immediately parse command as int in main
+
+* Parsing and checks in cgc_cmd_check_order

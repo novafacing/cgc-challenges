@@ -33,3 +33,6 @@ CWE-467
 Different elements are stored in common data containers, creating a challenge for
 inferring data types.  Also, a CRS must created a valid, sufficiently deep graph to 
 reach the vulnerable route function.
+
+
+### Read Notes

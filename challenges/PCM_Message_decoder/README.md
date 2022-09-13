@@ -36,3 +36,8 @@ CWE-120 - Buffer Copy without Checking Size of Input
 ## Challenges
 The attacker must be able to determine there's a mistake in the sample size
 check and understand they can use that to send an overly large DataSize.
+
+### Read Notes
+
+* read and parsing in cgc_readwav, parsing in cgc_parsewav but that's literally the whole
+  program...

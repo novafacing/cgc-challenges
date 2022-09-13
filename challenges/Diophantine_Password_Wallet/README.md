@@ -13,3 +13,9 @@ There is a null pointer dereference vulnerability. The vulnerability arises from
 ## Notes
 
 The CB itself doesn't actually check to make sure that the passwords stored in the database satisfy the constraint mentioned in the description.
+
+
+### Read Notes
+
+* Reads a lot of ints and does some extremely complicated processing on them, but not a
+  lot of checks

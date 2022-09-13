@@ -39,6 +39,6 @@ CWE-193 - Off by one error
 This vulnerability requires two steps to demonstrate it crashing the program.  First a recipe has to be entered with no step by step instructions, then the recipe has to be searched and tagged.  Finally, it must be displayed as part of the tagged list.
 
 
+### Read Notes
 
-
-
+* Terrible sample, just stores raw strings

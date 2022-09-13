@@ -40,3 +40,8 @@ Proving: Easy
 Fixing: Easy (add bounds checking)
 
 This CB presents a number of challenges to a computer reasoning system. The difficulty lies in the transformation of the input set into the processed data after the RF front-end.  Due to its very nature fuzzing will be ineffective as RF receivers are naturally subjected to noise and are particularly well suited to identifying signals in the presence of noise. Also the CB introduces naturally AWGN (Additive White Guassian Noise) to every received sample. This CRS is therefore subjectively considered to be hard and designed to test beyond state of the art input reasoning capabilities and solvers. 
+
+
+### Read Notes
+
+* Read, passed into cgc_receive_packet, parsed in cgc_simple_checksum

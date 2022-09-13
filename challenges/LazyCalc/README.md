@@ -36,3 +36,8 @@ CWE-121: Stack-based Buffer Overflow
  - **Discovery**: easy
  - **Proving**: easy
  - **Patching**: easy
+
+
+### Read Notes
+
+* Not much here every func does more reads

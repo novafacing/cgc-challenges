@@ -41,3 +41,9 @@ The service acts primary to test the strength of the competitor's ability to
 reason through fairly complex logic quickly. The competitor must be able to
 generate enough valid moves against an AI to successful finish the game in
 a reasonable amount of time to be successful against this service.
+
+
+### Read Notes
+
+* Read, passed into cgc_read_move which reads MORE and then parses, medium-ok type of
+  function....

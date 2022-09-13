@@ -92,3 +92,9 @@ CWE-125: Out-of-bounds Read
 - Proving is medium
 - Patching is easy
 
+### Read Notes
+
+* Read and lots of checks on getmessage
+* Lots of checks also in validatecert
+* Parsing *and copies* in cgc_parsecertificate and get*Attribute funcs it calls
+* This may be a GOOD sample

@@ -62,3 +62,8 @@ the CB to process them.
 Discovering = Medium
 Proving = Medium
 Patching = Medium
+
+
+### Read Notes
+
+* Read parse and copy in cgc_create_number_array

@@ -38,3 +38,8 @@ CWE-843: Access of Resource Using Incompatible Type ('Type Confusion')
  - **Discovery**: hard
  - **Proving**: hard
  - **Patching**: medium
+
+  ### Read Notes
+
+* Big read in process(), followed by a ton of parsing on the data, no real picky
+  functions

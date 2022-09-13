@@ -45,3 +45,8 @@ CWE-788	Access of Memory Location After End of Buffer
 3) Model the stack to determine the contents of the uninitialized variable.
 
 4) Determine the size of the buffer contained in the uninitialized variable.
+
+
+### Read Notes
+
+* Read checked with strcmp and that's about it

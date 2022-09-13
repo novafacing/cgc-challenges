@@ -29,3 +29,8 @@ CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer
 ## Challenges
 
 This CB incorporates a single vulnerability. This vulnerability will require a CRS system to enter the appropriate state (navigating the state machine) and entering more than 128 dive points when downloading dive data. The difficulty lies in the numerous code paths available in the service as well as the unconstrained inputs available to the user.
+
+
+### Read Notes
+
+* It's cpp

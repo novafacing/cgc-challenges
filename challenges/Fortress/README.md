@@ -52,3 +52,8 @@ CWE-122: Heap-based Buffer Overflow
  - **Discovery**: easy
  - **Proving**: medium
  - **Patching**: easy
+
+### Read Notes
+
+* Reads and heavy parsing on them mostly *cmp and *toul functions in main
+* Reads and lots of stdlib parsing also in handlesendmission

@@ -40,3 +40,7 @@ Involves reuse of memory without initialization, so some understanding of heap a
  - **Discovery**: easy
  - **Proving**: medium
  - **Fixing**: medium
+
+### Read Notes
+
+* Nothing

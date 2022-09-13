@@ -99,3 +99,7 @@ CWE-680
 * A fuzzer will also have problems with the requirement for 3 lines of data, each having a non-standard line termination charactor. At the same time, the length of a line is restricted along with the total length of all 3 lines.
 * A SMT solver should be able to work out the proper inputs to create a valid haiku. But, the amount of input required to trigger the POV is much more than the size of the buffer, so is not something that can be learned from code conditions.
 * 
+
+### Read Notes
+
+* Read in cgc_recv_haiku but not really any parse/checks 

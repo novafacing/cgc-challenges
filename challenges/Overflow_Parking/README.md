@@ -47,3 +47,7 @@ Finally, proving vulnerability via heap corruption is a non-trivial task, even f
 - Discovering is medium
 - Proving is hard
 - Patching is easy
+
+### Read Notes
+
+* read in cgc_read_instr, doesn't seem to be much checking at all though

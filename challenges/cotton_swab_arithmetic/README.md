@@ -67,3 +67,8 @@ In both cases, CBs must:
 #) Handle dynamic dispatch, complex paths based on input inherent to an interpreter
 #) Handle self-modifying bytecode this implies accurately modeling memory
 
+
+### Read Notes
+
+* Read in main, verification in cgc_bytecode_vrfy
+* (GOOD example!)

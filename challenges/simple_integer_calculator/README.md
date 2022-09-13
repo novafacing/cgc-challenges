@@ -57,3 +57,8 @@ CWE-190 Integer Overflow or Wraparound
 ## Challenges
 
 This challenge binary uses a trie to store function pointers to reach deeper functionality.  Exploration of the challenge set will require processing the entries in the trie and generating inputs capable of exercising the application.
+
+
+### Read Notes
+
+* It's literally a ginormous processor func idk what we can do with this

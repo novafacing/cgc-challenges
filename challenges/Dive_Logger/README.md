@@ -39,3 +39,8 @@ out-of-bounds write
 CWE-787 
 CWE-839
 ## Challenges
+
+### Read Notes
+
+* Lots of already structured reads that are trusted, sanitizers just sanitize, they don't
+  return an error state

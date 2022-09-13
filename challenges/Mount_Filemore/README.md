@@ -63,3 +63,8 @@ CWE-122 Heap Overflow
  - **Discovery**: medium
  - **Proving**: hard
  - **Patching**: easy
+
+
+### Read Notes
+
+* Read in main, strtoul on input otherwise...lots of reads but not that many parses

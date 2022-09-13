@@ -59,3 +59,7 @@ an input which will lead to triggering the vulnerability. This CB is inspired by
 several real-world path traversal and unicode vulnerabilities, including
 CVE-2000-0884 in Microsoft IIS.
 
+
+### Read Notes
+
+* canonicalize_path may be a GOOD sample: check, copy, return status

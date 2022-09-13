@@ -38,3 +38,6 @@ Use of Uninitialized Variable (CWE-457)
 ## Challenges
 
 This CB tests if the competitors can detect uninitialized stack variable and its insecure usage. This requires a good understanding and reasoning of the stack throughout interprocedural control flows. The CB also tests the ability to analyze unusual control-flow introduced by *goto* statements. 
+
+
+* read AND parse in cgc_parse_input

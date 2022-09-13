@@ -29,3 +29,9 @@ CWE-822: Untrusted Pointer Dereference
 
 ## Challenges
 Triggering the vulnerability to modify memory locations is easy, while triggering the vulnerability to access memory locations is difficult because it requires unlocking the vault. Additionally, the IO is obfuscated using XOR which makes fuzzing more challenging, e.g. changing a single byte or bit cascades into the following bytes.
+
+
+### Read Notes
+
+* betoh16 is passed input bytes
+* so is betoh32

@@ -53,3 +53,9 @@ engines.
  - **Discovery**: Easy
  - **Proving**: Hard
  - **Patching**: Medium
+
+
+### Read Notes
+
+* Overall a bad sample, cgc_findmatches technically does some parsing and comparisons
+  against user data but does a lot of state and business logic in the process

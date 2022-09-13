@@ -87,3 +87,9 @@ CWE-843 Access of resource using incompatible type
 - Proving is medium
 - Fixing is easy
 
+
+### Read Notes
+
+* Read in main, parsing and copies in cgc_tokenize (GOOD candidate!)
+* tokenized data passed into cgc_parse (more parsing but also a lot of business logic)
+* parsed data passed into cgc_eval (lot of business logic)

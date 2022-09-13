@@ -55,3 +55,8 @@ CWE-788 Access of Memory Location After End of Buffer
 2. Identifying the hidden command and properly send a record in order to execute the vulnerable free().
 
 3. Patching the CB with sufficient checks to ensure an integer wrap-around either doesn't occur or doesn't create a vulnerable condition. 
+
+### Read Notes
+
+* Lots of parsing and reading simultaneously but nothing matching criteria
+

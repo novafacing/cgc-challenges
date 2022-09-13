@@ -34,3 +34,10 @@ CWE-786: Access of Memory Location Before Start of Buffer
  - **Discovery**: medium
  - **Proving**: medium
  - **Patching**: medium
+
+
+### Read Notes
+
+* update_rules adds user data to structure, does checksums and such. Would be a GOOD
+  target, but difficult
+* interface::process does parsing and calls business logic

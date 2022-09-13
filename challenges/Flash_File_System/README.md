@@ -37,3 +37,11 @@ Proving: Hard
 Fixing: Easy
 
 It is this authors subjective opinion that discovery of this vulnerability is easy as a negative array index to the CloseFile command should be easily identified. However proving this vulnerability with a type 1 register control PoV is much more difficult. The system would have to recognize that it can write to a previous stack frames PC and cause execution of nearly 30 instructions without issue to unroll the stack frame further giving full control of PC and the base pointer. Fixing is easy by adding a simple check for negative values before accessing the File Descriptor array table.
+
+
+### Read Notes
+
+* Receive command number in runtestsystem:recvdata
+* Parse command number in runtestsystem
+* Read data from *Command functions and then use it, no checks besides size, so RecvData
+  might actually be ok but probably not

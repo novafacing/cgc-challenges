@@ -51,3 +51,11 @@ CWE-125 - Out of Bounds Read
 No example inputs are provided to the CRS for this challenge. The CRS must discover the proper input format by examining the binary. In order to leverage the write what where vulnerability, the CRS must create an input that passes enough format checks to reach the point in the service where a format string will be passed to the output function. It must then include a format specifier in the correct place within the input to trigger the vulnerability. 
 
 In order to prove the out of bounds read vulnerability the CRS must construct an input that passes every analysis step to reach the inner Application layer of the packet. The Application layer must be properly constructed except for an invalid length field in either the To or Subject email field. 
+
+
+### Read Notes
+
+
+* Reads and checks in receiveandverifyinitializationpacket
+* Likewise for receiveandverifyfilters, receiveAndprocess*
+

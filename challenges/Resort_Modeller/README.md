@@ -64,3 +64,10 @@ CWE-822: Untrusted Pointer Dereference
 * Discovering is medium
 * Proving is medium
 * Fixing is easy
+
+
+### Read Notes
+
+* Read and checks on several structs:
+* * cgc_gen_deciders, cgc_gen_lifs, cgc_gen_trails
+* This may be a good binary for more complex testing

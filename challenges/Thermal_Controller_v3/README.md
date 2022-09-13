@@ -35,3 +35,6 @@ Fixing: Easy
 
 This vulnerability is considered to be on the harder side of proving due to the conditions that are needed to properly trigger a type-1 vulnerability. Due to its nature fixing the vulnerability is a trivial as it involves fixing the type checks to unsigned values. There may be some difficulty for the CRS in discovering all of the initial conditions needed to trigger and prove the vulnerability in this service.
 
+### Read Notes
+
+* cgc_validate_fw is definitely an option, that's about it here

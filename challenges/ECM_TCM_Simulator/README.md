@@ -39,3 +39,7 @@ Proving: Easy
 Fixing: Easy (add bounds checking)
 
 This CB presents a moderate difficulty in discovery due preliminary to the large surface area to attack and the near infinite state exploration that can occur. This is due to the nature of the service as a simulator and the ability to input a large number of commands into the system. It also requires the ordering of the commands to turn on the engine and enable traction control before it is possible to send the read wheel speed command to disclose the secret page memory.
+
+### Read Notes
+
+* Read in setups, lot of parsing in Handle* methods

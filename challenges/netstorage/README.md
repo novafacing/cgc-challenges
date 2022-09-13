@@ -24,3 +24,8 @@ CWE-787: Out-of-bounds Write
 
 ## Challenges
 The commands are wrapped in two structures, which increases the depth needed to get to the exploitable function. Additionally, the instructions that result in the overflow use _SSE_ registers, which must be supported by the analysis platform. In order to get to the point where commands can be sent, the _devlist_ command must be sent, the _devid_ extracted, and then sent as part of the _import_ command. Lastly, the use of function pointers may make control flow more difficult to analyze.
+
+### Read Notes
+
+* read in cgc_usb_handle_packets parsed by be16toh
+* Read in cgc_handle* and parsing especially import and submit

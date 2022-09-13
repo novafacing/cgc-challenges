@@ -89,3 +89,8 @@ CWE-476
 - The first challenge is to play a full game through to completion. This will provide the player with access to the START OVER menu option.
 - The second challenge is to notice that the scores are unsigned char which can overflow. And then correlate that with the guard on the game struct pointer assignment.
 - The hardest challenge is to actually play 257 * 2 games and choose the correct player char (P or Q) and win exactly 257 games out of 257 * 2 games.
+
+
+### Read Notes
+
+* Read in main is just parsed by streq

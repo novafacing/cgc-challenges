@@ -56,3 +56,8 @@ CWE-121: Stack-based Buffer Overflow
  - **Discovery**: medium
  - **Proving**: medium
  - **Patching**: medium
+
+ ### Read Notes
+
+ * Read in readmgcfile, checks in mgcheaderinfo::synced/songv1/calcframesize, may be
+   a GOOD sample!

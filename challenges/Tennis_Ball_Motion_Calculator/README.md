@@ -77,3 +77,9 @@ is
 Meaning there was some more rounding errors during the floating point calculations.
 
 All in all, this CB is plagued with different sources of rounding errors which eventually leads to an out of bounds array access that seg-faults.
+
+
+### Read Notes
+
+
+* A few "strtoX" functions but that's about it, more parsing in main also

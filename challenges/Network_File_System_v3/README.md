@@ -37,3 +37,8 @@ Proving: Medium
 Fixing: Medium
 
 This CB has a single vulnerability present in it. It is a type 2 vulnerability and discloses magic page data. Due to the nature of the vulnerability it is relatively easy to discover a crashing input by specifying a negative value to the offset 32-bit integer for a Read command. If the value is large enough then the buffer under run reads a value outside of an allocated page resulting in SIGSEGV. The difficulty lies in directing the under read to a specific memory address that leaks page data via a pointer to magic page data on the heap. The user also then has to craft the read length to be sufficiently large that the data returned from the read request leaks enough page data back necessary for a type 2 POV.
+
+
+### Read Notes
+
+* Not a lot of checks surprisingly

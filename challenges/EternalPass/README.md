@@ -70,3 +70,8 @@ CWE-822 Untrusted pointer dereference
 * Discovery: easy
 * Proving: hard
 * Patching: easy
+
+### Read Notes
+
+* Nothing really to speak of here
+

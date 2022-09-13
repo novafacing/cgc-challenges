@@ -153,3 +153,8 @@ CWE-122 Heap-based Buffer Overflow
 ## Challenges
 
 The attacker must find a random seed that allows bars to overflow their buffer.
+
+### Read Notes
+
+* No real parsing after read to speak of, just reads ints from stdin and then checks
+  them in main

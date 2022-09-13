@@ -38,3 +38,8 @@ The integer overflow should be relatively easy to identify.  Determining that th
 Discovering - Easy
 Proving - Medium
 Fixing - Easy
+
+### Read Notes
+
+* Read and parse 1-byte cmd in cgc_RecvCommand
+* Read and parse additional 1-2 byte commands/ids, cgc_GrantAccess possible picky func

@@ -135,3 +135,8 @@ CWE-476
 * The second challenge is understanding floating point arithmetic. Half of the math functions process floating point numbers.
 * The third challenge is that, assuming the competitor can mangage the nonce, and they are doing fuzzing, they are going to experience crashes in a subset of the math functions in any case where the list length is 0. This is a case that will help differentiate between teams' methods of patching and detecting vulnerabilities. The ideal patch, is to put a test in operation.c:do\_create() around line 255. Another efficient patch would be to put a list length check at the start of the operation.c:load\_list() function. It is also possible to put a length check inside of each math function in math\_fun.c. One or more of those checks should be designed to cause the system to exit if num\_list->count is 0. Either method would prevent the functions from causing a SIGSEGV.
 * The final challenge is believing that floating point numbers can be odd and even.
+
+
+### Read Notes
+
+* Lots of number reads and checks against constant values but nothing in our flow format

@@ -24,3 +24,9 @@ CWE-134: Uncontrolled Format Sting
 ## Challenges
 
 The goal of this challenge set was to use inlining and macros to increase the code size. In terms of LOC, it is about 3 times larger than the average code size of other KPRCA challenge sets. In addition to LOC, the challenge set also has a lot of preprocessing that will slow down attempts to analyze with a symbolic executor and fuzzing, to a lesser extent. The release pollers include a simple case that should be trivially modifiable to get to a crashing input, in order to make the challenge set easier.
+
+
+### Read Notes
+
+* Read in main, parse in parse_request and copy *based* on user input but doesn't actually
+  copy the user input, may be INTERESTING

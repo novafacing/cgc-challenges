@@ -66,3 +66,6 @@ The defrag() function will cause excessive stack consumption via a huge (and unn
 
 This buffer isn't actually used for anything mission-critical.  It has no explicit use when reconstituting packets.  Without some distraction, an optimizing compiler should therefore be expected to remove the allocation.  Without these allocations, it becomes infeasible to stack overflow within the confines of the FRAG protocol packet length.  Similarly, an optimizing CRS will avoid the stack overflow condition in this manner.
 
+### Read Notes
+
+* Read in main, basically just memcmped

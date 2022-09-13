@@ -30,3 +30,8 @@ CWE-416: Use After Free
 ## Challenges
 
 This CB requires the reasoning system to login and provide the proper credentials. In order for the reasoning system to effectively do this it must track the state of the users in the database and provide the proper authentication parameters to access the user console where messages can be sent and the vulnerability exercised. Lastly a use after free event does not immediately constitute a crash. The memory pointer that points to stale data on the heap must be manipulated in a manner to cause a crashing event.
+
+
+### Read Notes
+
+* ToInteger is a GOOD sample here (copy, return status, check)

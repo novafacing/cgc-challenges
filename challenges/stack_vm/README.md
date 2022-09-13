@@ -48,3 +48,9 @@ CWE-125
 * Must determine how the interpreter works in order to construct a valid program.
 * Must understand how the stack used when executing a program is stored relative to the program being executed on the heap.
 * Must construct a program that causes the stack to overflow and overwrite the 'size' attribute of the executing program.
+
+
+### Read Notes
+
+* Check in parsecmd but no copy
+

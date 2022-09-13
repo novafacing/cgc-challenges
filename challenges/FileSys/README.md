@@ -70,3 +70,8 @@ CWE-416: Use After Free
 ## Challenges
 
 - C++
+
+
+### Read Notes
+
+* Not much to say for this one

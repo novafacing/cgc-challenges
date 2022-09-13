@@ -35,3 +35,6 @@ CWE-126: Buffer Over-read
  - **Discovery**: medium
  - **Proving**: medium
  - **Patching**: medium
+
+* Input in interface.cc::run, passed into strto*, strsep, Gain::fromRational. Probably
+  not a great bin

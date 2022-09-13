@@ -33,3 +33,8 @@ Medium - many instructions modify state. May not be obvious how much control the
 Medium/Hard - A CRS will have to understand the emulator and use that to feed and transform values in the register states to prove vulnerability.
 ### Fixing
 Easy - a contraint needs to be applied on the register arg2 form of SCAN in much same way it is applied on the immediate form.
+
+### Read Notes
+
+* REad a ton in main, then execute it as emulated instructions but not many checks on
+  anything

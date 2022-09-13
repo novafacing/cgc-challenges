@@ -90,3 +90,8 @@ CWE-788 Access of Memory Location After End of Buffer
 * Discovering is easy
 * Proving is hard
 * Fixing is easy
+
+
+### Read Notes
+
+* cgc_can_have* functions do parsing on input data but otherwise hmmm...not a great sample

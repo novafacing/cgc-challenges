@@ -57,3 +57,10 @@ The expected solver is an analysis framework that can combine symbolic program
 analysis with fuzzing. Use the symbolic program analysis to figure out the 
 maximum values of all of the header fields, then generate a file with the rest 
 of data set to random values.
+
+
+### Read Notes
+
+* Receivalls and ;MANY checks in main
+
+* Data passed into cgc_huffman_decode_table which copies!

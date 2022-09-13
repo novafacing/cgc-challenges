@@ -68,3 +68,9 @@ Vuln 4: CWE-476: Null pointer dereference
 
 ## Challenges 
 The challenge of this binary is providing a properly formatted file that allows each vulnerability to be reached. There are many linked dependencies that force frequent offset calculations. 
+
+### Read Notes
+
+
+* Read in main, parse in cgc_parse_book and children (cgc_verify_chapter, cgc_verify_entry,
+  copy in cgc_getentryinfo)

@@ -45,3 +45,10 @@ CWE-121 Stack-based Buffer Overflow
 
 The primary difficulty with this challenge is maintaining identical RNG state
 with mixed floating-point and integer operations.
+
+
+### Read Notes
+
+* cgc_extract_guess_req are all 2 checks, then return part of input. May be GOOD because
+  they return the value as return value.
+

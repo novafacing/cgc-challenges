@@ -39,3 +39,7 @@ CWE-121: Stack-based Buffer Overflow
  - **Discovery**: easy
  - **Proving**: medium
  - **Patching**: easy
+
+### Read Notes
+
+* Read in handle_query, then it disappears into the neural net!

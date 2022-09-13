@@ -58,3 +58,9 @@ Heap Corruption
  - **Discovery**: medium
  - **Proving**: hard
  - **Patching**: easy
+
+
+### Read Notes
+
+* read in load_req, does some magic number checks and stuff, then reads again
+* Lots of commands and various integrity checks

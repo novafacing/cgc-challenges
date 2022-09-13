@@ -64,3 +64,12 @@ or fuzzing would not be a viable solution for discovering either of the vulnerab
 Discovering = Easy
 Proving = Medium
 Patching = Medium
+
+
+### Read Notes
+
+* Many reads but they pretty much all go straight into strtols in hi_lo
+* In rps, freaduntil -> strcmp several times
+* cgc_do_init does several reads and then checks on the data
+* cgc_bytecode_exec does a few checks but is mostly business logic (passed in result
+* of cgc_do_init)

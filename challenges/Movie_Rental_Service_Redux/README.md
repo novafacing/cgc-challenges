@@ -56,3 +56,9 @@ CWE-134: Uncontrolled Format String
 The CB generates a small random password stored in the heap which is meant to be bruce forceable. The more challenging part is determining the "undocumented" byte sequence (hardcoded in the binary) that enables debug mode. Once in debug mode a user must send the "undocumented" integer codes that call the debug functions, dag (debug add genre) and dar (debug add rating). Specifically the vulnerability is enabled by calling dag with a vulnerable string.
 
 Once a competitor determines how to call the dag function and add a vulnerable string to the movie genre list, crashing the program requires the competitor use the admin mode function to add or update a movie. When it gets to the part that lists the "genres" the bug can be triggered.
+
+
+### Read Notes
+
+
+* Read and parse in cgc_update/read/remove etc but not really flow we are looking for

@@ -35,3 +35,9 @@ Stack-based Buffer Overflow (CWE-121)
 ## Challenges
 
 This service is focused on testing code coverage of input based attacks. The easter egg is slightly contrived, but the hope is that by forcing a file of at least 961 lines, and an input of at least 4096+ bytes on the 961 (vulnerable) line, the goal is to push how effective a competitors's genetic algorithms/code coverage analysis/input generation algorithms/etc characteristics are. 
+
+### Read Notes
+
+* Read and checks in cgc_open_sfile hash function in cgc_get_lhash, might be interesting
+  for patching, because it creates a hash from user input and returns it straight up.
+* Lots of other processing in differ.c but it is almost all business logic

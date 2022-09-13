@@ -54,3 +54,9 @@ Off-by-one Error (CWE-193)
 ## Challenges
 
 The competitors need to analyze and find out about the hard-coded data (master key) in order to generate valid session keys, which are random each time they are generated and expire in 3 actions. In order to trigger the bug successfully, good understanding of stack structure (location of local variables and their usage) is important as well as computing the correct token values (constraint solving).
+
+
+### Read Notes
+
+* Read in main, handle_command dispatches.
+* cgc_permit_test does checks and returns static, may be a GOOD sample

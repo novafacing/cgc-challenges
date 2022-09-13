@@ -150,3 +150,4 @@ of the cookie value in the Chess game.
 - Fixing is medium
 
 
+### Read Notes
