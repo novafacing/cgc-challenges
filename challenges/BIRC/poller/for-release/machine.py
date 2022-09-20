@@ -42,13 +42,13 @@ def random_word(max_size=10, min_size=2):
 def random_text(max_words=10, min_words=3):
     max_words = max_words if max_words >= min_words else min_words
     text = ''
-    for x in range(random.randint(min_words, max_words)):
+    for x in xrange(random.randint(min_words, max_words)):
         text += random_word() + ' '
     return text
 
 def rand_bytes(min_size=3, max_size=30):
     rndbytes = ''
-    for x in range(random.randint(min_size, max_size)):
+    for x in xrange(random.randint(min_size, max_size)):
         rndbytes += chr(random.randint(0,255))
     return rndbytes
 
@@ -131,7 +131,7 @@ class Brc(Actions):
 
     def _generate_password(self):
         pw = ''
-        for x in range(10):
+        for x in xrange(10):
             pw += chr(self._get_random_byte())
         return pw
 
@@ -145,17 +145,17 @@ class Brc(Actions):
         if not self.cur_user:
             return
 
-        for x in range(len(self.all_users)):
+        for x in xrange(len(self.all_users)):
             if self.cur_user.name == self.all_users[x].name:
                 self.all_users.pop(x)
                 break
 
         chans_to_delete = []
-        for x in range(len(self.all_channels)):
+        for x in xrange(len(self.all_channels)):
             if self.cur_user.name == self.all_channels[x].creator.name:
                 chans_to_delete.insert(0,x)
             else:
-                for y in range(len(self.all_channels[x].users)):
+                for y in xrange(len(self.all_channels[x].users)):
                     if self.cur_user.name == self.all_channels[x].users[y].name:
                         self.all_channels[x].users.pop(y)
                         break
@@ -190,14 +190,14 @@ class Brc(Actions):
             if chan.name == c.name:
                 channel = c
         if channel:
-            for x in range(len(channel.users)):
+            for x in xrange(len(channel.users)):
                 if self.cur_user.name == channel.users[x].name:
                     channel.users.pop(x)
                     return True
         return False
 
     def _delete_channel(self, chan):
-        for x in range(len(self.all_channels)):
+        for x in xrange(len(self.all_channels)):
             if chan.name == self.all_channels[x].name:
                 if self.cur_user.name == self.all_channels[x].creator.name:
                     self.all_channels.pop(x)

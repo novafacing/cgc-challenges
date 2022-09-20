@@ -32,7 +32,7 @@ import os
 
 # NOTE: this is super inefficient, don't care.
 def random_bytes(min, max, mod=255):
-    return ''.join(chr(choice(list(range(mod)))) for _ in range(randint(min,max)))
+    return ''.join(chr(choice(range(mod))) for _ in range(randint(min,max)))
 
 def round_up_to_align(sz_alloc):
     SZ_PAGE = 0x1000
@@ -53,7 +53,7 @@ class TaintedLove(Actions):
         DEBUG = self.GLOBAL_DEBUG and True
         POV = self.GLOBAL_POV and True
         if DEBUG:
-            print("entanglement_razzmatazz()")
+            print "entanglement_razzmatazz()"
 
         ID = "\x01"
         MIN_RX_BYTES = 1+1337
@@ -84,7 +84,7 @@ class TaintedLove(Actions):
             if POV:
                 sz_alloc -= 1
         if DEBUG:
-            print("sz_alloc (after rounding): %d" % sz_alloc)
+            print "sz_alloc (after rounding): %d" % sz_alloc
         ALLOC = struct.pack("<H", sz_alloc)
 
         # Pick a random 2-byte OOB loop initializer. 
@@ -109,13 +109,13 @@ class TaintedLove(Actions):
             mapping[0] = ord(OOB[0])
             mapping[1] = ord(OOB[1])
             if DEBUG:
-                print("OOB inits: mapping[0] = 0x%02x, mapping[1] = 0x%02x" % \
-                    (mapping[0], mapping[1]))
+                print "OOB inits: mapping[0] = 0x%02x, mapping[1] = 0x%02x" % \
+                    (mapping[0], mapping[1])
             for i in range(0, sz_alloc-2):
                 mapping[i+2] = (mapping[i+1] + mapping[i] + i) & 0xFF
                 if DEBUG:
-                    print("OOB calc #%d: mapping[i+2] = 0x%02x" % \
-                        (i, mapping[i+2]))
+                    print "OOB calc #%d: mapping[i+2] = 0x%02x" % \
+                        (i, mapping[i+2])
             output = struct.pack("B", mapping[sz_alloc-1])
         
         # Send the request, check the answer.
@@ -131,7 +131,7 @@ class TaintedLove(Actions):
         DEBUG = self.GLOBAL_DEBUG and True
         POV = self.GLOBAL_POV and False
         if DEBUG:
-            print("causality_poppycock()")
+            print "causality_poppycock()"
 
         ID = "\x07"
         MIN_RX_BYTES = 1+1337
@@ -155,7 +155,7 @@ class TaintedLove(Actions):
             gate_satisfy = self.chance(0.5)
         
         if DEBUG:
-            print("gate_satisfy: %d" % gate_satisfy)
+            print "gate_satisfy: %d" % gate_satisfy
 
         if gate_satisfy:
             GATE_MAGIC = GATE_MAGIC_PASS
@@ -173,8 +173,8 @@ class TaintedLove(Actions):
             buf += random_bytes(1, 1, SZ_VULN_BUF-1)
         
         if DEBUG:
-            print("poppycock | TOTAL_BYTES = %d, len(buf) = %d, TOTAL_BYTES-len(buf) = %d" % \
-                (TOTAL_BYTES, len(buf), TOTAL_BYTES-len(buf)))
+            print "poppycock | TOTAL_BYTES = %d, len(buf) = %d, TOTAL_BYTES-len(buf) = %d" % \
+                (TOTAL_BYTES, len(buf), TOTAL_BYTES-len(buf))
         buf += random_bytes(TOTAL_BYTES-len(buf), TOTAL_BYTES-len(buf))
 
         if POV:
@@ -190,11 +190,11 @@ class TaintedLove(Actions):
                 GATE_CURR = (GATE_CURR + (ord(buf[i]) % SZ_VULN_BUF)) & 0xFF
 
             if DEBUG:
-                print("poppycock | ord(buf[%04d]) = 0x%02x, ord(buf[%04d]) %% SZ_VULN_BUF = 0x%02x" % (i, ord(buf[i]), i, ord(buf[i]) % SZ_VULN_BUF))
-                print("poppycock | #%08d: after adding buf[%04d] = 0x%02x, GATE_CURR = 0x%02x" % (i, i, ord(buf[i]), GATE_CURR))
+                print "poppycock | ord(buf[%04d]) = 0x%02x, ord(buf[%04d]) %% SZ_VULN_BUF = 0x%02x" % (i, ord(buf[i]), i, ord(buf[i]) % SZ_VULN_BUF)
+                print "poppycock | #%08d: after adding buf[%04d] = 0x%02x, GATE_CURR = 0x%02x" % (i, i, ord(buf[i]), GATE_CURR)
         FIXUP = (GATE_MAGIC - GATE_CURR) & 0xFF
         if DEBUG:
-            print("poppycock | final GATE_CURR = 0x%02x, would need to add 0x%02x (%d) of FIXUP to match 0x%02x" % (GATE_CURR, FIXUP, FIXUP, GATE_MAGIC))
+            print "poppycock | final GATE_CURR = 0x%02x, would need to add 0x%02x (%d) of FIXUP to match 0x%02x" % (GATE_CURR, FIXUP, FIXUP, GATE_MAGIC)
 
         # Apply FIXUP. We need to spread the fixup over several GATE_PRIME 
         # offsets because a proper patch will mod them SZ_VULN_BUF.
@@ -211,7 +211,7 @@ class TaintedLove(Actions):
             if i > len(buf)-1:
                 # Go nuclear
                 if DEBUG:
-                    print("poppycock | deltas insufficient for FIXUP; nuclear option...")
+                    print "poppycock | deltas insufficient for FIXUP; nuclear option..."
                 buf[0] = ID
                 for j in range(GATE_PRIME, TOTAL_BYTES-GATE_PRIME, GATE_PRIME):
                     buf[j] = chr(0)
@@ -221,11 +221,11 @@ class TaintedLove(Actions):
                 continue
 
             if DEBUG:
-                print("poppycock | applying FIXUP; i = %d" % i)
+                print "poppycock | applying FIXUP; i = %d" % i
             curr = ord(buf[i]) % SZ_VULN_BUF
             delta = min((SZ_VULN_BUF-1) - curr, FIXUP)
             if DEBUG:
-                print("poppycock | adding delta = %d to buf[%04d]" % (delta, i))
+                print "poppycock | adding delta = %d to buf[%04d]" % (delta, i)
             buf[i] = chr(curr + delta)
             FIXUP -= delta
             i += GATE_PRIME
@@ -252,10 +252,10 @@ class TaintedLove(Actions):
                         vuln_buf[i+2] << 16 | \
                         vuln_buf[i+3] << 24
             if DEBUG:
-                print("poppycock | #%08d: output = 0x%08x" % (i, output))
+                print "poppycock | #%08d: output = 0x%08x" % (i, output)
         
         if DEBUG:
-            print("poppycock | final output: 0x%08x" % output)
+            print "poppycock | final output: 0x%08x" % output
 
         self.write(buf)
         self.read(length=4, expect=struct.pack("<L", output))
@@ -275,7 +275,7 @@ class TaintedLove(Actions):
         DEBUG = self.GLOBAL_DEBUG and True
         POV = self.GLOBAL_POV and True
         if DEBUG:
-            print("heisenberg_hooey()")
+            print "heisenberg_hooey()"
 
         ID = "\x03"
         MIN_RX_BYTES = 1+1337
@@ -286,7 +286,7 @@ class TaintedLove(Actions):
             gate_satisfy = self.chance(0.5)
 
         if DEBUG:
-            print("gate_satisfy: %d" % gate_satisfy)
+            print "gate_satisfy: %d" % gate_satisfy
 
         buf  = [ID]
         buf += random_bytes(MIN_RX_BYTES-len(buf), self.MAX_RX_BYTES-len(buf))
@@ -359,11 +359,11 @@ class TaintedLove(Actions):
                         (ord(buf[SYSCALL_PROP_OFF]) + ord(buf[VULN_OFF])) \
                     ) & 0xFFFFFFFF
         if DEBUG:
-            print("buf[SYSCALL_PROP_OFF] = 0x%02x, buf[FLOAT_PROP_OFF] = 0x%02x, buf[VULN_OFF] = 0x%02x, output = 0x%08x" % \
+            print "buf[SYSCALL_PROP_OFF] = 0x%02x, buf[FLOAT_PROP_OFF] = 0x%02x, buf[VULN_OFF] = 0x%02x, output = 0x%08x" % \
             (   ord(buf[SYSCALL_PROP_OFF]), \
                 ord(buf[FLOAT_PROP_OFF]), \
                 ord(buf[VULN_OFF]), \
-                output))
+                output)
 
         # If we pass the gate, it sends extra data:
         if gate_satisfy:
@@ -379,7 +379,7 @@ class TaintedLove(Actions):
         DEBUG = self.GLOBAL_DEBUG and True
         POV = self.GLOBAL_POV and True
         if DEBUG:
-            print("relativistic_jabberwock()")
+            print "relativistic_jabberwock()"
 
         ID = "\x04"
         MIN_RX_BYTES = 1+1337
@@ -390,7 +390,7 @@ class TaintedLove(Actions):
             gate_satisfy = self.chance(0.5)
         
         if DEBUG:
-            print("gate_satisfy: %d" % gate_satisfy)
+            print "gate_satisfy: %d" % gate_satisfy
 
         # First, we get a random buffer, then we fix it up.
         buf  = [ID]
@@ -492,7 +492,7 @@ class TaintedLove(Actions):
         """
         DEBUG = True and self.GLOBAL_DEBUG
         if DEBUG:
-            print("exit()")
+            print "exit()"
 
         ID = ord("\x00")
         EXIT_CODE = randint(1, 255)

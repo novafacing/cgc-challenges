@@ -175,7 +175,7 @@ class ApplicationPage():
 
 
     def get_incomplete_field(self):
-        for x in range(len(self.fields)):
+        for x in xrange(len(self.fields)):
             (text_field, opt_text_field, is_required, current_val, gen_func) = self.fields[x]
             if current_val is None:
                 return self.fields[x]
@@ -183,7 +183,7 @@ class ApplicationPage():
         return None
 
     def enter_field(self):
-        for x in range(len(self.fields)):
+        for x in xrange(len(self.fields)):
             (text_field, opt_text_field, is_required, current_val, gen_func) = self.fields[x]
             if current_val is None:
                 self.fields[x].current_val = gen_func()
@@ -192,7 +192,7 @@ class ApplicationPage():
         return False
 
     def update_field(self, field_name):
-        for x in range(len(self.fields)):
+        for x in xrange(len(self.fields)):
             text_field, opt_text_field, is_required, current_val, gen_func = self.fields[x]
             if text_field == field_name:
                 current_val = gen_func()

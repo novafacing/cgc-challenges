@@ -25,20 +25,20 @@ class Parser(object):
         self.close = chars[4]
         self.escape_char = chars[5]
         self.reserved = set(chars)
-        self.tag_chars = list(set([chr(x) for x in range(1,255)]) - self.reserved)
+        self.tag_chars = list(set([chr(x) for x in xrange(1,255)]) - self.reserved)
         self.version_string = version_string
 
     def escape(self, s):
         return ''.join([self.escape_char + x if x in self.reserved else x for x in s])
 
     def random_string(self, length):
-        return ''.join([chr(random.randint(1,255)) for x in range(length)])
+        return ''.join([chr(random.randint(1,255)) for x in xrange(length)])
 
     def random_tag(self, length):
-        return ''.join([random.choice(self.tag_chars) for x in range(length)])
+        return ''.join([random.choice(self.tag_chars) for x in xrange(length)])
 
     def open_tag(self, node):
-        attr = ''.join([self.sep + self.escape(a[0]) + self.assign + self.escape(a[1]) for a in list(node.attr.items())])
+        attr = ''.join([self.sep + self.escape(a[0]) + self.assign + self.escape(a[1]) for a in node.attr.items()])
         return self.left + node.tag + attr + self.right
 
     def close_tag(self, node):
@@ -56,13 +56,13 @@ class Parser(object):
         node.ns = ns
         if random.randint(0, 2) == 0:
             # add some attributes
-            for x in range(random.randint(1, 5)):
+            for x in xrange(random.randint(1, 5)):
                 name = self.random_string(random.randint(3, 8))
                 value = self.random_string(random.randint(3, 8))
                 node.attr[name] = value
         if random.randint(0, 3) == 0:
             # add some children
-            for x in range(random.randint(1, 4)):
+            for x in xrange(random.randint(1, 4)):
                 child = self.generate_node(node.attr['namespace'] if node.cml else node.ns, node)
                 node.children.append(child)
         return node
@@ -90,12 +90,12 @@ class Parser(object):
         return self.generate_query(node.parent, remaining)
 
     def _children(self, node, remaining):
-        x = random.choice(list(range(len(node.children))))
+        x = random.choice(range(len(node.children)))
         return chr(0x84) + struct.pack('>H', x) + self.generate_query(node.children[x], remaining - 1)
 
     def _siblings(self, node, remaining):
         node = node.parent
-        x = random.choice(list(range(len(node.children))))
+        x = random.choice(range(len(node.children)))
         return chr(0x84) + struct.pack('>H', x) + self.generate_query(node.children[x], remaining - 1)
 
     def _tag(self, node, remaining):
@@ -105,7 +105,7 @@ class Parser(object):
         return node.ns + chr(0) + self.generate_query(node, remaining)
 
     def _attribute(self, node, remaining):
-        name, value = random.choice(list(node.attr.items()))
+        name, value = random.choice(node.attr.items())
         return name + chr(0) + value + chr(0) + self.generate_query(node, remaining)
 
     def generate_query(self, node, remaining):
@@ -121,7 +121,7 @@ class Parser(object):
             (lambda n: node.ns is not None, self._namespace, 0x82),
             (lambda n: len(node.attr) > 0, self._attribute, 0x83)
         ]
-        possible = list([x for x in instructions if x[0](node)])
+        possible = list(filter(lambda x: x[0](node), instructions))
         insn = random.choice(possible)
         return chr(insn[2]) + insn[1](node, remaining-1)
 
@@ -232,7 +232,7 @@ class TemplateGenerator(Actions):
         pass
 
     def init_parser(self):
-        chars = [chr(x) for x in random.sample(list(range(1, 255)), 6)]
+        chars = [chr(x) for x in random.sample(range(1, 255), 6)]
         self.state['parser'] = Parser(chars, '%u.%u' % struct.unpack('<II', self.magic_page[5:9] + self.magic_page[1:5]))
 
         self.write(self.INIT + ''.join(chars))
@@ -249,12 +249,12 @@ class TemplateGenerator(Actions):
     def get_attr(self):
         if len(self.state['nodes']) == 0:
             return
-        desc, node = random.choice(list(self.state['nodes'].items()))
+        desc, node = random.choice(self.state['nodes'].items())
         if len(node.attr) == 0:
             self.write(self.GET_ATTR + desc + self.wrap_string(self.state['parser'].random_string(8)))
             self.read(length=1, expect=self.NOT_FOUND)
         else:
-            name, value = random.choice(list(node.attr.items()))
+            name, value = random.choice(node.attr.items())
             self.write(self.GET_ATTR + desc + self.wrap_string(name))
             self.read(length=1, expect=self.SUCCESS)
             s = self.wrap_string(value)
@@ -263,7 +263,7 @@ class TemplateGenerator(Actions):
     def set_attr(self):
         if len(self.state['nodes']) == 0:
             return
-        desc, node = random.choice(list(self.state['nodes'].items()))
+        desc, node = random.choice(self.state['nodes'].items())
         name = self.state['parser'].random_string(random.randint(3, 8))
         value = self.state['parser'].random_string(random.randint(3, 8))
         node.attr[name] = value
@@ -273,17 +273,17 @@ class TemplateGenerator(Actions):
     def list_attr(self):
         if len(self.state['nodes']) == 0:
             return
-        desc, node = random.choice(list(self.state['nodes'].items()))
+        desc, node = random.choice(self.state['nodes'].items())
         self.write(self.LIST_ATTR + desc)
         self.read(length=1, expect=self.SUCCESS)
         self.read(length=2, expect=struct.pack('>H', len(node.attr)))
         if len(node.attr) > 0:
-            self.read(length=2*len(node.attr)+len(''.join(list(node.attr.keys()))))
+            self.read(length=2*len(node.attr)+len(''.join(node.attr.keys())))
 
     def get_tag(self):
         if len(self.state['nodes']) == 0:
             return
-        desc, node = random.choice(list(self.state['nodes'].items()))
+        desc, node = random.choice(self.state['nodes'].items())
         self.write(self.GET_TAG + desc)
         self.read(length=1, expect=self.SUCCESS)
         s = self.wrap_string(node.tag)
@@ -292,7 +292,7 @@ class TemplateGenerator(Actions):
     def get_ns(self):
         if len(self.state['nodes']) == 0:
             return
-        desc, node = random.choice(list(self.state['nodes'].items()))
+        desc, node = random.choice(self.state['nodes'].items())
         self.write(self.GET_NS + desc)
         if node.ns is None:
             self.read(length=1, expect=self.NOT_FOUND)
@@ -304,7 +304,7 @@ class TemplateGenerator(Actions):
     def query(self):
         if len(self.state['nodes']) == 0:
             return
-        desc, node = random.choice(list(self.state['nodes'].items()))
+        desc, node = random.choice(self.state['nodes'].items())
         qs = self.state['parser'].generate_query(node, random.randint(10, 20))
         result = self.state['parser'].apply_query(node, qs)
         assert result is not None
@@ -323,7 +323,7 @@ class TemplateGenerator(Actions):
                 result = find_cml(c)
                 if result: return result
             return None
-        for desc in list(self.state['nodes'].keys()):
+        for desc in self.state['nodes'].keys():
             node = find_cml(self.state['nodes'][desc])
             if node:
                 break

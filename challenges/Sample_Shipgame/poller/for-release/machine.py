@@ -18,8 +18,8 @@ class SampleShipGame(Actions):
     def start(self):
         #setup the local variables and state
         self.curplayer = '1' 
-        self.p1map = [['.' for i in range(10)] for j in range(10)] 
-        self.p2map = [['.' for i in range(10)] for j in range(10)] 
+        self.p1map = [['.' for i in xrange(10)] for j in xrange(10)] 
+        self.p2map = [['.' for i in xrange(10)] for j in xrange(10)] 
         self.p1shipchoices = random.sample([2,3,4,5], 4)
         self.p1shiplife = [0,0,0,0]
         self.p1curship = 0
@@ -53,7 +53,7 @@ class SampleShipGame(Actions):
             return
 
 
-        for i in range(c[n]):
+        for i in xrange(c[n]):
             if (direction == 'R') :
                 if ((col + i) > 9) or (m[row][col+i] != '.') : 
                     e = True 
@@ -72,7 +72,7 @@ class SampleShipGame(Actions):
             self.read(delim='\n', expect="Bad Command - Try again\n")
         else :
             #if there isn't an error then we need to update the map
-            for i in range(c[n]):
+            for i in xrange(c[n]):
                 if (direction == 'R') :
                     m[row][col+i] = str(c[n])
                 else :
@@ -105,7 +105,7 @@ class SampleShipGame(Actions):
 
         self.read(delim='\n', expect="\tABCDEFGHIJ\n")
 
-        for i in range(10) :
+        for i in xrange(10) :
             self.read(delim='\n', expect="   {:d}:\t".format(i) + "".join(m[i]) + "\n")
 
     def setup_help(self):

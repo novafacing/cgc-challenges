@@ -225,13 +225,13 @@ class InterpretThis(Actions):
         # have a special case, but this is easier.
         bytecode_len = randint(20, self.BYTECODE_SZ-4)
         bytes_left = bytecode_len
-        if DEBUG: print("bytecode_len = 0x%04x (%d)" % (bytecode_len, bytecode_len))
+        if DEBUG: print "bytecode_len = 0x%04x (%d)" % (bytecode_len, bytecode_len)
 
         while 0 < bytes_left:
 
             if DEBUG: 
-                print("\n----instruction #%d----" % inst_count)
-                print("current memory state: %s" % self.state['offsets'])
+                print "\n----instruction #%d----" % inst_count
+                print "current memory state: %s" % self.state['offsets']
                 dbg_flags = ""
 
             opcode = 0
@@ -266,7 +266,7 @@ class InterpretThis(Actions):
                 opcode |= self.INST_MASK_OP1
                 # ?INST_MASK_DST +INST_MASK_OP1
                 if DEBUG: dbg_flags += " +INST_MASK_OP1"
-                inst_op1 = choice(list(self.state['offsets'].keys()))
+                inst_op1 = choice(self.state['offsets'].keys())
                 op1 = self.state['offsets'][inst_op1]
             else:
                 # -INST_MASK_DST
@@ -293,7 +293,7 @@ class InterpretThis(Actions):
                         # operands are op1 (offset) and op2, dst is ACC.
                         opcode |= self.INST_MASK_OP1
                         if DEBUG: dbg_flags += " +INST_MASK_OP1"
-                        inst_op1 = choice(list(self.state['offsets'].keys()))
+                        inst_op1 = choice(self.state['offsets'].keys())
                         op1 = self.state['offsets'][inst_op1]
                     else:
                         # (-INST_MASK_DST) (-INST_MASK_ACC) -INST_MASK_OP1
@@ -306,7 +306,7 @@ class InterpretThis(Actions):
             if (choice([False, True])):
                 opcode |= self.INST_MASK_OP2
                 if DEBUG: dbg_flags += " +INST_MASK_OP2"
-                inst_op2 = choice(list(self.state['offsets'].keys()))
+                inst_op2 = choice(self.state['offsets'].keys())
                 op2 = self.state['offsets'][inst_op2]
             else:
                 if DEBUG: dbg_flags += " -INST_MASK_OP2"
@@ -318,93 +318,93 @@ class InterpretThis(Actions):
 
             # Emulate the operation.
             if   (opcode & self.INST_MASK_OPCODE) == self.OPCODE_ADD:
-                if DEBUG: print("OPCODE_ADD |%s" % dbg_flags)
+                if DEBUG: print "OPCODE_ADD |%s" % dbg_flags
                 if opcode & self.INST_MASK_ACC:
                     op = "tmp = (acc + op2) & 0xFFFFFFFF"
-                    if DEBUG: print(op)
+                    if DEBUG: print op
                     exec(op)
                 else:
                     op = "tmp = (op1 + op2) & 0xFFFFFFFF"
-                    if DEBUG: print(op)
+                    if DEBUG: print op
                     exec(op)
             elif (opcode & self.INST_MASK_OPCODE) == self.OPCODE_SUB:
-                if DEBUG: print("OPCODE_SUB |%s" % dbg_flags)
+                if DEBUG: print "OPCODE_SUB |%s" % dbg_flags
                 if opcode & self.INST_MASK_ACC:
                     op = "tmp = (acc - op2) & 0xFFFFFFFF"
-                    if DEBUG: print(op)
+                    if DEBUG: print op
                     exec(op)
                 else:
                     op = "tmp = (op1 - op2) & 0xFFFFFFFF"
-                    if DEBUG: print(op)
+                    if DEBUG: print op
                     exec(op)
             elif (opcode & self.INST_MASK_OPCODE) == self.OPCODE_MUL:
-                if DEBUG: print("OPCODE_MUL |%s" % dbg_flags)
+                if DEBUG: print "OPCODE_MUL |%s" % dbg_flags
                 if opcode & self.INST_MASK_ACC:
                     op = "tmp = (acc * op2) & 0xFFFFFFFF"
-                    if DEBUG: print(op)
+                    if DEBUG: print op
                     exec(op)
                 else:
                     op = "tmp = (op1 * op2) & 0xFFFFFFFF"
-                    if DEBUG: print(op)
+                    if DEBUG: print op
                     exec(op)
             elif (opcode & self.INST_MASK_OPCODE) == self.OPCODE_DIV:
                 if 0 == op2: op2 = 0xf000f000
-                if DEBUG: print("OPCODE_DIV |%s" % dbg_flags)
+                if DEBUG: print "OPCODE_DIV |%s" % dbg_flags
                 if opcode & self.INST_MASK_ACC:
                     op = "tmp = (acc / op2) & 0xFFFFFFFF"
-                    if DEBUG: print(op)
+                    if DEBUG: print op
                     exec(op)
                 else:
                     op = "tmp = (op1 / op2) & 0xFFFFFFFF"
-                    if DEBUG: print(op)
+                    if DEBUG: print op
                     exec(op)
             elif (opcode & self.INST_MASK_OPCODE) == self.OPCODE_OUT:
-                if DEBUG: print("OPCODE_OUT |%s" % dbg_flags)
+                if DEBUG: print "OPCODE_OUT |%s" % dbg_flags
                 op = "out = acc"
-                if DEBUG: print(op)
+                if DEBUG: print op
                 exec(op)
 
             # Store result, as appropriate.
             if (opcode & self.INST_MASK_OPCODE) == self.OPCODE_OUT:
                 pass # All we do is OUT <-- ACC, which we've already done.
             else:
-                if DEBUG: print("tmp = 0x%08x" % tmp)
+                if DEBUG: print "tmp = 0x%08x" % tmp
                 if opcode & self.INST_MASK_DST:
                     self.state['offsets'][inst_op1] = tmp
                 else:
                     acc = tmp
 
-            if DEBUG: print("    ************    ")
+            if DEBUG: print "    ************    "
 
             # Add to bytecode buffer, advance.
             bytecode += struct.pack(">B", opcode)
-            if DEBUG: print("opcode: 0x%02x" % opcode)
+            if DEBUG: print "opcode: 0x%02x" % opcode
             inst_len += 1
 
             if opcode & self.INST_MASK_OP1:
-                if DEBUG: print("inst_op1 (offset): 0x%08x (%d)" % (inst_op1, inst_op1))
-                if DEBUG: print("op1 (offset): 0x%08x (%d)" % (op1, op1))
+                if DEBUG: print "inst_op1 (offset): 0x%08x (%d)" % (inst_op1, inst_op1)
+                if DEBUG: print "op1 (offset): 0x%08x (%d)" % (op1, op1)
                 bytecode += struct.pack(">L", inst_op1)
                 inst_len += 4
             else:
-                if DEBUG: print("inst_op1 (imm): 0x%04x (%d)" % (inst_op1, inst_op1))
-                if DEBUG: print("op1 (imm): 0x%04x (%d)" % (op1, op1))
+                if DEBUG: print "inst_op1 (imm): 0x%04x (%d)" % (inst_op1, inst_op1)
+                if DEBUG: print "op1 (imm): 0x%04x (%d)" % (op1, op1)
                 bytecode += struct.pack(">H", inst_op1)
                 inst_len += 2
 
             if opcode & self.INST_MASK_OP2:
-                if DEBUG: print("inst_op2 (offset): 0x%08x (%d)" % (inst_op2, inst_op2))
-                if DEBUG: print("op2 (offset): 0x%08x (%d)" % (op2, op2))
+                if DEBUG: print "inst_op2 (offset): 0x%08x (%d)" % (inst_op2, inst_op2)
+                if DEBUG: print "op2 (offset): 0x%08x (%d)" % (op2, op2)
                 bytecode += struct.pack(">L", inst_op2)
                 inst_len += 4
             else:
-                if DEBUG: print("inst_op2 (imm): 0x%04x (%d)" % (inst_op2, inst_op2))
-                if DEBUG: print("op2 (imm): 0x%04x (%d)" % (op2, op2))
+                if DEBUG: print "inst_op2 (imm): 0x%04x (%d)" % (inst_op2, inst_op2)
+                if DEBUG: print "op2 (imm): 0x%04x (%d)" % (op2, op2)
                 bytecode += struct.pack(">H", inst_op2)
                 inst_len += 2
 
             if DEBUG: 
-                print("#%04d: acc = 0x%08x" % (inst_count, acc))
+                print "#%04d: acc = 0x%08x" % (inst_count, acc)
                 inst_count += 1
 
             bytes_left -= inst_len
@@ -431,7 +431,7 @@ class InterpretThis(Actions):
         self.NUM_OFFSETS.
         """
         DEBUG = self.GLOBAL_DEBUG and True
-        if DEBUG: print("\n-------setup-------")
+        if DEBUG: print "\n-------setup-------"
 
         # SCRATCH_SZ is large and it's unlikely that we'll propagate through 
         # the same offsets if we don't limit ourselves.  So, we limit ourselves 
@@ -445,6 +445,6 @@ class InterpretThis(Actions):
             while 0 != (idx % 4): idx = randint(0, self.SCRATCH_SZ-4)
             self.state['offsets'][idx] = 0
 
-        if DEBUG: print("offsets: %s" % list(self.state['offsets'].keys()))
+        if DEBUG: print "offsets: %s" % self.state['offsets'].keys()
 
 

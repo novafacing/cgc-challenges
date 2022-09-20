@@ -4,11 +4,11 @@ from generator.actions import Actions
 import random, string, struct
 
 def random_string_n(size=20):
-    return ''.join([random.choice(string.ascii_letters) for x in range(size)])
+    return ''.join([random.choice(string.ascii_letters) for x in xrange(size)])
 def random_string(size=20):
-    return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
+    return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
 def random_bytes_n(size=20):
-    return ''.join([chr(random.randint(0,255)) for x in range(size)])
+    return ''.join([chr(random.randint(0,255)) for x in xrange(size)])
 
 class OTP(object):
 
@@ -28,7 +28,7 @@ class OTP(object):
         if idx != 0:
             tmp += self.magic_page[:idx]
         idx = len(self.data)
-        for i in range(len(self.data), self.MAX_OTP_LEN):
+        for i in xrange(len(self.data), self.MAX_OTP_LEN):
             self.data += chr(ord(tmp[idx % 4096]) ^ ord(sv[i % 4]))
             idx += 2
         self.seed_idx = idx
@@ -57,7 +57,7 @@ class AOTPSim(Actions):
         sv = random_bytes_n(4)
         self.write(sv)
         si = 0
-        for i in range(4096 / 4):
+        for i in xrange(4096 / 4):
             si += struct.unpack('<I', self.magic_page[i * 4:(i + 1) * 4])[0]
             si = si & 0xFFFFFFFF
         si %= 4096

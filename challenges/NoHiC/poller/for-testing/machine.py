@@ -49,7 +49,7 @@ class MultiPass(Actions):
 	DEBUG_MODE = DEBUG or False
 	DEBUG_RANGE = DEBUG or False
 
-	MAX_UINT32 = 2 * sys.maxsize + 1
+	MAX_UINT32 = 2 * sys.maxint + 1
 	MAX_LIST_LEN = 1000
 
 	def start(self):
@@ -238,7 +238,7 @@ class MultiPass(Actions):
 		# read expected result
 		val = self.state['m'].get_mean()
 		if self.DEBUG_MEAN:
-			print(('mean_op: val = {0}'.format(val)))
+			print('mean_op: val = {0}'.format(val))
 		self._read_and_match_calculated_value(val)
 
 	def sum_op(self):
@@ -251,7 +251,7 @@ class MultiPass(Actions):
 		# read expected result
 		val = self.state['m'].get_sum()
 		if self.DEBUG_SUM:
-			print(('sum_op: val = {0}'.format(val)))
+			print('sum_op: val = {0}'.format(val))
 		self._read_and_match_calculated_value(val)
 
 	def product_op(self):
@@ -264,7 +264,7 @@ class MultiPass(Actions):
 		# read expected result
 		val = self.state['m'].get_product()
 		if self.DEBUG_PRODUCT:
-			print(('product_op: val = {0}'.format(val)))
+			print('product_op: val = {0}'.format(val))
 		self._read_and_match_calculated_value(val)
 
 	def min_op(self):
@@ -277,7 +277,7 @@ class MultiPass(Actions):
 		# read expected result
 		val = self.state['m'].get_min()
 		if self.DEBUG_MIN:
-			print(('min_op: val = {0}'.format(val)))
+			print('min_op: val = {0}'.format(val))
 		exp_result = self.state['m'].pack_single(val)
 		self.read(length=len(exp_result), expect=exp_result)
 
@@ -291,7 +291,7 @@ class MultiPass(Actions):
 		# read expected result
 		val = self.state['m'].get_max()
 		if self.DEBUG_MAX:
-			print(('max_op: val = {0}'.format(val)))
+			print('max_op: val = {0}'.format(val))
 		exp_result = self.state['m'].pack_single(val)
 		self.read(length=len(exp_result), expect=exp_result)
 
@@ -305,7 +305,7 @@ class MultiPass(Actions):
 		# read expected result
 		val = self.state['m'].get_median()
 		if self.DEBUG_MEDIAN:
-			print(('median_op: val = {0}'.format(val)))
+			print('median_op: val = {0}'.format(val))
 		self._read_and_match_calculated_value(val)
 
 	def sort_op(self):
@@ -318,7 +318,7 @@ class MultiPass(Actions):
 		# read expected result
 		val_list = self.state['m'].get_sort()
 		if self.DEBUG_SORT:
-			print(('sort_op: sorted list = {0}'.format(val_list)))
+			print('sort_op: sorted list = {0}'.format(val_list))
 		exp_result = self.state['m'].pack_list(val_list)
 		self.read(length=len(exp_result), expect=exp_result)
 
@@ -332,7 +332,7 @@ class MultiPass(Actions):
 		# read expected result
 		val_list = self.state['m'].get_rsort()
 		if self.DEBUG_RSORT:
-			print(('rsort_op: rsorted list = {0}'.format(val_list)))
+			print('rsort_op: rsorted list = {0}'.format(val_list))
 		exp_result = self.state['m'].pack_list(val_list)
 		self.read(length=len(exp_result), expect=exp_result)
 
@@ -346,7 +346,7 @@ class MultiPass(Actions):
 		# read expected result
 		val_list = self.state['m'].get_odds()
 		if self.DEBUG_ODDS:
-			print(('odds_op: odds count {0}, odds list = {1}'.format(len(val_list), val_list)))
+			print('odds_op: odds count {0}, odds list = {1}'.format(len(val_list), val_list))
 
 		exp_result = self.state['m'].pack_length_and_list(val_list=val_list)
 		self.read(length=len(exp_result), expect=exp_result)
@@ -361,7 +361,7 @@ class MultiPass(Actions):
 		# read expected result
 		val_list = self.state['m'].get_evens()
 		if self.DEBUG_EVENS:
-			print(('evens_op: evens count {0}, evens list = {1}'.format(len(val_list), val_list)))
+			print('evens_op: evens count {0}, evens list = {1}'.format(len(val_list), val_list))
 
 		exp_result = self.state['m'].pack_length_and_list(val_list=val_list)
 		self.read(length=len(exp_result), expect=exp_result)
@@ -376,7 +376,7 @@ class MultiPass(Actions):
 		# read expected result
 		val_list = self.state['m'].get_mode()
 		if self.DEBUG_MODE:
-			print(('mode_op: val_list = {0}'.format(val_list)))
+			print('mode_op: val_list = {0}'.format(val_list))
 
 		exp_result = self.state['m'].pack_length_and_list(val_list=val_list)
 		self.read(length=len(exp_result), expect=exp_result)
@@ -391,6 +391,6 @@ class MultiPass(Actions):
 		# read expected result
 		val = self.state['m'].get_range()
 		if self.DEBUG_RANGE:
-			print(('range_op: val = {0}'.format(val)))
+			print('range_op: val = {0}'.format(val))
 		self._read_and_match_calculated_value(val)
 

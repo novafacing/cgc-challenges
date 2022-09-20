@@ -16,7 +16,7 @@ DEP_WORDS = [
   ]
 
 def random_string(size=20):
-  return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
+  return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
 
 class ABLOOMY(Actions):
 
@@ -44,8 +44,8 @@ class ABLOOMY(Actions):
     lyrics = ''
     num_words = random.randint(1, 6)
     num_lines = random.randint(1, 15)
-    for i in range(num_lines):
-      for j in range(num_words):
+    for i in xrange(num_lines):
+      for j in xrange(num_words):
         if random.randint(1, 100) <= 5:
           lyrics += random.choice(DEP_WORDS)
           dep = True

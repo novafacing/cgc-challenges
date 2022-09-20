@@ -226,7 +226,7 @@ class Dfars(Actions):
         if self.chance(.10):
             new_dir += '++|'
         elif self.chance(.00005):
-            dirs = random.choice(list(self.state['books'].keys())).split('|')[1:-1]
+            dirs = random.choice(self.state['books'].keys()).split('|')[1:-1]
             for i in range(0, random.randint(0, 3)):
                 insert_offset = random.randint(0, len(dirs))
 
@@ -240,7 +240,7 @@ class Dfars(Actions):
                 new_dir = "|" + new_dir
             # print "GOT", new_dir
         else:
-            new_dir = random.choice(list(self.state['books'].keys()))
+            new_dir = random.choice(self.state['books'].keys())
             # print "Changing to %s" % new_dir
 
         self.write('ch_sec %s\n' % (new_dir))
@@ -268,7 +268,7 @@ class Dfars(Actions):
 
         if (self.state['current_dir'] in self.state['books'] and len(self.state['books'][self.state['current_dir']]) > 0):
             book = random.choice(
-                list(self.state['books'][self.state['current_dir']].keys())
+                self.state['books'][self.state['current_dir']].keys()
                 )[:39].rstrip()
             self.write('compress %s\n' % book)
             self.read(delim='\n\n', expect=r'%s\n.*\n\n' %
@@ -286,7 +286,7 @@ class Dfars(Actions):
     def get(self):
         if self.state['current_dir'] in self.state['books'] and len(self.state['books'][self.state['current_dir']]) > 0:
             book = random.choice(
-                list(self.state['books'][self.state['current_dir']].keys())
+                self.state['books'][self.state['current_dir']].keys()
                 )[:39].rstrip()
             self.write('get %s\n' % book)
             self.read(delim='\n\n', expect=r'%s\n.*\n\n' %

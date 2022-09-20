@@ -49,7 +49,7 @@ def random_alpha(a, b):
     return ''.join(choice(string.letters) for _ in range(randint(a, b)))
 
 def chunks(l, n):
-    for i in range(0, len(l), n):
+    for i in xrange(0, len(l), n):
         yield l[i:i+n]
 
 class CTTP(Actions):
@@ -93,7 +93,7 @@ class CTTP(Actions):
             path = random_alpha(10,100)
             self.reqpaths.append((ERROR,path))
         else:
-            path = choice(list(self.files.keys()))
+            path = choice(self.files.keys())
             self.reqpaths.append((INFO,path))
 
 
@@ -142,7 +142,7 @@ class CTTP(Actions):
             path = random_alpha(10,100)
             self.reqpaths.append((ERROR,path))
         else:
-            path = choice(list(self.files.keys()))
+            path = choice(self.files.keys())
             self.reqpaths.append((INFO,path))
 
         body = "" 
@@ -168,7 +168,7 @@ class CTTP(Actions):
             path = random_alpha(10,100)
             self.reqpaths.append((ERROR,path))
         else:
-            path = choice(list(self.files.keys()))
+            path = choice(self.files.keys())
             self.reqpaths.append((INFO,path))
 
 
@@ -213,7 +213,7 @@ class CTTP(Actions):
             path = random_alpha(10,100)
             self.reqpaths.append((ERROR,path))
         else:
-            path = choice(list(self.files.keys()))
+            path = choice(self.files.keys())
             self.reqpaths.append((INFO,path))
 
         body = "" 
@@ -308,7 +308,7 @@ class CTTP(Actions):
         heapcookie = self._rand(4)
         
         for _ in range(randint(0,10)):
-            ver = choice(list(self.verinfo.keys()))
+            ver = choice(self.verinfo.keys())
             rtype = choice(self.verinfo[ver])
             if rtype[0] == self._quit:
                 rtype = (self._notimplemented, randint(0x41414147,0xffffffff))
@@ -316,7 +316,7 @@ class CTTP(Actions):
             self.write(req)
             self.read(length=len(resp), expect=resp)
         
-        ver = choice(list(self.verinfo.keys()))
+        ver = choice(self.verinfo.keys())
         req, resp = self._quit(ver, 0x41414146)
         self.write(req)
         self.read(length=len(resp), expect=resp)

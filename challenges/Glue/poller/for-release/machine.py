@@ -2,14 +2,14 @@
 
 import random
 import string
-import io
+import cStringIO
 import tarfile
 
 from generator.actions import Actions
 
 
 def rs(n=16):
-    return ''.join([random.choice(string.letters) for _ in range(n)])
+    return ''.join([random.choice(string.letters) for _ in xrange(n)])
 
 
 def ru(_max=8 ** 6):
@@ -18,10 +18,10 @@ def ru(_max=8 ** 6):
 
 def rmode():
     return random.choice([
-        0o700,
-        0o500,
-        0o666,
-        0o123
+        0700,
+        0500,
+        0666,
+        0123
     ])
 
 
@@ -92,10 +92,10 @@ class Mine(tarfile.TarInfo):
 class Machine(Actions):
     def start(self):
         #self.delay(100)
-        verify = ''.join([self.magic_page[i] for i in range(0, 0x1000, 4)])
+        verify = ''.join([self.magic_page[i] for i in xrange(0, 0x1000, 4)])
         self.read(length=len(verify), expect=verify)
 
-        self.state['io'] = io.StringIO()
+        self.state['io'] = cStringIO.StringIO()
         self.state['tar'] = tarfile.open(mode='w', fileobj=self.state['io'], format=tarfile.USTAR_FORMAT)
         self.state['dz'] = open('/dev/zero')
 

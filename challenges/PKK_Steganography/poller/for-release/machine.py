@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from io import StringIO
+from cStringIO import StringIO
 from generator.actions import Actions
 import random
 import string
@@ -21,7 +21,7 @@ MODE_EM = 0x1337
 MODE_EX = 0x7331
 
 def random_string(size=20):
-  return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
+  return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
 
 class APPMSteg(Actions):
 
@@ -36,7 +36,7 @@ class APPMSteg(Actions):
     h = random.randint(1, 400)
 
     pixels = StringIO()
-    for i in range(w * h * 3):
+    for i in xrange(w * h * 3):
       pixels.write(chr(random.randint(0, 255)))
 
     self.state['w'] = w
@@ -59,7 +59,7 @@ class APPMSteg(Actions):
 
     self.state['pixels'].seek(0)
     for c in message:
-      for i in range(0, 8):
+      for i in xrange(0, 8):
         pixel = self.state['pixels'].read(1)
         bit = (ord(c) >> (7 - i)) & 1
         if bit:

@@ -4,7 +4,7 @@ import random
 import struct
 
 def random_bytes(cnt):
-    return ''.join([chr(random.randint(0,255)) for x in range(cnt)])
+    return ''.join([chr(random.randint(0,255)) for x in xrange(cnt)])
 
 def generate_bmp(data):
     width = random.randint(1, 30)
@@ -24,10 +24,10 @@ def generate_exe(data):
     exe.pusha()
     reg = Register(random.randint(0, 3))
     exe.move_abs(reg, 0)
-    for x in range(random.randint(0, 10)):
+    for x in xrange(random.randint(0, 10)):
         exe.nop()
     exe.loop_op(('xor', xork), reg, len(data))
-    for x in range(random.randint(0, 10)):
+    for x in xrange(random.randint(0, 10)):
         exe.nop()
     exe.popa()
 
@@ -149,7 +149,7 @@ class Executable(object):
                 self.ro_data += chr(0xEB) + chr((top - (len(self.ro_data) + 2)) & 0xff)
         else:
             # unroll the loop
-            for x in range(count):
+            for x in xrange(count):
                 self.do_op(op, ('mem_disp', reg, x))
 
     def modrm(self, r1, r2):
@@ -275,7 +275,7 @@ class TemplateGenerator(Actions):
     def update(self):
         self.comment('UPDATE')
         r = []
-        for x in range(random.randint(5, 10)):
+        for x in xrange(random.randint(5, 10)):
             if self.chance(0.8) or len(self.state['rules']) <= 1:
                 # add some rules
                 self.comment('update add')

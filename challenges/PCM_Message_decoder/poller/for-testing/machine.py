@@ -83,7 +83,7 @@ class Wav(Actions):
         pass
 
     def random_string(self, min_length, max_length):
-        chars = list(map(chr, list(range(32, 91))))
+        chars = map(chr, range(32, 91))
         str = "  "
         # don't allow consecutive spaces or consecutive chars with no variation
         while (
@@ -135,7 +135,7 @@ class Wav(Actions):
                 num_samples += 7 * samples_per_dot
                 continue
 
-            if not c in list(lang.keys()):
+            if not c in lang.keys():
                 sys.stderr.write("Invalid char " + c + "\n")
                 sys.exit(-1)
 

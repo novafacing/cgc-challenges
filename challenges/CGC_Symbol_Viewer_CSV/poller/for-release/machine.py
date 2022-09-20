@@ -8,16 +8,16 @@ import sys
 from collections import OrderedDict
 
 def random_string_n(size=20):
-  return ''.join([random.choice(string.ascii_letters) for x in range(size)])
+  return ''.join([random.choice(string.ascii_letters) for x in xrange(size)])
 
 def random_string(size=20):
-  return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
+  return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
 
 def random_digits(size=20):
-  return ''.join([random.choice(string.digits) for x in range(random.randint(1,size))])
+  return ''.join([random.choice(string.digits) for x in xrange(random.randint(1,size))])
 
 def random_bytes(size=20):
-  return ''.join([chr(random.randint(0,255)) for x in range(size)])
+  return ''.join([chr(random.randint(0,255)) for x in xrange(size)])
 
 
 class ACSV(Actions):
@@ -51,7 +51,7 @@ class ACSV(Actions):
     return symbol
 
   def _gen_symbols(self):
-    for i in range(self.state['num_symbols']):
+    for i in xrange(self.state['num_symbols']):
       self.state['symbols'].append(self._gen_symbol())
     symbols = ''
     strtab = '\0'
@@ -79,7 +79,7 @@ class ACSV(Actions):
   def _gen_sections(self):
     self.state['cur_off'] = self.state['base_off']
     self.state['sections'].append({'name': '', 'type': 0, 'flags': 0, 'addr': 0, 'offset': 0, 'size': 0, 'link': 0, 'info': 0, 'addralign': 0, 'entsize': 0})
-    for i in range(self.state['e_shnum'] - 3):
+    for i in xrange(self.state['e_shnum'] - 3):
       if i + 1 == self.state['e_shtrndx']:
         self.state['sections'].append({'name': random_string(), 'type': 3, 'flags': 0, 'addr': 0, 'offset': self.state['cur_off'], 'size': 21 * self.state['e_shnum'], 'link': 0, 'info': 0, 'addralign': 0, 'entsize': 0})
         self.state['cur_off'] += 21 * self.state['e_shnum']
@@ -130,7 +130,7 @@ class ACSV(Actions):
     self._gen_sections()
     self.state['cgcf'] += random_bytes(self.state['base_off'] - len(self.state['cgcf']))
 
-    for i in range(len(self.state['sections']) - 2):
+    for i in xrange(len(self.state['sections']) - 2):
       s = self.state['sections'][i]
       if i == self.state['e_shtrndx']:
         self.state['cgcf'] += self.state['shstr'].ljust(s['size'], '\0')
@@ -201,7 +201,7 @@ class ACSV(Actions):
     s = '  [No.] Name' + ' ' * (max_len - 4) + '  Type           Addr     Off    Size\n'
     self.read(length=len(s), expect=s)
     self.state['sections'] = sorted(self.state['sections'], key=lambda x: x['offset'])
-    for i in range(len(self.state['sections'])):
+    for i in xrange(len(self.state['sections'])):
       sec = self.state['sections'][i]
       s = '  [%3d] %s' % (i, sec['name'])
       s += ' ' * (max_len - len(sec['name']))
@@ -217,7 +217,7 @@ class ACSV(Actions):
     s = '  [No.] Value       Size Type    Bind    Name\n'
     self.read(length=len(s), expect=s)
     self.state['symbols'] = sorted(self.state['symbols'], key=lambda x: x['name'])
-    for i in range(len(self.state['symbols'])):
+    for i in xrange(len(self.state['symbols'])):
       sym = self.state['symbols'][i]
       typ = self._symbol_type2str(sym['info'] & 0xF)
       bind = self._symbol_bind2str(sym['info'] >> 4)

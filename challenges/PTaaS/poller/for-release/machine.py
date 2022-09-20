@@ -45,8 +45,8 @@ class PTaaS(Actions):
     def camera(self):
         self.write('c\n')
 
-        origin = tuple(['%s' % random.randint(-100, 100) for i in range(3)])
-        direction = tuple(['%s' % random.randint(1, 100) for i in range(3)])
+        origin = tuple(['%s' % random.randint(-100, 100) for i in xrange(3)])
+        direction = tuple(['%s' % random.randint(1, 100) for i in xrange(3)])
         fov = '%.1f' % (random.randint(1, 9) / 10.0)
 
         origin = self.state['model'].make_vector([self.state['model'].strtod(c) for c in origin])
@@ -68,12 +68,12 @@ class PTaaS(Actions):
         self.write('s\n')
 
         material = random.getrandbits(1)
-        position = tuple(['%s' % random.randint(-100, 100) for i in range(3)])
-        color = tuple(['%s' % random.randint(1, 100) for i in range(3)])
+        position = tuple(['%s' % random.randint(-100, 100) for i in xrange(3)])
+        color = tuple(['%s' % random.randint(1, 100) for i in xrange(3)])
         radius = '%s' % random.randint(50, 100)
 
         if self.chance(0.2):
-            emission = tuple(['%s' % random.randint(1, 100) for i in range(3)])
+            emission = tuple(['%s' % random.randint(1, 100) for i in xrange(3)])
         else:
             emission = ('0', '0', '0')
 
@@ -103,12 +103,12 @@ class PTaaS(Actions):
         self.write('p\n')
 
         material = random.getrandbits(1)
-        position = tuple(['%s' % random.randint(-100, 100) for i in range(3)])
-        color = tuple(['%s' % random.randint(1, 100) for i in range(3)])
-        normal = tuple(['%s' % random.randint(1, 100) for i in range(3)])
+        position = tuple(['%s' % random.randint(-100, 100) for i in xrange(3)])
+        color = tuple(['%s' % random.randint(1, 100) for i in xrange(3)])
+        normal = tuple(['%s' % random.randint(1, 100) for i in xrange(3)])
 
         if self.chance(0.2):
-            emission = tuple(['%s' % random.randint(1, 100) for i in range(3)])
+            emission = tuple(['%s' % random.randint(1, 100) for i in xrange(3)])
         else:
             emission = ('0', '0', '0')
 

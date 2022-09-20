@@ -83,7 +83,7 @@ class OrderUpPoller(Actions):
         self._load_tables()
 
         if DEBUG:
-            print("------- start -----------")
+            print "------- start -----------"
 
     def add_customers(self):
         '''
@@ -91,12 +91,12 @@ class OrderUpPoller(Actions):
         '''
         self.send_cmd(self.CMD_ADD_CUST)
         if DEBUG:
-            print("cmd: add customer -----------")
+            print "cmd: add customer -----------"
 
         new_customers = self.state['e'].get_next_arriving_customers()
 
         if DEBUG:
-            print(" {0} customers to be added.".format(len(new_customers)))
+            print " {0} customers to be added.".format(len(new_customers))
 
         # send customer count
         write_data = sp.pack_single_uint8(len(new_customers))
@@ -104,7 +104,7 @@ class OrderUpPoller(Actions):
         # send all customers on new_customers list
         for c in new_customers:
             if DEBUG:
-                print(" packing customer {0}".format(c.id))
+                print " packing customer {0}".format(c.id)
             write_data += sp.pack_single_uint32(c.id)
 
         self.write(write_data)
@@ -115,7 +115,7 @@ class OrderUpPoller(Actions):
 
         # recv number of customers seated
         if DEBUG:
-            print(" {0} seated".format(seated_cnt))
+            print " {0} seated".format(seated_cnt)
 
         recv_buf = recv_uint8(seated_cnt)
 
@@ -130,14 +130,14 @@ class OrderUpPoller(Actions):
         '''
         self.send_cmd(self.CMD_TABLE_STATUS)
         if DEBUG:
-            print("cmd: table status -----------")
+            print "cmd: table status -----------"
 
         tss = self.state['e'].get_status_of_tables()
         packed = ''
         for t in tss:
             packed += sp.pack_single_uint32(t)
             if DEBUG:
-                print(" status {0}".format(t))
+                print " status {0}".format(t)
 
         recv_buf = packed
 
@@ -152,7 +152,7 @@ class OrderUpPoller(Actions):
         '''
         self.send_cmd(self.CMD_GET_ORDERS)
         if DEBUG:
-            print("cmd: get orders -----------")
+            print "cmd: get orders -----------"
 
         orders = self.state['e'].get_orders(self.magic_page)
 
@@ -161,7 +161,7 @@ class OrderUpPoller(Actions):
         recv_buf += sp.pack_single_uint8(len(orders))
 
         if DEBUG:
-            print(" {0} orders: {1}".format(len(orders), orders))
+            print " {0} orders: {1}".format(len(orders), orders)
 
         if 0 < len(orders):
             packed = self.state['e'].pack_orders(orders)
@@ -179,7 +179,7 @@ class OrderUpPoller(Actions):
         '''
         self.send_cmd(self.CMD_ORDER_UP)
         if DEBUG:
-            print("cmd: order up -----------")
+            print "cmd: order up -----------"
 
         orders_taken = self.state['e'].get_ready_orders(count=0) # 0 means all
         order_count = len(orders_taken)
@@ -216,12 +216,12 @@ class OrderUpPoller(Actions):
         '''
         self.send_cmd(self.CMD_BUS_TABLES)
         if DEBUG:
-            print("cmd: bus tables -----------")
+            print "cmd: bus tables -----------"
 
         bus_cnt = self.state['e'].bus_finished_tables()
         packed = sp.pack_single_uint8(bus_cnt)
         if DEBUG:
-            print(" bus count {0}".format(bus_cnt))
+            print " bus count {0}".format(bus_cnt)
 
         recv_buf = packed
 
@@ -237,7 +237,7 @@ class OrderUpPoller(Actions):
         '''
         self.send_cmd(self.CMD_QUIT)
         if DEBUG:
-            print("cmd: quit -----------")
+            print "cmd: quit -----------"
 
         recv_buf = recv_status(self.STATUS_QUIT)
         self.read(length=len(recv_buf), expect=recv_buf)

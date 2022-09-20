@@ -19,7 +19,7 @@ def random_word(max_size=10, min_size=2):
 def random_text(max_words=32, min_words=3):
     max_words = max_words if max_words >= min_words else min_words
     text = ''
-    for x in range(random.randint(min_words, max_words)):
+    for x in xrange(random.randint(min_words, max_words)):
         text += random_word() + ' '
     return text
 

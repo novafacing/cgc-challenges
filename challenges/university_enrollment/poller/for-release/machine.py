@@ -2,10 +2,9 @@ from generator.actions import Actions
 import random
 import string
 import struct
-import io
+import StringIO
 import os
 import csv
-from functools import reduce
 
 MAX_COURSES = 7
 MAX_CREDITS = 17

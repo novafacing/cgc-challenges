@@ -32,14 +32,14 @@ def kaprica_mixin(self):
             H = (H * 3) & 0xffffffff
             H = ((H << 13) ^ (H >> 19) ^ (H >> 21)) & 0xffffffff
             return H
-        xmap = list(range(256))
-        xmap_inv = list(range(256))
+        xmap = list(xrange(256))
+        xmap_inv = list(xrange(256))
         state = hash_string(seed)
-        for i in range(255, 0, -1):
+        for i in xrange(255, 0, -1):
             j = state % i
             state = hash_iterate(state)
             xmap[i], xmap[j] = xmap[j], xmap[i]
-        for i in range(256):
+        for i in xrange(256):
             xmap_inv[xmap[i]] = i
         self.xlat_map = xmap
         self.xlat_map_inv = xmap_inv
@@ -75,7 +75,7 @@ pack_bytes = lambda x: struct.pack("{0}B".format(len(x)), *x)
 byte_str = lambda x: "\\x%02x" % int(x)
 
 def hfname(name):
-    for x in reversed(range(len(name))):
+    for x in reversed(xrange(len(name))):
         if ord(name[x]) != 0x20:
             return name[:x+1]
     return None
@@ -102,7 +102,7 @@ def random_filename(max_size=11, min_size=3):
 def random_text(max_words=10, min_words=3):
     max_words = max_words if max_words >= min_words else min_words
     text = ''
-    for x in range(random.randint(min_words, max_words)):
+    for x in xrange(random.randint(min_words, max_words)):
         text += random_word() + ' '
         return text
 
@@ -114,11 +114,11 @@ def random_data(size):
     return buf
 
 def random_bytes(size):
-    return [random.randint(0,255) for x in range(size)]
+    return [random.randint(0,255) for x in xrange(size)]
 
 def random_file_name():
     filename = ''
-    for x in range(random.randint(0,5)):
+    for x in xrange(random.randint(0,5)):
         filename += '/' + random_filename()
 
     return filename
@@ -683,7 +683,7 @@ class FileMountTool(Actions):
             new_file.data = new_file.size *[0x00]
         elif choice == 3:
             new_file.data = []
-            for x in range(new_file.size):
+            for x in xrange(new_file.size):
                 new_file.data.append(self._get_random_byte())
 
 

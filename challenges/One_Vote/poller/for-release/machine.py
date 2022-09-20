@@ -182,7 +182,7 @@ class VotingMachine(Actions):
         # results_menu
         # quit entry
         '''
-        cmds = list(self.MENU_ENTRIES.keys())
+        cmds = self.MENU_ENTRIES.keys()
         cmds.sort()
         menu = ''
         for m_id in cmds:

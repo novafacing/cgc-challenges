@@ -34,7 +34,7 @@ class Grapher(Actions):
         # try to not send too much data over the wire
         self.state['max_value'] = max_value = randint(10, 2**8)
         # generate data
-        self.state['data'] = [randint(0, max_value) for x in range(randint(1, 32))]
+        self.state['data'] = [randint(0, max_value) for x in xrange(randint(1, 32))]
         self.m = CharterMath()
 
     def send_data(self):
@@ -47,7 +47,7 @@ class Grapher(Actions):
 
     def sparks(self):
         self.w(1)
-        sparks = range(0x2581, 0x2588)
+        sparks = xrange(0x2581, 0x2588)
         self.w(len(sparks))
         packed_sparks = pack('<' + len(sparks) * 'L', *sparks)
         self.write(packed_sparks)
@@ -92,7 +92,7 @@ class Grapher(Actions):
         count = randint(1, 64)
         self.w(count)
         expectation = ''
-        for _n in range(count):
+        for _n in xrange(count):
             expectation += pack('<L', randint(0, (2**32)-1))
         self.write(expectation)
         self.read(length=(count*4), expect=expectation)

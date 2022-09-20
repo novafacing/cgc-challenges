@@ -74,7 +74,7 @@ class NumGenerator(object):
         rand = struct.unpack('<B', self.magic_page[self.rand_idx])[0] % NUM_CELLS
         self.rand_idx = (self.rand_idx + 1) % POOL_SIZE
 
-        for i in range(NUM_CELLS):
+        for i in xrange(NUM_CELLS):
             idx = (rand + i) % NUM_CELLS
             if self.numbers[idx] == UNUSED:
                 self.numbers[idx] = USED
@@ -96,7 +96,7 @@ class NumGenerator(object):
 
     def flush_cache(self, flush_count):
         flush_count = flush_count if flush_count <= len(self.cache) else len(self.cache)
-        for x in range(flush_count):
+        for x in xrange(flush_count):
             self.reinstate_number(self.cache.pop())
 
     def reset(self):
@@ -113,34 +113,34 @@ class Gridder(object):
         if board:
             self.board = [ list(subarr) for subarr in board ]
         else:
-            self.board = [ [UNUSED] * SET_SIZE for x in range(SET_SIZE) ]
+            self.board = [ [UNUSED] * SET_SIZE for x in xrange(SET_SIZE) ]
 
     def debug(self):
-        for r in range(SET_SIZE):
+        for r in xrange(SET_SIZE):
             out = ''
             if r and r % SET_SUBSIZE == 0:
                 print("------+-------+------")
-            for c in range(SET_SIZE):
+            for c in xrange(SET_SIZE):
                 if c and c % SET_SUBSIZE == 0:
                     out += "| "
                 out += "{0} ".format(self.board[r][c])
-            print(out)
-        print("=====================\n")
+            print out
+        print "=====================\n"
 
 
     def read_board(self, read_uint):
-        for r in range(SET_SIZE):
-            for c in range(SET_SIZE):
+        for r in xrange(SET_SIZE):
+            for c in xrange(SET_SIZE):
                 read_uint(self.board[r][c])
 
 
     def write_board(self, write_uint):
-        for r in range(SET_SIZE):
-            for c in range(SET_SIZE):
+        for r in xrange(SET_SIZE):
+            for c in xrange(SET_SIZE):
                 write_uint(self.board[r][c])
 
     def reset_board(self):
-        self.board = [ [UNUSED] * SET_SIZE for x in range(SET_SIZE) ]
+        self.board = [ [UNUSED] * SET_SIZE for x in xrange(SET_SIZE) ]
 
     def generate_new_gridder(self, cell_idx, pngen):
         if cell_idx == 0:
@@ -216,7 +216,7 @@ class Gridder(object):
         if self.board[row][col] != UNUSED:
             return self.find_solution(cell_idx+1);
 
-        for i in range(1, SET_SIZE + 1):
+        for i in xrange(1, SET_SIZE + 1):
             self.board[row][col] = i;
             if self.valid_cell(row, col):
                 solution = self.find_solution(cell_idx + 1)
@@ -229,8 +229,8 @@ class Gridder(object):
     def has_unique_solution(self, cell_idx, s1, exit):
         if cell_idx == NUM_CELLS:
             exit.append(1)
-            for r in range(SET_SIZE):
-                for c in range(SET_SIZE):
+            for r in xrange(SET_SIZE):
+                for c in xrange(SET_SIZE):
                     if self.board[r][c] != s1.board[r][c]:
                         return False
             return True
@@ -240,7 +240,7 @@ class Gridder(object):
         if self.board[row][col]:
             return self.has_unique_solution(cell_idx+1, s1, exit)
 
-        for i in reversed(range(1, SET_SIZE + 1)):
+        for i in reversed(xrange(1, SET_SIZE + 1)):
             if len(exit):
                 return False
 
@@ -264,7 +264,7 @@ class Gridder(object):
 
     def valid_cell(self, row, col):
         cell = self.board[row][col];
-        for i in range(SET_SIZE):
+        for i in xrange(SET_SIZE):
             if (row != i and cell == self.board[i][col]) or (col != i and cell == self.board[row][i]):
                 return False
 

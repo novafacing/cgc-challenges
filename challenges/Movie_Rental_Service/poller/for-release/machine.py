@@ -18,7 +18,7 @@ MOVIES = [
 ]
 
 def random_string(size=20):
-    return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
+    return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
 
 class ARentMovie(Actions):
     def start(self):
@@ -39,7 +39,7 @@ class ARentMovie(Actions):
 
     def read_movies(self):
         self.read_string('\nMovies (Full)\n--------------\n')
-        for x in range(len(MOVIES)):
+        for x in xrange(len(MOVIES)):
             self.read_movie(MOVIES, x)
         self.read_string('--------------\n%d movie(s)\n' % len(MOVIES))
 
@@ -50,8 +50,8 @@ class ARentMovie(Actions):
         self.write('1 list\n')
         self.read_movies()
         self.read_string('\nMovies (Rented)\n--------------\n')
-        for x in range(len(self.state['rented'])):
-            self.read_movie([MOVIES[x] for x in self.state['rented']], x)
+        for x in xrange(len(self.state['rented'])):
+            self.read_movie(map(lambda x: MOVIES[x], self.state['rented']), x)
         self.read_string('--------------\n%d movie(s)\n' % len(self.state['rented']))
 
     def rent_movie(self):
@@ -66,7 +66,7 @@ class ARentMovie(Actions):
 
         idx = random.randint(0, 9)
         if random.randint(1, 100) <= 75:
-            for i in range(0, 10):
+            for i in xrange(0, 10):
                 if i not in self.state['rented']:
                     idx = i
                     break
@@ -81,8 +81,8 @@ class ARentMovie(Actions):
     def return_movie(self):
         self.write('3 return\n')
         self.read_string('\nMovies (Rented)\n--------------\n')
-        for x in range(len(self.state['rented'])):
-            self.read_movie([MOVIES[x] for x in self.state['rented']], x)
+        for x in xrange(len(self.state['rented'])):
+            self.read_movie(map(lambda x: MOVIES[x], self.state['rented']), x)
         self.read_string('--------------\n%d movie(s)\n' % len(self.state['rented']))
         if len(self.state['rented']) == 0:
             self.read(delim='\n', expect='[ERROR] All the movies are in our inventory.\n')

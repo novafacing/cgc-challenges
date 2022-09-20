@@ -28,14 +28,14 @@ class Neuron(object):
     self.gradient = 0.0
     self.n = n
     self.weights = list()
-    for i in range(outlen):
+    for i in xrange(outlen):
       w = (g_prng() & 0xFFFF) * 1.0 / 0xFFFF
       e = Edge(w, 0)
       self.weights.append(e)
 
   def feed_forward(self, prev):
     val = 0.0
-    for i in range(len(prev)):\
+    for i in xrange(len(prev)):\
         val += prev[i].value * prev[i].weights[self.n].weight
     self.value = self.sigmoid(val)
 
@@ -44,12 +44,12 @@ class Neuron(object):
 
   def compute_hidden_grad(self, nxt):
     val = 0.0
-    for i in range(len(nxt) - 1):
+    for i in xrange(len(nxt) - 1):
       val += nxt[i].gradient * self.weights[i].weight
     self.gradient = val * self.dsigmoid(self.value)
 
   def update_weights(self, prev):
-    for i in range(len(prev)):
+    for i in xrange(len(prev)):
       old = prev[i].weights[self.n].delta
       tmp = self.eta * prev[i].value * self.gradient + self.alpha * old
       prev[i].weights[self.n].delta = tmp
@@ -64,41 +64,41 @@ class Neuron(object):
 class NNet(object):
   def __init__(self, t):
     self.layers = list()
-    for i in range(len(t)):
+    for i in xrange(len(t)):
       nl = list()
       self.layers.append(nl)
-      for j in range(t[i] + 1):
+      for j in xrange(t[i] + 1):
         nl.append(Neuron(j, 0 if i == len(t) - 1 else t[i+1]))
       nl[-1].value = 1.0
 
   def feed_forward(self, inp):
     layer = self.layers[0]
-    for i in range(len(inp)):
+    for i in xrange(len(inp)):
       layer[i].value = inp[i]
-    for i in range(1, len(self.layers)):
+    for i in xrange(1, len(self.layers)):
       prev = self.layers[i - 1]
-      for j in range(len(self.layers[i]) - 1):
+      for j in xrange(len(self.layers[i]) - 1):
         self.layers[i][j].feed_forward(prev)
 
   def back_prop(self, target):
     out_layer = self.layers[-1]
-    for i in range(len(out_layer) - 1):
+    for i in xrange(len(out_layer) - 1):
       out_layer[i].compute_out_grad(target[i])
-    for i in range(len(self.layers) - 2, 0, -1):
+    for i in xrange(len(self.layers) - 2, 0, -1):
       hidden_layer = self.layers[i]
       nxt = self.layers[i+1]
-      for j in range(len(hidden_layer)):
+      for j in xrange(len(hidden_layer)):
         hidden_layer[j].compute_hidden_grad(nxt)
-    for i in range(len(self.layers) - 1, 0, -1):
+    for i in xrange(len(self.layers) - 1, 0, -1):
       l = self.layers[i]
       prev = self.layers[i-1]
-      for j in range(len(l) - 1):
+      for j in xrange(len(l) - 1):
         l[j].update_weights(prev)
 
   def get_output(self):
     out = list()
     out_layer = self.layers[-1]
-    for i in range(len(out_layer)):
+    for i in xrange(len(out_layer)):
       out.append(out_layer[i].value)
     return out
 
@@ -116,7 +116,7 @@ class NeuralHouse(Actions):
       self.sq_ft = random.randint(300, 20000)
       self.num_crimes = random.randint(0, 500)
       price = 1337
-      for i in range(num_samples):
+      for i in xrange(num_samples):
         s += struct.pack('<HHHH', self.num_beds, self.num_baths, self.sq_ft, self.num_crimes)
         s += struct.pack('<H', price)
         inp = list()
@@ -128,7 +128,7 @@ class NeuralHouse(Actions):
         target = [price / 50000.0]
         self.nnet.back_prop(target)
     else:
-      for i in range(num_samples):
+      for i in xrange(num_samples):
         num_beds = random.randint(1, 20)
         num_baths = random.randint(1, 25)
         sq_ft = random.randint(300, 20000)

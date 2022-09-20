@@ -144,7 +144,7 @@ class FileSystem():
       else:
         #Keep looking
         last = prev
-        prev = prev.__next__
+        prev = prev.next
 
     last.next = newNode
     newNode.prev = last
@@ -166,10 +166,10 @@ class FileSystem():
   def Delete(self, file):
     #remove links
     if (file.parent.child == file):
-      file.parent.child = file.__next__
+      file.parent.child = file.next
     if (file.prev):
-      file.prev.next = file.__next__
-    if (file.__next__):
+      file.prev.next = file.next
+    if (file.next):
       file.next.prev = file.prev
 
     file.prev = None
@@ -181,7 +181,7 @@ class FileSystem():
     if (file):
       self.numFiles -= 1
       self.RemoveNode(file.child)
-      self.RemoveNode(file.__next__)
+      self.RemoveNode(file.next)
       if (file in self.allFiles):
         self.allFiles.remove(file)
 
@@ -210,7 +210,7 @@ class FileSystem():
           flavorText = resourceFile.resources[file.resourceIndex]
           
       output += "%s \t%d\t%s\n" % (file.name, len(file.contents), flavorText)
-      file = file.__next__
+      file = file.next
     return output
 
   def ChangeDirectory(self):
@@ -219,7 +219,7 @@ class FileSystem():
     while (next):
       if ((next.type == FILE_DIRECTORY) and (next.name != "System")):
         possible.append(next)
-      next = next.__next__
+      next = next.next
     newDir = random.choice(possible)
     if (newDir == "upone"):
       if (self.cwd != self.cgc_root):
@@ -232,7 +232,7 @@ class FileSystem():
     while (file != None):
       if (file.name not in self.reservedFiles):
         self.allFiles.append(file)
-      file = file.__next__
+      file = file.next
     
     return newDir
 

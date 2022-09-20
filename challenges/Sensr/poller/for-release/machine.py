@@ -18,7 +18,7 @@ def calc_hash(s):
     result = 0
     mixer = 0x12345678
 
-    for i in range(0, 0x1000, 4):
+    for i in xrange(0, 0x1000, 4):
         x = struct.unpack('<I', s[i:i+4])[0]
         result += x ^ mixer
 

@@ -4,13 +4,13 @@ from generator.actions import Actions
 import random, string, struct
 
 def random_string(size=20):
-    return ''.join([random.choice(string.ascii_letters + string.digits) for x in range(random.randint(8,size))])
+    return ''.join([random.choice(string.ascii_letters + string.digits) for x in xrange(random.randint(8,size))])
 def random_string_s(size=20):
-    return ''.join([random.choice(string.ascii_letters + ' ') for x in range(random.randint(1,size))])
+    return ''.join([random.choice(string.ascii_letters + ' ') for x in xrange(random.randint(1,size))])
 def random_bytes(size=20):
-    return ''.join([chr(random.randint(1,255)) for x in range(random.randint(1,size))])
+    return ''.join([chr(random.randint(1,255)) for x in xrange(random.randint(1,size))])
 def random_bytes_n(size=20):
-    return ''.join([chr(random.randint(0,255)) for x in range(size)])
+    return ''.join([chr(random.randint(0,255)) for x in xrange(size)])
 
 def kaprica_mixin(self):
     if hasattr(self, 'xlat_seed'):
@@ -28,14 +28,14 @@ def kaprica_mixin(self):
             H = (H * 3) & 0xffffffff
             H = ((H << 13) ^ (H >> 19) ^ (H >> 21)) & 0xffffffff
             return H
-        xmap = list(range(256))
-        xmap_inv = list(range(256))
+        xmap = list(xrange(256))
+        xmap_inv = list(xrange(256))
         state = hash_string(seed)
-        for i in range(255, 0, -1):
+        for i in xrange(255, 0, -1):
             j = state % i
             state = hash_iterate(state)
             xmap[i], xmap[j] = xmap[j], xmap[i]
-        for i in range(256):
+        for i in xrange(256):
             xmap_inv[xmap[i]] = i
         self.xlat_map = xmap
         self.xlat_map_inv = xmap_inv
@@ -253,7 +253,7 @@ class FlgMgr(object):
                 if s.chal == chal and s.valid:
                     flags.append(s)
         else:
-            for i in range(len(self.submits)):
+            for i in xrange(len(self.submits)):
                 if len(flags) == n:
                     break
                 if self.submits[len(self.submits) - i - 1].valid:
@@ -402,7 +402,7 @@ class ASHOUT(Actions):
     def random_string(self, l):
         s = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
         buf = []
-        for i in range(l):
+        for i in xrange(l):
             r = self.prng()
             buf.append(s[r % len(s)])
         return ''.join(buf)
@@ -456,7 +456,7 @@ class ASHOUT(Actions):
             s = 'No solves yet.\n'
             self.read(length=len(s), expect=s)
         s = ''
-        for i in range(len(solves)):
+        for i in xrange(len(solves)):
             s += '| %s solved %s (%d pts)\n' % (solves[i].team.name, solves[i].chal.name, solves[i].chal.points)
         s += '================================\n'
         self.read(length=len(s), expect=s)
@@ -497,7 +497,7 @@ class ASHOUT(Actions):
             chal.flag = self.random_string(32)
             ctf.add_chal(chal)
         elif 4 <= r <= 7:
-            for i in range(len(ctf.chals)):
+            for i in xrange(len(ctf.chals)):
                 c = ctf.chals[i]
                 if c.status == Challenge.CSTAT_LOCKED:
                     if self.prng() % 100 < 50:
@@ -626,7 +626,7 @@ class ASHOUT(Actions):
             if len(f) > 0:
                 s += '\nTop Solvers\n'
                 s += '===========\n'
-                for i in range(len(f)):
+                for i in xrange(len(f)):
                     s += '%d. %s\n' % (i+1, f[i].team.name)
             return s
 
@@ -647,7 +647,7 @@ class ASHOUT(Actions):
         s = '\n=== Challenge list ===================\n'
         self.read(length=len(s), expect=s)
         s = ''
-        for i in range(len(ctf.chals)):
+        for i in xrange(len(ctf.chals)):
             s += '%d. ' % i
             s += self.print_challenge(ctf.chals[i], False)
         self.read(length=len(s), expect=s)
@@ -669,7 +669,7 @@ class ASHOUT(Actions):
         s = '\n=== Challenge list ===================\n'
         self.read(length=len(s), expect=s)
         s = ''
-        for i in range(len(ctf.chals)):
+        for i in xrange(len(ctf.chals)):
             s += '%d. ' % i
             s += self.print_challenge(ctf.chals[i], False)
         self.read(length=len(s), expect=s)
@@ -689,7 +689,7 @@ class ASHOUT(Actions):
         n = min(5, len(ctf.teams) - (page - 1) * 5)
         err, ranks, page = ctf.get_ranks(page)
         s = ''
-        for i in range(n):
+        for i in xrange(n):
             rank = i + page * 5 + 1
             s += '%d. %s (%d pts)\n' % (rank, ranks[i].name, ranks[i].score)
         self.read(length=len(s), expect=s)
@@ -713,7 +713,7 @@ class ASHOUT(Actions):
         while True:
             s = '\nPage: '
             self.read(length=len(s), expect=s)
-            pg = random.choice(list(range(1, num_pages + 3)) + ['q'] * 5)
+            pg = random.choice(range(1, num_pages + 3) + ['q'] * 5)
             self.write(str(pg) + '\n')
             if pg == 'q':
                 return
@@ -762,7 +762,7 @@ class ASHOUT(Actions):
         s = '\n=== Submit flag ===================\n'
         s += 'Flag: '
         self.read(length=len(s), expect=s)
-        avail_chals = [c for c in ctf.chals if c.status != Challenge.CSTAT_LOCKED]
+        avail_chals = filter(lambda c: c.status != Challenge.CSTAT_LOCKED, ctf.chals)
         if len(avail_chals) > 0 and random.randint(1, 100) <= 80:
             chal = random.choice(avail_chals)
             flag = chal.flag

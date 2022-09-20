@@ -2,7 +2,7 @@ from generator.actions import Actions
 import random
 import string
 import struct
-import io
+import StringIO
 
 def random_name(max_size=8, min_size=3):
     characters = string.letters
@@ -131,7 +131,7 @@ class Pizza():
         if not self.toppings:
             _read("\tNone\n")
             return
-        for x in range(len(self.toppings)):
+        for x in xrange(len(self.toppings)):
             _read("\t%d. " % (x+1))
             self.toppings[x].read_topping(_read, True)
 
@@ -140,7 +140,7 @@ class Pizza():
             _read("\tNone\n")
             return
 
-        for x in range(len(self.sauces)):
+        for x in xrange(len(self.sauces)):
             _read("\t%d. " % (x+1))
             self.sauces[x].read_topping(_read, True)
 
@@ -201,7 +201,7 @@ class Order():
         calories = 0
         carbs = 0
         _read("==================================================\n")
-        for x in range(len(self.pizzas)):
+        for x in xrange(len(self.pizzas)):
             _read("  Item #%d. " % int(x+1))
             self.pizzas[x].read_pizza(_read)
             calories += self.pizzas[x].get_calories()
@@ -218,7 +218,7 @@ class PizzaOrders(Actions):
         self.read(length=len(string), expect=string)
 
     def _read_toppings(self, toppings, tabs=False, has_asterisk=False):
-        for x in range(len(toppings)):
+        for x in xrange(len(toppings)):
             if tabs:
                 self._read("\t")
             self._read("%d. " % (x+1))
@@ -242,7 +242,7 @@ class PizzaOrders(Actions):
         if not self.orders or not len(self.orders):
             return
 
-        for x in range(len(self.orders)):
+        for x in xrange(len(self.orders)):
             self._read("%d - %s: Ordered %d pizza(s)\n" % (x+1, self.orders[x].pickup_name,
                                                             len(self.orders[x].pizzas)))
             if full:

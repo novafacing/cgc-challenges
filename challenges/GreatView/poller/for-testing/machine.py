@@ -31,14 +31,14 @@ from random import choice,randint
 from struct import *
 
 def chunks(l, n):
-    for i in range(0, len(l), n):
+    for i in xrange(0, len(l), n):
         yield l[i:i+n]
 
 def random_alpha(a, b):
     return ''.join(choice(string.letters) for _ in range(randint(a, b)))
 
 def get_rand_array(nspace):
-    arrs = [x for x in list(nspace.values()) if x[1] == "arr"]
+    arrs = filter(lambda x: x[1] == "arr",nspace.values())
     if len(arrs) == 0:
         return None
     return choice(arrs)[0]
@@ -100,7 +100,7 @@ class GREATVIEW(Actions):
     def validget(self):
         if len(self.nspace) == 0:
             self.validnew()
-        name,vtype,arg1,arg2 = choice(list(self.nspace.values()))
+        name,vtype,arg1,arg2 = choice(self.nspace.values())
         if vtype == "num":
             cmd = "get %s\n" % name
             res = str(arg1)
@@ -130,7 +130,7 @@ class GREATVIEW(Actions):
     def validset(self):
         if len(self.nspace) == 0:
             self.validnew()
-        name,vtype,arg1,arg2 = choice(list(self.nspace.values()))
+        name,vtype,arg1,arg2 = choice(self.nspace.values())
         newval = randint(-(2**31),2**31-1)
         if vtype == "num":
             cmd = "set %s %s\n" % (name,newval)
@@ -151,7 +151,7 @@ class GREATVIEW(Actions):
     def validdel(self):
         if len(self.nspace) == 0:
             self.validnew()
-        name,vtype,arg1,arg2 = choice(list(self.nspace.values()))
+        name,vtype,arg1,arg2 = choice(self.nspace.values())
         del self.nspace[name]
         if vtype == "arr":
             del self.arrs[name]

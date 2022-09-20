@@ -185,7 +185,7 @@ class MSLS_HANDSHAKE_MESSAGE:
       self.message += data
       self.length += len(data)
     else:
-      print("Bad Data Size %d" % length)
+      print "Bad Data Size %d" % length
 
   def get_length(self):
     return self.length
@@ -292,7 +292,7 @@ class CROMU_00097_Generator(Actions):
   def application_delete(self):
     if (len(self.board) == 0):
       return
-    index = random.choice(list(range(len(self.board))))
+    index = random.choice(range(len(self.board)))
     self.board.remove(self.board[index])
     request = SLS_MESSAGE(SLS_TYPE_APPLICATION, self.state["current_connection"])
     app_msg = APPLICATION_MESSAGE(APPLICATION_TYPE_DELETE_MESSAGE, self.state["current_connection"])
@@ -326,7 +326,7 @@ class CROMU_00097_Generator(Actions):
   def application_read(self):
     if (len(self.board) == 0):
       return
-    index = random.choice(list(range(len(self.board))))
+    index = random.choice(range(len(self.board)))
  
     request = SLS_MESSAGE(SLS_TYPE_APPLICATION, self.state["current_connection"])
     app_msg = APPLICATION_MESSAGE(APPLICATION_TYPE_READ_MESSAGE, self.state["current_connection"])

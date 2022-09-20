@@ -11,7 +11,7 @@ class RPN(Actions):
         ops = "-+*/|^~!"
         num_elems = random.randint(0, 49)
         self.string = ""
-        for i in range(num_elems):
+        for i in xrange(num_elems):
             if random.randint(0, 1) % 2 == 0:
                 self.string += random.choice(ops) + " "
             else:

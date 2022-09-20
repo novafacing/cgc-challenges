@@ -68,7 +68,7 @@ class TemplatePoller(Actions):
     def start(self):
         #self.delay(100)
         if DEBUG:
-            print("------- start -----------")
+            print "------- start -----------"
         self._gen_status_msgs()
         self.resort = Resort(flag_page=self.magic_page)
         self.rider_ids = set()
@@ -78,7 +78,7 @@ class TemplatePoller(Actions):
         Load a new resort digraph.
         '''
         if DEBUG:
-            print("cmd: load resort digraph -----------")
+            print "cmd: load resort digraph -----------"
 
         self.resort_size = 3
         self.resort_min_altitude = 5000
@@ -103,7 +103,7 @@ class TemplatePoller(Actions):
         Load a group of riders.
         '''
         if DEBUG:
-            print("cmd: load rider group -----------")
+            print "cmd: load rider group -----------"
 
         riders = []        
         count = randint(10,200)
@@ -118,9 +118,9 @@ class TemplatePoller(Actions):
         self.resort.rider_count += len(riders)
 
         if DEBUG:
-            print("Adding {0} riders".format(len(riders)))
+            print "Adding {0} riders".format(len(riders))
             for r in riders:
-                print(" [r{0}] added".format(r.id))
+                print " [r{0}] added".format(r.id)
 
         self.write(rider_buf)
         self.read(length=len(self.OK), expect=self.OK)
@@ -132,7 +132,7 @@ class TemplatePoller(Actions):
         Load one rider.
         '''
         if DEBUG:
-            print("cmd: load rider single -----------")
+            print "cmd: load rider single -----------"
 
         riders = []        
         count = 1
@@ -146,7 +146,7 @@ class TemplatePoller(Actions):
         self.resort.rider_count += len(riders)
 
         if DEBUG:
-            print(" [r{0}] added".format(riders[0].id))
+            print " [r{0}] added".format(riders[0].id)
 
         self.write(rider_buf)
         self.read(length=len(self.OK), expect=self.OK)
@@ -158,7 +158,7 @@ class TemplatePoller(Actions):
         Reset simulation and delete all riders.
         '''
         if DEBUG:
-            print("cmd: unload riders -----------")
+            print "cmd: unload riders -----------"
 
         self.resort.resort_reset()
         self.resort.riders = []
@@ -175,7 +175,7 @@ class TemplatePoller(Actions):
         Run the simulation for steps iterations.
         '''
         if DEBUG:
-            print("cmd: start simulation -----------")
+            print "cmd: start simulation -----------"
 
         steps = randint(1000, 2000)
         # steps = 10
@@ -195,7 +195,7 @@ class TemplatePoller(Actions):
         Reset simulation, but do not delete any riders.
         '''
         if DEBUG:
-            print("cmd: reset simulation -----------")
+            print "cmd: reset simulation -----------"
 
         self.resort.resort_reset()
 
@@ -209,7 +209,7 @@ class TemplatePoller(Actions):
         Get the stats from the lifts (ID, rider_total)
         '''
         if DEBUG:
-            print("cmd: lift stats -----------")
+            print "cmd: lift stats -----------"
 
         self.write(self.LIFT_STATS)
         ls_buf = self.resort.lift_stats_buffer()
@@ -226,7 +226,7 @@ class TemplatePoller(Actions):
         Get the stats from the trails (ID, rider_total)
         '''
         if DEBUG:
-            print("cmd: trail stats -----------")
+            print "cmd: trail stats -----------"
 
         self.write(self.TRAIL_STATS)
         s_buf = self.resort.trail_stats_buffer()
@@ -243,7 +243,7 @@ class TemplatePoller(Actions):
         Get the stats from the riders (ID, energy_level)
         '''
         if DEBUG:
-            print("cmd: rider stats -----------")
+            print "cmd: rider stats -----------"
 
         self.write(self.RIDER_STATS)
         s_buf = self.resort.rider_stats_buffer()
@@ -279,7 +279,7 @@ class TemplatePoller(Actions):
         Quit cleanly
         '''
         if DEBUG:
-            print("cmd: quit -----------")
+            print "cmd: quit -----------"
 
         return -1
 

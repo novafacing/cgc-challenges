@@ -36,7 +36,7 @@ class TemplatePoller(Actions):
     def start(self):
         #self.delay(100)
         if DEBUG:
-            print("------- start -----------")
+            print "------- start -----------"
         self.state['e'] = Dealer(self.magic_page)
         self.state['e'].add_players(CONFIG['PLAYER_COUNT'])
         self.state['e'].gen_ok()
@@ -47,7 +47,7 @@ class TemplatePoller(Actions):
         Give the dealer a new deck.
         '''
         if DEBUG:
-            print("cmd: new deck -----------")
+            print "cmd: new deck -----------"
 
         # cmd
         byte_str = self.state['e'].make_trigger_buf('DECK')
@@ -55,7 +55,7 @@ class TemplatePoller(Actions):
         bad_cards = False
         if True == allow_bad and self.chance(0.001):
             if DEBUG:
-                print("deck includes bad cards")
+                print "deck includes bad cards"
             bad_cards = True
 
         if [] == deck:
@@ -81,7 +81,7 @@ class TemplatePoller(Actions):
         Instruct dealer to deal one round to players
         '''
         if DEBUG:
-            print("cmd: deal one round -----------")
+            print "cmd: deal one round -----------"
 
         self.write(self.state['e'].make_trigger_buf('DEAL'))
 
@@ -90,15 +90,15 @@ class TemplatePoller(Actions):
         self.read(length=len(self.state['e'].ok), expect=self.state['e'].ok)
         if False == enough_cards:
             if DEBUG:
-                print("not enough cards for a round")
+                print "not enough cards for a round"
             return -1
         else:
             if DEBUG:
-                print("enough cards for a round")
+                print "enough cards for a round"
             self.state['e'].play_one_round()
             if DEBUG:
                 mpiu = self.state['e'].total_magic_page_indices_used()
-                print("## fp indices testing ##")
+                print "## fp indices testing ##"
                 self.state['e'].check_magic_bytes_usage()
 
             return 0
@@ -108,7 +108,7 @@ class TemplatePoller(Actions):
         Ask dealer for round data
         '''
         if DEBUG:
-            print("cmd: get round data -----------")
+            print "cmd: get round data -----------"
 
         self.write(self.state['e'].make_trigger_buf('DATA'))
 
@@ -124,7 +124,7 @@ class TemplatePoller(Actions):
         Ask dealer for house balance per player
         '''
         if DEBUG:
-            print("cmd: get balances -----------")
+            print "cmd: get balances -----------"
 
         self.write(self.state['e'].make_trigger_buf('BALANCE'))
 
@@ -139,7 +139,7 @@ class TemplatePoller(Actions):
         Ask dealer for the number of players
         '''
         if DEBUG:
-            print("cmd: get player count -----------")
+            print "cmd: get player count -----------"
 
         self.write(self.state['e'].make_trigger_buf('COUNT'))
 
@@ -152,7 +152,7 @@ class TemplatePoller(Actions):
         Quit cleanly
         '''
         if DEBUG:
-            print("cmd: quit -----------")
+            print "cmd: quit -----------"
 
         self.write(self.state['e'].make_trigger_buf('QUIT'))
 
@@ -165,7 +165,7 @@ class TemplatePoller(Actions):
         Send a bogus command
         '''
         if DEBUG:
-            print("cmd: bogus -----------")
+            print "cmd: bogus -----------"
 
         self.write(self.state['e'].make_trigger_buf('BOGUS'))
 

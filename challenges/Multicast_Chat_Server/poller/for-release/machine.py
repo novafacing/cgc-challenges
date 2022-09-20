@@ -78,12 +78,12 @@ class TemplateGenerator(Actions):
 		while len(users) == 0:
 			channels = []
 			while len(channels) < 2:
-				channels = [c for c in list(self.channels.keys()) if len(self.channels[c]['queue']) > 4 and len(self.channels[c]['subscriptions']) > 2]
+				channels = [c for c in self.channels.keys() if len(self.channels[c]['queue']) > 4 and len(self.channels[c]['subscriptions']) > 2]
 				self.sendMessage()
 			channel = random.choice(channels)
 			senders = [m['sender'] for m in self.channels[channel]['queue']]
 			users = [u for u in self.users if u['name'] not in senders and 
-			                                  u['name'] in list(self.channels[channel]['subscriptions'].keys()) and 
+			                                  u['name'] in self.channels[channel]['subscriptions'].keys() and 
 			                                  u['subscriptions'][channel]['index'] < len(self.channels[channel]['queue'])]
 		user = random.choice(users)
 		command = "/out/" + channel + "\n"
@@ -97,12 +97,12 @@ class TemplateGenerator(Actions):
 		while len(users) < 1:
 			for u in self.users:
 				if len(u['subscriptions']) > 1:
-					for channelName in list(u['subscriptions'].keys()):
+					for channelName in u['subscriptions'].keys():
 						if len(self.channels[channelName]['queue']) > u['subscriptions'][channelName]['index'] + 2:
 							users.append(u)
 				else:
 					deliveryType = random.choice(self.deliveryType)	
-					channel = random.choice(list(self.channels.keys()))
+					channel = random.choice(self.channels.keys())
 					self._subscribe(u, channel, deliveryType)
 			self.sendMessage()
 		user = random.choice(users)
@@ -110,7 +110,7 @@ class TemplateGenerator(Actions):
 		self.write(command)
 		self.write(user['token'])
 		self.write(":end\n")
-		for channelName in reversed(list(user['subscriptions'].keys())):
+		for channelName in reversed(user['subscriptions'].keys()):
 			self._getMessageFromChannel(user,channelName)
 
 
@@ -118,14 +118,14 @@ class TemplateGenerator(Actions):
 		users = [u for u in self.users if len(u['subscriptions']) > 2]
 		while len(users) < 3:	
 			deliveryType = random.choice(self.deliveryType)	
-			channel = random.choice(list(self.channels.keys()))
+			channel = random.choice(self.channels.keys())
 			userList = [u for u in self.users if u not in users]
 			user = random.choice(userList)
 			self._subscribe(user, channel, deliveryType)			
 			users = [u for u in self.users if len(u['subscriptions']) > 2]
 
 		user = random.choice(users)
-		subscription = random.choice(list(user['subscriptions'].keys()))
+		subscription = random.choice(user['subscriptions'].keys())
 		command = "/in/" + subscription + "\n"
 		message = ''.join(random.choice(string.ascii_letters) for _ in range(20))
 		priority = random.choice(self.priorities)
@@ -151,21 +151,21 @@ class TemplateGenerator(Actions):
 		self.write(command)
 		self.write(user['token'])
 		self.write(args)
-		if channel not in list(user['subscriptions'].keys()):
+		if channel not in user['subscriptions'].keys():
 			user['subscriptions'][channel] = {'deliveryType':"latest"}
 		user['subscriptions'][channel]['index'] = len(self.channels[channel]['queue'])
 		self.channels[channel]['subscriptions'][user['name']] = {'index': user['subscriptions'][channel]['index']}
 		command = "/token/" + channel + "\n"
-		subscriptions_string = ''.join(key for key in list(user['subscriptions'].keys()))
+		subscriptions_string = ''.join(key for key in user['subscriptions'].keys())
 		args_regex =  "0" + ":" + user['name'] + ":" + "([0-9a-f]{" + str(len(subscriptions_string)*2) + "})" + ":"
-		args_regex += ','.join(key for key in reversed(list(user['subscriptions'].keys())))
+		args_regex += ','.join(key for key in reversed(user['subscriptions'].keys()))
 		args_regex += "\n"
 		signature = Variable('signature')
 		signature.set_re(args_regex, group=1)
 		self.read(delim="\n", expect=command)
 		self.read(delim="\n", assign=signature)
 		args1 = "0" + ":" + user['name'] + ":"
-		args3 = ":" + ','.join(key for key in reversed(list(user['subscriptions'].keys()))) + "\n"
+		args3 = ":" + ','.join(key for key in reversed(user['subscriptions'].keys())) + "\n"
 		self.write(command)
 		self.write(args1)
 		self.write(signature)
@@ -187,7 +187,7 @@ class TemplateGenerator(Actions):
 		self.write(command)
 		self.write(user['token'])
 		self.write(args)
-		if channel in list(user['subscriptions'].keys()):
+		if channel in user['subscriptions'].keys():
 			user['subscriptions'][channel]['deliveryType'] = deliveryType
 		else:
 			command = "/auth/" + channel + "\n"
@@ -197,32 +197,32 @@ class TemplateGenerator(Actions):
 
 
 	def subscribeGuaranteed(self):
-		channel = random.choice(list(self.channels.keys()))
+		channel = random.choice(self.channels.keys())
 		user = random.choice(self.users)
 		self._subscribe(user, channel, "guaranteed")
 
 	def subscribeLatest(self):
-		channel = random.choice(list(self.channels.keys()))
+		channel = random.choice(self.channels.keys())
 		user = random.choice(self.users)
 		self._subscribe(user, channel, "latest")
 
 	def subscribeIncremental(self):
-		channel = random.choice(list(self.channels.keys()))
+		channel = random.choice(self.channels.keys())
 		user = random.choice(self.users)
 		self._subscribe(user, channel, "next")
 
 	def subscribeLow(self):
-		channel = random.choice(list(self.channels.keys()))
+		channel = random.choice(self.channels.keys())
 		user = random.choice(self.users)
 		self._subscribe(user, channel, "low")
 
 	def subscribeMedium(self):
-		channel = random.choice(list(self.channels.keys()))
+		channel = random.choice(self.channels.keys())
 		user = random.choice(self.users)
 		self._subscribe(user, channel, "medium")
 
 	def subscribeHigh(self):
-		channel = random.choice(list(self.channels.keys()))
+		channel = random.choice(self.channels.keys())
 		user = random.choice(self.users)
 		self._subscribe(user, channel, "high")
 

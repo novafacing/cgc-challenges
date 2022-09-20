@@ -125,7 +125,7 @@ class MyClass(Actions):
         # read a valid or invalid object
         if random.randint(0, 1) == 0:
             # valid
-            name = random.choice(list(self.var.keys()))
+            name = random.choice(self.var.keys())
         else:
             # invalid
             name = "".join(random.choice(string.ascii_lowercase) for _ in range(5, 10))
@@ -169,7 +169,7 @@ class MyClass(Actions):
         # write an existing or new object
         if random.randint(0, 1) == 0:
             # existing
-            name = random.choice(list(self.var.keys()))
+            name = random.choice(self.var.keys())
             objtype = self.var[name][0]
         else:
             # new

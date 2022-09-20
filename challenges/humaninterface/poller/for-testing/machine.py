@@ -4,7 +4,7 @@ import string
 import struct
 
 def random_bytes(size):
-    return ''.join(chr(random.randint(0, 0xFF)) for c in range(size))
+    return ''.join(chr(random.randint(0, 0xFF)) for c in xrange(size))
 
 class Forkbeard(Actions):
     LINK_PAYLOAD_SIZE = 339

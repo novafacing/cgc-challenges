@@ -8,7 +8,7 @@ bs = string.ascii_letters + string.digits + ' '
 end_marker = '\xed\xac\xed\xde'
 
 def random_bytes(n=128):
-    return ''.join([random.choice(bs) for _ in range(n)])
+    return ''.join([random.choice(bs) for _ in xrange(n)])
 
 class Machine(Actions):
     def start(self):

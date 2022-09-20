@@ -36,11 +36,11 @@ def rs(n=16, with_ws=False, space=None):
         elif isinstance(space, list):
             space += [" ", "\t"]
 
-    return ''.join([random.choice(space) for _ in range(1, n + 1)])
+    return ''.join([random.choice(space) for _ in xrange(1, n + 1)])
 
 
 def rls(_min=4, _max=12, **kwargs):
-    return rs(random.choice(range(_min, _max + 1)), **kwargs)
+    return rs(random.choice(xrange(_min, _max + 1)), **kwargs)
 
 
 class Machine(Actions):
@@ -70,7 +70,7 @@ class Machine(Actions):
         if not self.state['store'] or self.chance(0.03):
             title = rls(space=words)
         else:
-            title = random.choice(list(self.state['store'].keys()))
+            title = random.choice(self.state['store'].keys())
 
         self.write("get-note {}\n".format(title))
         if title in self.state['store']:
@@ -86,7 +86,7 @@ class Machine(Actions):
             return
 
         if self.chance(0.03) and self.state['store']:
-            title = random.choice(list(self.state['store'].keys()))
+            title = random.choice(self.state['store'].keys())
         else:
             title = rls(space=words)
 
@@ -105,7 +105,7 @@ class Machine(Actions):
         if not self.state['store'] or self.chance(0.03):
             title = rls(space=words)
         else:
-            title = random.choice(list(self.state['store'].keys()))
+            title = random.choice(self.state['store'].keys())
 
         content = rls(space=words, with_ws=True)
 
@@ -121,7 +121,7 @@ class Machine(Actions):
         if not self.state['store'] or self.chance(0.03):
             title = rls(space=words)
         else:
-            title = random.choice(list(self.state['store'].keys()))
+            title = random.choice(self.state['store'].keys())
 
         self.state['store'].pop(title, None)
 

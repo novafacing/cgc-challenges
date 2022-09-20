@@ -17,7 +17,7 @@ encoder.FLOAT_REPR = lambda o: format(o, '.2f')
 p = lambda f,x: struct.pack(f,x)
 
 def random_string(size=20):
-  return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
+  return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
 
 class RandomKTY(object):
   def integer(self):
@@ -39,13 +39,13 @@ class RandomKTY(object):
   def array(self, d=0):
     l = random.randint(0, 20)
     if d < MAX_DEPTH:
-      return [ self.kty(d + 1) for i in range(l) ]
+      return [ self.kty(d + 1) for i in xrange(l) ]
     else:
       return None
 
   def obj(self, depth=0):
     l = random.randint(0, 20)
-    d = OrderedDict([ (self.string(), self.kty(depth + 1)) for i in range(l) ])
+    d = OrderedDict([ (self.string(), self.kty(depth + 1)) for i in xrange(l) ])
     if random.randint(1, 100) < 20:
       d['nyan_says'] = self.string()
       global nyan_says

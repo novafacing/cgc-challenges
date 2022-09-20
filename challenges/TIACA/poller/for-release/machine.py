@@ -152,13 +152,13 @@ class TIACA(Actions):
 		self.carstate.trunk_state = self.TRUNK_CLOSED
 
 	def loadTrunk(self):
-		weight = random.choice(list(range(11,100)))
+		weight = random.choice(range(11,100))
 		tosend = struct.pack("<BB", int(self.TRUNK_LOAD), weight)
 		self.write(tosend + "\n")
 		self.carstate.trunk_load += weight
 
 	def unloadTrunk(self):
-		weight = random.choice(list(range(11,100)))
+		weight = random.choice(range(11,100))
 		tosend = struct.pack("<BB", int(self.TRUNK_UNLOAD), weight)
 		self.write(tosend + "\n")
 		if(self.carstate.trunk_load < weight):
@@ -177,7 +177,7 @@ class TIACA(Actions):
 	def changeVolume(self):
 		if(self.carstate.info_state != self.INFO_OFF):
 			adjustDirection = random.choice([self.INFO_VOLUP, self.INFO_VOLDOWN])
-			amount = random.choice(list(range(10)))
+			amount = random.choice(range(10))
 			tosend = struct.pack("<BB", int(adjustDirection), amount)
 			self.write(tosend + "\n")
 			if(adjustDirection == self.INFO_VOLDOWN):

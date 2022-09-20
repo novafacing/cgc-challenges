@@ -119,7 +119,7 @@ class StringSearch(Actions):
 
         self.smoke_sensor_present = 1; 
 
-        message = pack('2H', 0x5, 0o1)
+        message = pack('2H', 0x5, 01)
 
         self.send_message(message)
 
@@ -317,7 +317,7 @@ class StringSearch(Actions):
             responsebytes = pack('12B', 0xa5, 0x5a, 0x0a, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
             
             # delete the sensor from our local copy
-            for x in range(len(self.sensorArray)-1, -1, -1):
+            for x in xrange(len(self.sensorArray)-1, -1, -1):
                 if self.sensorArray[x][0] == sensor_id:
                     del self.sensorArray[x]
                     break

@@ -63,7 +63,7 @@ class TemplateGenerator(Actions):
         req, resp, o = self._accounts.generate_good_buy_req_resp()
         self._comment("Buy", o)
 
-        for i, j in list(self._accounts.order_book[o['symbol']].items()):
+        for i, j in self._accounts.order_book[o['symbol']].items():
             self.comment("%s oid %s price %s qty" % ( i,  j['price'], j['qty']))
         self.write(req)
         self.read(length=len(resp), expect=resp)

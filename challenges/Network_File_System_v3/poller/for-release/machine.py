@@ -86,7 +86,7 @@ class MyClass(Actions):
     #############################
     def NextInode(self):
         for inode in range (0, self.MaxFiles):
-            if inode not in list(self.Files.keys()):
+            if inode not in self.Files.keys():
                 return inode
 
     def FindInode(self, filename):
@@ -143,7 +143,7 @@ class MyClass(Actions):
         # response
         self.read(length=1, expect=self.CFS_DIR)
         self.read(length=1, expect="\x00")
-        self.read(length=2, expect=pack("<H", 91*(len(list(self.Files.keys()))+1)))
+        self.read(length=2, expect=pack("<H", 91*(len(self.Files.keys())+1)))
         self.read(length=91, expect="{:<32} {:<32} {:<8} {:<4} {:<10}\n".format("Filename", "Owner", "Size", "Mode", "Timestamp"))
        	
 	sorted_dir_list = { } 
@@ -168,7 +168,7 @@ class MyClass(Actions):
         if randint(0,1):
             # success
             self.comment("Successful read attempt")
-            inode = choice(list(self.Files.keys()))
+            inode = choice(self.Files.keys())
             filename = self.Files[inode][0]
             contents = self.Files[inode][2]
             offset = randint(0, len(contents)-1)
@@ -181,7 +181,7 @@ class MyClass(Actions):
                 # invalid file
                 self.comment("Bad read attempt: invalid file")
                 filename = self.random_string(1,10)
-                while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+                while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
                     filename = self.random_string(1,10)
                 offset = 0
                 length = 0
@@ -190,7 +190,7 @@ class MyClass(Actions):
             else:
                 # invalid offset
                 self.comment("Bad read attempt: invalid offset")
-                inode = choice(list(self.Files.keys()))
+                inode = choice(self.Files.keys())
                 filename = self.Files[inode][0]
                 offset = len(self.Files[inode][2])+1
                 length = randint(1,10)
@@ -220,11 +220,11 @@ class MyClass(Actions):
     #############################
     def TestWrite(self):
         # check if we're at the max number of files 
-        if self.MaxFiles is not len(list(self.Files.keys())):
+        if self.MaxFiles is not len(self.Files.keys()):
             # success
             self.comment("Successful write attempt")
             filename = self.random_string(1,10)
-            while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+            while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
                 filename = self.random_string(1,10)
             string = self.random_string(1,254)
             self.SendWrite(filename, string, self.RESP_SUCCESS)
@@ -232,7 +232,7 @@ class MyClass(Actions):
             # failure
             self.comment("Bad write attempt: too many files")
             filename = self.random_string(1,10)
-            while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+            while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
                 filename = self.random_string(1,10)
             string = self.random_string(1,254)
             self.SendWrite(filename, string, self.RESP_INVALID_FILE)
@@ -259,9 +259,9 @@ class MyClass(Actions):
     #############################
     def TestWriteAppend(self):
         # if the only file is passwd, write a file first
-        if len(list(self.Files.keys())) is 1:
+        if len(self.Files.keys()) is 1:
             filename = self.random_string(1,10)
-            while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+            while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
                 filename = self.random_string(1,10)
             string = self.random_string(1,254)
             self.SendWrite(filename, string, self.RESP_SUCCESS)
@@ -271,9 +271,9 @@ class MyClass(Actions):
             # success
             self.comment("Successful write append attempt")
             # pick a vaild file that's not the passwd file
-            inode = choice(list(self.Files.keys()))
+            inode = choice(self.Files.keys())
             while inode is 0:
-                inode = choice(list(self.Files.keys()))
+                inode = choice(self.Files.keys())
     
             # Append some bytes to it
             filename = self.Files[inode][0]
@@ -283,7 +283,7 @@ class MyClass(Actions):
             # failure
             self.comment("Bad write append attempt: invalid file")
             filename = self.random_string(1,10)
-            while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+            while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
                 filename = self.random_string(1,10)
             string = self.random_string(1,10)
             self.SendWriteAppend(filename, string, self.RESP_INVALID_FILE)
@@ -304,7 +304,7 @@ class MyClass(Actions):
 
         # update the Files list
         if code is self.RESP_SUCCESS:
-            if filename in [self.Files[inode][0] for inode in list(self.Files.keys())]:
+            if filename in [self.Files[inode][0] for inode in self.Files.keys()]:
                 # file already exists
                 if code is self.RESP_SUCCESS:
                     self.Files[self.FindInode(filename)][1] += len(string)
@@ -319,9 +319,9 @@ class MyClass(Actions):
     #############################
     def TestDel(self):
         # if the only file is passwd, write a file first
-        if len(list(self.Files.keys())) is 1:
+        if len(self.Files.keys()) is 1:
             filename = self.random_string(1,10)
-            while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+            while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
                 filename = self.random_string(1,10)
             string = self.random_string(1,254)
             self.SendWrite(filename, string, self.RESP_SUCCESS)
@@ -331,16 +331,16 @@ class MyClass(Actions):
             # success
             self.comment("Successful delete attempt")
             # pick a vaild file that's not the passwd file
-            inode = choice(list(self.Files.keys()))
+            inode = choice(self.Files.keys())
             while inode is 0:
-                inode = choice(list(self.Files.keys()))
+                inode = choice(self.Files.keys())
             filename = self.Files[inode][0]
             self.SendDel(filename, self.RESP_SUCCESS)
 
         else:
             self.comment("Bad delete attempt: invalid file")
             filename = self.random_string(1,10)
-            while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+            while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
                 filename = self.random_string(1,10)
             self.SendDel(filename, self.RESP_DELETE_FAILED)
 
@@ -364,9 +364,9 @@ class MyClass(Actions):
     #############################
     def TestRename(self):
         # if we only have the 'passwd' file, write one more
-        while len(list(self.Files.keys())) < 3:
+        while len(self.Files.keys()) < 3:
             filename = self.random_string(1,10)
-            while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+            while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
                 filename = self.random_string(1,10)
             string = self.random_string(1,254)
             self.SendWrite(filename, string, self.RESP_SUCCESS)
@@ -377,14 +377,14 @@ class MyClass(Actions):
             self.comment("Successful rename attempt")
 
             # pick a vaild file that's not the passwd file
-            inode = choice(list(self.Files.keys()))
+            inode = choice(self.Files.keys())
             while inode is 0:
-                inode = choice(list(self.Files.keys()))
+                inode = choice(self.Files.keys())
             oldfilename = self.Files[inode][0]
 
             # pick a file that's not in the list at all
             newfilename = self.random_string(1,10)
-            while newfilename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(newfilename) is 0:
+            while newfilename in [self.Files[inode][0] for inode in self.Files.keys()] or len(newfilename) is 0:
                 newfilename = self.random_string(1,10)
 
             self.SendRename(oldfilename, newfilename, self.RESP_SUCCESS)
@@ -394,26 +394,26 @@ class MyClass(Actions):
             if randint(0,1):
                 # pick an invalid source file
                 oldfilename = self.random_string(1,10)
-                while oldfilename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(oldfilename) is 0:
+                while oldfilename in [self.Files[inode][0] for inode in self.Files.keys()] or len(oldfilename) is 0:
                     oldfilename = self.random_string(1,10)
 
                 # pick a file that's not in the list at all
                 newfilename = self.random_string(1,10)
-                while newfilename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(newfilename) is 0:
+                while newfilename in [self.Files[inode][0] for inode in self.Files.keys()] or len(newfilename) is 0:
                     newfilename = self.random_string(1,10)
 
                 self.SendRename(oldfilename, newfilename, self.RESP_RENAME_FAILED)
             else: 
                 # pick a valid source file 
-                oldinode = choice(list(self.Files.keys()))
+                oldinode = choice(self.Files.keys())
                 while oldinode is 0:
-                    oldinode = choice(list(self.Files.keys()))
+                    oldinode = choice(self.Files.keys())
                 oldfilename = self.Files[oldinode][0]
 
                 # pick a new file that already exists
-                inode = choice(list(self.Files.keys()))
+                inode = choice(self.Files.keys())
                 while inode is 0 or oldinode is inode:
-                    inode = choice(list(self.Files.keys()))
+                    inode = choice(self.Files.keys())
                 newfilename = self.Files[inode][0]
 
                 self.SendRename(oldfilename, newfilename, self.RESP_RENAME_FAILED)

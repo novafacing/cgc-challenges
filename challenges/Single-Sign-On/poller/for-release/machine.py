@@ -57,9 +57,9 @@ class TemplateGenerator(Actions):
 
     def request_resource_wrong_token_failure(self):
         auth_val = Variable('authval')
-        if len([x for x in self.users if x[1]]) == 0:
+        if len(filter(lambda x: x[1], self.users)) == 0:
             self.auth_success_with_auth_val()
-        user = random.choice([x for x in self.users if x[1]])
+        user = random.choice(filter(lambda x: x[1], self.users))
         user_id_str = pack('l', user[0][0])
         resource = random.choice(user[1])
         self.write("REQR" + user_id_str + self.token + resource[0] + '\x07')
@@ -70,9 +70,9 @@ class TemplateGenerator(Actions):
 
     def request_success(self):
         my_token = Variable('token')
-        if len([x for x in self.users if x[1]]) == 0:
+        if len(filter(lambda x: x[1], self.users)) == 0:
             self.auth_success_with_auth_val()
-        user = random.choice([x for x in self.users if x[1]])
+        user = random.choice(filter(lambda x: x[1], self.users))
         user_id_str = pack('l', user[0][0])
         resource = random.choice(user[1])
         self.write("REQR" + user_id_str)
@@ -123,9 +123,9 @@ class TemplateGenerator(Actions):
         self.read(delim="\n", assign=variable)
 
     def revoke_resource_success(self):
-        if len([x for x in self.users if x[1]]) == 0:
+        if len(filter(lambda x: x[1], self.users)) == 0:
             self.auth_success_with_auth_val()
-        user = random.choice([x for x in self.users if x[1]])
+        user = random.choice(filter(lambda x: x[1], self.users))
         user_id_str = pack('l', user[0][0])
         resource = random.choice(user[1])
         user[1].remove(resource)
@@ -135,9 +135,9 @@ class TemplateGenerator(Actions):
         self.read(delim="\n", expect="Resource revoked.\n")
 
     def revoke_resource_failure(self):
-        if len([x for x in self.users if x[1]]) == 0:
+        if len(filter(lambda x: x[1], self.users)) == 0:
             self.auth_success_with_auth_val()
-        user = random.choice([x for x in self.users if x[1]])
+        user = random.choice(filter(lambda x: x[1], self.users))
         user_id_str = pack('l', user[0][0])
         resource = random.choice(user[1])
         token = self.token

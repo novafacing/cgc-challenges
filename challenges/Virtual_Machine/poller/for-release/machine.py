@@ -157,7 +157,7 @@ class DMAEngine():
 
 		if ( worker_cur >= 5 ):
 			if ( device_id == 1 or device_id == 2 ):
-				print("===== CRITICAL ERROR: Too many DMA workers... this could trigger the bug ====")
+				print "===== CRITICAL ERROR: Too many DMA workers... this could trigger the bug ===="
 			return
 
 		self.workers[worker_cur].worker_type = DMAWorker.DMA_WORKER_READ
@@ -170,7 +170,7 @@ class DMAEngine():
 		self.worker_count += 1
 
 		if ( worker_cur >= 5 ):
-			print("===== CRITICAL ERROR: Too many DMA workers... this could trigger the bug ====")
+			print "===== CRITICAL ERROR: Too many DMA workers... this could trigger the bug ===="
 			return
 
 		self.workers[worker_cur].worker_type = DMAWorker.DMA_WORKER_WRITE
@@ -225,7 +225,7 @@ class DMAEngine():
 
 						if ( exception == True ):
 							if ( dmaAmount != len(read_data) ):
-								print("****!!!!ERROR!!!!!**** dmaAmount and length did not match!")
+								print "****!!!!ERROR!!!!!**** dmaAmount and length did not match!"
 
 							self.read_func( expect=read_data, length=dmaAmount )
 			
@@ -521,7 +521,7 @@ class CROMU00066(Actions):
 			elif instr_name == "JumpOffsetNotZero":
 				instr_data = (0x7 << 13) | (random.randint( 0, 15 ) << 9) | (random.randint( 0, 1 ) << 8) | (random.randint( 0, 255 ))
 			else:
-				print("Missing instruction: %s\n" % instr_name)
+				print "Missing instruction: %s\n" % instr_name
 
 			#print "EMIT INSTR: %s::%04X\n" % (instr_name, instr_data) 
 

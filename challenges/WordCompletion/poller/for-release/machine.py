@@ -39,7 +39,7 @@ def srand(seed) :
 
 def strToSeed(s) :
   temp = [ ord(_) for _ in s ]
-  for i in range(len(s), 4) :
+  for i in xrange(len(s), 4) :
     temp.append(0)
 
   #do a byte swap because of little endian

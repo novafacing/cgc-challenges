@@ -6,7 +6,7 @@ import math
 
 def random_string(length, population=string.letters+string.digits):
     s = ''
-    for x in range(length):
+    for x in xrange(length):
         s += random.choice(population)
     return s
 

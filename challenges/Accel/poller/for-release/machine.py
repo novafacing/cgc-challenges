@@ -22,10 +22,10 @@ def stddev(args):
     mean = sum(args) / len(args)
 
     # calculate the variance
-    variance = sum([(x - mean) ** 2 for x in args]) / len(args)
+    variance = sum(map(lambda x: (x - mean) ** 2, args)) / len(args)
 
-    if any([math.isnan(x) for x in args]):
-        print(args, math.sqrt(variance))
+    if any(map(lambda x: math.isnan(x), args)):
+        print args, math.sqrt(variance)
     return math.sqrt(variance)
 
 def cell_sortable(cell):
@@ -98,10 +98,10 @@ class Spreadsheet(Actions):
                 assert self.op.numargs == 2
                 return '(%s %s %s)' % (self.args[0], self.op.name, self.args[1])
             else:
-                return '%s(%s)' % (self.op.name, ', '.join([str(x) for x in self.args]))
+                return '%s(%s)' % (self.op.name, ', '.join(map(lambda x: str(x), self.args)))
 
         def evaluate(self):
-            result = round(self.op.evaluate([x.evaluate() for x in self.args]), 3)
+            result = round(self.op.evaluate(map(lambda x: x.evaluate(), self.args)), 3)
             if math.isinf(result):
                 return float('nan')
             return result
@@ -174,7 +174,7 @@ class Spreadsheet(Actions):
     def random_formula(self):
         op = random.choice(self.OPERATORS)
         length = op.numargs or random.randint(1, 10)
-        args = [self.random_value() for x in range(length)]
+        args = map(lambda x: self.random_value(), xrange(length))
         return self.Formula(op, args)
 
     def _show(self, cell):
@@ -218,7 +218,7 @@ class Spreadsheet(Actions):
         self.write('SHOW TABLE\n')
 
         cells = self.state['cells']
-        for k in sorted(list(cells.keys()), key=lambda x: cell_sortable(x)):
+        for k in sorted(cells.keys(), key=lambda x: cell_sortable(x)):
             if cells[k] is not None:
                 self.read(delim='\n', expect='%s=%s\n' % (k, self.cell_text(k)))
         self.read(delim='\n', expect='Success.\n')
@@ -256,7 +256,7 @@ class Spreadsheet(Actions):
     def quit(self):
         # iterate over all cells to make sure things are right
         cells = self.state['cells']
-        for k in list(cells.keys()):
+        for k in cells.keys():
             if cells[k] is not None:
                 self._show(k)
                 self.read(length=len('Accel:-$ '), expect='Accel:-$ ')

@@ -24,14 +24,14 @@ def kaprica_mixin(self):
             H = (H * 3) & 0xffffffff
             H = ((H << 13) ^ (H >> 19) ^ (H >> 21)) & 0xffffffff
             return H
-        xmap = list(range(256))
-        xmap_inv = list(range(256))
+        xmap = list(xrange(256))
+        xmap_inv = list(xrange(256))
         state = hash_string(seed)
-        for i in range(255, 0, -1):
+        for i in xrange(255, 0, -1):
             j = state % i
             state = hash_iterate(state)
             xmap[i], xmap[j] = xmap[j], xmap[i]
-        for i in range(256):
+        for i in xrange(256):
             xmap_inv[xmap[i]] = i
         self.xlat_map = xmap
         self.xlat_map_inv = xmap_inv
@@ -77,7 +77,7 @@ def random_word(max_size=8, min_size=3):
 def random_text(pad_size=0, max_words=5, min_words=1):
     max_words = max_words if max_words >= min_words else min_words
     text = ''
-    for x in range(random.randint(min_words, max_words)):
+    for x in xrange(random.randint(min_words, max_words)):
         text += random_word() + ' '
     if not pad_size:
         return text
@@ -88,7 +88,7 @@ def random_text(pad_size=0, max_words=5, min_words=1):
 
 def random_file_name():
     filename = ''
-    for x in range(random.randint(0,5)):
+    for x in xrange(random.randint(0,5)):
         filename += '/' + random_filename()
 
     return filename
@@ -149,7 +149,7 @@ class SongFrame(object):
         self.data = []
         data_len = (self.samples_per_frame() / 8 * self.bitrate()) / self.freq()
         data_len = data_len if data_len % 4 == 0 else data_len + (4 - (data_len % 4))
-        for x in range(data_len):
+        for x in xrange(data_len):
             self.data.append(random.randint(0,255))
 
     def layer(self):
@@ -182,7 +182,7 @@ class SongFrame(object):
         num_frames_left = random.randint(1,10)
         layer = random.randint(1,3)
         sfreq = random.randint(0,2)
-        for x in reversed(range(num_frames_left)):
+        for x in reversed(xrange(num_frames_left)):
             song_frames.append(cls(layer, sfreq, x))
         return song_frames
 
@@ -194,8 +194,8 @@ class Song(object):
 
     def remix_song(self, state, magic_page):
         idx = state['remix_idx']
-        for i in range(len(self.frames)):
-            for j in range(len(self.frames[i].data)):
+        for i in xrange(len(self.frames)):
+            for j in xrange(len(self.frames[i].data)):
                 multiplier = struct.unpack('<B', magic_page[idx])[0]
                 data_val = self.frames[i].data[j]
                 data_val = (data_val * multiplier) % 256
@@ -238,20 +238,20 @@ class Playlist(object):
         self.songs.append(song)
 
     def remove_song(self, song_id):
-        for i in range(len(self.songs)):
+        for i in xrange(len(self.songs)):
             if self.songs[i].tag.song_id == song_id:
                 self.songs.pop(i)
                 return True
         return False
 
     def find_song(self, song_id):
-        for i in range(len(self.songs)):
+        for i in xrange(len(self.songs)):
             if self.songs[i].tag.song_id == song_id:
                 return self.songs[i]
         return None
 
     def remix_song(self, song_id, state, magic_page):
-        for i in range(len(self.songs)):
+        for i in xrange(len(self.songs)):
             if self.songs[i].tag.song_id == song_id:
                 self.songs[i].remix_song(state, magic_page)
                 return True
@@ -339,7 +339,7 @@ class OneAmp(Actions):
         song_idx = random.randint(0, 2*len(self._master_playlist.songs))
         self.write('{0}\x02'.format(song_idx))
         if self._master_playlist.remove_song(song_idx):
-            for x in range(len(self._playlists)):
+            for x in xrange(len(self._playlists)):
                 self._playlists[x].remove_song(song_idx)
             self._read("Successfully removed song from library\x02")
         else:

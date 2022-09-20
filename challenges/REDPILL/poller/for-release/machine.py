@@ -70,14 +70,14 @@ class RedPill(Actions):
         except ValueError:
             self.state["queue"].append(tid)
             if self.DEBUG:
-                print("[machine.py]: added %d to queue: %s" % (tid, self.state["queue"]))
+                print "[machine.py]: added %d to queue: %s" % (tid, self.state["queue"])
             return True
 
     def queue_remove(self, tid):
         try:
             self.state["queue"].remove(tid)
             if self.DEBUG:
-                print("[machine.py]: removed %d from the queue: %s" % (tid, self.state["queue"]))
+                print "[machine.py]: removed %d from the queue: %s" % (tid, self.state["queue"])
             return True
         except ValueError:
             return False
@@ -379,7 +379,7 @@ class RedPill(Actions):
         already dead, but that would be overkill.
         """
         if self.DEBUG:
-            print("im doing a shutdown")
+            print "im doing a shutdown"
         for tid in range(1, conf["NUM_THREADS"]+1):
             if conf["MAJOR_TGKILL"] != self.state["threads"][tid]:
                 syscall = le(struct.pack("BB", conf["MAJOR_TGKILL"], tid))

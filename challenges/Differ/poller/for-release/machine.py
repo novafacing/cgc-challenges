@@ -2,7 +2,7 @@ from generator.actions import Actions
 import random
 import string
 import struct
-import io
+import StringIO
 
 #define MAX_MSGS 5
 #define MAX_RCPT 16
@@ -22,7 +22,7 @@ def random_line(max_size=8, min_size=1):
     line = random_word()
     max_size = max_size if max_size >= min_size else min_size
     max_size = random.randint(min_size, max_size)
-    for x in range(max_size):
+    for x in xrange(max_size):
         line += ' ' + random_word()
     return line + '\n'
 
@@ -37,7 +37,7 @@ def vulnerable_sfiles(file_name1, file_name2):
     data_p2 = ''
 
     y = 1
-    for x in range(1000):
+    for x in xrange(1000):
         if x == 961:
             line = random_line(5000, 5000)
         else:
@@ -91,12 +91,12 @@ class Sfile():
 
     def random_data(self):
         self.data = ''
-        for x in range(150):
+        for x in xrange(150):
             self.data += random_line()
         self.sfilesize = struct.pack('i', len(self.data))
 
     def scramble_data(self, data):
-        for line in io.StringIO(data).readlines():
+        for line in StringIO.StringIO(data).readlines():
             if random.randint(0, 1):                #50% chance line is same
                 self.data += line
             else:
@@ -105,7 +105,7 @@ class Sfile():
                     line = "".join(line)
                     self.data += line
                 elif random.randint(0,1):        #12.5% chance add lines
-                    for x in range(random.randint(1,25)):
+                    for x in xrange(random.randint(1,25)):
                         self.data += random_line()
                 else:                               #12.5% chance remove line
                     continue
@@ -176,19 +176,19 @@ class SlowDiff(Actions):
         for matching_text in best_match:
             if matching_text.l_idx > matching_text.r_idx:
                 self._read("%d,%dr%d,%d\n" % (l_idx, matching_text.l_idx, r_idx, matching_text.r_idx))
-                for x in range(matching_text.l_idx - l_idx):
+                for x in xrange(matching_text.l_idx - l_idx):
                     self._read("< %s\n" % left_lines[l_idx + x])
             elif matching_text.l_idx < matching_text.r_idx:
                 self._read("%d,%da%d,%d\n" % (l_idx, matching_text.l_idx, r_idx, matching_text.r_idx))
-                for x in range(matching_text.r_idx - r_idx):
+                for x in xrange(matching_text.r_idx - r_idx):
                     self._read("> %s\n" % right_lines[r_idx + x])
             else:
                 if l_idx != matching_text.l_idx or r_idx != matching_text.r_idx:
                     self._read("%d,%dc%d,%d\n" % (l_idx, matching_text.l_idx, r_idx, matching_text.r_idx))
-                    for x in range(matching_text.l_idx - l_idx):
+                    for x in xrange(matching_text.l_idx - l_idx):
                         self._read("< %s\n" % left_lines[l_idx + x])
                     self._read("---\n")
-                    for x in range(matching_text.r_idx - r_idx):
+                    for x in xrange(matching_text.r_idx - r_idx):
                         self._read("> %s\n" % right_lines[r_idx + x])
 
             l_idx = matching_text.l_idx + matching_text.length
@@ -198,11 +198,11 @@ class SlowDiff(Actions):
             self._read("%d,Ea%d,E\n" % (l_idx, r_idx))
 
         if l_idx < llen:
-            for x in range(llen - l_idx):
+            for x in xrange(llen - l_idx):
                 self._read("< %s\n" % left_lines[l_idx + x])
 
         if r_idx < rlen:
-            for x in range(rlen - r_idx):
+            for x in xrange(rlen - r_idx):
                 self._read("> %s\n" % right_lines[r_idx + x])
 
     def _find_match_set(self, matches):
@@ -268,7 +268,7 @@ class SlowDiff(Actions):
                 if found_match:
                     x = 0
                     add_to_matches = 1
-                    for x in range(len(matches)):
+                    for x in xrange(len(matches)):
                         m = matches[x]
                         if m.r_idx < match.r_idx:
                             if m.r_idx + m.length >= match.r_idx + match.length:

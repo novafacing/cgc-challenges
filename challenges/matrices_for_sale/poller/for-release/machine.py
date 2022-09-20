@@ -38,7 +38,7 @@ class TemplateGenerator(Actions):
 		return message
 
 	def _absoluteValueMap(self, message):
-		message = list(map(abs, message))
+		message = map(abs, message)
 		return message
 
 	def _modulusCoordinatesWithDimensions(self, message):
@@ -60,7 +60,7 @@ class TemplateGenerator(Actions):
 		else:
 			message_average = message_sum // message_len
 
-		message = [x - message_average for x in message]
+		message = map(lambda x: x - message_average, message)
 		return message
 
 	def start(self):

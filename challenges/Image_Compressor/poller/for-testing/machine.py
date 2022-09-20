@@ -59,7 +59,7 @@ class Bitmap(Actions):
 
         data = ""
         last_color = random_pixel(self.state["bpp"])
-        for x in range(self.state["width"] * self.state["height"]):
+        for x in xrange(self.state["width"] * self.state["height"]):
             if self.chance(0.7):
                 last_color = random_pixel(self.state["bpp"])
             data += last_color

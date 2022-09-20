@@ -211,9 +211,9 @@ class ACSPollGenerator(Actions):
 				name = random.choice(self.tree.names)
 				node = self.tree.find_node(name)
 				if not node:
-					print("Node not found: %s" % name)
+					print "Node not found: %s" % name
 				if not node['page']:
-					print("page not found: %s" % name)
+					print "page not found: %s" % name
 				self.send(name + '_new', node['page'])
 
 			elif number > 25:
@@ -232,9 +232,9 @@ class ACSPollGenerator(Actions):
 				name = random.choice(self.tree.names)
 				node = self.tree.find_node(name)
 				if not node:
-					print("Node not found: %s" % name)
+					print "Node not found: %s" % name
 				if not node['page']:
-					print("page not found: %s" % name)
+					print "page not found: %s" % name
 				self.visualize(node['page'])
 			else:
 			 	#5% of the time interact with a page,
@@ -400,7 +400,7 @@ class ACSPollGenerator(Actions):
 
 	def interact(self, name, varlist):
 		data = []
-		for each in list(varlist.keys()):
+		for each in varlist.keys():
 			data.append('[var:%s:%s]' % (each, varlist[each]))
 		self.send_command('INTERACT', name, ''.join(data))
 		page = self.tree.find_node(name)
@@ -461,9 +461,9 @@ class ACSPollGenerator(Actions):
 			if var_open_flag:
 				if each == '#':
 					varname = ''.join(varname)
-					if varname in override_list:
+					if override_list.has_key(varname):
 						self.output_str(override_list[varname])
-					elif varname in self.vars:
+					elif self.vars.has_key(varname):
 						self.output_str(self.vars[varname])
 					var_open_flag = False
 				else:

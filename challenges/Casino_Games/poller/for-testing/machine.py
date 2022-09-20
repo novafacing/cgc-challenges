@@ -55,7 +55,7 @@ class Deck():
 
 
 	def shuffle(self):
-		self.deck = list(range(self.SIZE_OF_DECK))
+		self.deck = range(self.SIZE_OF_DECK)
 		for i in range(0, self.SIZE_OF_DECK):
 			j = self.prng.random_in_range(0, i)
 			self.deck[i]= self.deck[j]
@@ -66,7 +66,7 @@ class Deck():
 		try: 
 			return self.deck.pop()
 		except IndexError:
-			print("Index Error drawing from empty deck")
+			print "Index Error drawing from empty deck"
 			return 0
 
 	def get_suit(self, card):
@@ -162,7 +162,7 @@ class CasinoPollGenerator(Actions):
 		self.prng = Prng()
 		seed = 0
 		for i in range(0, len(name)):
-			seed = (((seed << 8) & 0xffffffffffffffff) | ((seed >> 56) ^ (ord(name[i]) & 0xff))) & 0xffffffffffffffff
+			seed = (((seed << 8) & 0xffffffffffffffffL) | ((seed >> 56) ^ (ord(name[i]) & 0xff))) & 0xffffffffffffffffL
 		
 		self.prng.sprng(seed)
 		self.deck = Deck(52, self.prng)
@@ -185,7 +185,7 @@ class CasinoPollGenerator(Actions):
 									("BLACKJACK_BLACKJACK", random.randint(0,25)),
 									("BLACKJACK_WIN", random.randint(0,20))])
 
-		numbers = list(self.state["payouts"].values())
+		numbers = self.state["payouts"].values()
 		data = struct.pack("<" + "i"*len(numbers), *numbers)
 		encoded = ''
 		lookup = "!@#$%^&+=:><|?~*"
@@ -540,12 +540,12 @@ class Prng():
 
 	def sprng(self, seed):
 
-		state_64 = seed & 0xffffffffffffffff
+		state_64 = seed & 0xffffffffffffffffL
 		for i in range(16):
-			state_64 ^= (state_64 >> self.COEFFICIENT_A_64)& 0xffffffffffffffff
-			state_64 ^= (state_64 << self.COEFFICIENT_B_64)& 0xffffffffffffffff
-			state_64 ^= (state_64 >> self.COEFFICIENT_C_64)& 0xffffffffffffffff
-			self.state[i] = (state_64 *self.MULTIPLIER_64)& 0xffffffffffffffff
+			state_64 ^= (state_64 >> self.COEFFICIENT_A_64)& 0xffffffffffffffffL
+			state_64 ^= (state_64 << self.COEFFICIENT_B_64)& 0xffffffffffffffffL
+			state_64 ^= (state_64 >> self.COEFFICIENT_C_64)& 0xffffffffffffffffL
+			self.state[i] = (state_64 *self.MULTIPLIER_64)& 0xffffffffffffffffL
 		self.position = 0
 
 	def prng(self):
@@ -554,11 +554,11 @@ class Prng():
 		self.position = (self.position +1) % 16
 		state1 = self.state[self.position]
 
-		state1 ^= (state1 << self.COEFFICIENT_A_1024)& 0xffffffffffffffff
-		state1 ^= (state1 >> self.COEFFICIENT_B_1024)& 0xffffffffffffffff
-		state0 ^= (state0 >> self.COEFFICIENT_C_1024)& 0xffffffffffffffff
-		self.state[self.position] = (state0 ^ state1)& 0xffffffffffffffff
-		return (self.state[self.position] * self.MULTIPLIER_1024)& 0xffffffffffffffff
+		state1 ^= (state1 << self.COEFFICIENT_A_1024)& 0xffffffffffffffffL
+		state1 ^= (state1 >> self.COEFFICIENT_B_1024)& 0xffffffffffffffffL
+		state0 ^= (state0 >> self.COEFFICIENT_C_1024)& 0xffffffffffffffffL
+		self.state[self.position] = (state0 ^ state1)& 0xffffffffffffffffL
+		return (self.state[self.position] * self.MULTIPLIER_1024)& 0xffffffffffffffffL
 
 	def random_in_range(self, min, max):
 		

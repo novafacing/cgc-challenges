@@ -50,14 +50,14 @@ class H2Flow(Actions):
 		expected = sp.pack_error(error_name)
 		self.read(length=len(expected), expect=expected)
 		if True == self.DEBUG_ERR:
-			print(('exiting due to {0}'.format(error_name)))
+			print('exiting due to {0}'.format(error_name))
 
 	def _do_io(self):
 		vcc = self.state['s'].get_valve_change_choices()
 		tanks = self.state['s'].get_tanks()
 		for idx in range(self.state['s'].count()):
 			if True == self.DEBUG_FUNC:
-				print("Tank{0} settings: {1}".format(idx, tanks[idx]))
+				print "Tank{0} settings: {1}".format(idx, tanks[idx])
 			expected = sp.pack_tank(tanks[idx])
 			self.read(length=len(expected), expect=expected)
 
@@ -75,7 +75,7 @@ class H2Flow(Actions):
 				valve_cmd = vcc[idx]
 
 			if True == self.DEBUG_FUNC:
-				print(" Valve cmd selected: {0}".format(valve_cmd))
+				print " Valve cmd selected: {0}".format(valve_cmd)
 
 			msg = sp.pack_command(valve_cmd)
 			self.write(msg)
@@ -89,11 +89,11 @@ class H2Flow(Actions):
 			elif 'SET_OUT_OF_SERVICE' == valve_cmd:
 				tanks[idx].set_out_of_service()
 				if True == self.DEBUG_FUNC2:
-					print(" SET_OUT_OF_SERVICE")
+					print " SET_OUT_OF_SERVICE"
 			elif 'SET_END_OF_LIFE' == valve_cmd:
 				tanks[idx].set_end_of_life()
 				if True == self.DEBUG_FUNC2:
-					print(" SET_END_OF_LIFE")
+					print " SET_END_OF_LIFE"
 
 			if '' != error_name:
 				self._recv_error(error_name)

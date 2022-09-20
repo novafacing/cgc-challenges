@@ -4,9 +4,9 @@ import re
 import struct
 
 def random_alpha():
-    alphabet = list(set([chr(x) for x in range(256)]) - set(['\0']))
+    alphabet = list(set([chr(x) for x in xrange(256)]) - set(['\0']))
     length = random.randint(10, 50)
-    return ''.join([random.choice(alphabet) for x in range(length)])
+    return ''.join([random.choice(alphabet) for x in xrange(length)])
 
 def random_number():
     return random.randint(10, 100000)
@@ -14,8 +14,8 @@ def random_number():
 def get_f(v, f, n):
     if n == 0 and f[0] is None:
         s = ''
-        last = sorted([int(x) for x in list(f.keys())])[-1]
-        for x in range(last+1):
+        last = sorted([int(x) for x in f.keys()])[-1]
+        for x in xrange(last+1):
             if x == 0:
                 continue
             if x > 1:
@@ -76,7 +76,7 @@ def test4b(v, f):
     return ''
 
 def test5(v, f):
-    return ''.join (['%d\n' % x for x in range(8)])
+    return ''.join (['%d\n' % x for x in xrange(8)])
 
 def test6(v, f):
     v['i'] = 0
@@ -209,7 +209,7 @@ class Fuzzy(Actions):
 
     def generate_stmt(self):
         ntests = random.randint(len(self.TESTS), len(self.TESTS) * 8)
-        stmt = [random.choice(self.TESTS) for x in range(ntests)]
+        stmt = [random.choice(self.TESTS) for x in xrange(ntests)]
         s = '\n'.join([x[1] for x in stmt])
         self.state['results'][s] = stmt
         return s

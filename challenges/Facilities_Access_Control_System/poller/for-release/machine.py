@@ -102,21 +102,21 @@ class MyClass(Actions):
         self.read(length=2, expect=resp)
 
     def FindAvailableUserIndex(self):
-        ExistingUserIndexes = list(self.Users.keys())
+        ExistingUserIndexes = self.Users.keys()
         for i in range(0, self.MAX_USERS):
             if i not in ExistingUserIndexes:
                     return i
         return self.MAX_USERS
 
     def FindAvailableDeviceIndex(self):
-        ExistingDeviceIndexes = list(self.Devices.keys())
+        ExistingDeviceIndexes = self.Devices.keys()
         for i in range(0, self.MAX_DEVICES):
             if i not in ExistingDeviceIndexes:
                     return i
         return self.MAX_DEVICES
 
     def IsUserUnique(self, Username, Pin, Code):
-        for u in list(self.Users.keys()):
+        for u in self.Users.keys():
             if (self.Users[u])['Username'] == Username:
                 return 0
             if (self.Users[u])['Pin'] == Pin:
@@ -168,7 +168,7 @@ class MyClass(Actions):
         self.comment("Add Duplicate User")
         if not self.Users:
             self.AddRandomUser()
-        UserIndex = choice(list(self.Users.keys()))
+        UserIndex = choice(self.Users.keys())
         Username = (self.Users[UserIndex])['Username']
         First = (self.Users[UserIndex])['First']
         Last = (self.Users[UserIndex])['Last']
@@ -221,7 +221,7 @@ class MyClass(Actions):
                 AccessCode = self.random_hex_string(31, 31)
             if not self.Users:
                 self.AddRandomUser()
-            UserIndex = choice(list(self.Users.keys()))
+            UserIndex = choice(self.Users.keys())
             AccessCode = (self.Users[UserIndex])['Code']
             self.AddUser(Username, First, Last, Pin, AccessCode)
             self.ReceiveResponse(self.RESP_ADD_USER_FAILED, 0)
@@ -239,7 +239,7 @@ class MyClass(Actions):
     def DelRandomUser(self):
         if not self.Users:
             self.AddRandomUser()
-        UserIndex = choice(list(self.Users.keys()))
+        UserIndex = choice(self.Users.keys())
 
         self.DelUser(UserIndex)
 
@@ -257,7 +257,7 @@ class MyClass(Actions):
         del self.Users[UserIndex]
 
     def FindUser(self, Username):
-        for user in list(self.Users.keys()):
+        for user in self.Users.keys():
             if Username == (self.Users[user])['Username']:
                 return Username
         return self.MAX_USERS
@@ -278,7 +278,7 @@ class MyClass(Actions):
         self.ReceiveOkResponse(0)
 
     def FindDeviceId(self, DeviceId):
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Id'] == DeviceId:
                 return(d)
         return(self.MAX_DEVICES)
@@ -315,7 +315,7 @@ class MyClass(Actions):
         CandidateDevices = []
         if not self.Devices:
             self.AddRandomDevice()
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] != self.DEVICE_UNUSED:
                 CandidateDevices.append((self.Devices[d])['Id'])
         DeviceId = choice(CandidateDevices)
@@ -331,7 +331,7 @@ class MyClass(Actions):
         RemoveMe = self.FindDeviceId(DeviceId)
     
         # remove it from any alarms that reference it
-        for alarm in list(self.Devices.keys()):
+        for alarm in self.Devices.keys():
             if (self.Devices[alarm])['Type'] != self.DEVICE_ALARM:
                 continue;
             for device in (self.Devices[alarm])['DeviceList']:
@@ -466,7 +466,7 @@ class MyClass(Actions):
 
     def FindAlarmTriggerDevice(self):
         CandidateDevices = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] in [self.DEVICE_CONTACT, self.DEVICE_MOTION, self.DEVICE_HEAT, self.DEVICE_SMOKE]:
                     CandidateDevices.append((self.Devices[d])['Id'])
 
@@ -477,7 +477,7 @@ class MyClass(Actions):
 
     def FindAlarmDevice(self):
         CandidateDevices = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] == self.DEVICE_ALARM:
                     CandidateDevices.append((self.Devices[d])['Id'])
 
@@ -521,7 +521,7 @@ class MyClass(Actions):
     def GrantAccess(self):
         # find a keypad or swipe to add them to
         CandidateDevices = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] in [self.DEVICE_KEYPAD, self.DEVICE_SWIPE]:
                 CandidateDevices.append(d)
         if not CandidateDevices:
@@ -535,7 +535,7 @@ class MyClass(Actions):
         # find a user 
         if not self.Users:
             self.AddRandomUser()
-        UserIndex = choice(list(self.Users.keys()))
+        UserIndex = choice(self.Users.keys())
 
         # send the command
         self.comment("Grant Access")
@@ -560,7 +560,7 @@ class MyClass(Actions):
             # get a valid user
             if not self.Users:
                 self.AddRandomUser()
-            UserIndex = choice(list(self.Users.keys()))
+            UserIndex = choice(self.Users.keys())
             # get an invalid DeviceId
             DeviceId = randint(0,100)
             while self.FindDeviceId(DeviceId) != self.MAX_DEVICES:
@@ -581,7 +581,7 @@ class MyClass(Actions):
             # get a valid user
             if not self.Users:
                 UserIndex = self.AddRandomUser()
-            UserIndex = choice(list(self.Users.keys()))
+            UserIndex = choice(self.Users.keys())
             # send the command
             self.SendCommand(self.CMD_GRANT_ACCESS)
             request = pack("<HB", DeviceId, UserIndex)
@@ -591,7 +591,7 @@ class MyClass(Actions):
             # invalid UserID value
             self.comment("Grant Acesss with invalid userid value")
             CandidateDevices = []
-            for d in list(self.Devices.keys()):
+            for d in self.Devices.keys():
                 if (self.Devices[d])['Type'] in [self.DEVICE_KEYPAD, self.DEVICE_SWIPE]:
                     CandidateDevices.append(d)
             if not CandidateDevices:
@@ -611,7 +611,7 @@ class MyClass(Actions):
             # unused UserID
             self.comment("Grant Acesss with unused userid")
             CandidateDevices = []
-            for d in list(self.Devices.keys()):
+            for d in self.Devices.keys():
                 if (self.Devices[d])['Type'] in [self.DEVICE_KEYPAD, self.DEVICE_SWIPE]:
                     CandidateDevices.append(d)
             if not CandidateDevices:
@@ -633,7 +633,7 @@ class MyClass(Actions):
             self.ReceiveResponse(self.RESP_GRANT_FAILED, 0)
 
     def RevokeAccess(self, UserIndex):
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] == self.DEVICE_KEYPAD:
                 if (self.Users[UserIndex])['Pin'] in (self.Devices[d])['AuthorizedCodes']:
                     (self.Devices[d])['AuthorizedCodes'].remove((self.Users[UserIndex])['Pin'])
@@ -672,7 +672,7 @@ class MyClass(Actions):
         return 0
             
     def ProcessAlarms(self):
-        for alarm in list(self.Devices.keys()):
+        for alarm in self.Devices.keys():
             if (self.Devices[alarm])['Type'] != self.DEVICE_ALARM:
                 continue
 
@@ -716,7 +716,7 @@ class MyClass(Actions):
         self.comment("Update Keypad")
         # find a device with a user associated
         CandidateDevices = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] == self.DEVICE_KEYPAD:
                 CandidateDevices.append(d)
         if not CandidateDevices:
@@ -728,7 +728,7 @@ class MyClass(Actions):
             # add a user to it
             if not self.Users:
                 UserIndex = self.AddRandomUser()
-            UserIndex = choice(list(self.Users.keys()))
+            UserIndex = choice(self.Users.keys())
             Pin = (self.Users[UserIndex])['Pin']
 	    if Pin not in (self.Devices[DeviceIndex])['AuthorizedCodes']:
 	            (self.Devices[DeviceIndex])['AuthorizedCodes'].append(Pin)
@@ -744,7 +744,7 @@ class MyClass(Actions):
                 # add a user to it
                 if not self.Users:
                     UserIndex = self.AddRandomUser()
-                UserIndex = choice(list(self.Users.keys()))
+                UserIndex = choice(self.Users.keys())
                 Pin = (self.Users[UserIndex])['Pin']
 	        if Pin not in (self.Devices[DeviceIndex])['AuthorizedCodes']:
 	            (self.Devices[DeviceIndex])['AuthorizedCodes'].append(Pin)
@@ -759,7 +759,7 @@ class MyClass(Actions):
         self.comment("Pins: {}".format((self.Devices[DeviceIndex])['AuthorizedCodes']))
         # make sure the keypad is tied to an alarm
         CandidateAlarms = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] == self.DEVICE_ALARM:
                 CandidateAlarms.append(d)
         if not CandidateAlarms:
@@ -772,7 +772,7 @@ class MyClass(Actions):
         self.AddDeviceToAlarm((self.Devices[DeviceIndex])['Id'], (self.Devices[AlarmIndex])['Id'])
 
 	# for all of the alarms associated with this swipe
-	for d in list(self.Devices.keys()):
+	for d in self.Devices.keys():
 	    if (self.Devices[d])['Type'] == self.DEVICE_ALARM:
                 if DeviceIndex in (self.Devices[d])['DeviceList']:
                     # update the alarm's state
@@ -793,7 +793,7 @@ class MyClass(Actions):
         self.comment("Update Swipe")
         # find a device with a user associated
         CandidateDevices = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] == self.DEVICE_SWIPE:
                 CandidateDevices.append(d)
         if not CandidateDevices:
@@ -805,7 +805,7 @@ class MyClass(Actions):
             # add a user to it
             if not self.Users:
                 UserIndex = self.AddRandomUser()
-            UserIndex = choice(list(self.Users.keys()))
+            UserIndex = choice(self.Users.keys())
             Code = (self.Users[UserIndex])['Code']
 	    if Code not in (self.Devices[DeviceIndex])['AuthorizedCodes']:
                 (self.Devices[DeviceIndex])['AuthorizedCodes'].append(Code)
@@ -821,7 +821,7 @@ class MyClass(Actions):
                 # add a user to it
                 if not self.Users:
                     UserIndex = self.AddRandomUser()
-                UserIndex = choice(list(self.Users.keys()))
+                UserIndex = choice(self.Users.keys())
                 Code = (self.Users[UserIndex])['Code']
 	        if Code not in (self.Devices[DeviceIndex])['AuthorizedCodes']:
                     (self.Devices[DeviceIndex])['AuthorizedCodes'].append(Code)
@@ -836,7 +836,7 @@ class MyClass(Actions):
 	self.comment("AuthorizedCodes: {}".format((self.Devices[DeviceIndex])['AuthorizedCodes']))
         # make sure the swipe is tied to an alarm
         CandidateAlarms = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] == self.DEVICE_ALARM:
                 CandidateAlarms.append(d)
         if not CandidateAlarms:
@@ -849,7 +849,7 @@ class MyClass(Actions):
         self.AddDeviceToAlarm((self.Devices[DeviceIndex])['Id'], (self.Devices[AlarmIndex])['Id'])
 
 	# for all of the alarms associated with this swipe
-	for d in list(self.Devices.keys()):
+	for d in self.Devices.keys():
 	    if (self.Devices[d])['Type'] == self.DEVICE_ALARM:
                 if DeviceIndex in (self.Devices[d])['DeviceList']:
                     # update the alarm's state
@@ -870,7 +870,7 @@ class MyClass(Actions):
         self.comment("Update Contact")
         # find a contact
         CandidateDevices = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] == self.DEVICE_CONTACT:
                 CandidateDevices.append(d)
         if not CandidateDevices:
@@ -895,7 +895,7 @@ class MyClass(Actions):
         self.comment("Update Motion")
         # find a Motion device
         CandidateDevices = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] == self.DEVICE_MOTION:
                 CandidateDevices.append(d)
         if not CandidateDevices:
@@ -920,7 +920,7 @@ class MyClass(Actions):
         self.comment("Update Heat")
         # find a Heat device
         CandidateDevices = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] == self.DEVICE_HEAT:
                 CandidateDevices.append(d)
         if not CandidateDevices:
@@ -942,7 +942,7 @@ class MyClass(Actions):
         self.comment("Update Smoke")
         # find a smoke detector
         CandidateDevices = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] == self.DEVICE_SMOKE:
                 CandidateDevices.append(d)
         if not CandidateDevices:
@@ -986,7 +986,7 @@ class MyClass(Actions):
         self.comment("List Alarm Codes")
         # get a list of Keypads and Swipes
         CandidateDevices = []
-        for d in list(self.Devices.keys()):
+        for d in self.Devices.keys():
             if (self.Devices[d])['Type'] in [self.DEVICE_KEYPAD, self.DEVICE_SWIPE]:
                 CandidateDevices.append(d)
         if not CandidateDevices:

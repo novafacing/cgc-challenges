@@ -42,11 +42,11 @@ def random_string(a, b):
     return ''.join(choice(chars) for _ in range(randint(a, b)))
 
 def random_data(a,b):
-    chars = ''.join(map(chr, list(range(256))))
+    chars = ''.join(map(chr, range(256)))
     return ''.join(choice(chars) for _ in range(randint(a, b)))
 
 def chunks(l, n):
-    for i in range(0, len(l), n):
+    for i in xrange(0, len(l), n):
         yield l[i:i+n]
 
 
@@ -104,7 +104,7 @@ class TFTTP(Actions):
     def _build_get_good(self):
         if len(self.state['quotes']) == 0:
             self.put_good()
-        key = choice(list(self.state['quotes'].keys()))
+        key = choice(self.state['quotes'].keys())
         val = self.state['quotes'][key]
         return key,val
 
@@ -260,7 +260,7 @@ class TFTTP(Actions):
     def invalid(self):
         #invalid length or invalid packet code
         if self.chance(0.5):
-            req = self._construct_pkt(choice(list(self.pkttypes.values())),
+            req = self._construct_pkt(choice(self.pkttypes.values()),
                     random_data(0,10000)) #arbitrary max len
             req = pack("<I",randint(self.MAX_PKT_SIZE,2**32-1))+req[4:]
         else:

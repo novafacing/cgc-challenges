@@ -50,7 +50,7 @@ class HighCoo(Actions):
 
 	def _send_command(self, command_name):
 		if self.DEBUG_FUNC:
-			print(('-- _send_command-- {0}'.format(command_name)))
+			print('-- _send_command-- {0}'.format(command_name))
 
 		if self.chance(0.007):
 			cmd = self.state['m'].pack_command('BAD')
@@ -68,7 +68,7 @@ class HighCoo(Actions):
 		expected = self.state['m'].pack_error(error_name)
 		self.read(length=len(expected), expect=expected)
 		if True == self.DEBUG_ERR:
-			print(('exiting due to {0}'.format(error_name)))
+			print('exiting due to {0}'.format(error_name))
 
 	def add_haiku(self):
 		if self.DEBUG_FUNC:

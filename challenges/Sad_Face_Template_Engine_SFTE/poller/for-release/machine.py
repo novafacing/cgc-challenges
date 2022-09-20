@@ -8,7 +8,7 @@ import sys
 import re
 
 def random_string(size=20):
-  return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
+  return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
 
 class HashDict(object):
   def __init__(self):
@@ -104,7 +104,7 @@ class ASADFACE(Actions):
     self.read(length=len('-- Empty variable name will exit this menu\n'), expect='-- Empty variable name will exit this menu\n')
     self.read(length=len('-- Empty value will undefine the variable (if exists)\n'), expect='-- Empty value will undefine the variable (if exists)\n')
 
-    for i in range(num_vars):
+    for i in xrange(num_vars):
       self.read(length=len('var name: '), expect='var name: ')
       if delete_mode:
         if self.state['vars'].length == 0:
@@ -151,7 +151,7 @@ class ASADFACE(Actions):
     self.write('2\n')
     self.read(length=len('-- Current variables:\n'), expect='-- Current variables:\n')
 
-    for i in range(self.state['vars'].TABLE_SIZE):
+    for i in xrange(self.state['vars'].TABLE_SIZE):
       cur = self.state['vars'].get(i)
       if cur:
         for x in cur:
@@ -170,7 +170,7 @@ class ASADFACE(Actions):
     self.read(length=len('-- Submit a null-terminated string\n'), expect='-- Submit a null-terminated string\n')
     s = ''
     num_things = random.randint(1, 50)
-    for i in range(num_things):
+    for i in xrange(num_things):
       thing = random.choice(['normal', 'variable', 'section', 'comment'])
       if thing == 'comment':
         s += ':(#%s):' % random_string()
@@ -180,7 +180,7 @@ class ASADFACE(Actions):
         s += ':(%s):' % name
         self.state['total_len'] += len(self._var2str(var))
       elif thing == 'section' and any((self.state['vars'].find(x))['type'] == 3 for x in self.state['vars'].keys):
-        name = random.choice([x for x in self.state['vars'].keys if (self.state['vars'].find(x))['type'] == 3])
+        name = random.choice(filter(lambda x: (self.state['vars'].find(x))['type'] == 3, self.state['vars'].keys))
         var = self.state['vars'].find(name)
         rs = random_string()
         s += ':(@%s):' % name

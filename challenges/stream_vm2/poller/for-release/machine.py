@@ -14,7 +14,7 @@ class VM(Actions):
             self.state['registers'].append(random.randint(0,0xFFFFFFFF) if self.state['init_registers'] else 0)
 
         self.state['memory'] = []
-        for x in range(0, 0x10000):
+        for x in xrange(0, 0x10000):
             self.state['memory'].append(random.randint(0,0xFF) if x < self.state['init_memory'] else 0)
 
         flags = self.state['init_memory']
@@ -28,7 +28,7 @@ class VM(Actions):
                 self.write(struct.pack('<I', x))
 
         mem = ''
-        for x in range(0, self.state['init_memory']):
+        for x in xrange(0, self.state['init_memory']):
             mem += chr(self.state['memory'][x])
         if len(mem):
             self.write(mem)
@@ -230,7 +230,7 @@ class VM(Actions):
                     map(chr, self.state['memory'][int(start):int(start)+int(l)])),
                     length=int(l))
             elif r[1] == 1:
-                rand_data = [random.randint(0, 0xff) for _ in range(int(l))]
+                rand_data = [random.randint(0, 0xff) for _ in xrange(int(l))]
                 self.state['memory'][start:start + l] = rand_data
                 self.write(''.join(map(chr, rand_data)))
 

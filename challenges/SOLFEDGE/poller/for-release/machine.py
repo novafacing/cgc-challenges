@@ -65,7 +65,7 @@ class Solfedge(Actions):
 
 	def _send_command(self, command_name):
 		if self.DEBUG_FUNC:
-			print(('-- _send_command-- {0}'.format(command_name)))
+			print('-- _send_command-- {0}'.format(command_name))
 
 		if self.chance(0.01):
 			cmd = self.state['m'].pack_command('BAD')
@@ -81,7 +81,7 @@ class Solfedge(Actions):
 
 	def _send_bytes_count(self, bytes_count, bytes_count_type):
 		if self.DEBUG_FUNC:
-			print(('-- _send_bytes_count-- {0}'.format(bytes_count)))
+			print('-- _send_bytes_count-- {0}'.format(bytes_count))
 
 		# bytes_count of 0, results in ERR_NO_NOTES or ERR_NO_SYLLABLES
 		if self.chance(0.01):
@@ -121,7 +121,7 @@ class Solfedge(Actions):
 
 	def _send_byte_count_and_notes(self, note_id_list):
 		if self.DEBUG_FUNC:
-			print(('-- _send_byte_count_and_notes-- \n\t{0}'.format(note_id_list)))
+			print('-- _send_byte_count_and_notes-- \n\t{0}'.format(note_id_list))
 
 		val = self.state['m'].pack_as_notes(note_id_list)
 
@@ -130,13 +130,13 @@ class Solfedge(Actions):
 
 		self.write(val)
 		if self.DEBUG_FUNC:
-			print(('-- _send_byte_count_and_notes-- sent {0} bytes\n\t{1}'.format(len(val), val)))
+			print('-- _send_byte_count_and_notes-- sent {0} bytes\n\t{1}'.format(len(val), val))
 
 		return 0
 
 	def _send_byte_count_and_syllables(self, syllable_id_list):
 		if self.DEBUG_FUNC:
-			print(('-- _send_byte_count_and_syllables-- ids:\n\t->{0}<-'.format(syllable_id_list)))
+			print('-- _send_byte_count_and_syllables-- ids:\n\t->{0}<-'.format(syllable_id_list))
 
 		val = self.state['m'].pack_as_syllables(syllable_id_list)
 
@@ -145,13 +145,13 @@ class Solfedge(Actions):
 
 		self.write(val)
 		if self.DEBUG_FUNC:
-			print(('-- _send_byte_count_and_syllables-- sent {0} bytes\n\t{1}'.format(len(val), val)))
+			print('-- _send_byte_count_and_syllables-- sent {0} bytes\n\t{1}'.format(len(val), val))
 
 		return 0
 
 	def _recv_results(self, result_type, result_id_list):
 		if self.DEBUG_FUNC:
-			print(('-- _recv_results-- \n\t{0} {1}\n\t ->{2}<-'.format(len(result_id_list), result_type, result_id_list)))
+			print('-- _recv_results-- \n\t{0} {1}\n\t ->{2}<-'.format(len(result_id_list), result_type, result_id_list))
 		expected = ''
 		if 'notes' == result_type:
 			expected += self.state['m'].pack_as_notes(result_id_list)
@@ -160,13 +160,13 @@ class Solfedge(Actions):
 
 		self.read(length=len(expected), expect=expected)
 		if self.DEBUG_FUNC:
-			print(('-- _recv_results-- received {0} bytes\n\t->{1}<-'.format(len(expected), expected)))
+			print('-- _recv_results-- received {0} bytes\n\t->{1}<-'.format(len(expected), expected))
 
 	def _recv_error(self, error_name):
 		expected = self.state['m'].pack_error(error_name)
 		self.read(length=len(expected), expect=expected)
 		if True == self.DEBUG_ERR:
-			print(('exiting due to {0}'.format(error_name)))
+			print('exiting due to {0}'.format(error_name))
 
 
 	def _generate_random_harmony(self, num_bytes, harmony_type, include_invalid=False, no_sol=False):

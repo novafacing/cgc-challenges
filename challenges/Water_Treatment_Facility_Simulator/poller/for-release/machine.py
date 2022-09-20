@@ -440,7 +440,7 @@ class MyClass(Actions):
 	    self.CheckMainMenu()
 
     def random_string(self, min_length, max_length):
-        chars = list(map(chr, list(range(48,57))+list(range(65,90))+list(range(97,122))))
+        chars = map(chr, range(48,57)+range(65,90)+range(97,122))
         str = ''
         while len(str) < min_length:
             str = ''.join(choice(chars) for _ in range(randint(min_length, max_length))).rstrip()

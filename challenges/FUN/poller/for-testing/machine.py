@@ -5,7 +5,7 @@ import string
 import struct
 
 def random_alnum(size):
-    return ''.join([random.choice(string.ascii_letters + string.digits) for x in range(size)])
+    return ''.join([random.choice(string.ascii_letters + string.digits) for x in xrange(size)])
 
 class Fun(Actions):
     def encode_uint(self, v):
@@ -80,7 +80,7 @@ class Fun(Actions):
         if not partial:
             self.recv_uint(i)
         else:
-            for x in range(len(self.state['words'])):
+            for x in xrange(len(self.state['words'])):
                 if self.state['words'][x].startswith(self.state['words'][i]):
                     self.recv_uint(x)
                     break

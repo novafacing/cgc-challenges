@@ -27,7 +27,7 @@ NUM_MAX_JOBS = 1000
 NUM_PRINTERS = 10
 
 def random_string(size=20):
-    return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
+    return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
 
 def random_host():
     return '%d.%d.%d.%d' % (random.randint(0,255),random.randint(0,255),random.randint(0,255),random.randint(0,255))
@@ -39,7 +39,7 @@ class Printer(object):
         self.jobs = list()
         self.job_ids = list()
 
-        for i in range(NUM_MAX_JOBS):
+        for i in xrange(NUM_MAX_JOBS):
             self.jobs.append(Job())
 
 class Job(object):
@@ -85,7 +85,7 @@ class APrinter(Actions):
         self.cur_printer = None
         self.cur_job = None
         self.printers = list()
-        for i in range(NUM_PRINTERS):
+        for i in xrange(NUM_PRINTERS):
             name = "DEFAULT" if i == 0 else get_name(i)
             self.printers.append(Printer(name))
 
@@ -100,7 +100,7 @@ class APrinter(Actions):
         msg = '\x01' + printer.queue + '\n'
         self.write(msg)
 
-        for i in range(NUM_MAX_JOBS):
+        for i in xrange(NUM_MAX_JOBS):
             if printer.jobs[i].state == JS_QUEUED:
                 printer.jobs[i].state = JS_PRINTING
                 if printer.state != PS_PRINTING:
@@ -133,7 +133,7 @@ class APrinter(Actions):
             return
         busy = False
         printer = self.cur_printer
-        for i in range(NUM_MAX_JOBS):
+        for i in xrange(NUM_MAX_JOBS):
             if printer.jobs[i].state == JS_WAITING or printer.jobs[i].state == JS_QUEUED:
                 printer.job_ids.remove(i)
                 printer.jobs[i] = Job()
@@ -165,7 +165,7 @@ class APrinter(Actions):
         self.read(length=len(out), expect=out)
 
         final = ''
-        for i in range(NUM_MAX_JOBS):
+        for i in xrange(NUM_MAX_JOBS):
             if printer.jobs[i].state != JS_INVALID:
                 out = ''
                 out += printer.jobs[i].owner[:10]
@@ -327,12 +327,12 @@ class APrinter(Actions):
         self.printer_tick()
 
     def printer_tick(self):
-        for i in range(NUM_PRINTERS):
+        for i in xrange(NUM_PRINTERS):
             s = 0
             printer = self.printers[i]
             if printer.state == PS_IDLE:
                 continue
-            for j in range(NUM_MAX_JOBS):
+            for j in xrange(NUM_MAX_JOBS):
                 if printer.jobs[j].state != JS_PRINTING:
                     continue
                 printer.jobs[j].ticks -= 1

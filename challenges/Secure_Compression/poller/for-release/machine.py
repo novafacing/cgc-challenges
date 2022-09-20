@@ -4,11 +4,11 @@ from generator.actions import Actions
 import random, string, struct
 
 def random_string_n(size=20):
-    return ''.join([random.choice(string.ascii_letters) for x in range(size)])
+    return ''.join([random.choice(string.ascii_letters) for x in xrange(size)])
 def random_string(size=20):
-    return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
+    return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
 def random_bytes_n(size=20):
-    return ''.join([chr(random.randint(0,255)) for x in range(size)])
+    return ''.join([chr(random.randint(0,255)) for x in xrange(size)])
 def strlen(s):
     return s.index('\x00')
 
@@ -22,7 +22,7 @@ class BIO(object):
     def read(self, n):
         b = ord(self.data[self.didx])
         r = 0
-        for i in range(n):
+        for i in xrange(n):
             if self.bidx == 8:
                 self.didx += 1
                 b = ord(self.data[self.didx])
@@ -34,7 +34,7 @@ class BIO(object):
 
     def write(self, data, n):
         b = ord(self.data[self.didx])
-        for i in range(n):
+        for i in xrange(n):
             if self.bidx == 8:
                 self.data = self.data[:self.didx] + chr(b) + self.data[self.didx+1:]
                 self.didx += 1
@@ -48,7 +48,7 @@ class BIO(object):
 key = None
 def _cmp(s1, s2):
     global key
-    for i in range(len(s1)):
+    for i in xrange(len(s1)):
         if s1[i] != s2[i]:
             i1 = key.find(s1[i])
             i2 = key.find(s2[i])
@@ -71,7 +71,7 @@ class SC(object):
                 if size >= len(d):
                     break
                 data = d[size:size+512]
-                table = [data[i:] + data[:i] for i in range(len(data))]
+                table = [data[i:] + data[:i] for i in xrange(len(data))]
                 global key
                 key = self.key
                 table.sort(cmp=_cmp)
@@ -100,8 +100,8 @@ class SC(object):
                 size += 2
                 data = d[size:size+512]
                 table = [''] * len(data)
-                for i in range(len(data)):
-                    table = [data[j] + table[j] for j in range(len(data))]
+                for i in xrange(len(data)):
+                    table = [data[j] + table[j] for j in xrange(len(data))]
                     table.sort(cmp=_cmp)
                 #print 'later oidx: %d' % oidx
                 out += table[oidx]
@@ -110,11 +110,11 @@ class SC(object):
 
     def _mtf(self, comp, data):
         if comp:
-            l = [chr(x) for x in range(32)]
+            l = [chr(x) for x in xrange(32)]
             l += list(self.key)
-            l += [chr(x) for x in range(127, 256)]
+            l += [chr(x) for x in xrange(127, 256)]
             code = list()
-            for i in range(len(data)):
+            for i in xrange(len(data)):
                 c = l.index(data[i])
                 code.append(chr(c))
                 l.pop(c)
@@ -122,7 +122,7 @@ class SC(object):
             out = ''.join(code)
             out_c = '\0' * len(data) * 2
             bio = BIO(out_c)
-            for i in range(len(data)):
+            for i in xrange(len(data)):
                 if ord(out[i]) > 0x0F:
                     bio.write('\x00', 1)
                     bio.write(out[i], 8)
@@ -142,14 +142,14 @@ class SC(object):
                 return None, 0
             out = ''
             bio = BIO(data[4:])
-            for i in range(sz):
+            for i in xrange(sz):
                 if bio.read(1) == 0:
                     out += chr(bio.read(8))
                 else:
                     out += chr(bio.read(4))
-            l = [chr(x) for x in range(32)]
+            l = [chr(x) for x in xrange(32)]
             l += list(self.key)
-            l += [chr(x) for x in range(127, 256)]
+            l += [chr(x) for x in xrange(127, 256)]
             out_d = list()
             for c in out:
                 n = l[ord(c)]
@@ -178,14 +178,14 @@ class SC(object):
 class ASECOMP(Actions):
 
     def _shuffle_key(self):
-        self.key = [chr(x) for x in range(32, 127)]
+        self.key = [chr(x) for x in xrange(32, 127)]
         random.shuffle(self.key)
         self.key = ''.join(self.key)
 
     def _generate_data(self):
-        alph = [chr(x) for x in range(32, 127)]
+        alph = [chr(x) for x in xrange(32, 127)]
         n = random.randint(1, 100)
-        return ''.join([random.choice(alph) * 3 for x in range(n/3 + 1)])
+        return ''.join([random.choice(alph) * 3 for x in xrange(n/3 + 1)])
 
     def start(self):
         #self.delay(100)
@@ -194,7 +194,7 @@ class ASECOMP(Actions):
         self.data = None
         self.original = None
         s = ''
-        for i in range(0, 8, 2):
+        for i in xrange(0, 8, 2):
             s += '%02X' % ord(self.magic_page[i])
         s += '\n'
         self.read(length=len(s), expect=s)
@@ -226,7 +226,7 @@ class ASECOMP(Actions):
         s = 'Original Size: %d\n' % len(self.data)
         s += 'Compressed Size: %d (%d%%)\n' % (outlen, int((1.0 * outlen / len(self.data) * 100)))
         s += 'Compressed Data: '
-        for i in range(outlen):
+        for i in xrange(outlen):
             if i >= 32:
                 break
             s += '%02X' % ord(out[i])

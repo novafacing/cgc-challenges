@@ -399,14 +399,14 @@ class Machine(Actions):
         self.char_width = 7
 
     def pick_chars(self):
-        for _ in range(random.randint(1, 64)):
+        for _ in xrange(random.randint(1, 64)):
             c = random.choice(self.state['char_set'])
             self.state['string'] += c
 
     def munge_maps(self):
-        for idx in range(len(self.state['string'])):
+        for idx in xrange(len(self.state['string'])):
             self.state['cur_map'] = char_maps[self.state['string'][idx]][:]
-            changes = random.sample(range(len(self.state['cur_map'])), 4)
+            changes = random.sample(xrange(len(self.state['cur_map'])), 4)
             for c_idx in changes:
                 if self.state['cur_map'][c_idx] == '0':
                     self.state['cur_map'][c_idx] = '1'
@@ -420,8 +420,8 @@ class Machine(Actions):
 
     def insert_newlines(self):
         self.state['final_output'] = ''
-        for l in range(self.height):
-            for i in range(len(self.state['output'])):
+        for l in xrange(self.height):
+            for i in xrange(len(self.state['output'])):
                 self.state['final_output'] += self.state['output'][i][l * self.char_width:(l + 1) * self.char_width]
             self.state['final_output'] += '\n'
 

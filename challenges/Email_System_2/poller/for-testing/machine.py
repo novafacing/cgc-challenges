@@ -60,8 +60,7 @@ class User():
 
 		return (name, passwd)
 
-	def AddUser(self, xxx_todo_changeme):
-		(name, passwd) = xxx_todo_changeme
+	def AddUser(self, (name, passwd)):
 		self.users.append((name, passwd))
 
 	def GetUser(self, num):
@@ -150,7 +149,7 @@ class Agent_message(Actions):
 			all_nums.append(x)
 
 		
-		if name in list(self.messages.keys()):
+		if name in self.messages.keys():
 			for x in self.messages[name]:
 				all_nums.remove(x[0])
 
@@ -327,7 +326,7 @@ class Agent_message(Actions):
 	def _size_all(self):
 		count = 0
 
-		for x in list(self.messages.values()):
+		for x in self.messages.values():
 			for y in x:
 				count += 1
 		return count

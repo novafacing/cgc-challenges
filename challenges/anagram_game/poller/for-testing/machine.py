@@ -1,6 +1,5 @@
 from generator.actions import Actions
 import random
-from functools import reduce
 
 CMD_QUIT = 0
 CMD_ADD_WORD = 1
@@ -21916,7 +21915,7 @@ class Anagram(Actions):
         flag |= 0x40 if neg else 0
         seq.insert(0, absval | flag)
 
-        return ''.join([chr(x) for x in seq])
+        return ''.join(map(lambda x: chr(x), seq))
     
     def encode_string(self, value):
         return self.encode_int(len(value)) + value
@@ -22012,7 +22011,7 @@ class Anagram(Actions):
 
         self.read_int(STATUS_SUCCESS)
         f = get_freq(word)
-        anagrams = reduce(lambda x, y: x + y, [x[1] for x in [x for x in iter(self.state['freq'].items()) if not any([x[0][i] > f[i] for i in range(26)])]])
+        anagrams = reduce(lambda x, y: x + y, [x[1] for x in filter(lambda x: not any([x[0][i] > f[i] for i in xrange(26)]), self.state['freq'].iteritems())])
         self.read_int(len(anagrams))
         for w in sorted(anagrams):
             self.read_string(w)

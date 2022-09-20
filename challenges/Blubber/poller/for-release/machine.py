@@ -31,14 +31,14 @@ def kaprica_mixin(self):
             H = (H * 3) & 0xffffffff
             H = ((H << 13) ^ (H >> 19) ^ (H >> 21)) & 0xffffffff
             return H
-        xmap = list(range(256))
-        xmap_inv = list(range(256))
+        xmap = list(xrange(256))
+        xmap_inv = list(xrange(256))
         state = hash_string(seed)
-        for i in range(255, 0, -1):
+        for i in xrange(255, 0, -1):
             j = state % i
             state = hash_iterate(state)
             xmap[i], xmap[j] = xmap[j], xmap[i]
-        for i in range(256):
+        for i in xrange(256):
             xmap_inv[xmap[i]] = i
         self.xlat_map = xmap
         self.xlat_map_inv = xmap_inv
@@ -83,14 +83,14 @@ class TemplateGenerator(Actions):
         self.xlat_seed('9an538n9av3;5')
 
         sig = 0
-        for i in range(0, 0x1000, 4):
+        for i in xrange(0, 0x1000, 4):
             sig ^= struct.unpack('<I', self.magic_page[i: i + 4])[0]
         self.read(length=4, expect=struct.pack('<I', sig))
 
     def rblub(self, n=120):
         n = random.randint(10, n)
         s = ''
-        for _ in range(n):
+        for _ in xrange(n):
             s += random.choice(string.letters)
         return s
 

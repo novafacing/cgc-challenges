@@ -6,7 +6,7 @@ import struct
 
 def random_string(length):
     s = ''
-    for x in range(length):
+    for x in xrange(length):
         s += random.choice(string.ascii_uppercase)
     return s
 
@@ -98,7 +98,7 @@ class MultiPass(Actions):
         self.state['cards'][(card_id, auth_code)] = value
 
     def purchase(self):
-        (card_id, auth_code), value = random.choice(list(self.state['cards'].items()))
+        (card_id, auth_code), value = random.choice(self.state['cards'].items())
         cost = random.randint(0, value)
         pid = r_uint32()
         vendor = r_vendor()
@@ -118,7 +118,7 @@ class MultiPass(Actions):
         self.state['purchases'].append((card_id, auth_code, tid, pid, cost))
 
     def balance(self):
-        (card_id, auth_code), value = random.choice(list(self.state['cards'].items()))
+        (card_id, auth_code), value = random.choice(self.state['cards'].items())
         self.packet(card_id, auth_code, self.AUTH, self.BALANCE, 0, 0)
         tid = self.rpacket(self.AUTH, self.BALANCE, self.OK)
 
@@ -158,7 +158,7 @@ class MultiPass(Actions):
         self.rpacket(self.FIN, self.REFUND, self.OK)
 
     def recharge(self):
-        (card_id, auth_code), value = random.choice(list(self.state['cards'].items()))
+        (card_id, auth_code), value = random.choice(self.state['cards'].items())
         amount = random.randint(0, 0xffffffff - value)
         vendor = r_vendor()
 

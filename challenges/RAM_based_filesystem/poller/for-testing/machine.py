@@ -14,7 +14,7 @@ class CGCfs(Actions):
         self.read(delim="% ", expect="Type help for a list of available commands.\n")
 
     def full_random_string(self, min_length, max_length):
-        chars = list(map(chr, list(range(1, 10)) + list(range(11, 32)) + list(range(35, 47)) + list(range(48, 255))))
+        chars = map(chr, range(1, 10) + range(11, 32) + range(35, 47) + range(48, 255))
         str = ""
         while len(str) < min_length:
             str = "".join(
@@ -24,7 +24,7 @@ class CGCfs(Actions):
         return str
 
     def random_string(self, min_length, max_length):
-        chars = list(map(chr, list(range(48, 57)) + list(range(65, 90)) + list(range(97, 122))))
+        chars = map(chr, range(48, 57) + range(65, 90) + range(97, 122))
         str = ""
         while len(str) < min_length:
             str = "".join(

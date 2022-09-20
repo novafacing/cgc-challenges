@@ -93,7 +93,7 @@ class TemplatePoller(Actions):
     def start(self):
         #self.delay(100)
         if DEBUG:
-            print("------- start -----------")
+            print "------- start -----------"
         self.state['s'] = NOPE(flag_page=self.magic_page)
         self.state['tids'] = set()
         self.state['usernames'] = set()
@@ -108,7 +108,7 @@ class TemplatePoller(Actions):
         Create a new account
         '''
         if DEBUG:
-            print("cmd: create account -----------")
+            print "cmd: create account -----------"
 
         if True == isinstance(taxpayer, TaxPayer):
             tp = taxpayer
@@ -119,14 +119,14 @@ class TemplatePoller(Actions):
         s = Session(s_key, tp, self.CREATE_ACCOUNT, tp.gen_new_taxpayer_data_bytes())
 
         if DEBUG:
-            print(s)
+            print s
         buf = s.gen_bytes()
         self.write(buf)
 
         pwd = self.state['s'].add_new_taxpayer(s, tp)
         resp = Response(s.key, pwd, self.OK)
         if DEBUG:
-            print(resp)
+            print resp
 
         buf = resp.gen_bytes()
         self.read(length=len(buf), expect=buf)
@@ -138,7 +138,7 @@ class TemplatePoller(Actions):
         Login to establish a session
         '''
         if DEBUG:
-            print("cmd: login -----------")
+            print "cmd: login -----------"
 
         tp_invalid = False
         tp = self.state['s'].get_rand_taxpayer()
@@ -175,14 +175,14 @@ class TemplatePoller(Actions):
         resp = Response(s_key, ans, res)
 
         if DEBUG:
-            print(" Username: {0}".format(tp.username))
-            print(" Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp))
+            print " Username: {0}".format(tp.username)
+            print " Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp)
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf)))
-            print("         as text {0}".format(buf))
+            print " resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf))
+            print "         as text {0}".format(buf)
 
         if res == self.ERR:
             # cannot match key on ERR conditions, so just read len
@@ -190,23 +190,23 @@ class TemplatePoller(Actions):
             buf = buf[len(resp.s_key):]
             self.read(length=len(e))
             if DEBUG:
-                print(" read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
             e = buf[:len(resp.answer)]
             buf = buf[len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         else:
             e = buf[:len(resp.s_key)+len(resp.answer)]
             buf = buf[len(resp.s_key)+len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         # we've read the key and answer, the rest of the answer bytes are
         # junk, so just read len
@@ -214,13 +214,13 @@ class TemplatePoller(Actions):
         buf = buf[-len(resp.result):]
         self.read(length=len(e))
         if DEBUG:
-            print(" read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e)))
-            print("  new buf {0}".format(sp.hexify(buf)))
+            print " read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e))
+            print "  new buf {0}".format(sp.hexify(buf))
 
 
         self.read(length=len(buf), expect=buf)
         if DEBUG:
-            print(" read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf)))
+            print " read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf))
 
         return 0
 
@@ -229,7 +229,7 @@ class TemplatePoller(Actions):
         Logout to end a session
         '''
         if DEBUG:
-            print("cmd: logout -----------")
+            print "cmd: logout -----------"
 
         s_invalid = False
         s = self._get_random_session()
@@ -284,7 +284,7 @@ class TemplatePoller(Actions):
         Upload a tax form
         '''
         if DEBUG:
-            print("cmd: upload form")
+            print "cmd: upload form"
 
         s_invalid = False
         t4d_invalid = False
@@ -327,22 +327,22 @@ class TemplatePoller(Actions):
 
         resp = Response(s.key, ans, res)
         if DEBUG:
-            print(s)
-            print(tp)
-            print(t4d)
-            print(resp)
+            print s
+            print tp
+            print t4d
+            print resp
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" Username: {0}".format(tp.username))
-            print(" Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp))
+            print " Username: {0}".format(tp.username)
+            print " Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp)
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf)))
-            print("         as text {0}".format(buf))
+            print " resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf))
+            print "         as text {0}".format(buf)
 
         if res == self.ERR:
             # cannot match key on ERR conditions, so just read len
@@ -350,23 +350,23 @@ class TemplatePoller(Actions):
             buf = buf[len(resp.s_key):]
             self.read(length=len(e))
             if DEBUG:
-                print(" read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
             e = buf[:len(resp.answer)]
             buf = buf[len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         else:
             e = buf[:len(resp.s_key)+len(resp.answer)]
             buf = buf[len(resp.s_key)+len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         # we've read the key and answer, the rest of the answer bytes are
         # junk, so just read len
@@ -374,13 +374,13 @@ class TemplatePoller(Actions):
         buf = buf[-len(resp.result):]
         self.read(length=len(e))
         if DEBUG:
-            print(" read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e)))
-            print("  new buf {0}".format(sp.hexify(buf)))
+            print " read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e))
+            print "  new buf {0}".format(sp.hexify(buf))
 
 
         self.read(length=len(buf), expect=buf)
         if DEBUG:
-            print(" read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf)))
+            print " read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf))
 
         return 0
 
@@ -389,7 +389,7 @@ class TemplatePoller(Actions):
         Determine total amount of tax due (+) or to be refunded (-)
         '''
         if DEBUG:
-            print("cmd: taxes due")
+            print "cmd: taxes due"
 
         s_invalid = False
         s = self._get_random_session()
@@ -414,8 +414,8 @@ class TemplatePoller(Actions):
             s = Session(s.key, tp, self.TAXES_DUE, tdo.gen_bytes())
 
         if DEBUG:
-            print(tdo)
-            print(" sum_due: {0}".format(sum_due))
+            print tdo
+            print " sum_due: {0}".format(sum_due)
 
         buf = s.gen_bytes()
         self.write(buf)
@@ -433,19 +433,19 @@ class TemplatePoller(Actions):
 
         resp = Response(s.key, ans, res)
         if DEBUG:
-            print(resp)
+            print resp
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" Username: {0}".format(tp.username))
-            print(" Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp))
+            print " Username: {0}".format(tp.username)
+            print " Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp)
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf)))
-            print("         as text {0}".format(buf))
+            print " resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf))
+            print "         as text {0}".format(buf)
 
         if res == self.ERR:
             # cannot match key on ERR conditions, so just read len
@@ -453,23 +453,23 @@ class TemplatePoller(Actions):
             buf = buf[len(resp.s_key):]
             self.read(length=len(e))
             if DEBUG:
-                print(" read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
             e = buf[:len(resp.answer)]
             buf = buf[len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         else:
             e = buf[:len(resp.s_key)+len(resp.answer)]
             buf = buf[len(resp.s_key)+len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         # we've read the key and answer, the rest of the answer bytes are
         # junk, so just read len
@@ -477,13 +477,13 @@ class TemplatePoller(Actions):
         buf = buf[-len(resp.result):]
         self.read(length=len(e))
         if DEBUG:
-            print(" read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e)))
-            print("  new buf {0}".format(sp.hexify(buf)))
+            print " read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e))
+            print "  new buf {0}".format(sp.hexify(buf))
 
 
         self.read(length=len(buf), expect=buf)
         if DEBUG:
-            print(" read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf)))
+            print " read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf))
 
         return 0
 
@@ -493,7 +493,7 @@ class TemplatePoller(Actions):
         Determine list of years in which a taxpayer submitted a TenFourD
         '''
         if DEBUG:
-            print("cmd: taxes submitted")
+            print "cmd: taxes submitted"
 
         s_invalid = False
         s = self._get_random_session()
@@ -518,8 +518,8 @@ class TemplatePoller(Actions):
             s = Session(s.key, tp, self.TAXES_SUBMITTED, tdo.gen_bytes())
 
         if DEBUG:
-            print(tdo)
-            print(" years: {0}".format(years))
+            print tdo
+            print " years: {0}".format(years)
 
         buf = s.gen_bytes()
         self.write(buf)
@@ -537,19 +537,19 @@ class TemplatePoller(Actions):
 
         resp = Response(s.key, ans, res)
         if DEBUG:
-            print(resp)
+            print resp
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" Username: {0}".format(tp.username))
-            print(" Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp))
+            print " Username: {0}".format(tp.username)
+            print " Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp)
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf)))
-            print("         as text {0}".format(buf))
+            print " resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf))
+            print "         as text {0}".format(buf)
 
         if res == self.ERR:
             # cannot match key on ERR conditions, so just read len
@@ -557,23 +557,23 @@ class TemplatePoller(Actions):
             buf = buf[len(resp.s_key):]
             self.read(length=len(e))
             if DEBUG:
-                print(" read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
             e = buf[:len(resp.answer)]
             buf = buf[len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         else:
             e = buf[:len(resp.s_key)+len(resp.answer)]
             buf = buf[len(resp.s_key)+len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         # we've read the key and answer, the rest of the answer bytes are
         # junk, so just read len
@@ -581,13 +581,13 @@ class TemplatePoller(Actions):
         buf = buf[-len(resp.result):]
         self.read(length=len(e))
         if DEBUG:
-            print(" read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e)))
-            print("  new buf {0}".format(sp.hexify(buf)))
+            print " read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e))
+            print "  new buf {0}".format(sp.hexify(buf))
 
 
         self.read(length=len(buf), expect=buf)
         if DEBUG:
-            print(" read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf)))
+            print " read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf))
 
         return 0
 
@@ -596,7 +596,7 @@ class TemplatePoller(Actions):
         Apply some funds to tax debts.
         '''
         if DEBUG:
-            print("cmd: pay taxes")
+            print "cmd: pay taxes"
 
         s_invalid = False
         s = self._get_random_session()
@@ -620,7 +620,7 @@ class TemplatePoller(Actions):
             s = Session(s.key, tp, self.PAY_TAXES, sp.pack_single_uint32(dollaz))
 
         if DEBUG:
-            print("dollaz {0} years: {1}".format(dollaz, years))
+            print "dollaz {0} years: {1}".format(dollaz, years)
 
         buf = s.gen_bytes()
         self.write(buf)
@@ -638,19 +638,19 @@ class TemplatePoller(Actions):
 
         resp = Response(s.key, ans, res)
         if DEBUG:
-            print(resp)
+            print resp
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" Username: {0}".format(tp.username))
-            print(" Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp))
+            print " Username: {0}".format(tp.username)
+            print " Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp)
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf)))
-            print("         as text {0}".format(buf))
+            print " resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf))
+            print "         as text {0}".format(buf)
 
         if res == self.ERR:
             # cannot match key on ERR conditions, so just read len
@@ -658,23 +658,23 @@ class TemplatePoller(Actions):
             buf = buf[len(resp.s_key):]
             self.read(length=len(e))
             if DEBUG:
-                print(" read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
             e = buf[:len(resp.answer)]
             buf = buf[len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         else:
             e = buf[:len(resp.s_key)+len(resp.answer)]
             buf = buf[len(resp.s_key)+len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         # we've read the key and answer, the rest of the answer bytes are
         # junk, so just read len
@@ -682,13 +682,13 @@ class TemplatePoller(Actions):
         buf = buf[-len(resp.result):]
         self.read(length=len(e))
         if DEBUG:
-            print(" read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e)))
-            print("  new buf {0}".format(sp.hexify(buf)))
+            print " read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e))
+            print "  new buf {0}".format(sp.hexify(buf))
 
 
         self.read(length=len(buf), expect=buf)
         if DEBUG:
-            print(" read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf)))
+            print " read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf))
 
         return 0
 
@@ -697,7 +697,7 @@ class TemplatePoller(Actions):
         Get tax refund.
         '''
         if DEBUG:
-            print("cmd: get refund")
+            print "cmd: get refund"
 
         s_invalid = False
         s = self._get_random_session()
@@ -721,7 +721,7 @@ class TemplatePoller(Actions):
             s = Session(s.key, tp, self.GET_REFUND, "")
 
         if DEBUG:
-            print("refund {0} years: {1}".format(refund, years))
+            print "refund {0} years: {1}".format(refund, years)
 
         buf = s.gen_bytes()
         self.write(buf)
@@ -739,19 +739,19 @@ class TemplatePoller(Actions):
 
         resp = Response(s.key, ans, res)
         if DEBUG:
-            print(resp)
+            print resp
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" Username: {0}".format(tp.username))
-            print(" Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp))
+            print " Username: {0}".format(tp.username)
+            print " Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp)
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf)))
-            print("         as text {0}".format(buf))
+            print " resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf))
+            print "         as text {0}".format(buf)
 
         if res == self.ERR:
             # cannot match key on ERR conditions, so just read len
@@ -759,23 +759,23 @@ class TemplatePoller(Actions):
             buf = buf[len(resp.s_key):]
             self.read(length=len(e))
             if DEBUG:
-                print(" read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
             e = buf[:len(resp.answer)]
             buf = buf[len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         else:
             e = buf[:len(resp.s_key)+len(resp.answer)]
             buf = buf[len(resp.s_key)+len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         # we've read the key and answer, the rest of the answer bytes are
         # junk, so just read len
@@ -783,13 +783,13 @@ class TemplatePoller(Actions):
         buf = buf[-len(resp.result):]
         self.read(length=len(e))
         if DEBUG:
-            print(" read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e)))
-            print("  new buf {0}".format(sp.hexify(buf)))
+            print " read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e))
+            print "  new buf {0}".format(sp.hexify(buf))
 
 
         self.read(length=len(buf), expect=buf)
         if DEBUG:
-            print(" read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf)))
+            print " read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf))
 
         return 0
 
@@ -799,7 +799,7 @@ class TemplatePoller(Actions):
         Get audited.
         '''
         if DEBUG:
-            print("cmd: get audited")
+            print "cmd: get audited"
 
         s_invalid = False
         s = self._get_random_session()
@@ -841,23 +841,23 @@ class TemplatePoller(Actions):
             self.state['s'].audit_taxpayer(ar)
 
             if DEBUG:
-                print("audit years: {0}".format(ar.tax_years))
+                print "audit years: {0}".format(ar.tax_years)
 
         resp = Response(s.key, ans, res)
         if DEBUG:
-            print(resp)
+            print resp
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" Username: {0}".format(tp.username))
-            print(" Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp))
+            print " Username: {0}".format(tp.username)
+            print " Response: K:{0}, A:{1}, R:{2} {3}".format(len(resp.s_key), len(resp.answer), len(resp.result), resp)
 
         buf = resp.gen_bytes()
 
         if DEBUG:
-            print(" resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf)))
-            print("         as text {0}".format(buf))
+            print " resp buf: ({0}) {1}".format(len(buf), sp.hexify(buf))
+            print "         as text {0}".format(buf)
 
         if res == self.ERR:
             # cannot match key on ERR conditions, so just read len
@@ -865,23 +865,23 @@ class TemplatePoller(Actions):
             buf = buf[len(resp.s_key):]
             self.read(length=len(e))
             if DEBUG:
-                print(" read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
             e = buf[:len(resp.answer)]
             buf = buf[len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         else:
             e = buf[:len(resp.s_key)+len(resp.answer)]
             buf = buf[len(resp.s_key)+len(resp.answer):]
             self.read(length=len(e), expect=e)
             if DEBUG:
-                print(" read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e)))
-                print("  new buf {0}".format(sp.hexify(buf)))
+                print " read resp.s_key + resp.answer = ({0}) {1}".format(len(e), sp.hexify(e))
+                print "  new buf {0}".format(sp.hexify(buf))
 
         # we've read the key and answer, the rest of the answer bytes are
         # junk, so just read len
@@ -889,13 +889,13 @@ class TemplatePoller(Actions):
         buf = buf[-len(resp.result):]
         self.read(length=len(e))
         if DEBUG:
-            print(" read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e)))
-            print("  new buf {0}".format(sp.hexify(buf)))
+            print " read -len(resp.result) = ({0}) {1}".format(len(e), sp.hexify(e))
+            print "  new buf {0}".format(sp.hexify(buf))
 
 
         self.read(length=len(buf), expect=buf)
         if DEBUG:
-            print(" read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf)))
+            print " read final len(buf) = ({0}) {1}".format(len(buf), sp.hexify(buf))
 
         return 0
 
@@ -945,7 +945,7 @@ class TemplatePoller(Actions):
         Quit cleanly
         '''
         if DEBUG:
-            print("cmd: quit -----------")
+            print "cmd: quit -----------"
 
         return -1
 

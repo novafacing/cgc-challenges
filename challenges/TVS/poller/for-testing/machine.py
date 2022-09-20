@@ -4,13 +4,12 @@ import math
 import random
 import string
 import struct
-from functools import reduce
 
 VAULT_SIZE = 100
 handlers = [0x080482d0, 0x080484a0, 0x08048590]
 
 def random_string(size=20):
-    return ''.join([chr(random.randint(0,255)) for x in range(random.randint(1,size))])
+    return ''.join([chr(random.randint(0,255)) for x in xrange(random.randint(1,size))])
 
 class TVS(Actions):
     def start(self):
@@ -55,7 +54,7 @@ class TVS(Actions):
         self._send_time()
 
     def list_things(self):
-        s = struct.pack('>HHB', 2, len(list(self.state['items'].keys())) * 8 + 1, 1)
+        s = struct.pack('>HHB', 2, len(self.state['items'].keys()) * 8 + 1, 1)
         for k in sorted(self.state['items'].keys()):
             s += struct.pack('>II', k, 0 if self.state['items'][k] is None else len(self.state['items'][k]))
         self.write_bytes(struct.pack('>HHB', 2, 1, 1))
@@ -70,7 +69,7 @@ class TVS(Actions):
         return k
 
     def store_things(self):
-        if len(list(self.state['items'].keys())) == VAULT_SIZE:
+        if len(self.state['items'].keys()) == VAULT_SIZE:
             return
         k = self.next_k()
         v = random_string(random.randint(20, 100))
@@ -88,7 +87,7 @@ class TVS(Actions):
 
     def get_things(self):
         try:
-            k, v = random.choice([x for x in list(self.state['items'].items()) if x[1] is not None])
+            k, v = random.choice(filter(lambda x: x[1] is not None, self.state['items'].items()))
             self.state['items'][k] = None
             self.write_bytes(struct.pack('>HHBI', 2, 5, 4, k))
             self.read_bytes(struct.pack('>HHB', 2, len(v) + 1, 4) + v)
@@ -98,7 +97,7 @@ class TVS(Actions):
     def update_things(self):
         if len(self.state['items']) == 0:
             return
-        k = random.choice(list(self.state['items'].keys()))
+        k = random.choice(self.state['items'].keys())
         v = random_string(random.randint(20, 500))
         self.write_bytes(struct.pack('>HHBI', 2, len(v) + 5, 3, k) + v)
         self.read_bytes(struct.pack('>HHBI', 2, 5, 3, k))

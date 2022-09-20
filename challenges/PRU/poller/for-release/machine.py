@@ -50,9 +50,9 @@ fmt2Ops = {
 
 def getLastArg(regOp):
     if(regOp == 1):
-        return "R%d" % random.choice(list(range(32)))
+        return "R%d" % random.choice(range(32))
     else:
-        return random.choice(list(range(0xffff)))
+        return random.choice(range(0xffff))
 
 def genInstruction():
     fmts = [aluOps, fmt2Ops]
@@ -60,10 +60,10 @@ def genInstruction():
     regOp = random.choice([0,1])
     fmt = aluOps
     if fmt == aluOps:
-        op = random.choice(list(fmt.keys()))
-        return "%s R%d R%d %s" % (op, random.choice(list(range(32))), random.choice(list(range(32))), getLastArg(regOp))
+        op = random.choice(fmt.keys())
+        return "%s R%d R%d %s" % (op, random.choice(range(32)), random.choice(range(32)), getLastArg(regOp))
     else:
-        print("FMT2")
+        print "FMT2"
     pass
 
 def buildALUInstruction(inst):
@@ -89,7 +89,7 @@ def buildLDIInstruction(inst):
     value = int(inst.split()[2])
     rd = int(inst.split()[1][1:])
     if int("0x%0.8x" % (0b001 << (31-31) | fmt2Ops["LDI"] << (31-28) | value << (31-23) | rd << (31-4)), 16) == -1:
-        print("!!!!!!!!" + inst)
+        print "!!!!!!!!" + inst
     return int("0x%0.8x" % (0b001 << (31-31) | fmt2Ops["LDI"] << (31-28) | value << (31-23) | rd << (31-4)), 16)
 
 def buildJMPInstruction(inst):
@@ -122,9 +122,9 @@ def buildJALInstruction(inst):
 
 def buildInstruction(inst):
     op = inst.split()[0]
-    if(op in list(aluOps.keys())):
+    if(op in aluOps.keys()):
         return buildALUInstruction(inst)
-    if(op in list(fmt2Ops.keys())):
+    if(op in fmt2Ops.keys()):
         if op == "LDI":
             return buildLDIInstruction(inst)
         if op == "JMP":
@@ -132,10 +132,10 @@ def buildInstruction(inst):
         if op == "JAL":
             return buildJALInstruction(inst)
         else:
-            print("FMT2")
+            print "FMT2"
         return 0x41414141
     else:
-        print("Illegal Instruction")
+        print "Illegal Instruction"
         return 0x42424242
 
 class prucpu():
@@ -162,7 +162,7 @@ class prucpu():
             if op == "LDI":
                 op1,op2 = self.asm[self.pc].split()[1:]
                 self.doLDI(int(op1[1:]), int(op2))
-            elif op in list(aluOps.keys()):
+            elif op in aluOps.keys():
                 op1, op2, op3 = self.asm[self.pc].split()[1:]
                 if op3[0] == "R":
                     op3 = self.r[int(op3[1:])]
@@ -280,30 +280,30 @@ class PRU(Actions):
         pass
 
     def genALU(self):
-        op = random.choice(list(aluOps.keys()))
+        op = random.choice(aluOps.keys())
         regTarget = random.choice([0, 1])
         if regTarget == 0:
-            arg2 = "R" + str(random.choice(list(range(32))))
+            arg2 = "R" + str(random.choice(range(32)))
         else:
-            arg2 = str(random.choice(list(range(0xff))))
-        dest = "R" + str(random.choice(list(range(32))))
-        arg1 = "R" + str(random.choice(list(range(32))))
+            arg2 = str(random.choice(range(0xff)))
+        dest = "R" + str(random.choice(range(32)))
+        arg1 = "R" + str(random.choice(range(32)))
         self.cpu.code.append(buildInstruction("%s %s %s %s" % (op, dest, arg1, arg2)))
         self.cpu.asm.append("%s %s %s %s" % (op, dest, arg1, arg2))
 
     def genLDI(self):
-        imm = random.choice(list(range(0xffff)))
-        dest = "R" + str(random.choice(list(range(32))))
+        imm = random.choice(range(0xffff))
+        dest = "R" + str(random.choice(range(32)))
         self.cpu.code.append(buildInstruction("LDI %s %s" % (dest, imm)))
         self.cpu.asm.append("LDI %s %s" % (dest, imm))
 
     def genBranch(self):
         if len(self.cpu.asm) == 0:
             return
-        imm = random.choice(list(range(len(self.cpu.asm))))
+        imm = random.choice(range(len(self.cpu.asm)))
         op = random.choice(["JMP", "JAL"])
         if op=="JAL":
-            rd = random.choice(list(range(32)))
+            rd = random.choice(range(32))
             self.cpu.code.append(buildInstruction("JAL R%d %s" % (rd, str(imm))))
             self.cpu.asm.append("JAL R%d %s" % (rd, str(imm)))
         else:
@@ -333,11 +333,11 @@ class PRU(Actions):
         self.read(expect="============================================", delim="\n")
 
 if __name__ == "__main__":
-    print("%0.8x" % buildInstruction("LDI R0 29"))
-    print("%0.8x" % buildInstruction("LSL R0 R0 8"))
-    print("%0.8x" % buildInstruction("LDI R1 216"))
-    print("%0.8x" % buildInstruction("OR R0 R0 R1"))
-    print("%0.8x" % buildInstruction("LSL R0 R0 8"))
-    print("%0.8x" % buildInstruction("LDI R1 64"))
-    print("%0.8x" % buildInstruction("OR R0 R0 R1"))
-    print("%0.8x" % buildInstruction("LSL R0 R0 8"))
+    print "%0.8x" % buildInstruction("LDI R0 29")
+    print "%0.8x" % buildInstruction("LSL R0 R0 8")
+    print "%0.8x" % buildInstruction("LDI R1 216")
+    print "%0.8x" % buildInstruction("OR R0 R0 R1")
+    print "%0.8x" % buildInstruction("LSL R0 R0 8")
+    print "%0.8x" % buildInstruction("LDI R1 64")
+    print "%0.8x" % buildInstruction("OR R0 R0 R1")
+    print "%0.8x" % buildInstruction("LSL R0 R0 8")

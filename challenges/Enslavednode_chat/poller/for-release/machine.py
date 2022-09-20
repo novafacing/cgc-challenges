@@ -18,8 +18,8 @@ class Machine(Actions):
 
     def random_sentence(self):
         s = ''
-        for i in range(random.randint(0, 16)):
-            for k in range(random.randint(0, 256)):
+        for i in xrange(random.randint(0, 16)):
+            for k in xrange(random.randint(0, 256)):
                 s += random.choice(string.letters)
             s += ' '
         return s

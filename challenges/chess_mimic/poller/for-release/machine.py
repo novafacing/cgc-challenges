@@ -231,7 +231,7 @@ class Chesser(Actions):
 		if (pce == None):
 			return -1
 		target_color = pce[1]
-		if (dst[0] not in list(range(0,8))) or (dst[1] not in list(range(0,8))):
+		if (dst[0] not in range(0,8)) or (dst[1] not in range(0,8)):
 			# lands off board
 			return 3
 		if pce[0] == 'blank':

@@ -74,7 +74,7 @@ class GrizLight(Actions):
 		expected = self.state['m'].pack_error(error_name)
 		self.read(length=len(expected), expect=expected)
 		if True == self.DEBUG_ERR:
-			print(('exiting due to {0}'.format(error_name)))
+			print('exiting due to {0}'.format(error_name))
 
 
 	def _process_nonce(self):
@@ -95,7 +95,7 @@ class GrizLight(Actions):
 
 	def _send_command(self, command_name):
 		if self.DEBUG_FUNC:
-			print(('-- _send_command {0}--'.format(command_name)))
+			print('-- _send_command {0}--'.format(command_name))
 
 		if self.chance(0.001):
 			cmd = self.state['m'].pack_command('BAD')
@@ -111,7 +111,7 @@ class GrizLight(Actions):
 
 	def _send_mode(self, mode_name):
 		if self.DEBUG_FUNC:
-			print(('-- _send_mode {0}--'.format(mode_name)))
+			print('-- _send_mode {0}--'.format(mode_name))
 
 		if self.chance(0.001):
 			mode = self.state['m'].pack_mode('BAD')
@@ -127,7 +127,7 @@ class GrizLight(Actions):
 
 	def _send_model_id(self, model_name, component_type):
 		if self.DEBUG_FUNC:
-			print(('-- _send_model_id {0}--'.format(model_name)))
+			print('-- _send_model_id {0}--'.format(model_name))
 
 		if self.chance(0.001):
 			model = self.state['m'].pack_model('BAD', component_type)
@@ -140,7 +140,7 @@ class GrizLight(Actions):
 
 	def _send_target_id(self, target_id):
 		if self.DEBUG_FUNC:
-			print(('-- _send_target_id {0}--'.format(target_id)))
+			print('-- _send_target_id {0}--'.format(target_id))
 
 		target = self.state['m'].pack_target(target_id)
 		self.write(target)
@@ -155,7 +155,7 @@ class GrizLight(Actions):
 	def _get_random_valid_breaker_id(self):
 		b_count = self.state['m'].get_breaker_count()
 		if True == self.DEBUG_FUNC:
-			print(('_get_random_valid_breaker_id - breaker count:{0}'.format(b_count)))
+			print('_get_random_valid_breaker_id - breaker count:{0}'.format(b_count))
 		if 0 == b_count:
 			self.state['invalid_target_id'] = True
 			return b_count
@@ -192,7 +192,7 @@ class GrizLight(Actions):
 
 	def _recv_results(self, results):
 		if self.DEBUG_FUNC:
-			print(('_recv_results Results: object_id:{0}, receptacle_ids:{1}, receptacle_cnt:{2}'.format(results.get_object_id(), list(results.get_receptacle_id_list()), results.get_receptacle_ids_assigned_count())))
+			print('_recv_results Results: object_id:{0}, receptacle_ids:{1}, receptacle_cnt:{2}'.format(results.get_object_id(), list(results.get_receptacle_id_list()), results.get_receptacle_ids_assigned_count()))
 		expected = self.state['m'].pack_results(results)
 		self.read(length=len(expected), expect=expected)
 
@@ -229,7 +229,7 @@ class GrizLight(Actions):
 		else:
 			self.state['m'].init_panel(model_name)
 			if True == self.DEBUG_INIT:
-				print(('cmd_init_panel() added panel: {0}'.format(model_name)))
+				print('cmd_init_panel() added panel: {0}'.format(model_name))
 
 	def cmd_add_breaker(self):
 		# don't want valid receptacle_ids on outlets added after a splitter, else trigger vuln -> segfault
@@ -261,7 +261,7 @@ class GrizLight(Actions):
 
 		else:
 			if True == self.DEBUG_ADD_BREAKER:
-				print(('cmd_add_breaker() added breaker: {0}'.format(model_name)))
+				print('cmd_add_breaker() added breaker: {0}'.format(model_name))
 			results = self.state['m'].add_breaker(model_name)
 			self._recv_results(results)
 
@@ -290,7 +290,7 @@ class GrizLight(Actions):
 		self._send_target_id(breaker_id)
 
 		if True == self.DEBUG_ADD_OUTLET:
-			print(('cmd_add_outlet - {0} outlet on breaker {1}.'.format(model_name, breaker_id)))
+			print('cmd_add_outlet - {0} outlet on breaker {1}.'.format(model_name, breaker_id))
 
 		if False == self.state['m'].is_model_created():
 			self._recv_error('ERR_E_MODEL_NOT_EXISTS')
@@ -311,7 +311,7 @@ class GrizLight(Actions):
 		else:
 			results = self.state['m'].add_outlet(model_name, breaker_id)
 			if True == self.DEBUG_ADD_OUTLET:
-				print(('cmd_add_outlet() added outlet: {0}'.format(model_name)))
+				print('cmd_add_outlet() added outlet: {0}'.format(model_name))
 			self._recv_results(results)
 
 	def cmd_add_light_string(self):
@@ -340,7 +340,7 @@ class GrizLight(Actions):
 		self._send_target_id(receptacle_id)
 
 		if True == self.DEBUG_ADD_LIGHT_STRING:
-			print(('cmd_add_light_string - {0} light string on receptacle_id {1}.'.format(model_name, receptacle_id)))
+			print('cmd_add_light_string - {0} light string on receptacle_id {1}.'.format(model_name, receptacle_id))
 
 		if False == self.state['m'].is_model_created():
 			self._recv_error('ERR_E_MODEL_NOT_EXISTS')
@@ -361,7 +361,7 @@ class GrizLight(Actions):
 		else:
 			results = self.state['m'].add_light_string(model_name, receptacle_id)
 			if True == self.DEBUG_ADD_LIGHT_STRING:
-				print(('cmd_add_light_string() added light string: {0} to receptacle: {1}'.format(model_name, receptacle_id)))
+				print('cmd_add_light_string() added light string: {0} to receptacle: {1}'.format(model_name, receptacle_id))
 			self._recv_results(results)
 
 
@@ -383,7 +383,7 @@ class GrizLight(Actions):
 		self._send_target_id(receptacle_id)
 
 		if True == self.DEBUG_ADD_SPLITTER:
-			print(('cmd_add_splitter - {0} splitter on receptacle_id {1}.'.format(model_name, receptacle_id)))
+			print('cmd_add_splitter - {0} splitter on receptacle_id {1}.'.format(model_name, receptacle_id))
 
 		if False == self.state['m'].is_model_created():
 			self._recv_error('ERR_E_MODEL_NOT_EXISTS')
@@ -404,7 +404,7 @@ class GrizLight(Actions):
 		else:
 			results = self.state['m'].add_splitter(model_name, receptacle_id)
 			if True == self.DEBUG_ADD_SPLITTER:
-				print(('cmd_add_splitter() added splitter: {0} to receptacle: {1}'.format(model_name, receptacle_id)))
+				print('cmd_add_splitter() added splitter: {0} to receptacle: {1}'.format(model_name, receptacle_id))
 			self._recv_results(results)
 			self.state['have_splitter'] = True
 
@@ -427,7 +427,7 @@ class GrizLight(Actions):
 
 		results = self.state['m'].is_panel_overloaded()
 		if True == self.DEBUG_PANEL_OVERLOADED:
-			print(('cmd_panel_overloaded() ret:{0}'.format(results.get_object_id())))
+			print('cmd_panel_overloaded() ret:{0}'.format(results.get_object_id()))
 		self._recv_results(results)
 		self.state['examine_count'] += 1
 
@@ -452,7 +452,7 @@ class GrizLight(Actions):
 
 		results = self.state['m'].is_breaker_overloaded(breaker_id)
 		if True == self.DEBUG_BREAKER_OVERLOADED:
-			print(('cmd_breaker_overloaded() ret:{0}'.format(results.get_object_id())))
+			print('cmd_breaker_overloaded() ret:{0}'.format(results.get_object_id()))
 		self._recv_results(results)
 		self.state['examine_count'] += 1
 
@@ -476,7 +476,7 @@ class GrizLight(Actions):
 
 		results = self.state['m'].is_outlet_overloaded(outlet_id)
 		if True == self.DEBUG_OUTLET_OVERLOADED:
-			print(('cmd_outlet_overloaded() ret:{0}'.format(results.get_object_id())))
+			print('cmd_outlet_overloaded() ret:{0}'.format(results.get_object_id()))
 		self._recv_results(results)
 		self.state['examine_count'] += 1
 
@@ -499,7 +499,7 @@ class GrizLight(Actions):
 
 		results = self.state['m'].is_splitter_overloaded(splitter_id)
 		if True == self.DEBUG_SPLITTER_OVERLOADED:
-			print(('cmd_splitter_overloaded() ret:{0}'.format(results.get_object_id())))
+			print('cmd_splitter_overloaded() ret:{0}'.format(results.get_object_id()))
 		self._recv_results(results)
 		self.state['examine_count'] += 1
 
@@ -522,7 +522,7 @@ class GrizLight(Actions):
 
 		results = self.state['m'].is_light_string_overloaded(light_string_id)
 		if True == self.DEBUG_LIGHT_STRING_OVERLOADED:
-			print(('cmd_light_string_overloaded() ret:{0}'.format(results.get_object_id())))
+			print('cmd_light_string_overloaded() ret:{0}'.format(results.get_object_id()))
 		self._recv_results(results)
 		self.state['examine_count'] += 1
 
@@ -545,7 +545,7 @@ class GrizLight(Actions):
 
 		results = self.state['m'].is_receptacle_overloaded(receptacle_id)
 		if True == self.DEBUG_RECEPTACLE_OVERLOADED:
-			print(('cmd_receptacle_overloaded() ret:{0}'.format(results.get_object_id())))
+			print('cmd_receptacle_overloaded() ret:{0}'.format(results.get_object_id()))
 		self._recv_results(results)
 		self.state['examine_count'] += 1
 

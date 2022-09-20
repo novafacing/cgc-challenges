@@ -220,7 +220,7 @@ class Simulation(Actions):
 
 	def run( self ):
 
-		for i in range(self.num_sim_commands):
+		for i in xrange(self.num_sim_commands):
 			self.read( delim=': ', expect='Enter Source ID: ' )
 
 			random_source_select = random.randint( 0, 4 )
@@ -930,7 +930,7 @@ class Simulation(Actions):
 				if ( bad_wheel_number == False ):
 					break
 				else:
-					print("Redoing binary message, might hit bug\n")
+					print "Redoing binary message, might hit bug\n"
 
 		if ( len(binary_message) == 0 ):
 			binary_message_hex = ''

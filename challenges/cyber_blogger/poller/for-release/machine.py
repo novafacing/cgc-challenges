@@ -2,7 +2,7 @@ from generator.actions import Actions
 import random
 import string
 import struct
-import io
+import StringIO
 
 def random_word(max_size=8, min_size=5):
     characters = string.letters
@@ -13,7 +13,7 @@ def random_word(max_size=8, min_size=5):
 def random_text(max_words=50, min_words=2):
     max_words = max_words if max_words >= min_words else min_words
     text = ''
-    for x in range(random.randint(min_words, max_words)):
+    for x in xrange(random.randint(min_words, max_words)):
         text += random_word() + ' '
         if x+1 % 8 == 0:
             text += '\n'
@@ -54,7 +54,7 @@ class BlogAsciiFile():
         self.num_lines_p = struct.pack('H', self.num_lines)
         self.data = ''
 
-        for x in range(self.num_lines):
+        for x in xrange(self.num_lines):
             self.data += random_word(self.line_width-1, self.line_width-1) + '\n'
 
     def getfile(self):

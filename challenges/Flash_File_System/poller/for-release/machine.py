@@ -44,7 +44,7 @@ class MyClass(Actions):
 	#############################
 	def next_inode( self ):
 		for inode in range ( 0, self.MAX_FILES ):
-			if inode not in list(self.Files.keys()):
+			if inode not in self.Files.keys():
 				return inode
 
 		return None
@@ -185,11 +185,11 @@ class MyClass(Actions):
 	#############################
 	def TestDel(self):
 		# are we going for a success or failure?
-		if randint(0,1) and len(list(self.Files.keys())) > 0:
+		if randint(0,1) and len(self.Files.keys()) > 0:
 			# success
 			self.comment("Successful delete attempt")
 			# pick a vaild file
-			inode = choice(list(self.Files.keys()))
+			inode = choice(self.Files.keys())
 			filename = self.Files[inode][0]
 
 			self.SendDel(filename, 0)
@@ -207,7 +207,7 @@ class MyClass(Actions):
 		else:
 			self.comment("Bad delete attempt: invalid file")
 			filename = self.random_string(1,10)
-			while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+			while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
 				filename = self.random_string(1,10)
 			self.SendDel(filename, -1)
 
@@ -232,7 +232,7 @@ class MyClass(Actions):
 			open_mode = 2
 			
 			filename = self.random_string(1,10)
-			while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+			while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
 				filename = self.random_string(1,10)
 
 			new_fd = self.next_fd( )
@@ -263,14 +263,14 @@ class MyClass(Actions):
 			# Open existing file for reading
 			open_mode = 1
 
-			if ( len(list(self.Files.keys())) == 0 ):
+			if ( len(self.Files.keys()) == 0 ):
 				# Nothing to read -- just try a random file
 				filename = self.random_string(1, 30)
 
 				self.comment( "Failed open attempt (read) no files available" )
 				self.SendOpen( filename, open_mode, -1 )	
 			else:
-				inode = choice(list(self.Files.keys()))
+				inode = choice(self.Files.keys())
 				filename = self.Files[inode][0]	
 				new_fd = self.next_fd( )
 	
@@ -292,7 +292,7 @@ class MyClass(Actions):
 			# Open existing file for reading
 			open_mode = 1
 
-			if ( len(list(self.Files.keys())) == 0 ):
+			if ( len(self.Files.keys()) == 0 ):
 				# Nothing to read -- just try a random file
 				filename = self.random_string(1, 30)
 
@@ -301,7 +301,7 @@ class MyClass(Actions):
 			else:
 				# Pick a bad file to open for reading	
 				filename = self.random_string(1,10)
-				while filename in [self.Files[inode][0] for inode in list(self.Files.keys())] or len(filename) is 0:
+				while filename in [self.Files[inode][0] for inode in self.Files.keys()] or len(filename) is 0:
 					filename = self.random_string(1,10)
 				self.comment( "Failed open attempt (read) invalid file" )
 				self.SendOpen( filename, open_mode, -1 )

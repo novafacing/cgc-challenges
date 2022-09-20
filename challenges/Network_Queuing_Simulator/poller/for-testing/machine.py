@@ -12,7 +12,7 @@ import ctypes as ct
 #
 class Mersenne:
     def __init__(self, seed):
-        self.mt_state = list(range(624))
+        self.mt_state = range(624)
         self.idx = 0
         self.mt_state[0] = seed & 0xFFFFFFFF
         for i in range(1, 624):
@@ -196,7 +196,7 @@ class NetSim(Actions):
         self.cgc_max_wall_clock = 0.0
         self.num_queues = 0
 
-        self.queue = list(range(8))
+        self.queue = range(8)
         for q in range(0, 8):
             # create the queue
             self.queue[q] = {
