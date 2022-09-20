@@ -27,7 +27,7 @@ import sys
 import os
 
 from xml.sax.saxutils import escape
-from generator.actions import Actions
+from lib.generator.actions import Actions
 from random import choice,randint,random
 from numpy.random import randint as nprandint
 from struct import *

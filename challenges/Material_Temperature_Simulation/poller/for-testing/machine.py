@@ -2,7 +2,7 @@
 
 import os
 import sys
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import ctypes as ct
 import random
 

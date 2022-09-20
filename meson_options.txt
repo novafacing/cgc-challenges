@@ -806,3 +806,10 @@ option(
     value: 'output',
     description: 'Path to install built challenges into. Defaults to the ./output in the project root.'
 )
+
+option(
+    'no_polls',
+    type: 'boolean',
+    value: false,
+    description: 'Whether to disable poller seed generation. Defaults to YES polls.'
+)

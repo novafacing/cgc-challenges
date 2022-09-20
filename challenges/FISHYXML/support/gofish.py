@@ -22,8 +22,8 @@
 #
 
 from random import randint
-from piprng import PiPrng
-from common import DEBUG
+from .piprng import PiPrng
+from .common import DEBUG
 
 PRNG = PiPrng()
 
@@ -37,14 +37,14 @@ class GoFish(object):
 		self.turn = 0
 		self.p = [Player(0, p0name), Player(1, "Bot")]
 		if True == DEBUG:
-			print "GoFish(): p0 name:{0}, p1 name:{1}".format(p0name, 'Bot')
+			print("GoFish(): p0 name:{0}, p1 name:{1}".format(p0name, 'Bot'))
 
 	def deal(self):
 		for _ in range(self.HAND_SIZE):
 			self.p[0].take_top_card(self.pool)
 			self.p[1].take_top_card(self.pool)
 		if True == DEBUG:
-			print "GoFish.deal():\n\tp0 hand:{0}\n\tp1 hand:{1}".format(self.p[0].get_hand(), self.p[1].get_hand())
+			print("GoFish.deal():\n\tp0 hand:{0}\n\tp1 hand:{1}".format(self.p[0].get_hand(), self.p[1].get_hand()))
 		return self.p[0].get_hand()
 
 	def get_init_hand_size(self):
@@ -64,7 +64,7 @@ class GoFish(object):
 
 	def is_game_over(self):
 		if True == DEBUG:
-			print "GoFish.is_game_over():\n\tStatus:\n\tPool: {0}\n\tP0: {1}\n\tP1: {2}.".format(self.pool, self.p[0].get_hand(), self.p[1].get_hand())
+			print("GoFish.is_game_over():\n\tStatus:\n\tPool: {0}\n\tP0: {1}\n\tP1: {2}.".format(self.pool, self.p[0].get_hand(), self.p[1].get_hand()))
 		return self.is_pool_empty() and self.p[0].is_hand_empty() and self.p[1].is_hand_empty()
 
 	def get_score(self):
@@ -102,7 +102,7 @@ class GoFish(object):
 		else:
 			qty = self.pool.count()
 		if True == DEBUG:
-			print "GoFish.draw_new_hand(): qty:{0}, pool_sz:{1}.".format(qty, self.pool.count())
+			print("GoFish.draw_new_hand(): qty:{0}, pool_sz:{1}.".format(qty, self.pool.count()))
 		return self.p[self.get_turn_pid()].draw_new_hand(self.pool, qty)
 
 
@@ -138,13 +138,13 @@ class Deck(object):
 			idx = (idx + count) % 52
 			rand_idx = (rand_idx + PRNG.get_next()) % 52
 			if True == DEBUG:
-				print "Deck.shuffle: idx:{0}, rand_idx:{1}, count:{2}, deck_len:{3}.".format(idx, rand_idx, count, len(self.card_list))
+				print("Deck.shuffle: idx:{0}, rand_idx:{1}, count:{2}, deck_len:{3}.".format(idx, rand_idx, count, len(self.card_list)))
 			if idx != rand_idx:
 				temp_card = self.card_list[idx]
 				self.card_list[idx] = self.card_list[rand_idx]
 				self.card_list[rand_idx] = temp_card
 		if True == DEBUG:
-			print "Deck.shuffle(): seed: {0}, shuffled deck:\n{1}".format(seed, self.card_list)
+			print("Deck.shuffle(): seed: {0}, shuffled deck:\n{1}".format(seed, self.card_list))
 
 	def pop(self):
 		return self.get_card_by_idx(-1)
@@ -243,7 +243,7 @@ class Hand(object):
 	def select_rand_card_rank(self, pid):
 		idx = 0
 		if True == DEBUG:
-			print "Hand.select_rand_card_rank(): count: {0}.".format(self.get_count())
+			print("Hand.select_rand_card_rank(): count: {0}.".format(self.get_count()))
 
 		if 0 == self.get_count():
 			return 0
@@ -256,7 +256,7 @@ class Hand(object):
 				r = PRNG.get_next()
 				idx = r % self.get_count()
 				if True == DEBUG:
-					print "Hand.select_rand_card_rank() PRNG val: {0}.".format(r)
+					print("Hand.select_rand_card_rank() PRNG val: {0}.".format(r))
 
 		return self.card_list[idx].get_rank()
 

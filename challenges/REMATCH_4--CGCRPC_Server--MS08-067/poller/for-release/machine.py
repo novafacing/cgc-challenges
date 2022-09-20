@@ -4,7 +4,7 @@ import random
 import string
 from struct import pack, unpack
 import copy
-from generator.actions import Actions
+from lib.generator.actions import Actions
 
 
 CGCMB_NEGOTIATE                  =  0x01

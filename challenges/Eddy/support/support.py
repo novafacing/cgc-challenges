@@ -76,7 +76,7 @@ class Result(object):
 
     def generate_csum(self):
         ret = 0
-        for i in xrange(1024):
+        for i in range(1024):
             ret = ret ^ ord(self.magic_page[i * 4])
 
         for c in self.buf:

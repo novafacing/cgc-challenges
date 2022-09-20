@@ -21,7 +21,7 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 from array import array
-from common import ERRORS, DEBUG
+from .common import ERRORS, DEBUG
 
 class Results(object):
 

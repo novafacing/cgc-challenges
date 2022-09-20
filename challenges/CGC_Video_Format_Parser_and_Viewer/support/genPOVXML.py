@@ -35,7 +35,7 @@ import time
 if __name__ == '__main__':
 
 	if len(sys.argv) != 2:
-		print 'USAGE: %s <pov.cvf>' %sys.argv[0]
+		print('USAGE: %s <pov.cvf>' %sys.argv[0])
 		sys.exit()
 
 	try:
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 		cvf = f.read()
 		f.close()
 	except:
-		print '[ERROR] Failed to open %s' %sys.argv[1]
+		print('[ERROR] Failed to open %s' %sys.argv[1])
 		sys.exit()
 
 

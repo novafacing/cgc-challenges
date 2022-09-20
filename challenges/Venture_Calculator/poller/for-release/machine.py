@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 
 from numpy import int32, uint16
 

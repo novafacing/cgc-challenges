@@ -26,7 +26,7 @@ import string
 import sys
 import os
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 from random import choice,randint
 from struct import *
 

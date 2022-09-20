@@ -24,7 +24,7 @@
 #
 
 from xml.sax.saxutils import escape
-from generator.actions import Actions
+from lib.generator.actions import Actions
 from random import choice, randint, shuffle
 from struct import pack,unpack
 from math import ceil

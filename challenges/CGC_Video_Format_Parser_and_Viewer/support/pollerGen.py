@@ -434,7 +434,7 @@ if __name__ == '__main__':
 		try:
 			seed = int(sys.argv[1])
 		except:
-			print '[ERROR] Converting seed to int failed'
+			print('[ERROR] Converting seed to int failed')
 			sys.exit(0)
 
 	

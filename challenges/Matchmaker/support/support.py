@@ -21,12 +21,13 @@
 
 import random
 import string
+from functools import reduce
 
 def random_string(alphabet, min_len, max_len):
-    return ''.join(random.choice(alphabet) for _ in xrange(random.randint(min_len, max_len)))
+    return ''.join(random.choice(alphabet) for _ in range(random.randint(min_len, max_len)))
 
 def random_set(alphabet, min_len, max_len):
-    return set(random.choice(alphabet) for _ in xrange(random.randint(min_len, max_len)))
+    return set(random.choice(alphabet) for _ in range(random.randint(min_len, max_len)))
 
 class Rng(object):
     def __init__(self):
@@ -46,11 +47,11 @@ class Dfa(object):
         self = cls(rng)
         num_states = random.randint(1, 8)
 
-        for i in xrange(num_states):
+        for i in range(num_states):
             self.states.append(({}, (i != 0 and random.random() < 0.2)))
             default_alphabet = set(string.letters + string.digits + string.punctuation)
             num_transitions = random.randint(0, min(num_states, 4))
-            for j in xrange(num_transitions):
+            for j in range(num_transitions):
                 transition_set = random_set(list(default_alphabet), 1, 20)
                 default_alphabet -= transition_set
 
@@ -66,7 +67,7 @@ class Dfa(object):
             else:
                 ret.append('state')
 
-            for chars, dest in state[0].iteritems():
+            for chars, dest in state[0].items():
                 ret.append('transition %s %s' % (chars, dest))
 
         ret.append('done')
@@ -83,7 +84,7 @@ class Dfa(object):
         while len(ret) < (40 - 1) and not self.states[current][1]:
             # Get a sorted list of (char, dest) pairs
             d = {}
-            for chars, dest in self.states[current][0].iteritems():
+            for chars, dest in self.states[current][0].items():
                 for c in chars:
                     d[ord(c)] = dest
             table = [(key, d[key]) for key in sorted(d)]
@@ -108,7 +109,7 @@ class Dfa(object):
         while not self.states[current][1]:
             found = False
 
-            for chars, dest in self.states[current][0].iteritems():
+            for chars, dest in self.states[current][0].items():
                 if i < len(s) and s[i] in chars:
                     found = True
                     current = dest
@@ -129,10 +130,10 @@ class Support(object):
 
     def calculate_csum(self, line):
         ret = 0
-        for i in xrange(1024):
+        for i in range(1024):
             ret = ret ^ ord(self.magic_page[i * 4])
 
-        for i in xrange(len(line)):
+        for i in range(len(line)):
             ret = ret ^ ord(line[i])
 
         return ret
@@ -154,7 +155,7 @@ class Support(object):
 
     def make_nomatch(self):
         # Possible that our DFA accepts all, so try 10 strings and then give up
-        for _ in xrange(10):
+        for _ in range(10):
             alphabet = string.letters + string.digits + string.punctuation
             s = random_string(alphabet, 1, 16)
             if not self.dfa.accept(s):

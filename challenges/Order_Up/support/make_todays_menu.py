@@ -20,9 +20,9 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-import support as sp
+from . import support as sp
 
-from menu import Appetizer, Meal, Dessert, Menu
+from .menu import Appetizer, Meal, Dessert, Menu
 
 C_HEAD = '''/*
  * Copyright (C) Narf Industries <info@narfindustries.com>

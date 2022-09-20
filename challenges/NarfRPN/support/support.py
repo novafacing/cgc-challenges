@@ -35,9 +35,9 @@ class Matrix(object):
         # Disallow singular matrices to avoid vulnerability
         while not self.data or self.det() == 0.0:
             self.data = []
-            for i in xrange(height):
+            for i in range(height):
                 self.data.append([])
-                for j in xrange(width):
+                for j in range(width):
                     self.data[i].append(random.uniform(-Support.FLOAT_LIMIT, Support.FLOAT_LIMIT))
 
         if not valid:
@@ -48,10 +48,10 @@ class Matrix(object):
 
     def __add__(self, other):
         data = []
-        if isinstance(other, (int, long, float)):
-            for i in xrange(self.height):
+        if isinstance(other, (int, float)):
+            for i in range(self.height):
                 data.append([])
-                for j in xrange(self.width):
+                for j in range(self.width):
                     data[i].append(self.data[i][j] + float(other))
 
             return Matrix(self.width, self.height, data)
@@ -59,9 +59,9 @@ class Matrix(object):
             if self.width != other.width or self.height != other.height:
                 raise ValueError()
 
-            for i in xrange(self.height):
+            for i in range(self.height):
                 data.append([])
-                for j in xrange(self.width):
+                for j in range(self.width):
                     data[i].append(self.data[i][j] + other.data[i][j])
 
             return Matrix(self.width, self.height, data)
@@ -72,7 +72,7 @@ class Matrix(object):
         return self + other
 
     def __sub__(self, other):
-        if isinstance(other, (int, long, float)):
+        if isinstance(other, (int, float)):
             return self + -other
         elif isinstance(other, Matrix):
             neg = Matrix(other.width, other.height, [[-x for x in c] for c in other.data])
@@ -86,10 +86,10 @@ class Matrix(object):
 
     def __mul__(self, other):
         data = []
-        if isinstance(other, (int, long, float)):
-            for i in xrange(self.height):
+        if isinstance(other, (int, float)):
+            for i in range(self.height):
                 data.append([])
-                for j in xrange(self.width):
+                for j in range(self.width):
                     data[i].append(self.data[i][j] * float(other))
 
             return Matrix(self.width, self.height, data)
@@ -97,11 +97,11 @@ class Matrix(object):
             if self.width != other.height:
                 raise ValueError()
 
-            for i in xrange(self.height):
+            for i in range(self.height):
                 data.append([])
-                for j in xrange(other.width):
+                for j in range(other.width):
                     data[i].append(0.0)
-                    for k in xrange(self.width):
+                    for k in range(self.width):
                         data[i][j] += self.data[i][k] * other.data[k][j]
 
             return Matrix(self.height, other.width, data)
@@ -115,10 +115,10 @@ class Matrix(object):
         data = []
         if isinstance(other, Matrix):
             return NotImplemented
-        elif isinstance(other, (int, long, float)):
-            for i in xrange(self.height):
+        elif isinstance(other, (int, float)):
+            for i in range(self.height):
                 data.append([])
-                for j in xrange(self.width):
+                for j in range(self.width):
                     data[i].append(self.data[i][j] / other)
 
             return Matrix(self.width, self.height, data)
@@ -146,9 +146,9 @@ class Matrix(object):
             raise ValueError()
 
         data = []
-        for i in xrange(self.height):
+        for i in range(self.height):
             data.append([])
-            for j in xrange(self.width):
+            for j in range(self.width):
                 data[i].append(0.0)
 
         if self.width == 1:
@@ -194,7 +194,7 @@ class Support(object):
 
         try:
             res = op(a, b)
-            if isinstance(res, (int, long)):
+            if isinstance(res, int):
                 # Simulate integer overflow
                 res = ctypes.c_int(res & 0xffffffff).value
 
@@ -217,7 +217,7 @@ class Support(object):
     def div(self):
         # Python integer div floors, not truncate towards 0 like C
         def c_div(a, b):
-            if isinstance(a, (int, long)) and isinstance(b, (int, long)):
+            if isinstance(a, int) and isinstance(b, int):
                 return int(float(a) / b)
             else:
                 return a / b
@@ -238,7 +238,7 @@ class Support(object):
             return -1
 
     def pack_value(self, value, fuzzy=False):
-        if isinstance(value, (int, long)):
+        if isinstance(value, int):
             ret = struct.pack('<II', 0, value & 0xffffffff)
             return ret, len(ret)
         elif isinstance(value, Matrix):
@@ -247,8 +247,8 @@ class Support(object):
             if fuzzy:
                 ret = ''.join(['\\x' + hexlify(c) for c in ret])
 
-            for i in xrange(value.height):
-                for j in xrange(value.width):
+            for i in range(value.height):
+                for j in range(value.width):
                     packed = struct.pack('<d', value.data[i][j])
                     length += len(packed)
                     # Deal with differences in float precision

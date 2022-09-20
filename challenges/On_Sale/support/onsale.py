@@ -22,9 +22,9 @@
 #
 from random import choice
 
-import support as sp
-from product import Product
-import inventory as inv
+from . import support as sp
+from .product import Product
+from . import inventory as inv
 
 
 class OnSale(object):

@@ -20,7 +20,7 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-from common import DEBUG, CONFIG
+from .common import DEBUG, CONFIG
 from random import randint, choice
 import string
 

@@ -22,8 +22,8 @@
 #
 
 from random import randint, choice
-from piprng import PiPrng
-from common import DEBUG, CONFIG
+from .piprng import PiPrng
+from .common import DEBUG, CONFIG
 
 PRNG = PiPrng()
 
@@ -63,14 +63,14 @@ class TankSet(object):
 			if False == tank.is_end_of_life():
 				if True == tank.is_crit_low_level():
 					if True == DEBUG:
-						print("Tank {0} level critically low {1}.".format(tank.get_id(), tank.get_level()))
+						print(("Tank {0} level critically low {1}.".format(tank.get_id(), tank.get_level())))
 					return -1
 				if True == tank.is_low_level():
 					if True == DEBUG:
-						print("Tank {0} level is low {1}.".format(tank.get_id(), tank.get_level()))
+						print(("Tank {0} level is low {1}.".format(tank.get_id(), tank.get_level())))
 					tank.add_water(1 + CONFIG['LOW_LEVEL'] - tank.get_level())
 					if True == DEBUG:
-						print(" Autofilled to {0}.".format(tank.get_level()))
+						print((" Autofilled to {0}.".format(tank.get_level())))
 		return 0
 
 	def get_valve_change_choices(self):

@@ -22,8 +22,8 @@
 #
 from random import choice, randint, sample
 
-import support as sp
-from common import DEBUG, CONFIG
+from . import support as sp
+from .common import DEBUG, CONFIG
 
 class NOPE(object):
     def __init__(self, flag_page):
@@ -471,4 +471,4 @@ if __name__ == '__main__':
     tp.gen_random_details()
     t4d = TenFourD(tp)
     t4d.gen_totals_and_ds()
-    print t4d
+    print(t4d)

@@ -5,7 +5,7 @@ import random
 import string
 import sys
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 from struct import pack
 
 CS = {

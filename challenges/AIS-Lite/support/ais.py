@@ -139,22 +139,22 @@ class StringOfBits(object):
 		size 	= None
 		str_val = None
 		int_val = None
-		if kwargs.has_key('size'):
+		if 'size' in kwargs:
 			size = kwargs.pop('size')
-		if kwargs.has_key('str_val'):
+		if 'str_val' in kwargs:
 			str_val = kwargs.pop('str_val')
-		if kwargs.has_key('int_val'):
+		if 'int_val' in kwargs:
 			int_val = kwargs.pop('int_val')
 		if kwargs:
-			raise TypeError('StringOfBits: {0} are invalid keyword arguments'.format(kwargs.keys()))
+			raise TypeError('StringOfBits: {0} are invalid keyword arguments'.format(list(kwargs.keys())))
 
 		if None != int_val and None != str_val:
 			raise ValueError('StringOfBits: Cannot use both str_val and int_val keyword args.')
 
 		if True == DEBUG:
-			if size: print "size:{0}".format(size)
-			if int_val: print "int_val: {0}".format(int_val) 
-			if str_val: print "str_val: {0}".format(str_val)
+			if size: print("size:{0}".format(size))
+			if int_val: print("int_val: {0}".format(int_val)) 
+			if str_val: print("str_val: {0}".format(str_val))
 
 		if None != str_val:
 			if None != size and size > len(str_val):
@@ -182,7 +182,7 @@ class StringOfBits(object):
 			self.string_val = '0'*size
 
 		if True == DEBUG:
-			print " result: {0}: {1}".format(len(self.string_val), self.string_val)
+			print(" result: {0}: {1}".format(len(self.string_val), self.string_val))
 
 	def _is_valid_bits(self, str_val):
 		for bit in str_val:
@@ -199,7 +199,7 @@ class StringOfBits(object):
 				 '8': '1000',	'9': '1001',	'a': '1010',	'b': '1011',
 				 'c': '1100',	'd': '1101',	'e': '1110',	'f': '1111'}
 		digits = hex_str[2:].lower().rstrip('l')
-		bit_str = ''.join(map(lambda x: hexes[x], digits))
+		bit_str = ''.join([hexes[x] for x in digits])
 		return bit_str
 
 	def __len__(self):
@@ -263,7 +263,7 @@ class StringOfBits(object):
 
 	def increment(self):
 		l = len(self)
-		r = range(l)
+		r = list(range(l))
 		r.reverse()
 		idx = 0
 		for idx in r:
@@ -275,7 +275,7 @@ class StringOfBits(object):
 
 	def decrement(self):
 		l = len(self)
-		r = range(l)
+		r = list(range(l))
 		r.reverse()
 		idx = 0
 		for idx in r:
@@ -450,7 +450,7 @@ class MsgType1(object):
 		for idx in range(char_count):
 			bitset = bit_str[0 + (idx * 6) : 6 + (idx * 6)]
 			if True == DEBUG:
-				print "{0}-{1}: {2}".format(0 + (idx * 6), 6 + (idx * 6), int(bitset))
+				print("{0}-{1}: {2}".format(0 + (idx * 6), 6 + (idx * 6), int(bitset)))
 			ascii6_str += ais_6bit_to_ascii_payload(bitset)
 
 		return (ascii6_str, fill_bits)
@@ -619,7 +619,7 @@ class MsgType4(object):
 		for idx in range(char_count):
 			bitset = bit_str[0 + (idx * 6) : 6 + (idx * 6)]
 			if True == DEBUG:
-				print "{0}-{1}: {2}".format(0 + (idx * 6), 6 + (idx * 6), int(bitset))
+				print("{0}-{1}: {2}".format(0 + (idx * 6), 6 + (idx * 6), int(bitset)))
 			ascii6_str += ais_6bit_to_ascii_payload(bitset)
 
 		return (ascii6_str, fill_bits)
@@ -777,7 +777,7 @@ class MsgType5(object):
 		for idx in range(char_count):
 			bitset = bit_str[0 + (idx * 6) : 6 + (idx * 6)]
 			if True == DEBUG:
-				print "{0}-{1}: {2}".format(0 + (idx * 6), 6 + (idx * 6), int(bitset))
+				print("{0}-{1}: {2}".format(0 + (idx * 6), 6 + (idx * 6), int(bitset)))
 			ascii6_str += ais_6bit_to_ascii_payload(bitset)
 
 		return (ascii6_str, fill_bits)

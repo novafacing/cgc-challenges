@@ -30,7 +30,7 @@ import sys
 from array import array
 from collections import Counter
 
-from common import ERRORS, DEBUG
+from .common import ERRORS, DEBUG
 
 # random gen functions
 def random_alpha(a, b):

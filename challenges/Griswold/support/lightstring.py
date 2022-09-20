@@ -20,8 +20,8 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-from common import ERRORS, DEBUG
-from receptacle import Receptacle
+from .common import ERRORS, DEBUG
+from .receptacle import Receptacle
 
 
 LIGHT_STRING_MODELS = {
@@ -68,7 +68,7 @@ class LightString(object):
 
 	def get_receptacle_by_id(self, receptacle_id):
 		if True == DEBUG:
-			print('LightString.get_receptacle_by_id: rid:{0}'.format(receptacle_id))
+			print(('LightString.get_receptacle_by_id: rid:{0}'.format(receptacle_id)))
 
 		return self.receptacle.get_receptacle_by_id(receptacle_id)
 

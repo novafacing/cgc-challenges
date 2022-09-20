@@ -1,4 +1,4 @@
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import random
 import string
 import struct

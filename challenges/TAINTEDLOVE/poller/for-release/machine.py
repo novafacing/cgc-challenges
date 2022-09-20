@@ -23,7 +23,7 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-from generator.actions import Actions, Variable
+from lib.generator.actions import Actions, Variable
 from random import choice, randint
 import string
 import struct

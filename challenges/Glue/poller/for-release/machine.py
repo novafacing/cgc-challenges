@@ -5,7 +5,7 @@ import string
 import io
 import tarfile
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 
 
 def rs(n=16):

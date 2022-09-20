@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import random, string, struct
 
 def random_string_n(size=20):

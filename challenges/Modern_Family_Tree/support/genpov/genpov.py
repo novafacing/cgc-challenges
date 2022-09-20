@@ -65,7 +65,7 @@ class TemplatePoller(Actions):
 
     def start(self):
         if DEBUG:
-            print "------- start -----------"
+            print("------- start -----------")
         self._gen_status_msgs()
         self.state['s'] = FamilyTree(flag_page=self.magic_page)
         self.state['pids'] = set()
@@ -78,7 +78,7 @@ class TemplatePoller(Actions):
         Add a new person
         '''
         if DEBUG:
-            print "cmd: add person -----------"
+            print("cmd: add person -----------")
 
         if person != None:
             p = person
@@ -98,7 +98,7 @@ class TemplatePoller(Actions):
         Set biological child relationship between child and parents
         '''
         if DEBUG:
-            print "cmd: set biological child -----------"
+            print("cmd: set biological child -----------")
 
         [child, mother, father] = self.state['s'].get_random_people(3)
         if self.state['s'].p_unk == child or mother == father:
@@ -126,7 +126,7 @@ class TemplatePoller(Actions):
         people => [child, parent1, parent2] (one of parent1 or parent2 can be p_unk)
         '''
         if DEBUG:
-            print "cmd: set adopted child -----------"
+            print("cmd: set adopted child -----------")
 
         if people != []:
             [child, parent1, parent2] = people
@@ -158,7 +158,7 @@ class TemplatePoller(Actions):
         people => [parent1, parent2]
         '''
         if DEBUG:
-            print "cmd: set union -----------"
+            print("cmd: set union -----------")
 
         if people != []:
             [parent1, parent2] = people
@@ -189,7 +189,7 @@ class TemplatePoller(Actions):
         people => [parent1, parent2]
         '''
         if DEBUG:
-            print "cmd: set separated -----------"
+            print("cmd: set separated -----------")
 
         if people != []:
             [parent1, parent2] = people
@@ -219,7 +219,7 @@ class TemplatePoller(Actions):
         Set a person as deceased
         '''
         if DEBUG:
-            print "cmd: set deceased -----------"
+            print("cmd: set deceased -----------")
 
         [parent1] = self.state['s'].get_random_people(1)
         if self.state['s'].p_unk == parent1:
@@ -313,7 +313,7 @@ class TemplatePoller(Actions):
         Quit cleanly
         '''
         if DEBUG:
-            print "cmd: quit -----------"
+            print("cmd: quit -----------")
 
         return -1
 

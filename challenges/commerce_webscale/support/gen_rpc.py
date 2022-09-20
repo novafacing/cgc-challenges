@@ -39,7 +39,7 @@ class Spec(object):
 
     def parse_enum(self, s, l, t):
         values = []
-        for x in xrange(0, len(t), 2):
+        for x in range(0, len(t), 2):
             name, value = t[x:x+2]
             if name in self.state:
                 raise Exception('Duplicate constant `%s\' in enum' % name)
@@ -49,7 +49,7 @@ class Spec(object):
         return [Enum(values)]
 
     def parse_struct(self, s, l, t):
-        if len(set(map(lambda x: x.identifier, t))) != len(t):
+        if len(set([x.identifier for x in t])) != len(t):
             raise Exception('Duplicate identifier in struct')
 
         return [Struct(t)]
@@ -239,7 +239,7 @@ class Spec(object):
         f.write('typedef unsigned char opaque;\n')
         f.write('typedef char string;\n')
         f.write('/* Begin constants */\n')
-        for name, value in self.state.items():
+        for name, value in list(self.state.items()):
             value.generate_def(self.state, f)
         f.write('/* End constants */\n\n')
         for d in self.declarations:
@@ -573,7 +573,7 @@ class Union(object):
         self.discriminant.generate_def(state, f)
         f.write(';\n')
         f.write('union {\n')
-        for v, d in self.cases.items():
+        for v, d in list(self.cases.items()):
             if isinstance(d, Void): continue
             d.generate_def(state, f)
             f.write(';\n')
@@ -586,7 +586,7 @@ class Union(object):
     def generate_marshal(self, state, f, prefix):
         self.discriminant.generate_marshal(state, f, prefix)
         f.write('switch (%s.%s) {\n' % (prefix, self.discriminant.identifier))
-        for v, d in self.cases.items():
+        for v, d in list(self.cases.items()):
             if v is None:
                 f.write('default:\n')
             else:
@@ -600,7 +600,7 @@ class Union(object):
     def generate_unmarshal(self, state, f, prefix):
         self.discriminant.generate_unmarshal(state, f, prefix)
         f.write('switch (%s.%s) {\n' % (prefix, self.discriminant.identifier))
-        for v, d in self.cases.items():
+        for v, d in list(self.cases.items()):
             if v is None:
                 f.write('default:\n')
             else:
@@ -623,7 +623,7 @@ class Program(object):
         
         if isinstance(self.number, str):
             self.number = self.state[self.number]
-        if isinstance(self.number, int) or isinstance(self.number, long):
+        if isinstance(self.number, int) or isinstance(self.number, int):
             if self.number < 0:
                 raise Exception("Program number cannot be negative")
         else:
@@ -732,7 +732,7 @@ class Procedure(object):
 
     def generate_server_h(self, state, f, version):
         f.write('%s %s_%s(' % (self.return_type, version, self.identifier))
-        for i in xrange(0, len(self.args)):
+        for i in range(0, len(self.args)):
             if i != 0:
                 f.write(', ')
             f.write(str(self.args[i]))
@@ -742,14 +742,14 @@ class Procedure(object):
         f.write('static void __%s_%s(rpc_msg *msg, unsigned char *buf, size_t avail) {\n' % (version, self.identifier))
         f.write('int _result;\n')
         f.write('rpc_msg reply;\n')
-        for i in xrange(0, len(self.args)):
+        for i in range(0, len(self.args)):
             f.write('%s a%d;\n' % (self.args[i], i))
         f.write('%s retval;\n' % (self.return_type))
-        for i in xrange(0, len(self.args)):
+        for i in range(0, len(self.args)):
             f.write('_result = unmarshal_%s(&a%d, &buf, &avail);\n' % (self.args[i], i))
             # XXX verify result
         f.write('retval = %s_%s(' % (version, self.identifier))
-        for i in xrange(0, len(self.args)):
+        for i in range(0, len(self.args)):
             if i != 0:
                 f.write(', ')
             f.write('a%d' % i)
@@ -770,7 +770,7 @@ class Procedure(object):
 
     def generate_client_h(self, state, f):
         f.write('%s %s (' % (self.return_type, self.identifier))
-        for i in xrange(0, len(self.args)):
+        for i in range(0, len(self.args)):
             if i != 0:
                 f.write(', ')
             f.write(str(self.args[i]))
@@ -778,7 +778,7 @@ class Procedure(object):
 
     def generate_client_c(self, state, f):
         f.write('%s %s (' % (self.return_type, self.identifier))
-        for i in xrange(0, len(self.args)):
+        for i in range(0, len(self.args)):
             if i != 0:
                 f.write(', ')
             f.write('%s a%d' % (self.args[i], i))
@@ -800,7 +800,7 @@ class Procedure(object):
         f.write('msg.body.value.cbody.verf.body.count = 0;\n')
         f.write('_result = marshal_rpc_msg(&msg, &buf, &avail);\n')
         f.write('ASSERT_RESULT();\n')
-        for i in xrange(0, len(self.args)):
+        for i in range(0, len(self.args)):
             f.write('_result = marshal_%s(&a%d, &buf, &avail);\n' % (self.args[i], i))
             f.write('ASSERT_RESULT();\n')
         f.write('_result = _rpc_send(&__rpc, __buf, sizeof(__buf) - avail);\n')

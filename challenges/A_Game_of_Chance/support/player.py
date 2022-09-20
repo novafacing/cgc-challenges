@@ -23,8 +23,8 @@
 from random import randint
 from operator import add, mul
 
-import support as sp
-from common import DEBUG, CONFIG
+from . import support as sp
+from .common import DEBUG, CONFIG
 
 class Player(object):
     def __init__(self, pid=0, magic_page=''):
@@ -51,23 +51,23 @@ class Player(object):
     def exchange_money(self, amount):
         self.wallet += amount
         if DEBUG:
-            print "[p{0}] exchanged ${1}, new wallet balance ${2}".format(self.id, amount, self.wallet)
+            print("[p{0}] exchanged ${1}, new wallet balance ${2}".format(self.id, amount, self.wallet))
 
     def update_fp_idx(self, shift):
         if DEBUG:
-            print "[p{0}] fp idx {1} + shift {2}".format(self.id, self.current_mp_idx, shift)
+            print("[p{0}] fp idx {1} + shift {2}".format(self.id, self.current_mp_idx, shift))
         self.current_mp_idx = (self.current_mp_idx + shift) % 4096
         if DEBUG:
-            print "[p{0}] new fp idx {1}".format(self.id, self.current_mp_idx)
+            print("[p{0}] new fp idx {1}".format(self.id, self.current_mp_idx))
 
     def win(self):
         self.update_fp_idx(CONFIG['WIN_SHIFT'])
         if DEBUG:
-            print "[p{0}] win".format(self.id)
+            print("[p{0}] win".format(self.id))
 
     def loss(self):
         self.update_fp_idx(CONFIG['LOSS_SHIFT'])
         if DEBUG:
-            print "[p{0}] loss".format(self.id)
+            print("[p{0}] loss".format(self.id))
 
 

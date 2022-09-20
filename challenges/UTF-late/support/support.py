@@ -41,7 +41,7 @@ class Support(object):
         return self.random_alpha(1, self.MAX_FILE_SIZE)
 
     def get_filename(self):
-        return random.choice(self.files.keys()) if self.files else None
+        return random.choice(list(self.files.keys())) if self.files else None
 
     def read_file(self, name):
         if name in self.files:

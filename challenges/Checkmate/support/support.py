@@ -45,33 +45,33 @@ class Pawn(Piece):
         # Move one
         r = self.row + (1 if self.white else -1)
         c = self.col
-        if r in xrange(8) and c in xrange(8) and not board.get_piece(r, c):
+        if r in range(8) and c in range(8) and not board.get_piece(r, c):
             ret.append(Move(self, r, c))
 
         # Move two
         r = self.row + (2 if self.white else -2)
         c = self.col
         if ret and self.row == (1 if self.white else 6) and \
-                r in xrange(8) and c in xrange(8) and not board.get_piece(r, c):
+                r in range(8) and c in range(8) and not board.get_piece(r, c):
             ret.append(Move(self, r, c))
 
         # Capture
         r = self.row + (1 if self.white else -1)
         c = self.col - 1
-        if r in xrange(8) and c in xrange(8) and board.get_piece(r, c) and \
+        if r in range(8) and c in range(8) and board.get_piece(r, c) and \
                 board.get_piece(r, c).white != self.white:
             ret.append(Move(self, r, c, capture=True))
 
-        if r in xrange(8) and c in xrange(8) and board.ep_row == r and board.ep_col == c:
+        if r in range(8) and c in range(8) and board.ep_row == r and board.ep_col == c:
             ret.append(Move(self, r, c, capture=True))
 
         r = self.row + (1 if self.white else -1)
         c = self.col + 1
-        if r in xrange(8) and c in xrange(8) and board.get_piece(r, c) and \
+        if r in range(8) and c in range(8) and board.get_piece(r, c) and \
                 board.get_piece(r, c).white != self.white:
             ret.append(Move(self, r, c, capture=True))
 
-        if r in xrange(8) and c in xrange(8) and board.ep_row == r and board.ep_col == c:
+        if r in range(8) and c in range(8) and board.ep_row == r and board.ep_col == c:
             ret.append(Move(self, r, c, capture=True))
 
         return ret
@@ -91,7 +91,7 @@ class Rook(Piece):
             r = self.row + d[0]
             c = self.col + d[1]
 
-            while r in xrange(8) and c in xrange(8) and not board.get_piece(r, c):
+            while r in range(8) and c in range(8) and not board.get_piece(r, c):
                 ret.append(Move(self, r, c))
                 r += d[0]
                 c += d[1]
@@ -117,7 +117,7 @@ class Knight(Piece):
             r = self.row + m[0]
             c = self.col + m[1]
 
-            if r in xrange(8) and c in xrange(8):
+            if r in range(8) and c in range(8):
                 p = board.get_piece(r, c)
                 if not p:
                     ret.append(Move(self, r, c))
@@ -141,7 +141,7 @@ class Bishop(Piece):
             r = self.row + d[0]
             c = self.col + d[1]
 
-            while r in xrange(8) and c in xrange(8) and not board.get_piece(r, c):
+            while r in range(8) and c in range(8) and not board.get_piece(r, c):
                 ret.append(Move(self, r, c))
                 r += d[0]
                 c += d[1]
@@ -181,7 +181,7 @@ class King(Piece):
             r = self.row + m[0]
             c = self.col + m[1]
 
-            if r in xrange(8) and c in xrange(8):
+            if r in range(8) and c in range(8):
                 p = board.get_piece(r, c)
                 if not p or (p and p.white != self.white):
                     if not board.at_risk(self.white, r, c, True):
@@ -227,7 +227,7 @@ class Move(object):
 
 class Board(object):
     def __init__(self):
-        self.board = [['' for x in xrange(8)] for y in xrange(8)]
+        self.board = [['' for x in range(8)] for y in range(8)]
         self.board[0] = list('rnbqkbnr')
         self.board[1] = list('pppppppp')
         self.board[6] = list('PPPPPPPP')
@@ -265,11 +265,11 @@ class Board(object):
 
         reset = '\033[0m'
 
-        for i in xrange(8):
+        for i in range(8):
             row = i if white else 8 - i - 1
             ret += str(8 - row) + ' '
 
-            for j in xrange(8):
+            for j in range(8):
                 col = j if white else 8 - j - 1
                 p = self.get_piece(8 - row - 1, col)
                 color = (((row % 2) + (col % 2)) % 2) << 1
@@ -287,20 +287,20 @@ class Board(object):
         return ret
 
     def set_piece(self, piece, row, col):
-        if row not in xrange(8) or col not in xrange(8):
+        if row not in range(8) or col not in range(8):
             return
 
         abbrev = piece.abbrev()
         self.board[row][col] = abbrev.lower() if piece.white else abbrev
 
     def clear_piece(self, row, col):
-        if row not in xrange(8) or col not in xrange(8):
+        if row not in range(8) or col not in range(8):
             return
 
         self.board[row][col] = ''
 
     def get_piece(self, row, col):
-        if row not in xrange(8) or col not in xrange(8):
+        if row not in range(8) or col not in range(8):
             return None
 
         abbrev = self.board[row][col]
@@ -379,8 +379,8 @@ class Board(object):
     def all_moves(self, white):
         ret = []
 
-        for row in xrange(8):
-            for col in xrange(8):
+        for row in range(8):
+            for col in range(8):
                 p = self.get_piece(row, col)
                 if p and p.white == white:
                     ret += p.moves(self)
@@ -388,8 +388,8 @@ class Board(object):
         return ret
 
     def at_risk(self, white, row, col, skip_kings=False):
-        for r in xrange(8):
-            for c in xrange(8):
+        for r in range(8):
+            for c in range(8):
                 p = self.get_piece(r, c)
                 if not p:
                     continue
@@ -409,8 +409,8 @@ class Board(object):
         return False
 
     def check(self, white):
-        for r in xrange(8):
-            for c in xrange(8):
+        for r in range(8):
+            for c in range(8):
                 p = self.get_piece(r, c)
                 if not p:
                     continue
@@ -420,8 +420,8 @@ class Board(object):
 
 
     def checkmate(self, white):
-        for r in xrange(8):
-            for c in xrange(8):
+        for r in range(8):
+            for c in range(8):
                 p = self.get_piece(r, c)
                 if not p:
                     continue
@@ -436,8 +436,8 @@ class Board(object):
         if self.stalemate_ctr >= 100:
             return True
 
-        for r in xrange(8):
-            for c in xrange(8):
+        for r in range(8):
+            for c in range(8):
                 p = self.get_piece(r, c)
                 if not p:
                     continue
@@ -465,7 +465,7 @@ class Board(object):
 
         start_col = min(king_col, rook_col) + (1 if kingside else 2)
         end_col = max(king_col, rook_col)
-        for i in xrange(start_col, end_col):
+        for i in range(start_col, end_col):
             if self.get_piece(row, i) or self.at_risk(white, row, i, False):
                 return False
 
@@ -473,8 +473,8 @@ class Board(object):
 
     def get_empty_squares(self):
         ret = []
-        for row in xrange(8):
-            for col in xrange(8):
+        for row in range(8):
+            for col in range(8):
                 if not self.board[row][col]:
                     ret.append((row, col))
 
@@ -487,7 +487,7 @@ class Support(object):
 
     def calculate_csum(self, result):
         ret = 0
-        for i in xrange(1024):
+        for i in range(1024):
             ret = ret ^ ord(self.magic_page[i * 4])
         return (ret ^ result) & 0xffffffff
 

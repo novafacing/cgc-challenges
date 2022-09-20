@@ -184,7 +184,7 @@ def main():
     header.close()
 
     #build and write code file
-    code.write(CF_TEMPLATE%"".join(dissectors.values()))
+    code.write(CF_TEMPLATE%"".join(list(dissectors.values())))
     code.close()
 
     #build and write pollinfo file

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from generator.actions import Actions, Variable
+from lib.generator.actions import Actions, Variable
 from struct import *
 from random import *
 import struct

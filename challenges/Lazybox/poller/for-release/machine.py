@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-from generator.actions import Actions, Variable
+from lib.generator.actions import Actions, Variable
 from random import *
 import struct
 import ctypes as ct

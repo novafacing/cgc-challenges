@@ -20,8 +20,8 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-from common import ERRORS, DEBUG
-from receptacle import Receptacle
+from .common import ERRORS, DEBUG
+from .receptacle import Receptacle
 
 OUTLET_MODELS = {
 	'FIFTEEN_AMP': 15,
@@ -60,7 +60,7 @@ class Outlet(object):
 
 	def get_receptacle_by_id(self, receptacle_id):
 		if True == DEBUG:
-			print('Outlet.get_receptacle_by_id: rid:{0}'.format(receptacle_id))
+			print(('Outlet.get_receptacle_by_id: rid:{0}'.format(receptacle_id)))
 		r = self.r1.get_receptacle_by_id(receptacle_id)
 		if None == r:
 			r = self.r2.get_receptacle_by_id(receptacle_id)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from io import StringIO
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import random
 import string
 import struct

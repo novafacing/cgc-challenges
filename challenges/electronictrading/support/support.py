@@ -30,7 +30,7 @@ class Pool(object):
 
     def alloc(self):
         if not self.freeblks:
-            self.freeblks = range(self.page, self.page + 0xfff, self.size)
+            self.freeblks = list(range(self.page, self.page + 0xfff, self.size))
             self.freeblks.pop()
             self.page -= 0x1000
 

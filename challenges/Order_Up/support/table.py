@@ -22,9 +22,9 @@
 #
 from random import randint
 
-import support as sp
-from common import DEBUG, CONFIG
-from menu import FOOD_TYPE
+from . import support as sp
+from .common import DEBUG, CONFIG
+from .menu import FOOD_TYPE
 
 
 TABLE_STATUS = {
@@ -53,32 +53,32 @@ class Table:
 
     def add_customers(self, customers):
         if DEBUG:
-            print " table {0}: initial customers: {1}".format(self.id, self.customers)
+            print(" table {0}: initial customers: {1}".format(self.id, self.customers))
         if DEBUG:
-            print " table {0}: customers to add: {1}".format(self.id, customers)
+            print(" table {0}: customers to add: {1}".format(self.id, customers))
 
         for c in customers:
             self.add_customer(c)
             if DEBUG:
-                print " table {0}: added customer: {1}\n".format(self.id, c.id)
+                print(" table {0}: added customer: {1}\n".format(self.id, c.id))
 
         if DEBUG:
-            print " table {0}: updated customers: {1}".format(self.id, self.customers)
+            print(" table {0}: updated customers: {1}".format(self.id, self.customers))
 
         self.status += 1
         if DEBUG:
-            print " new table status {0}".format(self.status)
+            print(" new table status {0}".format(self.status))
 
     def is_vacant(self):
         res = TABLE_STATUS['VACANT'] == self.status
         if DEBUG:
-            print " table {0} is {1}vacant".format(self.id, "" if True == res else "not ")
+            print(" table {0} is {1}vacant".format(self.id, "" if True == res else "not "))
         return res
 
     def is_finished(self):
         res = TABLE_STATUS['FINISHED'] == self.status
         if DEBUG:
-            print " table {0} is {1}finished".format(self.id, "" if True == res else "not ")
+            print(" table {0} is {1}finished".format(self.id, "" if True == res else "not "))
         return res
 
     def get_food_item(self, c_id, magic_page, ftype, menu):
@@ -138,19 +138,19 @@ class Table:
             ftype = self.get_order_ftype_from_status()
             if -1 != ftype:
                 if DEBUG:
-                    print " table {0} currently seated customers: {1}".format(self.id, self.customers)
+                    print(" table {0} currently seated customers: {1}".format(self.id, self.customers))
                 for c in self.customers:
                     if DEBUG:
-                        print " table {0} getting order for customer: {1}".format(self.id, c.id)
+                        print(" table {0} getting order for customer: {1}".format(self.id, c.id))
                     food = self.get_food_item(c.id, magic_page, ftype, menu)
                     orders.append(Order(self.id, c.id, ftype, food))
 
                 self.status += 1
                 if DEBUG:
-                    print " table {0} new table status {1}".format(self.id, self.status)
+                    print(" table {0} new table status {1}".format(self.id, self.status))
         else:
             if DEBUG:
-                print " table {0} status not RTO {1} not in [{2}|{3}|{4}]".format(self.id, self.status, TABLE_STATUS['APP_RTO'], TABLE_STATUS['MEAL_RTO'], TABLE_STATUS['DES_RTO'])
+                print(" table {0} status not RTO {1} not in [{2}|{3}|{4}]".format(self.id, self.status, TABLE_STATUS['APP_RTO'], TABLE_STATUS['MEAL_RTO'], TABLE_STATUS['DES_RTO']))
         return orders
 
     def get_customer_by_id(self, c_id):
@@ -168,19 +168,19 @@ class Table:
             ftype = self.get_deliver_ftype_from_status()
             if -1 != ftype:
                 if DEBUG:
-                    print " table {0} currently seated customers: {1}".format(self.id, self.customers)
+                    print(" table {0} currently seated customers: {1}".format(self.id, self.customers))
                 for o in orders:
                     c = self.get_customer_by_id(o.cid)
                     if DEBUG:
-                        print " table {0} delivering item to customer: {1}".format(self.id, c.id)
+                        print(" table {0} delivering item to customer: {1}".format(self.id, c.id))
                     c.accept_food(o.fitem)
 
                 self.status += 1
                 if DEBUG:
-                    print " table {0} new table status {1}".format(self.id, self.status)
+                    print(" table {0} new table status {1}".format(self.id, self.status))
         else:
             if DEBUG:
-                print " table {0} status not WAIT {1} not in [{2}|{3}|{4}]".format(self.id, self.status, TABLE_STATUS['APP_WAIT'], TABLE_STATUS['MEAL_WAIT'], TABLE_STATUS['DES_WAIT'])
+                print(" table {0} status not WAIT {1} not in [{2}|{3}|{4}]".format(self.id, self.status, TABLE_STATUS['APP_WAIT'], TABLE_STATUS['MEAL_WAIT'], TABLE_STATUS['DES_WAIT']))
 
     def bus_table(self):
         del(self.customers)

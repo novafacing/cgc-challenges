@@ -127,7 +127,7 @@ class Tree():
 		for each in node['children']:
 			self.generate_query_recurse(output, indent + 1, each)
 
-from generator.actions import Actions, Variable
+from lib.generator.actions import Actions, Variable
 
 class ACSPollGenerator(Actions):
 

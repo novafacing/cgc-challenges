@@ -22,8 +22,8 @@
 #
 from random import randint
 
-import support as sp
-from common import CONFIG
+from . import support as sp
+from .common import CONFIG
 
 class Product:
     def __init__(self, barcode="", description="", model_num=0, cost=0.0):

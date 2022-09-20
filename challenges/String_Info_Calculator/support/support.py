@@ -30,7 +30,7 @@ import sys
 from array import array
 from collections import Counter
 
-from common import DEBUG
+from .common import DEBUG
 
 
 # random gen functions

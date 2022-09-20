@@ -37,7 +37,7 @@ class Support(object):
 
     def do_chess(self):
         piece = random.choice('prnbqk')
-        board = [list(' ' * 8) for _ in xrange(8)]
+        board = [list(' ' * 8) for _ in range(8)]
 
         x = random.randint(0, 7)
         y = random.randint(0, 6 if piece == 'p' else 7)
@@ -166,7 +166,7 @@ class Support(object):
             return ret
 
         iterations = random.randint(100, 1000)
-        for i in xrange(iterations):
+        for i in range(iterations):
             board = random.choice([transpose, swap_rows])(board)
 
         self.safari_party[0] = 0

@@ -22,7 +22,7 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #THE SOFTWARE.
 
-from generator.actions import Actions, Variable
+from lib.generator.actions import Actions, Variable
 import random
 import string
 import struct

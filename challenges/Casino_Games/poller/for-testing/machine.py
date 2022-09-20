@@ -27,7 +27,7 @@ import random
 import struct
 from collections import OrderedDict
 
-from generator.actions import Actions, Variable
+from lib.generator.actions import Actions, Variable
 
 class Deck():
 	SIZE_OF_DECK = 52

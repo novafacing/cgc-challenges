@@ -28,7 +28,7 @@ import random
 import string
 
 __author__ = 'scsi'
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import string
 import sys
 # add root dir to path so we can use common files for this and POV gen

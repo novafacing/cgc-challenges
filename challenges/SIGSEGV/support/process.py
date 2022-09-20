@@ -35,7 +35,7 @@ def escape(data):
 def rc4ish(data):
     '''A python implementation of our lovable psuedo-hashing algorithm'''
 
-    s = [i for i in reversed(range(256))]
+    s = [i for i in reversed(list(range(256)))]
     j = 0
     out = ["\x00"]*16
     key = data

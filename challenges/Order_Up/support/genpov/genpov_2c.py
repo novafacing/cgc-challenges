@@ -89,7 +89,7 @@ class OnSalePoller(Actions):
         self.state['new_prod'] = None
 
         if DEBUG:
-            print "------- start -----------"
+            print("------- start -----------")
 
     def buy_products(self):
         '''
@@ -97,7 +97,7 @@ class OnSalePoller(Actions):
         '''
         self.send_cmd(self.CMD_BUY)
         if DEBUG:
-            print "cmd: buy products"
+            print("cmd: buy products")
 
         # get list of products from inventory (duplicates are ok)
         products = self.state['e'].get_rand_products_to_buy(count=randint(1,50))
@@ -112,7 +112,7 @@ class OnSalePoller(Actions):
             write_str += (str(p.barcode))
 
             if DEBUG:
-                print "\t buy: {0}".format(p.barcode)
+                print("\t buy: {0}".format(p.barcode))
 
             total_cost += p.get_sale_price()
 
@@ -124,7 +124,7 @@ class OnSalePoller(Actions):
         self.recv_double(total_cost, match=False) 
 
         if DEBUG:
-            print "\t total cost: {0}".format(total_cost)
+            print("\t total cost: {0}".format(total_cost))
 
         #     self.recv_status(self.STATUS_ERR)
         self.recv_status(self.STATUS_OK)
@@ -137,7 +137,7 @@ class OnSalePoller(Actions):
         '''
         self.send_cmd(self.CMD_CHECK)
         if DEBUG:
-            print "cmd: check product"
+            print("cmd: check product")
 
         # select a product from existing inventory
         invalid = False
@@ -176,7 +176,7 @@ class OnSalePoller(Actions):
         '''
         self.send_cmd(self.CMD_ADD)
         if DEBUG:
-            print "cmd: add product"
+            print("cmd: add product")
 
         # gen new product
         overflow_byte_cnt = 20
@@ -225,7 +225,7 @@ class OnSalePoller(Actions):
         '''
         self.send_cmd(self.CMD_RM)
         if DEBUG:
-            print "cmd: rm product"
+            print("cmd: rm product")
 
         # select a product from existing inventory
         invalid = False
@@ -253,7 +253,7 @@ class OnSalePoller(Actions):
         '''
         self.send_cmd(self.CMD_UPDATE)
         if DEBUG:
-            print "cmd: update product"
+            print("cmd: update product")
 
         # select a product from existing inventory
         invalid = False
@@ -305,7 +305,7 @@ class OnSalePoller(Actions):
         '''
         self.send_cmd(self.CMD_ONSALE)
         if DEBUG:
-            print "cmd: set onsale"
+            print("cmd: set onsale")
 
         # select a product from existing inventory
         invalid = False
@@ -339,7 +339,7 @@ class OnSalePoller(Actions):
         '''
         self.send_cmd(self.CMD_NOSALE)
         if DEBUG:
-            print "cmd: set no sale"
+            print("cmd: set no sale")
 
         # select a product from existing inventory
         invalid = False
@@ -364,7 +364,7 @@ class OnSalePoller(Actions):
         '''
         self.send_cmd(self.CMD_LIST)
         if DEBUG:
-            print "cmd: list products"
+            print("cmd: list products")
 
         opt_model_num = chr(randint(1, 200))
         opt_cost = chr(2) # don't want this option on; can't match float reliably
@@ -405,7 +405,7 @@ class OnSalePoller(Actions):
         '''
         self.send_cmd(self.CMD_QUIT)
         if DEBUG:
-            print "cmd: quit -----------"
+            print("cmd: quit -----------")
 
         self.recv_status(self.STATUS_QUIT)
         return -1

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from collections import deque
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import random
 import struct
 import string

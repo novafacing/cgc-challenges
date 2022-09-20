@@ -25,7 +25,7 @@
 
 # TODO: test error states, e.g. invalid syscalls, invalid arguments, invalid tids
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 from random import choice, randint
 import imp
 import os

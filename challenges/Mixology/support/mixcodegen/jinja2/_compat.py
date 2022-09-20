@@ -18,14 +18,14 @@ _identity = lambda x: x
 
 
 if not PY2:
-    unichr = chr
+    chr = chr
     range_type = range
     text_type = str
     string_types = (str,)
 
-    iterkeys = lambda d: iter(d.keys())
-    itervalues = lambda d: iter(d.values())
-    iteritems = lambda d: iter(d.items())
+    iterkeys = lambda d: iter(list(d.keys()))
+    itervalues = lambda d: iter(list(d.values()))
+    iteritems = lambda d: iter(list(d.items()))
 
     import pickle
     from io import BytesIO, StringIO
@@ -47,22 +47,22 @@ if not PY2:
     get_next = lambda x: x.__next__
 
 else:
-    unichr = unichr
-    text_type = unicode
+    chr = chr
+    text_type = str
     range_type = xrange
-    string_types = (str, unicode)
+    string_types = (str, str)
 
-    iterkeys = lambda d: d.iterkeys()
-    itervalues = lambda d: d.itervalues()
-    iteritems = lambda d: d.iteritems()
+    iterkeys = lambda d: iter(d.keys())
+    itervalues = lambda d: iter(d.values())
+    iteritems = lambda d: iter(d.items())
 
-    import cPickle as pickle
-    from cStringIO import StringIO as BytesIO, StringIO
+    import pickle as pickle
+    from io import StringIO as BytesIO, StringIO
     NativeStringIO = BytesIO
 
     exec('def reraise(tp, value, tb=None):\n raise tp, value, tb')
 
-    from itertools import imap, izip, ifilter
+    
     intern = intern
 
     def implements_iterator(cls):
@@ -75,10 +75,10 @@ else:
         cls.__str__ = lambda x: x.__unicode__().encode('utf-8')
         return cls
 
-    get_next = lambda x: x.next
+    get_next = lambda x: x.__next__
 
     def encode_filename(filename):
-        if isinstance(filename, unicode):
+        if isinstance(filename, str):
             return filename.encode('utf-8')
         return filename
 
@@ -106,4 +106,4 @@ def with_metaclass(meta, *bases):
 try:
     from urllib.parse import quote_from_bytes as url_quote
 except ImportError:
-    from urllib import quote as url_quote
+    from urllib.parse import quote as url_quote

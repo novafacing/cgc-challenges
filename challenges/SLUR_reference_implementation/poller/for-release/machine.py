@@ -2,7 +2,7 @@
 
 
 from functools import partial
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import copy
 import inspect
 import random

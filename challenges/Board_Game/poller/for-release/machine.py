@@ -13,7 +13,7 @@
 # keep a table of piece locations
 # track moves
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import random
 
 LOG_ENABLED = False

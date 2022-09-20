@@ -20,9 +20,9 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-import support as sp
+from . import support as sp
 
-from product import Product
+from .product import Product
 
 C_HEAD = '''/*
  * Copyright (C) Narf Industries <info@narfindustries.com>

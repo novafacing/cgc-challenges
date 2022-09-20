@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import numpy as np
 import random
 import struct

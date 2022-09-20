@@ -3,7 +3,7 @@
 # Copyright (C) 2014 Dustin Fraze <df@cromulence.co>
 #
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import random
 
 class Contact():

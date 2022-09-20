@@ -3,7 +3,7 @@
 import struct
 import string
 import random
-from generator.actions import Actions
+from lib.generator.actions import Actions
 
 
 class Packet():

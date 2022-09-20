@@ -20,7 +20,7 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-from common import ERRORS, DEBUG
+from .common import ERRORS, DEBUG
 
 
 LOAD_TYPE = {
@@ -37,7 +37,7 @@ class Receptacle(object):
 		self.load_type = LOAD_TYPE['NO_LOAD']
 		self.load = None
 		if True == DEBUG:
-			print('Receptacle.__init__() created amp_rating:{0}, r_id:{1}'.format(amp_rating, r_id))
+			print(('Receptacle.__init__() created amp_rating:{0}, r_id:{1}'.format(amp_rating, r_id)))
 
 	def get_id(self):
 		return self.id

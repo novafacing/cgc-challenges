@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import random
 from struct import pack, unpack
 import ctypes

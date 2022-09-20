@@ -22,8 +22,8 @@
 #
 from random import choice, randint
 
-import support as sp
-from common import DEBUG, CONFIG
+from . import support as sp
+from .common import DEBUG, CONFIG
 
 # Plain content, send SVU as UINT32 and STI as UCHAR
 # Serialized content, send SVU as UINT32, STI as UINT32, and name as series of chars.
@@ -248,11 +248,11 @@ if __name__ == '__main__':
         item = item_type()
         item.rand_content()
 
-        print item
-        print ''.join(["\\x{0:02x}".format(ord(c)) for c in item.get_plain_content()])
-        print ''.join(["\\x{0:02x}".format(ord(c)) for c in item.get_serialized_content()])
+        print(item)
+        print(''.join(["\\x{0:02x}".format(ord(c)) for c in item.get_plain_content()]))
+        print(''.join(["\\x{0:02x}".format(ord(c)) for c in item.get_serialized_content()]))
         b.append(item)
 
-    print b
+    print(b)
 
 

@@ -30,6 +30,7 @@ import sys
 from array import array
 import numpy as np
 from collections import Counter
+from functools import reduce
 
 
 class MathSupport(object):
@@ -81,7 +82,7 @@ class MathSupport(object):
     def _gen_list(self, list_size):
         count = 0
         for idx in range(list_size):
-            val = randint(-(sys.maxint - 2), sys.maxint - 2)
+            val = randint(-(sys.maxsize - 2), sys.maxsize - 2)
 
             if count == list_size:
                 continue
@@ -111,7 +112,7 @@ class MathSupport(object):
                     self.DBL_LIST.append(self.DBL_LIST[-1])
 
         if self.DEBUG:
-            print("\nlist_size: {0}".format(count))
+            print(("\nlist_size: {0}".format(count)))
 
     #### Protocol Funcs ####
 
@@ -196,7 +197,7 @@ class MathSupport(object):
         DBL_LIST has double values
         """
         if self.DEBUG:
-            print("  val_list: {0}\n".format(val_list))
+            print(("  val_list: {0}\n".format(val_list)))
         if internal_list == True:
             if self.list_type == self.LIST_TYPE["INT32"]:
                 val_list = self.INT_LIST
@@ -208,20 +209,20 @@ class MathSupport(object):
         if self.list_type == self.LIST_TYPE["INT32"]:
             fmt = length * "i"
             if self.DEBUG:
-                print(
+                print((
                     " INT32 list. len: {0}\n fmt: {1}\n list: {2}".format(
                         length, fmt, val_list
                     )
-                )
+                ))
             # return struct.pack(fmt, length, *val_list)
         else:
             fmt = length * "d"
             if self.DEBUG:
-                print(
+                print((
                     " DBL64 list. len: {0}\n fmt: {1}\n list: {2}".format(
                         length, fmt, val_list
                     )
-                )
+                ))
             # return struct.pack(fmt, length, *val_list)
 
         res = [struct.pack("I", length), struct.pack(fmt, *val_list)]

@@ -4,7 +4,7 @@ import random
 import string
 from struct import pack, unpack
 import ctypes 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import random
 
 SLS_TYPE_CHANGESPEC  = 0x01

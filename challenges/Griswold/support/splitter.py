@@ -20,8 +20,8 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-from common import ERRORS, DEBUG
-from receptacle import Receptacle
+from .common import ERRORS, DEBUG
+from .receptacle import Receptacle
 
 SPLITTER_MODELS = {
 	'THREE_WAY': 3,
@@ -41,7 +41,7 @@ class Splitter(object):
 		for idx in range(self.receptacle_count):
 			self.receptacles.append(Receptacle(15, r_ids[idx]))
 		if True == DEBUG:
-			print('Splitter.__init__() created model_name:{0}, id:{1}, receptacles:{2}'.format(model_name, self.id, self.receptacles))
+			print(('Splitter.__init__() created model_name:{0}, id:{1}, receptacles:{2}'.format(model_name, self.id, self.receptacles)))
 
 	def get_id(self):
 		return self.id
@@ -59,7 +59,7 @@ class Splitter(object):
 
 	def get_splitter_by_id(self, splitter_id):
 		if True == DEBUG:
-			print('Splitter.get_splitter_by_id: splitter_id:{0}'.format(splitter_id))
+			print(('Splitter.get_splitter_by_id: splitter_id:{0}'.format(splitter_id)))
 
 		if splitter_id == self.id:
 			return self
@@ -73,7 +73,7 @@ class Splitter(object):
 
 	def get_receptacle_by_id(self, receptacle_id):
 		if True == DEBUG:
-			print('Splitter.get_receptacle_by_id: rid:{0}'.format(receptacle_id))
+			print(('Splitter.get_receptacle_by_id: rid:{0}'.format(receptacle_id)))
 
 		r = None
 		for receptacle in self.receptacles:

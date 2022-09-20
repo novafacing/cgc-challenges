@@ -27,7 +27,7 @@ import sys
 import os
 
 from xml.sax.saxutils import escape
-from generator.actions import Actions
+from lib.generator.actions import Actions
 from random import choice,randint
 from struct import *
 
@@ -132,8 +132,8 @@ def makevuln(ctype=0):
     if 0 == vcur[1]:
         #povd all the vulns for this proto
         vulnprotos = vulnprotos[1:]
-    print addedvuln 
-    print curname
+    print(addedvuln) 
+    print(curname)
     vcur[1]-=1
     
     return DUPEpkt("".join(layers)),names

@@ -25,8 +25,8 @@ import string
 from operator import itemgetter, attrgetter
 import numpy as np
 
-from common import CONFIG
-import support as sp
+from .common import CONFIG
+from . import support as sp
 
 
 class SnailMail(object):
@@ -40,13 +40,13 @@ class SnailMail(object):
         self.stamps = StampRoll()
 
     def address_exists(self, addr):
-        return addr in self.mailboxes.keys()
+        return addr in list(self.mailboxes.keys())
 
     def is_valid_customer_address(self, addr):
         return (True == self.address_exists(addr)) and (CONFIG['MIN_CUSTOMER_ADDR'] <= addr)
 
     def get_random_existing_address(self):
-        return choice(self.mailboxes.keys())
+        return choice(list(self.mailboxes.keys()))
 
     def get_new_address(self, invalid=False):
         if True == invalid:
@@ -62,7 +62,7 @@ class SnailMail(object):
             self.mailboxes[addr] = Mailbox(addr)
 
     def get_all_addresses(self):
-        return sorted([x for x in self.mailboxes.keys() if x >= CONFIG['MIN_CUSTOMER_ADDR']])
+        return sorted([x for x in list(self.mailboxes.keys()) if x >= CONFIG['MIN_CUSTOMER_ADDR']])
 
     def make_mail_item(self, s_invalid=False, r_invalid=False):
         addrs= self.get_all_addresses()
@@ -80,11 +80,11 @@ class SnailMail(object):
     def put_mail_in_box(self, m, box_id):
         self.mailboxes[box_id].add_mail(m)
         if (1 < CONFIG['DEFAULT_DEBUG_LEVEL']):
-            print "Put mail into box {0}.".format(box_id)
+            print("Put mail into box {0}.".format(box_id))
 
     def pop_mail_from_box(self, box_id):
         if (1 < CONFIG['DEFAULT_DEBUG_LEVEL']):
-            print "Pop mail from box {0}.".format(box_id)
+            print("Pop mail from box {0}.".format(box_id))
         return self.mailboxes[box_id].pop_mail()
 
     def get_all_mail_from_box(self, box_id):
@@ -222,7 +222,7 @@ class MailItem(object):
         s_hash = np.uint8([0, 0, 0, 0])
         b_hash = np.uint8([0, 0, 0, 0])
         if (1 < CONFIG['DEFAULT_DEBUG_LEVEL']):
-            print "Hashing mail..."
+            print("Hashing mail...")
 
         for i in range(CONFIG['MAX_SUBJ_LEN']):
             s_hash[i % 4] += np.uint8(ord(self.subject[i]))

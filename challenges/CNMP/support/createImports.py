@@ -25,18 +25,18 @@ JOKE_FILE = 'chuckNorrisJokes_list_orig.csv'
 
 def print_jokes(joke_list):
   for (length, joke) in joke_list:
-    print("insert_joke(jokedb, \"{0}\");".format(joke))
+    print(("insert_joke(jokedb, \"{0}\");".format(joke)))
 
 def print_max_joke_length(joke_list):
   max_len = 0;
   for (length, joke) in joke_list:
     if length > max_len:
       max_len = length
-  print("The longest joke is {0} chars.\n".format(max_len))
+  print(("The longest joke is {0} chars.\n".format(max_len)))
 
 def print_jokes_comma_separated(joke_list):
   for (length, joke) in joke_list:
-    print("    {0},".format(joke))
+    print(("    {0},".format(joke)))
 
 
 def main():

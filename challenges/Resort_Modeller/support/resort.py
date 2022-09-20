@@ -22,8 +22,8 @@
 #
 from random import choice, randint
 
-import support as sp
-from common import DEBUG, CONFIG
+from . import support as sp
+from .common import DEBUG, CONFIG
 
 class FlagPage(object):
     def __init__(self, flag_page):
@@ -33,7 +33,7 @@ class FlagPage(object):
     def next_byte(self):
         b = self.flag_page[self.cur_idx]
         if DEBUG:
-            print " fp[{0}] = 0x{1}".format(self.cur_idx, ord(b))
+            print(" fp[{0}] = 0x{1}".format(self.cur_idx, ord(b)))
         self.cur_idx = (self.cur_idx + 1) % 4096
         return b
 
@@ -59,28 +59,28 @@ class Resort(object):
         min_decider = self.get_decider_min()
         min_decider.add_riders(self.riders)
         if DEBUG:
-            print "start sim with {0} riders on D{1}".format(len(self.riders), min_decider.id)
+            print("start sim with {0} riders on D{1}".format(len(self.riders), min_decider.id))
 
         self.riders = []
 
         for count in range(steps):
             if DEBUG:
-                print " step {0}".format(count)
+                print(" step {0}".format(count))
             # deciders
             if DEBUG:
-                print "{0} deciders".format(len(self.deciders))
+                print("{0} deciders".format(len(self.deciders)))
             for d in self.deciders:
                 d.step(self.flag_page, self.trails, self.lifts)
 
             # trails
             if DEBUG:
-                print "{0} trails".format(len(self.trails))
+                print("{0} trails".format(len(self.trails)))
             for t in self.trails:
                 t.step(self.deciders)
 
             # lifts
             if DEBUG:
-                print "{0} lifts".format(len(self.lifts))
+                print("{0} lifts".format(len(self.lifts)))
             for l in self.lifts:
                 l.step(self.deciders)
 
@@ -93,7 +93,7 @@ class Resort(object):
         buf = ''
         for l in self.lifts:
             if DEBUG:
-                print "L{0} had {1} riders".format(l.id, l.rider_total)
+                print("L{0} had {1} riders".format(l.id, l.rider_total))
             buf += sp.pack_single_uint32(l.id)
             buf += sp.pack_single_uint32(l.rider_total)
         return buf
@@ -107,7 +107,7 @@ class Resort(object):
         buf = ''
         for t in self.trails:
             if DEBUG:
-                print "T{0} had {1} riders".format(t.id, t.rider_total)
+                print("T{0} had {1} riders".format(t.id, t.rider_total))
             buf += sp.pack_single_uint32(t.id)
             buf += sp.pack_single_uint32(t.rider_total)
         return buf
@@ -187,7 +187,7 @@ class Resort(object):
 
     def generate_random_layout(self, t_len=randint(10, 50), t_diffs=[1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5], c_count=randint(10, 50)):
         if DEBUG:
-            print "generate_random_layout()"
+            print("generate_random_layout()")
         decider_altitudes = set()
         for d_id in range(self.size + 1):
             d = None
@@ -202,7 +202,7 @@ class Resort(object):
             decider_altitudes.add(d.altitude)
             self.deciders.append(d)
             if DEBUG:
-                print " [d{0}] added".format(d.id)
+                print(" [d{0}] added".format(d.id))
 
         # all deciders sorted by altitude from low to high
         alt_sorted_deciders = sorted(self.deciders, key=lambda x: x.altitude)
@@ -243,7 +243,7 @@ class Resort(object):
 
             self.lifts.append(l)
             if DEBUG:
-                print " [l{0}] added".format(l.id)
+                print(" [l{0}] added".format(l.id))
 
         # lift end is used as the starting point of a trail
         # lift start is used as ending point of a trail
@@ -283,18 +283,18 @@ class Resort(object):
 
             self.trails.append(t)
             if DEBUG:
-                print " [t{0}] added".format(t.id)
+                print(" [t{0}] added".format(t.id))
 
 
     def route(self):
         for d in self.deciders:
-            print d.route()
+            print(d.route())
 
         for l in self.lifts:
-            print l.route()
+            print(l.route())
 
         for t in self.trails:
-            print t.route()
+            print(t.route())
 
     def __str__(self):
         return "Resort(size={0},min_altitude={1},max_altitude={2},\ndeciders={3},\nriders={4},\ntrails={5},\nlifts={6})".format(self.size, self.min_altitude, self.max_altitude, self.deciders, self.riders, self.trails, self.lifts)
@@ -316,22 +316,22 @@ class Decider(object):
         for r in riders:
             self.rider_queue.append(r)
             if DEBUG:
-                print "D{0} gained R{1}".format(self.id, r.id)
+                print("D{0} gained R{1}".format(self.id, r.id))
 
     def select_option(self, flag_page):
         idx = ord(flag_page.next_byte()) % len(self.transport_options)
         if DEBUG:
-            print "D{0} selected option idx {1} = {2}".format(self.id, idx, self.transport_options[idx])
+            print("D{0} selected option idx {1} = {2}".format(self.id, idx, self.transport_options[idx]))
         return self.transport_options[idx]
 
     def step(self, flag_page, trails, lifts):
         if [] == self.transport_options:
             if DEBUG:
-                print "D{0} has no transport options".format(self.id)
+                print("D{0} has no transport options".format(self.id))
             return
         riders = len(self.rider_queue)
         if DEBUG:
-            print "D{0} rider's in queue {1} quitters {2}".format(self.id, len(self.rider_queue), len(self.quitters))
+            print("D{0} rider's in queue {1} quitters {2}".format(self.id, len(self.rider_queue), len(self.quitters)))
 
         for _ in range(riders):
             op = self.select_option(flag_page)
@@ -339,18 +339,18 @@ class Decider(object):
             if isinstance(op, Trail) and r.energy_level < op.difficulty:
                     self.quitters.append(r)
                     if DEBUG:
-                        print "D{0} rider {1} quit".format(self.id, r.id)
+                        print("D{0} rider {1} quit".format(self.id, r.id))
                     continue
             if isinstance(op, Lift) and r.energy_level == 0:
                     self.quitters.append(r)
                     if DEBUG:
-                        print "D{0} rider {1} quit".format(self.id, r.id)
+                        print("D{0} rider {1} quit".format(self.id, r.id))
                     continue
             op.add_riders([r])
             # if DEBUG:
             #     print "D{0} op: {1}, r: {2}".format(self.id, op, r)
             if DEBUG:
-                print "D{0}: moved R{1} to {2}{3}".format(self.id, r.id, type(op), op.id)
+                print("D{0}: moved R{1} to {2}{3}".format(self.id, r.id, type(op), op.id))
 
     def decider_reset(self):
         riders = self.rider_queue
@@ -397,7 +397,7 @@ class Rider(object):
 
     def get_stats(self):
         if DEBUG:
-            print self.__str__()
+            print(self.__str__())
 
         return sp.pack_single_uint32(self.id) + sp.pack_single_uint32(self.energy_level)
 
@@ -406,7 +406,7 @@ class Rider(object):
         self.trail_count = 0
         self.trail_distance = 0
         if DEBUG:
-            print "R{0} reset".format(self.id)
+            print("R{0} reset".format(self.id))
 
     def generate_load_buffer(self):
         '''
@@ -442,7 +442,7 @@ class Trail(object):
         self.riders += riders
         if DEBUG:
             for r in riders:
-                print "T{0} gained R{1}".format(self.id, r.id)
+                print("T{0} gained R{1}".format(self.id, r.id))
 
     def step(self, deciders):
         end_decider = deciders[self.end_decider]
@@ -463,7 +463,7 @@ class Trail(object):
 
         if DEBUG:
             if 0 != done_cnt:
-                print "T{0} moved {1} riders to D{2}".format(self.id, done_cnt, end_decider.id)
+                print("T{0} moved {1} riders to D{2}".format(self.id, done_cnt, end_decider.id))
 
         # increment trail_distance on rest of riders
         for r in self.riders:
@@ -471,7 +471,7 @@ class Trail(object):
 
         if DEBUG:
             if 0 != len(self.riders):
-                print "T{0} update {1} riders' distance".format(self.id, len(self.riders))
+                print("T{0} update {1} riders' distance".format(self.id, len(self.riders)))
 
 
     def trail_reset(self):
@@ -507,14 +507,14 @@ class Chair(object):
         riders = self.riders
         if DEBUG:
             for r in self.riders:
-                print " C{0} unloaded R{1}".format(self.id, r.id)
+                print(" C{0} unloaded R{1}".format(self.id, r.id))
         self.riders = []
         return riders
 
     def load(self, r):
         self.riders.append(r)
         if DEBUG:
-            print " C{0} loaded R{1}".format(self.id, r.id)
+            print(" C{0} loaded R{1}".format(self.id, r.id))
 
 
 class Lift(object):
@@ -534,7 +534,7 @@ class Lift(object):
         self.riders += riders
         if DEBUG:
             for r in riders:
-                print "L{0} gained R{1}".format(self.id, r.id)
+                print("L{0} gained R{1}".format(self.id, r.id))
 
     def gen_chairs(self):
         for c_id in range(self.chair_count):
@@ -547,7 +547,7 @@ class Lift(object):
             return
 
         if DEBUG:
-            print "L{0} c_disembark {1} c_embark {2}".format(self.id, self.c_disembark, self.c_embark)
+            print("L{0} c_disembark {1} c_embark {2}".format(self.id, self.c_disembark, self.c_embark))
 
         ''' move riders from c_disembark chair to end_decider's rider_queue '''
         end_decider = deciders[self.end_decider]
@@ -557,7 +557,7 @@ class Lift(object):
         if 0 != len(d_riders):
             end_decider.add_riders(d_riders)
             if DEBUG:
-                print "L{0} unloaded {1} riders to D{2}".format(self.id, len(d_riders), end_decider.id)
+                print("L{0} unloaded {1} riders to D{2}".format(self.id, len(d_riders), end_decider.id))
 
         # increment c_disembark
         self.c_disembark = (self.c_disembark + 1) % len(self.chairs)
@@ -575,7 +575,7 @@ class Lift(object):
 
         if DEBUG:
             if 0 != loaded:
-                print "L{0} loaded {1} riders onto chair {2}".format(self.id, len(self.chairs[self.c_embark].riders), self.chairs[self.c_embark].id)
+                print("L{0} loaded {1} riders onto chair {2}".format(self.id, len(self.chairs[self.c_embark].riders), self.chairs[self.c_embark].id))
 
         # increment c_embark
         self.c_embark = (self.c_embark + 1) % len(self.chairs)

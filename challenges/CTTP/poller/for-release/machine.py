@@ -27,7 +27,7 @@ import sys
 import os
 
 from os.path import join,dirname,abspath
-from generator.actions import Actions
+from lib.generator.actions import Actions
 from random import choice,randint
 from struct import *
 

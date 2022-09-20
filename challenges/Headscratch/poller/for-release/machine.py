@@ -4,7 +4,7 @@ import random
 import string
 import struct
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 
 
 class Machine(Actions):

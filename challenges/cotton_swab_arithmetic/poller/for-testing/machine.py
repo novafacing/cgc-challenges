@@ -35,7 +35,7 @@
 #   - differs for offsets (op1 holds value, op1_inst holds offset)
 #   - differs for ignored op1 (no need to have an op1, we're not computing over it)
 
-from generator.actions import Actions, Variable
+from lib.generator.actions import Actions, Variable
 from random import randint, choice
 import struct
 

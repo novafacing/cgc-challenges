@@ -228,7 +228,7 @@ class cvf:
 				img += '\n'
 			img += pixelImage[x]
 
-		print img
+		print(img)
 
 		self.frames.append(''.join(pixelImage))
 
@@ -330,7 +330,7 @@ class cvf:
 				img += '\n'
 			img += pixel_image[x]
 
-		print img
+		print(img)
 
 		self.frames.append( ''.join( pixel_image ))
 		return
@@ -382,7 +382,7 @@ class cvf:
 
 	def pv( self, string, verbose ):
 		if verbose in self.verbose:
-			print string
+			print(string)
 
 		return
 		
@@ -463,5 +463,5 @@ if __name__ == '__main__':
 		i = len(sys.argv)
 		for x in range(1, i):
 			verbose.append(int(sys.argv[x]))
-			print verbose[-1]
+			print(verbose[-1])
 	x = cvf(verbose)

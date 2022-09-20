@@ -25,7 +25,7 @@ import struct
 import string
 from random import choice, randint
 from os.path import join
-from common import CONFIG
+from .common import CONFIG
 
 
 def random_string(length, term=''):

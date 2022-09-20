@@ -63,7 +63,7 @@ def run_single_game(game):
 	game.update_score()
 
 def run_game_sequence(index, player_char):
-	from tickatack import TickATackGame
+	from .tickatack import TickATackGame
 	t = TickATackGame(index)
 	replay = 0
 
@@ -91,21 +91,21 @@ def main():
 		# The player is always P.
 		game_result = run_game_sequence(i, 'P')
 		if is_goal_score(game_result['scores']):
-			print("SUCCESS: player_char: {0}, pi_index: {1}, scores: p={2}/c={3}".format(
+			print(("SUCCESS: player_char: {0}, pi_index: {1}, scores: p={2}/c={3}".format(
 				game_result['player_char'],
 				game_result['index'],
 				game_result['scores']['player'],
-				game_result['scores']['computer']))
+				game_result['scores']['computer'])))
 			return
 
 		# The player is always Q.
 		game_result = run_game_sequence(i, 'Q')
 		if is_goal_score(game_result['scores']):
-			print("SUCCESS: player_char: {0}, pi_index: {1}, scores: p={2}/c={3}".format(
+			print(("SUCCESS: player_char: {0}, pi_index: {1}, scores: p={2}/c={3}".format(
 				game_result['player_char'],
 				game_result['index'],
 				game_result['scores']['player'],
-				game_result['scores']['computer']))
+				game_result['scores']['computer'])))
 			return
 
 

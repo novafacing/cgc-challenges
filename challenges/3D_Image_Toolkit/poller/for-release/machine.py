@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import random
 import string
 from struct import pack, unpack, unpack_from

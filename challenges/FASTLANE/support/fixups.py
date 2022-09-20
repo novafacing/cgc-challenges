@@ -29,7 +29,7 @@
 
 import os
 import glob
-from config import conf
+from .config import conf
 
 
 def do_fixups():
@@ -43,7 +43,7 @@ def do_fixups():
 		buf = fp.read()
 		fp.close()
 
-		for key in conf.keys():
+		for key in list(conf.keys()):
 			buf = buf.replace(key, conf[key])
 
 		fp = open(template[:-len(".TEMPLATE")], "w")

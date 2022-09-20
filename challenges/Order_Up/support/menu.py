@@ -22,8 +22,8 @@
 #
 from random import randint
 
-import support as sp
-from common import CONFIG
+from . import support as sp
+from .common import CONFIG
 
 FOOD_TYPE = {
     'APP_TYPE': 0,

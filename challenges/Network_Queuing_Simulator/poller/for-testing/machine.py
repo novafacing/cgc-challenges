@@ -1,7 +1,7 @@
 #!/usr/bin/python2
 
 import os
-from generator.actions import Actions
+from lib.generator.actions import Actions
 import random
 from math import log
 from collections import deque

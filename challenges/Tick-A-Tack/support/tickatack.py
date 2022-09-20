@@ -20,7 +20,7 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-from piprng import PiPrng
+from .piprng import PiPrng
 
 
 class TickATackGame(object):
@@ -38,11 +38,11 @@ class TickATackGame(object):
 
 	def init_game(self, replay, player_char):
 		if self.DEBUG:
-			print("init_game - scores: p:{0},c:{1}, replay:{2}".format(self.scores['player'], self.scores['computer'], replay))
+			print(("init_game - scores: p:{0},c:{1}, replay:{2}".format(self.scores['player'], self.scores['computer'], replay)))
 
 		if not replay:
 			if self.DEBUG:
-				print("Set scores to 0 from p:{0},c:{1}".format(self.scores['player'], self.scores['computer']))
+				print(("Set scores to 0 from p:{0},c:{1}".format(self.scores['player'], self.scores['computer'])))
 			self.scores['player'] = 0
 			self.scores['computer'] = 0
 

@@ -132,7 +132,7 @@ class MultiPassSupport(object):
 			char * vendor_location;
 		} vendor_t;
 		'''
-		for name, val in self.VENDOR_TYPE.iteritems():
+		for name, val in self.VENDOR_TYPE.items():
 			# 0 < vls < 256
 			vls = randint(10, 255)
 

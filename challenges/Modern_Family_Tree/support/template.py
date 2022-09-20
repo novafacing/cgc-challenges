@@ -22,8 +22,8 @@
 #
 from random import choice, randint
 
-import support as sp
-from common import DEBUG, CONFIG
+from . import support as sp
+from .common import DEBUG, CONFIG
 
 class FamilyTree(object):
     def __init__(self, flag_page=''):
@@ -70,7 +70,7 @@ class FamilyTree(object):
                 ret = self.degrees_of_separation(p1.adopted_children[i], p2)
                 if 0 <= ret:
                     if DEBUG:
-                        print "{0} degrees between {1}.a_c[{2}]={3} and p2={4}".format(ret, p1.id, i, p1.adopted_children[i].id, p2.id)
+                        print("{0} degrees between {1}.a_c[{2}]={3} and p2={4}".format(ret, p1.id, i, p1.adopted_children[i].id, p2.id))
                     return 1 + ret
 
         # search p1.biological
@@ -80,7 +80,7 @@ class FamilyTree(object):
                 ret = self.degrees_of_separation(p1.biological_children[i], p2)
                 if 0 <= ret:
                     if DEBUG:
-                        print "{0} degrees between {1}.b_c[{2}]={3} and p2={4}".format(ret, p1.id, i, p1.biological_children[i].id, p2.id)
+                        print("{0} degrees between {1}.b_c[{2}]={3} and p2={4}".format(ret, p1.id, i, p1.biological_children[i].id, p2.id))
                     return 1 + ret
 
         # search p1.biological_mother
@@ -89,7 +89,7 @@ class FamilyTree(object):
             ret = self.degrees_of_separation(p1.biological_mother, p2)
             if 0 <= ret:
                 if DEBUG:
-                    print "{0} degrees between {1}.b_m={2} and p2={3}".format(ret, p1.id, p1.biological_mother.id, p2.id)
+                    print("{0} degrees between {1}.b_m={2} and p2={3}".format(ret, p1.id, p1.biological_mother.id, p2.id))
                 return 1 + ret
 
         # search p1.biological_father
@@ -98,7 +98,7 @@ class FamilyTree(object):
             ret = self.degrees_of_separation(p1.biological_father, p2)
             if 0 <= ret:
                 if DEBUG:
-                    print "{0} degrees between {1}.b_f={2} and p2={3}".format(ret, p1.id, p1.biological_father.id, p2.id)
+                    print("{0} degrees between {1}.b_f={2} and p2={3}".format(ret, p1.id, p1.biological_father.id, p2.id))
                 return 1 + ret
 
         # search p1.adopting
@@ -107,13 +107,13 @@ class FamilyTree(object):
             ret = self.degrees_of_separation(p1.adopting_parents[0], p2)
             if 0 <= ret:
                 if DEBUG:
-                    print "{0} degrees between {1}.a_p[0]={2} and p2={3}".format(ret, p1.id, p1.adopting_parents[0].id, p2.id)
+                    print("{0} degrees between {1}.a_p[0]={2} and p2={3}".format(ret, p1.id, p1.adopting_parents[0].id, p2.id))
                 return 1 + ret
 
             ret = self.degrees_of_separation(p1.adopting_parents[1], p2)
             if 0 <= ret:
                 if DEBUG:
-                    print "{0} degrees between {1}.a_p[1]={2} and p2={3}".format(ret, p1.id, p1.adopting_parents[1].id, p2.id)
+                    print("{0} degrees between {1}.a_p[1]={2} and p2={3}".format(ret, p1.id, p1.adopting_parents[1].id, p2.id))
                 return 1 + ret;
 
         # search p1.current
@@ -122,7 +122,7 @@ class FamilyTree(object):
             ret = self.degrees_of_separation(p1.current_partner, p2)
             if 0 <= ret:
                 if DEBUG:
-                    print "{0} degrees between {1}.c_p={2} and p2={3}".format(ret, p1.id, p1.current_partner.id, p2.id)
+                    print("{0} degrees between {1}.c_p={2} and p2={3}".format(ret, p1.id, p1.current_partner.id, p2.id))
                 return 1 + ret
 
         # search p1.former
@@ -143,7 +143,7 @@ class FamilyTree(object):
         self.new_search_map()
         res = self.degrees_of_separation(p1, p2)
         if DEBUG:
-            print " {0} degrees of separation for relation check on {1} and {2}".format(res, p1.id, p2.id)
+            print(" {0} degrees of separation for relation check on {1} and {2}".format(res, p1.id, p2.id))
 
         if 0 <= res:
             return CONFIG['RELATED']
@@ -316,10 +316,10 @@ if __name__ == '__main__':
     ft.set_union(ft.people[2], ft.people[4])
     ft.set_adopted_child(ft.people[8], ft.people[2], ft.people[4])
     ft.set_union(ft.people[8], ft.people[9])
-    print "Are p[1] and p[2] related? {0}".format(ft.find_are_related(ft.people[1], ft.people[2]))
-    print "Are p[2] and p[4] related? {0}".format(ft.find_are_related(ft.people[2], ft.people[4]))
-    print "Are p[2] and p[8] related? {0}".format(ft.find_are_related(ft.people[2], ft.people[8]))
-    print "Are p[1] and p[9] related? {0}".format(ft.find_are_related(ft.people[1], ft.people[9]))
-    print "Are p[2] and p[9] related? {0}".format(ft.find_are_related(ft.people[2], ft.people[9]))
-    print "Are p[2] and p[2] related? {0}".format(ft.find_are_related(ft.people[2], ft.people[2]))
-    print "Are p[2] and p_unk related? {0}".format(ft.find_are_related(ft.people[2], ft.p_unk))
+    print("Are p[1] and p[2] related? {0}".format(ft.find_are_related(ft.people[1], ft.people[2])))
+    print("Are p[2] and p[4] related? {0}".format(ft.find_are_related(ft.people[2], ft.people[4])))
+    print("Are p[2] and p[8] related? {0}".format(ft.find_are_related(ft.people[2], ft.people[8])))
+    print("Are p[1] and p[9] related? {0}".format(ft.find_are_related(ft.people[1], ft.people[9])))
+    print("Are p[2] and p[9] related? {0}".format(ft.find_are_related(ft.people[2], ft.people[9])))
+    print("Are p[2] and p[2] related? {0}".format(ft.find_are_related(ft.people[2], ft.people[2])))
+    print("Are p[2] and p_unk related? {0}".format(ft.find_are_related(ft.people[2], ft.p_unk)))

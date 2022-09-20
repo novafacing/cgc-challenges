@@ -89,7 +89,7 @@ import struct
 
 SYMS = ['AAPL', 'GOOG', 'NRFIN', "CROMU", "KPRCA", "PIRATE", "DDTEK", "OAK", "MAPLE", "PALM", "SK3WL"]
 BAD_SYMS = ["DDTEK", "SK3WL", "PALM"]
-GOOD_SYMS = filter(lambda x: x not in BAD_SYMS, SYMS)
+GOOD_SYMS = [x for x in SYMS if x not in BAD_SYMS]
 
 class Account(object):
     MAX_SHARES = 2**24
@@ -129,14 +129,14 @@ class Account(object):
 
     def get_holdings(self):
         l = []
-        for r, kv in zip(range(0, len(self.holdings)), self.holdings.items()):
+        for r, kv in zip(list(range(0, len(self.holdings))), list(self.holdings.items())):
             k, v = kv
             l.append((self.idx, r, k, v))
         return l
 
     @property
     def random_holding(self):
-        return random.choice(filter(lambda x: x[0] not in BAD_SYMS and x[1] > 0, self.holdings.items()))
+        return random.choice([x for x in list(self.holdings.items()) if x[0] not in BAD_SYMS and x[1] > 0])
 
 import pickle
 
@@ -170,7 +170,7 @@ class AccountGen(object):
             self.order_book[sym] = {}
     @property
     def accts_with_money(self):
-        return filter(lambda x: x.balance > self.MAX_ORDER_SZ, self.accounts.values())
+        return [x for x in list(self.accounts.values()) if x.balance > self.MAX_ORDER_SZ]
 
     @property
     def random_acct_with_money(self):
@@ -178,7 +178,7 @@ class AccountGen(object):
 
     @property
     def accounts_with_holding(self):
-        return filter(lambda x: len(x.get_holdings()) > 0, self.accounts.values())
+        return [x for x in list(self.accounts.values()) if len(x.get_holdings()) > 0]
 
     @property
     def random_account_with_holding(self):
@@ -188,9 +188,9 @@ class AccountGen(object):
     def account_with_bad_holding(self):
 
         accounts = []
-        for a in self.accounts.values():
+        for a in list(self.accounts.values()):
 
-            badness = filter(lambda x: x[0] in BAD_SYMS and x[1] == 0xFFFFFFFF,  a.holdings.items())
+            badness = [x for x in list(a.holdings.items()) if x[0] in BAD_SYMS and x[1] == 0xFFFFFFFF]
             if badness:
                 accounts.append((a, dict(badness)))
         return accounts
@@ -199,8 +199,8 @@ class AccountGen(object):
 
     @property
     def account_with_bad_holding_sym_only(self):
-        for a in self.accounts.values():
-            badness = filter(lambda x: x[0] in BAD_SYMS and x[1] < 0xFFFFFFFF,  a.holdings.items())
+        for a in list(self.accounts.values()):
+            badness = [x for x in list(a.holdings.items()) if x[0] in BAD_SYMS and x[1] < 0xFFFFFFFF]
             if badness:
                 return a, dict(badness)
         raise Exception("No holdings can overflow")
@@ -411,11 +411,11 @@ class AccountGen(object):
     def to_c(self):
 
         t = Template(ACCOUNT_TMPL)
-        hlds = [a.get_holdings() for a in self.accounts.values()]
+        hlds = [a.get_holdings() for a in list(self.accounts.values())]
         flat_holdings = []
 
-        map(flat_holdings.extend, hlds)
-        rendered_s = t.render(accounts=self.accounts.values(), holdings=flat_holdings)
+        list(map(flat_holdings.extend, hlds))
+        rendered_s = t.render(accounts=list(self.accounts.values()), holdings=flat_holdings)
         with open(ACCOUNT_C_F, 'w') as f:
             f.write(rendered_s)
 
@@ -450,7 +450,7 @@ class TemplateGenerator(Actions):
         sym = None
         for a, bhd in accts:
 
-            sym = set(bad_hold_dict.keys()).intersection(bhd.keys())
+            sym = set(bad_hold_dict.keys()).intersection(list(bhd.keys()))
             if(len(sym) > 0):
 
                 sym = list(sym)[0]
@@ -499,7 +499,7 @@ class TemplateGenerator(Actions):
         assert(len(r)+len(start_frag) + len(rlen)  == 20)
         order_only = self._accounts._gen_order_ds(so)
         self.write(order_only)
-        print "Order len %d" % len(order_only)
+        print("Order len %d" % len(order_only))
         assert(len(order_only) == 8 + 32 + 4 + 4)
         assert(len(r+start_frag+rlen) + len(order_only) == 24-4+48)
         pre = start_frag + rlen + r
@@ -535,8 +535,8 @@ def write_pov(accts):
     x = tg.xml()
     xml_lines = x.split("\n")
     xml_body = xml_lines[6:-3]
-    xml_body[xml_body.index(filter(lambda x: x.endswith('<!-- Length of read here -->'), xml_body)[0])+1] = "\t<write><var>TYPE2_SIZE</var></write>"
-    xml_body[xml_body.index(filter(lambda x: x.endswith('<!-- Read location here -->'), xml_body)[0])+1] = "\t<write><var>TYPE2_ADDR</var></write>"
+    xml_body[xml_body.index([x for x in xml_body if x.endswith('<!-- Length of read here -->')][0])+1] = "\t<write><var>TYPE2_SIZE</var></write>"
+    xml_body[xml_body.index([x for x in xml_body if x.endswith('<!-- Read location here -->')][0])+1] = "\t<write><var>TYPE2_ADDR</var></write>"
 
 
     fixed_xml = "\n".join(xml_body)

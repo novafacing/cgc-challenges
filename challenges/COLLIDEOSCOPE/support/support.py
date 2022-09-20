@@ -92,7 +92,7 @@ class ASTBinaryOperator(ASTNode):
             if not isinstance(lhs, ASTVariable):
                 return None
 
-            for i in xrange(deref_count):
+            for i in range(deref_count):
                 v = ns.get(lhs.name, None)
                 if v is None:
                     return None
@@ -189,7 +189,7 @@ class Support(object):
 
     def calculate_csum(self, x):
         ret = 0
-        for i in xrange(1024):
+        for i in range(1024):
             ret = ret ^ ord(self.magic_page[i * 4])
         return (ret ^ x) & 0xffffffff
 
@@ -210,11 +210,11 @@ class Support(object):
     @staticmethod
     def random_variable_name():
         length = random.randint(1, 4)
-        return ''.join(random.choice(string.lowercase) for _ in xrange(length))
+        return ''.join(random.choice(string.lowercase) for _ in range(length))
 
     @staticmethod
     def create_variable(ns):
-        buckets = { Support.hash(k) for k in ns.iterkeys() }
+        buckets = { Support.hash(k) for k in ns.keys() }
         name = Support.random_variable_name()
         while Support.hash(name) in buckets:
             name = Support.random_variable_name()
@@ -224,14 +224,14 @@ class Support(object):
     @staticmethod
     def get_variable(ns, kind=None):
         if kind is not None:
-            d = { k: v for (k, v) in ns.iteritems() if k == kind }
+            d = { k: v for (k, v) in ns.items() if k == kind }
         else:
             d = ns
 
         if not d:
             return None
 
-        return random.choice(d.keys())
+        return random.choice(list(d.keys()))
 
     @staticmethod
     def create_ast_node(ns):

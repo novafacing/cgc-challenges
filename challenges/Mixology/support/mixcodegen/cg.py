@@ -44,7 +44,7 @@ LIBDIR = os.path.join(BASEPATH, 'lib')
 
 
 DATADIR = os.path.join(BASEPATH, "support", 'data')
-from jinja2 import Template
+from .jinja2 import Template
 
 H_TMPL = """
 /*
@@ -144,7 +144,7 @@ class MixologyCodeGen(object):
 
 	@property
 	def massive_compounds(self):
-		return [c for c, w in filter(lambda x: x[1] > 2.3, self.compounds_and_weights)]
+		return [c for c, w in [x for x in self.compounds_and_weights if x[1] > 2.3]]
 
 
 	@property

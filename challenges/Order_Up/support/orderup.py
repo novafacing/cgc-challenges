@@ -23,12 +23,12 @@
 # from random import choice
 from random import choice, randint
 
-import support as sp
-from common import DEBUG, CONFIG
+from . import support as sp
+from .common import DEBUG, CONFIG
 
-import menu as m
-import table as t
-import todays_menu as tm
+from . import menu as m
+from . import table as t
+from . import todays_menu as tm
 
 class OrderUp(object):
     def __init__(self):
@@ -59,15 +59,15 @@ class OrderUp(object):
 
     def add_customers_to_waiting_list(self, customers):
         if DEBUG:
-            print " cur waiting_list: {0}".format(self.waiting_list)
+            print(" cur waiting_list: {0}".format(self.waiting_list))
         self.waiting_list += customers
         if DEBUG:
-            print " updated waiting_list: {0}".format(self.waiting_list)
+            print(" updated waiting_list: {0}".format(self.waiting_list))
 
     def get_next_customer_from_waiting_list(self):
         if [] == self.waiting_list:
             if DEBUG:
-                print " waiting list is empty"
+                print(" waiting list is empty")
             return None
         return self.waiting_list.pop(0)
 
@@ -76,7 +76,7 @@ class OrderUp(object):
             if True == t.is_vacant():
                 return t
         if DEBUG:
-            print " no vacant tables"
+            print(" no vacant tables")
 
         return None 
 
@@ -92,20 +92,20 @@ class OrderUp(object):
 
             seats = t.seats
             if DEBUG:
-                print " table {0} has {1} seats".format(t.id, t.seats)
-                print " currently seated customers: {0}".format(t.customers)
+                print(" table {0} has {1} seats".format(t.id, t.seats))
+                print(" currently seated customers: {0}".format(t.customers))
 
             to_seat = []
             for s in range(seats):
                 if DEBUG:
-                    print " getting customer from waiting_list"
+                    print(" getting customer from waiting_list")
                 c = self.get_next_customer_from_waiting_list()
                 if None == c:
                     if DEBUG:
-                        print " waiting_list is empty"
+                        print(" waiting_list is empty")
                     break
                 if DEBUG:
-                    print " selected customer {0}".format(c.id)
+                    print(" selected customer {0}".format(c.id))
 
                 to_seat.append(c)
             self.add_customers_to_table(t.id, to_seat)

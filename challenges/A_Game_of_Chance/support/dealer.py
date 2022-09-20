@@ -22,11 +22,11 @@
 #
 from random import choice, randint
 
-import support as sp
-from common import DEBUG, CONFIG
+from . import support as sp
+from .common import DEBUG, CONFIG
 
-from player import Player as p
-from pov_deck import POV_DECK_BYTES
+from .player import Player as p
+from .pov_deck import POV_DECK_BYTES
 
 TRIGGER_BYTES = ['\x21', '\x5f', '\x3c', '\x42', '\x63', '\x51']
 
@@ -65,7 +65,7 @@ class Dealer(object):
         self.deal1      = [0 for _ in range(p_count + 1)]
         self.deal2      = [0 for _ in range(p_count + 1)]
         if DEBUG:
-            print "added {0} players".format(p_count)
+            print("added {0} players".format(p_count))
 
     def make_trigger_buf(self, cmd_name):
         cmd = ''
@@ -87,7 +87,7 @@ class Dealer(object):
             deck[count-1] = chr(randint(CONFIG['MAX_CARD_VALUE'] + 1, 255))
 
         if DEBUG:
-            print "making new deck with {0} cards with {1}bad cards".format(count, "" if bad_cards else "no ")
+            print("making new deck with {0} cards with {1}bad cards".format(count, "" if bad_cards else "no "))
         # if DEBUG:
         #     print "deck:"
         #     for c in deck:
@@ -104,7 +104,7 @@ class Dealer(object):
     def get_packed_balances(self):
         p_bal = ''
         if DEBUG:
-            print " balances were:  {0}".format(self.balances)
+            print(" balances were:  {0}".format(self.balances))
         for b in self.balances:
             p_bal += sp.pack_single_int32(b)
 
@@ -113,7 +113,7 @@ class Dealer(object):
     def get_packed_wagers(self):
         p_wag = ''
         if DEBUG:
-            print " wagers were:  {0}".format(self.wagers)
+            print(" wagers were:  {0}".format(self.wagers))
         for w in self.wagers:
             p_wag += sp.pack_single_uint32(w)
         return p_wag
@@ -121,7 +121,7 @@ class Dealer(object):
     def get_packed_results(self):
         p_res = ''
         if DEBUG:
-            print " results were: {0}".format(self.results)
+            print(" results were: {0}".format(self.results))
         for r in self.results:
             p_res += sp.pack_single_uint32(r)
         return p_res
@@ -132,19 +132,19 @@ class Dealer(object):
     def calculate_round_results(self):
         max_sum = 0
         if DEBUG:
-            print "calculating round results"
+            print("calculating round results")
         for idx in range(1, len(self.results)):
             if max_sum < self.deal1[idx] + self.deal2[idx]:
                 max_sum = self.deal1[idx] + self.deal2[idx]
                 if DEBUG:
-                    print " updated round max_sum {0}".format(max_sum)
+                    print(" updated round max_sum {0}".format(max_sum))
 
         for idx in range(1, len(self.results)):
             if DEBUG:
-                print " calculating results for player {0}".format(idx)
+                print(" calculating results for player {0}".format(idx))
             my_sum = self.deal1[idx] + self.deal2[idx]
             if DEBUG:
-                print "  round sum {1}".format(idx, my_sum)
+                print("  round sum {1}".format(idx, my_sum))
             if my_sum == max_sum:
                 self.results[idx] = CONFIG['WIN']
                 if DEBUG:
@@ -157,13 +157,13 @@ class Dealer(object):
     def get_next_card(self):
         c = self.deck.pop()
         if DEBUG:
-            print "got next card 0x{0:02x}".format(ord(c))
+            print("got next card 0x{0:02x}".format(ord(c)))
         return c
 
     def play_one_round(self):
 
         if DEBUG:
-            print "play one round with {0} players".format(len(self.players))
+            print("play one round with {0} players".format(len(self.players)))
 
         # deal card to each player
         for p in self.players:
@@ -171,15 +171,15 @@ class Dealer(object):
             self.deal1[p.id] = ord(c)
             p.cards[0] = ord(c)
             if DEBUG:
-                print " player {0} dealt card 0x{1:02x}".format(p.id, ord(c))
+                print(" player {0} dealt card 0x{1:02x}".format(p.id, ord(c)))
         if DEBUG:
-            print " cards from deal 1: {0}".format(self.deal1)
+            print(" cards from deal 1: {0}".format(self.deal1))
 
         # get wager from each player
         for p in self.players:
             self.wagers[p.id] = p.get_wager()
             if DEBUG:
-                print " player {0} wagered {1}".format(p.id, self.wagers[p.id])
+                print(" player {0} wagered {1}".format(p.id, self.wagers[p.id]))
 
         # deal card to each player
         for p in self.players:
@@ -187,9 +187,9 @@ class Dealer(object):
             self.deal2[p.id] = ord(c)
             p.cards[1] = ord(c)
             if DEBUG:
-                print " player {0} dealt card 0x{1:02x}".format(p.id, ord(c))
+                print(" player {0} dealt card 0x{1:02x}".format(p.id, ord(c)))
         if DEBUG:
-            print " cards from deal 2: {0}".format(self.deal2)
+            print(" cards from deal 2: {0}".format(self.deal2))
 
         self.calculate_round_results()
 
@@ -227,16 +227,16 @@ class Dealer(object):
                 i1 == i2 - 1 and \
                 i2 == i3 - 1:
                 if DEBUG:
-                    print "#### Warning 4 consecutive magic page indices: {0}, {1}, {2}, {3}.".format(i0, i1, i2, i3)
-                    print "magic total_magic_page_indices_used: {0}".format(mpiu_list)
+                    print("#### Warning 4 consecutive magic page indices: {0}, {1}, {2}, {3}.".format(i0, i1, i2, i3))
+                    print("magic total_magic_page_indices_used: {0}".format(mpiu_list))
                 return [i0, i1, i2, i3]
         if DEBUG:
-            print " Done checking for 4 consecutive magic page indices."
+            print(" Done checking for 4 consecutive magic page indices.")
         return []
 
 def check_deck(deck_sz=1000):
     if DEBUG:
-        print "find_trigger_deck size {0}".format(deck_sz)
+        print("find_trigger_deck size {0}".format(deck_sz))
     # setup
     d = Dealer('A'*4096)
     d.add_players(CONFIG['PLAYER_COUNT'])
@@ -254,7 +254,7 @@ def check_deck(deck_sz=1000):
         mpiu_list = d.check_magic_bytes_usage()
         if [] != mpiu_list:
             if DEBUG:
-                print "indices {0}".format(mpiu_list)
+                print("indices {0}".format(mpiu_list))
             return deck
 
     return []
@@ -266,12 +266,12 @@ def find_trigger_deck():
         deck_sz += 10
         deck = check_deck(deck_sz)
     if DEBUG:
-        print "trigger deck len {0}, deck {1}".format(len(deck), deck)
+        print("trigger deck len {0}, deck {1}".format(len(deck), deck))
     return deck
 
 def test_trigger_deck(deck):
     if DEBUG:
-        print "test_trigger_deck"
+        print("test_trigger_deck")
     # setup
     d = Dealer('A'*4096)
     d.add_players(CONFIG['PLAYER_COUNT'])
@@ -286,7 +286,7 @@ def test_trigger_deck(deck):
         mpiu_list = d.check_magic_bytes_usage()
         if [] != mpiu_list:
             # if DEBUG:
-            print "trigger indices {0}".format(mpiu_list)
+            print("trigger indices {0}".format(mpiu_list))
             return True
 
     return False
@@ -294,7 +294,7 @@ def test_trigger_deck(deck):
 if __name__ == '__main__':
     # deck = find_trigger_deck()
     deck = POV_DECK_BYTES
-    print test_trigger_deck(deck)
+    print(test_trigger_deck(deck))
 
 
 

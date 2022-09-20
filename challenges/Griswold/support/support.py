@@ -30,15 +30,15 @@ import sys
 from array import array
 from collections import Counter
 
-from globalids import GlobalIdNums
-from common import ERRORS, DEBUG
-from loadcenter import LOAD_CENTER_MODELS, LoadCenter
-from breaker import BREAKER_MODELS, Breaker
-from outlet import OUTLET_MODELS, Outlet
-from splitter import SPLITTER_MODELS, Splitter
-from receptacle import LOAD_TYPE, Receptacle
-from lightstring import LIGHT_STRING_MODELS, LightString
-from results import Results
+from .globalids import GlobalIdNums
+from .common import ERRORS, DEBUG
+from .loadcenter import LOAD_CENTER_MODELS, LoadCenter
+from .breaker import BREAKER_MODELS, Breaker
+from .outlet import OUTLET_MODELS, Outlet
+from .splitter import SPLITTER_MODELS, Splitter
+from .receptacle import LOAD_TYPE, Receptacle
+from .lightstring import LIGHT_STRING_MODELS, LightString
+from .results import Results
 
 
 MODES = {'BUILD': 13980, 'EXAMINE': 809110, 'BAD': 13}
@@ -160,7 +160,7 @@ class Support(object):
 		elif component_type == 'LIGHT_STRING':
 			res = LIGHT_STRING_MODELS
 
-		keys = res.keys()
+		keys = list(res.keys())
 		if 'BAD' in keys:
 			keys.remove('BAD')
 		return keys
@@ -194,12 +194,12 @@ class Support(object):
 	def outlet_amps_exceed_breaker_amps(self, outlet_model_name, breaker_id):
 		if True == self.is_panel_empty():
 			if True == DEBUG:
-				print('Support outlet amps > breaker amps - is_empty: {0}, breaker count: {1}'.format(self.is_panel_empty(), self.get_breaker_count()))
+				print(('Support outlet amps > breaker amps - is_empty: {0}, breaker count: {1}'.format(self.is_panel_empty(), self.get_breaker_count())))
 			return True
 		else:
 			b = self.e_model.get_breaker_by_id(breaker_id)
 			if True == DEBUG:
-				print('Support outlet amps > breaker amps - outlet:{0} > breaker:{1}'.format(OUTLET_MODELS[outlet_model_name], b.get_amp_rating()))
+				print(('Support outlet amps > breaker amps - outlet:{0} > breaker:{1}'.format(OUTLET_MODELS[outlet_model_name], b.get_amp_rating())))
 			return OUTLET_MODELS[outlet_model_name] > b.get_amp_rating()
 
 	def get_random_empty_receptacle_id(self):
@@ -267,7 +267,7 @@ class Support(object):
 
 	def get_receptacle_by_id(self, receptacle_id):
 		if True == DEBUG:
-			print('Support.get_receptacle_by_id. receptacle_id:{0}'.format(receptacle_id))
+			print(('Support.get_receptacle_by_id. receptacle_id:{0}'.format(receptacle_id)))
 		return self.e_model.get_receptacle_by_id(receptacle_id)
 
 	def add_outlet(self, model_name, breaker_id):
@@ -275,7 +275,7 @@ class Support(object):
 		rid_1 = self.global_ids.get_next_receptacle_id()
 		rid_2 = self.global_ids.get_next_receptacle_id()
 		if True == DEBUG:
-			print('Support.add_outlet o_id:{0}, rid_1:{1}, rid_2:{2}.'.format(outlet_id, rid_1, rid_2))
+			print(('Support.add_outlet o_id:{0}, rid_1:{1}, rid_2:{2}.'.format(outlet_id, rid_1, rid_2)))
 
 		o = Outlet(model_name, outlet_id, [rid_1, rid_2])
 		b = self.e_model.get_breaker_by_id(breaker_id)
@@ -298,7 +298,7 @@ class Support(object):
 		self.empty_receptacle_ids.append(rid_2)
 
 		if True == DEBUG:
-			print('Support.add_outlet(). Final empty_receptacle_ids:{0}'.format(self.empty_receptacle_ids))
+			print(('Support.add_outlet(). Final empty_receptacle_ids:{0}'.format(self.empty_receptacle_ids)))
 
 		return r
 
@@ -325,8 +325,8 @@ class Support(object):
 		self.empty_receptacle_ids.append(rid_1)
 
 		if True == DEBUG:
-			print('Support.add_light_string(). Final empty_receptacle_ids:{0}'.format(self.empty_receptacle_ids))
-			print('Support.add_light_string(). Final full_receptacle_ids:{0}'.format(self.full_receptacle_ids))
+			print(('Support.add_light_string(). Final empty_receptacle_ids:{0}'.format(self.empty_receptacle_ids)))
+			print(('Support.add_light_string(). Final full_receptacle_ids:{0}'.format(self.full_receptacle_ids)))
 
 		return r
 
@@ -338,7 +338,7 @@ class Support(object):
 			rids.append(self.global_ids.get_next_receptacle_id())
 
 		if True == DEBUG:
-			print('Support.add_splitter() receptacle_count:{0}, rids:{1}'.format(receptacle_count, rids))
+			print(('Support.add_splitter() receptacle_count:{0}, rids:{1}'.format(receptacle_count, rids)))
 
 		sp = Splitter(model_name, splitter_id, rids)
 
@@ -357,12 +357,12 @@ class Support(object):
 		for r_id in rids:
 			r1 = sp.get_receptacle_by_id(r_id)
 			if None == r1:
-				print('Support.add_splitter sp.get_receptacle_by_id returned None for r1. r_id:{0}, rids:{1}'.format(r_id, rids))
+				print(('Support.add_splitter sp.get_receptacle_by_id returned None for r1. r_id:{0}, rids:{1}'.format(r_id, rids)))
 			self.empty_receptacle_ids.append(r_id)
 
 		if True == DEBUG:
-			print('Support.add_splitter(). Final empty_receptacle_ids:{0}'.format(self.empty_receptacle_ids))
-			print('Support.add_splitter(). Final full_receptacle_ids:{0}'.format(self.full_receptacle_ids))
+			print(('Support.add_splitter(). Final empty_receptacle_ids:{0}'.format(self.empty_receptacle_ids)))
+			print(('Support.add_splitter(). Final full_receptacle_ids:{0}'.format(self.full_receptacle_ids)))
 
 		return r
 
@@ -400,7 +400,7 @@ class Support(object):
 		too_much_amp_load_one_receptacle = (max_amp_load > amp_rating)
 		res = too_much_total_amp_load or too_much_amp_load_one_receptacle
 		if True == DEBUG:
-			print('Support.is_outlet_overloaded() total_amp_load:{0}, max_amp_load:{1}, amp_rating:{2} => {3}'.format(total_amp_load, max_amp_load, amp_rating, res))
+			print(('Support.is_outlet_overloaded() total_amp_load:{0}, max_amp_load:{1}, amp_rating:{2} => {3}'.format(total_amp_load, max_amp_load, amp_rating, res)))
 		r = Results()
 		r.set_object_id(res)
 		return r
@@ -418,7 +418,7 @@ class Support(object):
 			too_much_amp_load_one_receptacle = (max_amp_load > amp_rating)
 			res = too_much_total_amp_load or too_much_amp_load_one_receptacle
 			if True == DEBUG:
-				print('Support.is_splitter_overloaded() total_amp_load:{0}, max_amp_load:{1}, amp_rating:{2} => {3}'.format(total_amp_load, max_amp_load, amp_rating, res))
+				print(('Support.is_splitter_overloaded() total_amp_load:{0}, max_amp_load:{1}, amp_rating:{2} => {3}'.format(total_amp_load, max_amp_load, amp_rating, res)))
 		r = Results()
 		r.set_object_id(res)
 		return r
@@ -431,7 +431,7 @@ class Support(object):
 			amp_rating = ls.get_amp_rating()
 			res = (total_amp_load > amp_rating)
 			if True == DEBUG:
-				print('Support.is_light_string_overloaded() total_amp_load:{0} > amp_rating:{1} => {2}'.format(total_amp_load, amp_rating, res))
+				print(('Support.is_light_string_overloaded() total_amp_load:{0} > amp_rating:{1} => {2}'.format(total_amp_load, amp_rating, res)))
 		r = Results()
 		r.set_object_id(res)
 		return r
@@ -442,7 +442,7 @@ class Support(object):
 		amp_rating = receptacle.get_amp_rating()
 		res = (total_amp_load > amp_rating)
 		if True == DEBUG:
-			print('Support.is_receptacle_overloaded() total_amp_load:{0} > amp_rating:{1} => {2}'.format(total_amp_load, amp_rating, res))
+			print(('Support.is_receptacle_overloaded() total_amp_load:{0} > amp_rating:{1} => {2}'.format(total_amp_load, amp_rating, res)))
 
 		r = Results()
 		r.set_object_id(res)

@@ -3,7 +3,7 @@
 import random
 import string
 from struct import pack, unpack
-from generator.actions import Actions
+from lib.generator.actions import Actions
 
 FILE_TEXT               = 0xf1
 FILE_EXECUTABLE         = 0xf2

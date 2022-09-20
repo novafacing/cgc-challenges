@@ -39,7 +39,7 @@ class Support(object):
         return name
 
     def get_existing_login(self):
-        return random.choice(self.logins.items())
+        return random.choice(list(self.logins.items()))
 
     def get_new_variable(self):
         self.lastvar += 1

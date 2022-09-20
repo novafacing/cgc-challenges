@@ -18,7 +18,7 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from generator.actions import Actions
+from lib.generator.actions import Actions
 from os.path import dirname, abspath, join
 import random
 import string
