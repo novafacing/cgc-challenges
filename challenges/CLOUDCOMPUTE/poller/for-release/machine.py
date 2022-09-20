@@ -50,7 +50,7 @@ def refresh_session(old_session, DEBUG):
     Produces: new session tuple
     """
     DEBUG = GLOBAL_DEBUG and True
-    if DEBUG: print "refresh_session()"
+    if DEBUG: print("refresh_session()")
     
     opcodes = { 
         'NUL' : 0x004C554E, # 'NUL\x00'
@@ -79,7 +79,7 @@ def refresh_session(old_session, DEBUG):
             while True:
                 opc = randint(0, 0xFFFFFFFF)
                 unused = True
-                for v in opcodes.values():
+                for v in list(opcodes.values()):
                     if opc == v: 
                         unused = False
                         break
@@ -87,49 +87,49 @@ def refresh_session(old_session, DEBUG):
                     break
         else:
             # Do a known one.
-            opc_str = choice(opcodes.keys())
+            opc_str = choice(list(opcodes.keys()))
             opc = opcodes[opc_str]
 
         if DEBUG: 
-            print "op[%04d]: %s, imm = 0x%02x (%d), off = 0x%02x (%d)" % \
-                (i, opc_str, imm, imm, off, off)        
+            print("op[%04d]: %s, imm = 0x%02x (%d), off = 0x%02x (%d)" % \
+                (i, opc_str, imm, imm, off, off))        
 
         # Add it to the opcode buffer.
         session['opcodes'] += struct.pack("<LBBBB", opc, ord(' '), imm, ord(' '), off)
 
         # Emulate the operation on the scratch buffer.
         if   'NUL' == opc_str:
-            if DEBUG: print "0x%02x (%d) = 0x00" % (off, off) 
+            if DEBUG: print("0x%02x (%d) = 0x00" % (off, off)) 
             session['scratch'][off] = chr(0)
         elif 'SET' == opc_str: 
-            if DEBUG: print "0x%02x (%d) = 0x%02x (%d)" % (off, off, imm, imm) 
+            if DEBUG: print("0x%02x (%d) = 0x%02x (%d)" % (off, off, imm, imm)) 
             session['scratch'][off] = chr(imm)
         elif 'ADD' == opc_str:
-            if DEBUG: print "0x%02x (%d) += 0x%02x (%d)" % (off, off, imm, imm) 
+            if DEBUG: print("0x%02x (%d) += 0x%02x (%d)" % (off, off, imm, imm)) 
             session['scratch'][off] = chr((ord(session['scratch'][off]) + imm) % 0x100)
         elif 'SUB' == opc_str:
-            if DEBUG: print "0x%02x (%d) -= 0x%02x (%d)" % (off, off, imm, imm) 
+            if DEBUG: print("0x%02x (%d) -= 0x%02x (%d)" % (off, off, imm, imm)) 
             session['scratch'][off] = chr((ord(session['scratch'][off]) - imm) % 0x100)
         elif 'MUL' == opc_str:
-            if DEBUG: print "0x%02x (%d) *= 0x%02x (%d)" % (off, off, imm, imm) 
+            if DEBUG: print("0x%02x (%d) *= 0x%02x (%d)" % (off, off, imm, imm)) 
             session['scratch'][off] = chr((ord(session['scratch'][off]) * imm) % 0x100)
         elif 'DIV' == opc_str:
             if 0 == imm:    
-                if DEBUG: print "0x%02x (%d) += 0xAA" % (off, off) 
+                if DEBUG: print("0x%02x (%d) += 0xAA" % (off, off)) 
                 session['scratch'][off] = chr(0xAA)
             else:
-                if DEBUG: print "0x%02x (%d) *= 0x%02x (%d)" % (off, off, imm, imm) 
+                if DEBUG: print("0x%02x (%d) *= 0x%02x (%d)" % (off, off, imm, imm)) 
                 session['scratch'][off] = chr((ord(session['scratch'][off]) / imm) % 0x100)
         elif 'SHR' == opc_str:
-            if DEBUG: print "0x%02x (%d) >>= 0x%02x (%d)" % (off, off, imm, imm) 
+            if DEBUG: print("0x%02x (%d) >>= 0x%02x (%d)" % (off, off, imm, imm)) 
             session['scratch'][off] = chr((ord(session['scratch'][off]) >> imm) % 0x100)
         elif 'SHL' == opc_str:
-            if DEBUG: print "0x%02x (%d) <<= 0x%02x (%d)" % (off, off, imm, imm) 
+            if DEBUG: print("0x%02x (%d) <<= 0x%02x (%d)" % (off, off, imm, imm)) 
             session['scratch'][off] = chr((ord(session['scratch'][off]) << imm) % 0x100)
         elif 'UNK' == opc_str:
-            if DEBUG: print "UNK opcode; no effect on scratch buffer"
+            if DEBUG: print("UNK opcode; no effect on scratch buffer")
         else:
-            print "INVALID OPC_STR; EXITING..."
+            print("INVALID OPC_STR; EXITING...")
             return -1
 
     return session
@@ -144,7 +144,7 @@ class CloudCompute(Actions):
         for the actual work.
         """
         DEBUG = GLOBAL_DEBUG and True
-        if DEBUG: print "compute()"
+        if DEBUG: print("compute()")
 
         # Decide whether we will create a new session or exercise an existing one.
         if  (0 == len(self.state['sessions']) or # no existing sessions
@@ -153,7 +153,7 @@ class CloudCompute(Actions):
 
             # Condition:
             # - we're opening a new session
-            if DEBUG: print "NEW session"
+            if DEBUG: print("NEW session")
 
             # *** NEW SESSION ***
             # CRS -> CB: 4B MAGIC_NEW_SESSION
@@ -194,7 +194,7 @@ class CloudCompute(Actions):
 
             # Condition:
             # - we're using an existing session
-            if DEBUG: print "OLD session"
+            if DEBUG: print("OLD session")
 
             # *** OLD SESSION ***
             # CRS -> CB: 4B (existing) session ID
@@ -203,7 +203,7 @@ class CloudCompute(Actions):
             # CRS <- CB: 4B session ID | scratch area (of length SCRATCH_SZ)
 
             # CRS -> CB: 4B (existing) session ID
-            session_id_idx = choice(self.state['session_vars'].keys())
+            session_id_idx = choice(list(self.state['session_vars'].keys()))
             self.write(self.state['session_vars'][session_id_idx])
 
             # CRS <- CB: 4B (reflected) session ID
@@ -231,7 +231,7 @@ class CloudCompute(Actions):
         Send exit MAGIC as session ID to shut down.
         """
         DEBUG = GLOBAL_DEBUG and True
-        if DEBUG: print "exit()"
+        if DEBUG: print("exit()")
         
         self.write(struct.pack("<L", MAGIC_EXIT))
         return -1
@@ -247,7 +247,7 @@ class CloudCompute(Actions):
         """
         self.delay(50)
         DEBUG = GLOBAL_DEBUG and True
-        if DEBUG: print "start()"
+        if DEBUG: print("start()")
         self.state['sessions'] = dict()
         self.state['session_vars'] = dict()
 

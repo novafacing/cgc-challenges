@@ -297,7 +297,7 @@ class CromuAll(Actions):
         elif mod_len == 2:
             data.append(chr(0))
 
-        for i in xrange(0, len(data), 3):
+        for i in range(0, len(data), 3):
 
             byteA = ord(data[i]) >> 2
             byteB = ((ord(data[i]) & 0x3) << 4) | (ord(data[i+1])>>4)
@@ -360,12 +360,12 @@ class Prng():
 
     def sprng(self, seed):
 
-        state_64 = seed & 0xffffffffffffffffL
+        state_64 = seed & 0xffffffffffffffff
         for i in range(16):
-            state_64 ^= (state_64 >> self.COEFFICIENT_A_64)& 0xffffffffffffffffL
-            state_64 ^= (state_64 << self.COEFFICIENT_B_64)& 0xffffffffffffffffL
-            state_64 ^= (state_64 >> self.COEFFICIENT_C_64)& 0xffffffffffffffffL
-            self.state[i] = (state_64 *self.MULTIPLIER_64)& 0xffffffffffffffffL
+            state_64 ^= (state_64 >> self.COEFFICIENT_A_64)& 0xffffffffffffffff
+            state_64 ^= (state_64 << self.COEFFICIENT_B_64)& 0xffffffffffffffff
+            state_64 ^= (state_64 >> self.COEFFICIENT_C_64)& 0xffffffffffffffff
+            self.state[i] = (state_64 *self.MULTIPLIER_64)& 0xffffffffffffffff
         self.position = 0
 
     def prng(self):
@@ -374,11 +374,11 @@ class Prng():
         self.position = (self.position +1) % 16
         state1 = self.state[self.position]
 
-        state1 ^= (state1 << self.COEFFICIENT_A_1024)& 0xffffffffffffffffL
-        state1 ^= (state1 >> self.COEFFICIENT_B_1024)& 0xffffffffffffffffL
-        state0 ^= (state0 >> self.COEFFICIENT_C_1024)& 0xffffffffffffffffL
-        self.state[self.position] = (state0 ^ state1)& 0xffffffffffffffffL
-        return (self.state[self.position] * self.MULTIPLIER_1024)& 0xffffffffffffffffL
+        state1 ^= (state1 << self.COEFFICIENT_A_1024)& 0xffffffffffffffff
+        state1 ^= (state1 >> self.COEFFICIENT_B_1024)& 0xffffffffffffffff
+        state0 ^= (state0 >> self.COEFFICIENT_C_1024)& 0xffffffffffffffff
+        self.state[self.position] = (state0 ^ state1)& 0xffffffffffffffff
+        return (self.state[self.position] * self.MULTIPLIER_1024)& 0xffffffffffffffff
 
     def random_in_range(self, min, max):
         

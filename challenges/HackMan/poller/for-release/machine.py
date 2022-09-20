@@ -9,7 +9,7 @@ import struct
 p = lambda f,x: struct.pack(f,x)
 
 def random_string(size=20):
-  return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
+  return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
 
 class HackMan(Actions):
   def start(self):
@@ -107,7 +107,7 @@ class HackMan(Actions):
             if c in self.state['word'] and c not in self.state['progress']:
               self.write('%s\n' % c)
               new_progress = ''
-              for i in xrange(len(self.state['word'])):
+              for i in range(len(self.state['word'])):
                 if self.state['word'][i] == c:
                   new_progress += c
                 else:

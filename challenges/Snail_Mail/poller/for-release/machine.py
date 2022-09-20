@@ -73,7 +73,7 @@ class SnailMailPoller(Actions):
         #self.delay(100)
         self.state['e'] = SnailMail()
         if DEBUG:
-            print "------- start -----------"
+            print("------- start -----------")
 
     def add_address(self):
         '''
@@ -81,7 +81,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_ADD_ADDRESS)
         if DEBUG:
-            print "cmd: add addresses"
+            print("cmd: add addresses")
 
         invalid = False
         if self.chance(.2):
@@ -104,7 +104,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_LIST_ADDRESSES)
         if DEBUG:
-            print "cmd: list addresses"
+            print("cmd: list addresses")
 
         addr_list = self.state['e'].get_all_addresses() # sorted list of addrs
         if [] != addr_list:
@@ -121,7 +121,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_RECEIVE_MAIL)
         if DEBUG:
-            print "cmd: receive mail"
+            print("cmd: receive mail")
 
         stamp = self.state['e'].get_stamp()
         if stamp is None:
@@ -149,7 +149,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_SORT_MAIL)
         if DEBUG:
-            print "cmd: sort mail"
+            print("cmd: sort mail")
 
         if 0 == self.state['e'].sort_mail():
             self.recv_status(self.STATUS_OK)
@@ -162,7 +162,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_LIST_UNDELIVERABLE_MAIL)
         if DEBUG:
-            print "cmd: list undeliverable mail"
+            print("cmd: list undeliverable mail")
 
         u_d_mail = self.state['e'].get_undeliverable_mail() # list of mail sorted increasing by recipient
         if [] != u_d_mail:
@@ -180,7 +180,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_DELIVER_MAIL)
         if DEBUG:
-            print "cmd: deliver mail"
+            print("cmd: deliver mail")
 
         if 0 == self.state['e'].deliver_mail():
             self.recv_status(self.STATUS_OK)
@@ -193,7 +193,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_RETURN_TO_SENDER)
         if DEBUG:
-            print "cmd: return to sender"
+            print("cmd: return to sender")
 
         if 0 == self.state['e'].return_to_sender():
             self.recv_status(self.STATUS_OK)
@@ -206,7 +206,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_LIST_LOST_MAIL)
         if DEBUG:
-            print "cmd: list lost mail"
+            print("cmd: list lost mail")
 
         l_mail = self.state['e'].get_lost_mail() # list of mail sorted increasing by sb_hash
         if [] != l_mail:
@@ -223,7 +223,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_DESTROY_LOST_MAIL)
         if DEBUG:
-            print "cmd: destroy lost mail"
+            print("cmd: destroy lost mail")
 
         res = self.state['e'].destroy_lost_mail()
         if 0 == res:
@@ -238,7 +238,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_BUY_POSTAGE)
         if DEBUG:
-            print "cmd: buy postage"
+            print("cmd: buy postage")
 
         stamp = Variable('stamp{0}'.format(self.state['e'].stamp_id()))
         stamp.set_slice(0,3)
@@ -255,7 +255,7 @@ class SnailMailPoller(Actions):
         '''
         self.send_cmd(self.CMD_QUIT)
         if DEBUG:
-            print "cmd: quit -----------"
+            print("cmd: quit -----------")
 
         self.recv_status(self.STATUS_QUIT)
         return -1

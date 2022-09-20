@@ -51,13 +51,13 @@ TS = {
 def r_bytes(n):
     return ''.join([
         chr(random.randint(1, 255))
-        for _ in xrange(random.randint(0, n))
+        for _ in range(random.randint(0, n))
     ])
 
 def r_str(n):
     return ''.join(
         random.choice(string.printable)
-        for _ in xrange(n)
+        for _ in range(n)
     )
 
 def enc_length(n):
@@ -72,7 +72,7 @@ def enc_length(n):
         raise Exception
 
     bs = pack('B', 0x80 | nbytes)
-    for i in xrange(nbytes):
+    for i in range(nbytes):
         bs = bs[0] + pack('B', (n >> (i * 8)) & 0xFF) + bs[1:]
 
     return bs
@@ -86,7 +86,7 @@ def dbg(s):
 class Element(object):
     def __init__(self, depth, cls=None, tag=None):
         if cls is None:
-            self.cls = random.choice(CS.values())
+            self.cls = random.choice(list(CS.values()))
         else:
             self.cls = cls
 
@@ -118,7 +118,7 @@ class Element(object):
                 try:
                     out += chr((ord(x) ^ random.randint(1, 256)) & 0xff)
                 except ValueError:
-                    print x, ord(x), type(x)
+                    print(x, ord(x), type(x))
                     raise
 
         else:
@@ -232,7 +232,7 @@ class ASL6(Actions):
     def random_element(self, c=None, t=None):
         while True:
             if c is None:
-                c = random.choice(CS.values())
+                c = random.choice(list(CS.values()))
 
             if t is None:
                 t = random.randint(0, 32)
@@ -245,7 +245,7 @@ class ASL6(Actions):
                 if mutate:
                     e.primitive = int(not e.primitive)
 
-                for _ in xrange(n):
+                for _ in range(n):
                     re = self.random_element(self.state['cur_depth'] + 2)
                     if re:
                         e.add_sub(re)
@@ -355,7 +355,7 @@ class ASL6(Actions):
 
         l = 0
         i += 1
-        for off in xrange(num_bytes):
+        for off in range(num_bytes):
             l = (l << 8) | ord(self.state['stream'][i + off])
 
         return num_bytes + 1, l
@@ -437,7 +437,7 @@ class ASL6(Actions):
             if e.tag < 0 or e.tag > len(TS):
                 ex += "UNIVERSAL %d " % e.tag
             else:
-                for k, v in TS.iteritems():
+                for k, v in TS.items():
                     if v == e.tag:
                         ex += "UNIVERSAL %s " % k
                         break
@@ -456,7 +456,7 @@ class ASL6(Actions):
     def print_string(self, e):
         ex = ""
 
-        for i in xrange(e.length):
+        for i in range(e.length):
             if e.data[i] in string.ascii_letters + string.digits:
                 ex += "%c" % e.data[i]
             else:
@@ -472,7 +472,7 @@ class ASL6(Actions):
                 self.read(expect="INVALID TIME", length=len("INVALID TIME"))
                 return
 
-            for i in xrange(12):
+            for i in range(12):
                 if e.data[i] not in string.digits:
                     self.read(expect="INVALID TIME", length=len("INVALID TIME"))
                     return
@@ -495,7 +495,7 @@ class ASL6(Actions):
                 self.read(expect="INVALID TIME", length=len("INVALID TIME"))
                 return
 
-            for i in xrange(14):
+            for i in range(14):
                 if e.data[i] not in string.digits:
                     self.read(expect="INVALID TIME", length=len("INVALID TIME"))
                     return
@@ -517,7 +517,7 @@ class ASL6(Actions):
         if e.length > 16:
             ex += "\n"
             ex += '    ' * (e.depth + 1)
-            for i in xrange(e.length):
+            for i in range(e.length):
                 ex += "%02X" % ord(e.data[i])
                 if i % 32 == 31:
                     ex += "\n"
@@ -525,7 +525,7 @@ class ASL6(Actions):
                 else:
                     ex += ' '
         else:
-            for i in xrange(e.length):
+            for i in range(e.length):
                 ex += "%02X " % ord(e.data[i])
 
         if len(ex):

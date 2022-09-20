@@ -14,7 +14,7 @@ TYPE_NORMAL = 0
 p = lambda f,x: struct.pack(f,x)
 
 def random_string(size=20):
-  return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
+  return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
 
 class LulzChat(Actions):
   def start(self):
@@ -153,9 +153,9 @@ class LulzChat(Actions):
     self.read(length=len('\n[[[ MESSAGES ]]]\n'), expect='\n[[[ MESSAGES ]]]\n')
     self.read(length=len('idx. <from_id, length, type>\n'), expect='idx. <from_id, length, type>\n')
     self.read(length=len('----------------------------\n'), expect='----------------------------\n')
-    tmp_list =  filter(lambda m: m['to_id'] == self.state['current_user']['user_id'], self.state['messages'])
+    tmp_list =  [m for m in self.state['messages'] if m['to_id'] == self.state['current_user']['user_id']]
 
-    for i in xrange(min(len(tmp_list), MAX_NUM_MSG)):
+    for i in range(min(len(tmp_list), MAX_NUM_MSG)):
       m = tmp_list[i]
       if (m['type'] == TYPE_PROTECTED):
         es = '%d. <%d, N/A, Protected>\n' % (i+1, m['from_id'])
@@ -182,9 +182,9 @@ class LulzChat(Actions):
     self.read(length=len('\n[[[ MESSAGES ]]]\n'), expect='\n[[[ MESSAGES ]]]\n')
     self.read(length=len('idx. <from_id, length, type>\n'), expect='idx. <from_id, length, type>\n')
     self.read(length=len('----------------------------\n'), expect='----------------------------\n')
-    tmp_list =  filter(lambda m: m['to_id'] == self.state['current_user']['user_id'], self.state['messages'])
+    tmp_list =  [m for m in self.state['messages'] if m['to_id'] == self.state['current_user']['user_id']]
 
-    for i in xrange(min(len(tmp_list), MAX_NUM_MSG)):
+    for i in range(min(len(tmp_list), MAX_NUM_MSG)):
       m = tmp_list[i]
       if (m['type'] == TYPE_PROTECTED):
         es = '%d. <%d, N/A, Protected>\n' % (i+1, m['from_id'])
@@ -279,9 +279,9 @@ class LulzChat(Actions):
     self.read(length=len('\n[[[ MESSAGES ]]]\n'), expect='\n[[[ MESSAGES ]]]\n')
     self.read(length=len('idx. <from_id, length, type>\n'), expect='idx. <from_id, length, type>\n')
     self.read(length=len('----------------------------\n'), expect='----------------------------\n')
-    tmp_list =  filter(lambda m: m['to_id'] == self.state['current_user']['user_id'], self.state['messages'])
+    tmp_list =  [m for m in self.state['messages'] if m['to_id'] == self.state['current_user']['user_id']]
 
-    for i in xrange(min(len(tmp_list), MAX_NUM_MSG)):
+    for i in range(min(len(tmp_list), MAX_NUM_MSG)):
       m = tmp_list[i]
       if (m['type'] == TYPE_PROTECTED):
         es = '%d. <%d, N/A, Protected>\n' % (i+1, m['from_id'])

@@ -37,7 +37,7 @@ def random_alpha(a, b):
     return ''.join(choice(string.letters) for _ in range(randint(a, b)))
 
 def random_data(a,b):
-    chars = ''.join(map(chr, range(256)))
+    chars = ''.join(map(chr, list(range(256))))
     return ''.join(choice(chars) for _ in range(randint(a, b)))
 
 def random_string(a, b):
@@ -73,7 +73,7 @@ class TFTTP(Actions):
     def _build_get_good(self):
         if len(self.state['quotes']) == 0:
             self.put_good()
-        key = choice(self.state['quotes'].keys())
+        key = choice(list(self.state['quotes'].keys()))
         val = self.state['quotes'][key]
         return key,val
 

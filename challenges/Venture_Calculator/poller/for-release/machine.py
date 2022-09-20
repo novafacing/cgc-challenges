@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from __future__ import division
+
 
 from generator.actions import Actions
 
@@ -88,7 +88,7 @@ class TemplateGenerator(Actions):
         self.write(self.magic_page[:4])
         self.read(length=0x1000, expect=self.magic_page)
 
-        for _ in xrange(8):
+        for _ in range(8):
             self.command()
             self.implicit_push()
 
@@ -235,7 +235,7 @@ class TemplateGenerator(Actions):
             return
 
         s = int32(0)
-        for _ in xrange(n):
+        for _ in range(n):
             v = self.state['calc'].pop()
             s = int32(int32(s) + int32(v))
 
@@ -260,7 +260,7 @@ class TemplateGenerator(Actions):
             return
 
         s = int32(0)
-        for _ in xrange(n):
+        for _ in range(n):
             v = self.state['calc'].pop()
             s = int32(int32(s) + int32(v))
 
@@ -339,7 +339,7 @@ class TemplateGenerator(Actions):
             self.state['calc'].push(n)
             return
 
-        for _ in xrange(n):
+        for _ in range(n):
             self.state['calc'].pop()
 
     def min(self):

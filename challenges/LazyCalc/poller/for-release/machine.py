@@ -81,7 +81,7 @@ class Calc(Actions):
     g_secret = self.magic_page
 
     sm = 0
-    for i in xrange(4096/4):
+    for i in range(4096/4):
       sm += struct.unpack('<I', self.magic_page[i*4:i*4 +4])[0]
     sm %= 128
     if ord(self.magic_page[0]) & 1:
@@ -142,7 +142,7 @@ class Calc(Actions):
     self.write(pack(self.n))
     self.calcs = []
     s = ''
-    for i in xrange(self.n):
+    for i in range(self.n):
       op = self.gen_random_op()
       self.calcs.append(op)
       s += pack(op.typ) + spack(op.arg1) + spack(op.arg2) + spack(0)
@@ -179,7 +179,7 @@ class Calc(Actions):
       return
 
     cmds = []
-    for i in xrange(random.randint(15, 40)):
+    for i in range(random.randint(15, 40)):
       cmds.append(random.choice([CMD_ADD, CMD_SUB, CMD_MUL, CMD_EXP, CMD_IMP, CMD_CMP]))
 
     for cmd in cmds:

@@ -65,7 +65,7 @@ class map:
 
 class Mapper(Actions):
 #	myMap = map
-	oMap = map("Newville") 
+	oMap = list(map("Newville")) 
 	#from example in understanding a poll generator.md
 	def random_string(self, size):
 		chars = string.letters + string.digits
@@ -255,7 +255,7 @@ class Mapper(Actions):
 
 ######### /\ /\ /\ helper functs /\ /\ /\ ### \/ \/ \/ \/ \/ node functs \/ \/ \/ \/ #########
 	def start(self):
-		self.oMap = map("Newville")
+		self.oMap = list(map("Newville"))
 
 	def finish(self):
 		self.write('0\n')

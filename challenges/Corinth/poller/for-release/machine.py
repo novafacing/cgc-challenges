@@ -94,7 +94,7 @@ class Corinth(Actions):
 
         in_circle = 0
 
-        for i in xrange(0x1000):
+        for i in range(0x1000):
             n1 = self.monte_gen()
             n2 = self.monte_gen()
             dist = sqrt((n1 * n1) + (n2 * n2))
@@ -165,7 +165,7 @@ class Corinth(Actions):
     def doubler(self):
         in_circle = 0
         initial_counter = self.counter
-        for i in xrange(0x1000):
+        for i in range(0x1000):
             n1 = self.monte_gen()
             n2 = self.monte_gen()
             dist = sqrt((n1 * n1) + (n2 * n2))
@@ -185,8 +185,7 @@ class Corinth(Actions):
 
         len_to_double = random.randint(1, my_doubler_size)
 
-        str_to_double = ''.join(map(lambda _x: chr(random.randint(65, 90)),
-                                    xrange(len_to_double)))
+        str_to_double = ''.join([chr(random.randint(65, 90)) for _x in range(len_to_double)])
 
         doubled_str = str_to_double * 2
 

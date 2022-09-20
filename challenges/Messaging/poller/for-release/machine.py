@@ -15,7 +15,7 @@ def hash_string(s, t):
         0x98765432
     ]
     result = initials[t]
-    for x in xrange(0, 0x1000, 4):
+    for x in range(0, 0x1000, 4):
         foo = struct.unpack('<I', s[x:x+4])[0]
         result = ((result << 7) ^ (result >> 24)) & 0xffffffff
         result ^= foo
@@ -32,7 +32,7 @@ def escape(s):
 def random_string(cnt=None):
     if cnt is None:
         cnt = random.randint(4, 200)
-    return escape(''.join([chr(random.randint(0, 255)) for x in xrange(cnt)]))
+    return escape(''.join([chr(random.randint(0, 255)) for x in range(cnt)]))
 
 # tables for multiplication in GF(2^8) using a primitive polynomial of 0x11D
 gf_exp = [1, 2, 4, 8, 16, 32, 64, 128, 29, 58, 116, 232, 205, 135, 19, 38, 76, 152, 45, 90, 180, 117, 234, 201, 143, 3, 6, 12, 24, 48, 96, 192, 157, 39, 78, 156, 37, 74, 148, 53, 106, 212, 181, 119, 238, 193, 159, 35, 70, 140, 5, 10, 20, 40, 80, 160, 93, 186, 105, 210, 185, 111, 222, 161, 95, 190, 97, 194, 153, 47, 94, 188, 101, 202, 137, 15, 30, 60, 120, 240, 253, 231, 211, 187, 107, 214, 177, 127, 254, 225, 223, 163, 91, 182, 113, 226, 217, 175, 67, 134, 17, 34, 68, 136, 13, 26, 52, 104, 208, 189, 103, 206, 129, 31, 62, 124, 248, 237, 199, 147, 59, 118, 236, 197, 151, 51, 102, 204, 133, 23, 46, 92, 184, 109, 218, 169, 79, 158, 33, 66, 132, 21, 42, 84, 168, 77, 154, 41, 82, 164, 85, 170, 73, 146, 57, 114, 228, 213, 183, 115, 230, 209, 191, 99, 198, 145, 63, 126, 252, 229, 215, 179, 123, 246, 241, 255, 227, 219, 171, 75, 150, 49, 98, 196, 149, 55, 110, 220, 165, 87, 174, 65, 130, 25, 50, 100, 200, 141, 7, 14, 28, 56, 112, 224, 221, 167, 83, 166, 81, 162, 89, 178, 121, 242, 249, 239, 195, 155, 43, 86, 172, 69, 138, 9, 18, 36, 72, 144, 61, 122, 244, 245, 247, 243, 251, 235, 203, 139, 11, 22, 44, 88, 176, 125, 250, 233, 207, 131, 27, 54, 108, 216, 173, 71, 142]
@@ -52,55 +52,55 @@ def gf_inverse(x):
     return gf_exp[(255 - gf_log[x]) % 255]
 def gf_poly_eval(poly, x):
     result = poly[0]
-    for i in xrange(1, len(poly)):
+    for i in range(1, len(poly)):
         result = gf_mul(result, x) ^ poly[i]
     return result
 def gf_poly_add(x, y):
     result = [0] * max(len(x), len(y))
-    for i in xrange(len(x)):
+    for i in range(len(x)):
         result[len(result) - len(x) + i] = x[i]
-    for i in xrange(len(y)):
+    for i in range(len(y)):
         result[len(result) - len(y) + i] ^= y[i]
     return result
 def gf_poly_mul_const(x, c):
     result = [0] * len(x)
-    for i in xrange(len(x)):
+    for i in range(len(x)):
         result[i] = gf_mul(x[i], c)
     return result
 def gf_poly_mul(x, y):
     # long multiplication of polynomials x and y
     result = [0] * (len(x) + len(y) - 1)
-    for i in xrange(len(x)):
-        for j in xrange(len(y)):
+    for i in range(len(x)):
+        for j in range(len(y)):
             result[i + j] ^= gf_mul(x[i], y[j])
     return result
 def gf_poly_mod(x, y):
     # returns x % y
     result = list(x)
-    for i in xrange(len(x) - len(y) + 1):
+    for i in range(len(x) - len(y) + 1):
         c = result[i] # store now since it is modified in the loop
-        for j in xrange(len(y)):
+        for j in range(len(y)):
             result[i + j] ^= gf_mul(c, y[j])
     return result[-len(y)+1:]
 def gen_poly(k, n=0):
     # calculate (x - a^n) * (x - a^(n+1)) ... * (x - a^(n+k-1))
     result = [1]
-    for i in xrange(k):
+    for i in range(k):
         result = gf_poly_mul(result, [1, gf_exp[n + i]])
     return result
 def calc_syn(msg, k, n=0):
     result = [0] * k
-    for i in xrange(k):
+    for i in range(k):
         result[i] = gf_poly_eval(msg, gf_exp[n + i])
     return result
 def calc_lambda(S):
     l = [1]
     L = 0
     T = [1]
-    for k in xrange(len(S)):
+    for k in range(len(S)):
         T += [0] # T(x) = T(x) * x
         delta = S[k]
-        for i in xrange(1, len(l)):
+        for i in range(1, len(l)):
             delta ^= gf_mul(l[len(l) - 1 - i], S[k - i])
         if delta != 0:
             if L <= k:
@@ -117,12 +117,12 @@ def calc_lambda(S):
 def calc_locs(l, n=0):
     locs = []
     sigma = [0] * (len(l) - 1)
-    for k in xrange(len(sigma)):
+    for k in range(len(sigma)):
         sigma[k] = gf_mul(l[k], gf_exp[len(sigma) - k])
 
-    for i in xrange(255):
+    for i in range(255):
         s = 1
-        for k in xrange(len(sigma)):
+        for k in range(len(sigma)):
             s ^= sigma[k]
             sigma[k] = gf_mul(sigma[k], gf_exp[len(sigma) - k])
         if s == 0:
@@ -141,7 +141,7 @@ def calc_omega(S, sigma):
     return gf_poly_mod(gf_poly_mul(S, sigma), [1] + [0] * len(S)) # S*sigma mod x^2t
 def calc_derivative(sigma):
     result = list(sigma)
-    for x in xrange(len(result) - 1, 0, -2):
+    for x in range(len(result) - 1, 0, -2):
         result[x] = 0
     return result[:-1]
 def ecc_encode(msg, k):
@@ -175,7 +175,7 @@ class Packet(object):
             return self.data
 
         blocks = []
-        for x in xrange(0, len(self.data), n_blocksize):
+        for x in range(0, len(self.data), n_blocksize):
             block_data = self.data[x:x+n_blocksize]
             orig_size = len(block_data)
             block_data = block_data.ljust(n_blocksize, '\x00')
@@ -183,7 +183,7 @@ class Packet(object):
 
             # corrupt some symbols
             encoded = [ord(x) for x in encoded]
-            for y in xrange(max(0, n_parity / 2 - 2)):
+            for y in range(max(0, n_parity / 2 - 2)):
                 encoded[random.randint(1,254)] = random.randint(0,255)
             encoded = ''.join([chr(x) for x in encoded])
 
@@ -289,4 +289,4 @@ class TemplateGenerator(Actions):
 if __name__ == '__main__':
     m = Metadata()
     p = Packet(0x20, m.to_string())
-    print repr(p.to_string())
+    print(repr(p.to_string()))

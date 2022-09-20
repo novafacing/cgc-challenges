@@ -84,7 +84,7 @@ class GreyMatter(Actions):
                 str_doc_path = "<INDEX VARIABLE>"
             else:
                 str_doc_path = doc_path
-            print "Currently serving '%s'" % str_doc_path
+            print("Currently serving '%s'" % str_doc_path)
 
         # If we're not in the index document special case, we need to do a 
         # read() and verify the requested document against the correctly 
@@ -107,7 +107,7 @@ class GreyMatter(Actions):
             num_links = 0
 
         if self.DEBUG:
-            print "\t%d links in this doc" % num_links
+            print("\t%d links in this doc" % num_links)
 
         # We generate our paths, keeping track of the amount of space consumed.
         # Do this before the fluff loop below because we need to guarantee that 
@@ -142,7 +142,7 @@ class GreyMatter(Actions):
             paths.append(new_path)
             link = "$SRC$" + new_path + "$!SRC$"
             if self.DEBUG:
-                print "Responding to '%s'; generated a link: '%s'" % (str_doc_path, link)
+                print("Responding to '%s'; generated a link: '%s'" % (str_doc_path, link))
             links.append(link)
             sz_doc += len(link)
 
@@ -184,7 +184,7 @@ class GreyMatter(Actions):
             path = paths[i]
             cp = canonicalize_path(path)
             if self.DEBUG:
-                print "Recursing to serve '%s', canon'ed to '%s'" % (path, cp)
+                print("Recursing to serve '%s', canon'ed to '%s'" % (path, cp))
             self._respond(cp)
 
     def start(self):

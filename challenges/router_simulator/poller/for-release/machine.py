@@ -29,7 +29,7 @@ class Router(Actions):
         ip, mask = random_ip(length)
         valid_asn = len(self.state['routers']) > 0 and self.chance(0.95)
         if valid_asn:
-            asn = random.choice(self.state['routers'].keys())
+            asn = random.choice(list(self.state['routers'].keys()))
             self.write('add %s %s %d\n' % (ip, mask, asn))
             self.state['routes'][(ip, mask)] = asn
         else:
@@ -42,7 +42,7 @@ class Router(Actions):
     def delete(self):
         valid_route = len(self.state['routes']) > 0 and self.chance(0.8)
         if valid_route:
-            route = random.choice(self.state['routes'].keys())
+            route = random.choice(list(self.state['routes'].keys()))
             del self.state['routes'][route]
             self.write('delete %s %s\n' % (route[0], route[1]))
         else:
@@ -109,12 +109,12 @@ class Router(Actions):
     def enable_delete(self):
         valid_asn = len(self.state['routers']) > 0 and self.chance(0.8)
         if valid_asn:
-            asn = random.choice(self.state['routers'].keys())
+            asn = random.choice(list(self.state['routers'].keys()))
             self.write('delete %d\n' % asn)
             del self.state['routers'][asn]
 
             to_delete = []
-            for k, v in self.state['routes'].iteritems():
+            for k, v in self.state['routes'].items():
                 if v == asn:
                     to_delete.append(k)
             for k in to_delete:
@@ -129,7 +129,7 @@ class Router(Actions):
     def enable_edit(self):
         valid_asn = len(self.state['routers']) > 0 and self.chance(0.8)
         if valid_asn:
-            asn = random.choice(self.state['routers'].keys())
+            asn = random.choice(list(self.state['routers'].keys()))
             name, ip = self.state['routers'][asn]
             self.write('edit %d\n' % asn)
             self.read(delim='\n', expect='AS %d\n' % asn)

@@ -8,7 +8,7 @@ import sys
 import re
 
 def random_string(size=20):
-  return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
+  return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
 
 class File(object):
   FT_REG = 0
@@ -99,7 +99,7 @@ class AFILES(Actions):
     self.cwd = self.root_dir
     self.num_files = 0
     self.num_opened_files = 0
-    self.opened_files = [None for i in xrange(self.MAX_NUM_OPENED_FILES)]
+    self.opened_files = [None for i in range(self.MAX_NUM_OPENED_FILES)]
 
   def shell(self):
     self.read(length=len('$ '), expect='$ ')
@@ -120,7 +120,7 @@ class AFILES(Actions):
     pool = ['.', '..'] + self.cwd.files
     n = random.randint(0, len(pool))
     files = list()
-    for i in xrange(n):
+    for i in range(n):
       f = random.choice(pool)
       cmd += ' %s' % (f.name if f != '.' and f != '..' else f)
       files.append(f)
@@ -167,7 +167,7 @@ class AFILES(Actions):
     else:
       if self.num_files == self.MAX_NUM_FILES:
         out += 'Max number of files reached\n'
-      elif len(filter(lambda x: x.name == name, self.cwd.files)) > 0:
+      elif len([x for x in self.cwd.files if x.name == name]) > 0:
         out += 'File already exists\n'
       else:
         f = File(name, File.FT_REG, 0, self.cwd)
@@ -343,7 +343,7 @@ class AFILES(Actions):
           tt += '==============================\n'
           self.read(length=len(tt), expect=tt)
           ss = ''
-          for i in xrange(random.randint(1, 20)):
+          for i in range(random.randint(1, 20)):
             ss += random_string() + ' '
           ss = ss[:-1] + '\n'
           f.write(0, ss, len(ss))
@@ -375,7 +375,7 @@ class AFILES(Actions):
     if name == '':
       out += 'No file specified\n'
     else:
-      if len(filter(lambda x: x.name == name, self.cwd.files)) == 0:
+      if len([x for x in self.cwd.files if x.name == name]) == 0:
         out += 'No such file\n'
       elif f.type != File.FT_REG:
         out += 'Not a regular file\n'
@@ -407,7 +407,7 @@ class AFILES(Actions):
     else:
       if self.num_files == self.MAX_NUM_FILES:
         out += 'Max number of files reached\n'
-      elif len(filter(lambda x: x.name == name, self.cwd.files)) > 0:
+      elif len([x for x in self.cwd.files if x.name == name]) > 0:
         out += 'File already exists\n'
       else:
         f = File(name, File.FT_DIR, 0, self.cwd)
@@ -441,8 +441,8 @@ class AFILES(Actions):
     elif r >= 91:
       name = ''
     else:
-      files = filter(lambda x: x.type == File.FT_REG, self.cwd.files)
-      dirs = filter(lambda x: x.type == File.FT_DIR, self.cwd.files)
+      files = [x for x in self.cwd.files if x.type == File.FT_REG]
+      dirs = [x for x in self.cwd.files if x.type == File.FT_DIR]
       r = random.randint(1, 100)
       if r <= 50:
         name = random_string()
@@ -484,8 +484,8 @@ class AFILES(Actions):
     elif r >= 91:
       name = ''
     else:
-      files = filter(lambda x: x.type == File.FT_REG, self.cwd.files)
-      dirs = filter(lambda x: x.type == File.FT_DIR, self.cwd.files)
+      files = [x for x in self.cwd.files if x.type == File.FT_REG]
+      dirs = [x for x in self.cwd.files if x.type == File.FT_DIR]
       r = random.randint(1, 100)
       if r <= 50:
         name = ''

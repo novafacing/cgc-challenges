@@ -38,7 +38,7 @@ class TimecardPollGenerator(Actions):
             self.state["employees"].append(Employee())
         # Generate a random list of employee id's from 1 to 10 elements long. The generator will create inputs for those employees only.
         self.state["id_subset"] = random.sample(
-            range(0, self.NUMBER_OF_EMPLOYEES), random.randint(1, 10)
+            list(range(0, self.NUMBER_OF_EMPLOYEES)), random.randint(1, 10)
         )
 
         root = os.getenv("CORPUS_ROOT", None)

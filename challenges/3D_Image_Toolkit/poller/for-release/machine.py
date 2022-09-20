@@ -82,7 +82,7 @@ class Poller(Actions):
         self.seed_prng(c_uint(unpack("<L", self.magic_page[0:4])[0]))
 
         x = 0
-        for _ in xrange(4096 / 10):
+        for _ in range(4096 / 10):
             # z, r, x, a, b, y, g
             t = {}
             t["x"] = c_short(self.prng()).value
@@ -331,7 +331,7 @@ class Poller(Actions):
         max_idx = 8 if (type == 0 or type == 2) else 4
         close_idx = max_idx
 
-        for x in xrange(max_idx):
+        for x in range(max_idx):
             if type == 0 or type == 2:
                 temp_diff = abs(val - self.red_blue[x])
             else:

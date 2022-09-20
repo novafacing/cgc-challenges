@@ -4,11 +4,11 @@ from generator.actions import Actions
 import random, string, struct
 
 def random_string_n(size=20):
-    return ''.join([random.choice(string.ascii_letters) for x in xrange(size)])
+    return ''.join([random.choice(string.ascii_letters) for x in range(size)])
 def random_string(size=20):
-    return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
+    return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
 def random_bytes_n(size=20):
-    return ''.join([chr(random.randint(0,255)) for x in xrange(size)])
+    return ''.join([chr(random.randint(0,255)) for x in range(size)])
 
 g_rand = None
 g_rand_idx = 0
@@ -75,7 +75,7 @@ class CExplorer(object):
     def get_next_exp(self):
         exp = self.BASE_EXP
         mult = 1.0
-        for i in xrange(self.level):
+        for i in range(self.level):
             mult *= self.NEXT_EXP_MULTIPLIER
         exp = int(exp * mult)
         return exp - self.exp
@@ -203,13 +203,13 @@ class CFortress(object):
         return s
 
     def num_avail_missions(self):
-        return len(filter(lambda m: m.avail, self.missions))
+        return len([m for m in self.missions if m.avail])
 
     def num_avail_exps(self):
-        return len(filter(lambda e: e.avail and e.hired, self.explorers))
+        return len([e for e in self.explorers if e.avail and e.hired])
 
     def num_hired_exps(self):
-        return len(filter(lambda e: e.hired, self.explorers))
+        return len([e for e in self.explorers if e.hired])
 
     def get_avg_level(self):
         lvl_sum = 0
@@ -309,7 +309,7 @@ class AFORTRESS(Actions):
         fort = self.state['fort']
         n_missions = len(fort.missions) - fort.num_avail_missions()
         s =  '\nDay-%03d => [%d mission] | [%d explorer] | [%d supply]\n' % (fort.day, n_missions, fort.num_hired_exps(), fort.supply)
-        s += ''.join('-' for i in xrange(len(s)))
+        s += ''.join('-' for i in range(len(s)))
         s += '\n'
         s += '0. Next day!\n'
         s += '1. Missions\n'
@@ -346,11 +346,11 @@ class AFORTRESS(Actions):
         global g_rand, g_rand_idx
         r = (ord(g_rand[g_rand_idx % 4096]) & 0xFF) % 4 + 1
         g_rand_idx += 2
-        for i in xrange(r):
+        for i in range(r):
             group = (ord(g_rand[g_rand_idx % 4096]) & 0xFF) % 3 + 1
             g_rand_idx += 2
             typ = CRequirement.TYPE_NOTHING
-            for j in xrange(group):
+            for j in range(group):
                 typ |= self.state['skills'][(ord(g_rand[g_rand_idx % 4096]) & 0xFF) % len(self.state['skills'])]['counter']
                 g_rand_idx += 2
             supply = (ord(g_rand[g_rand_idx % 4096]) & 0xFF) % 30 + 1
@@ -418,7 +418,7 @@ class AFORTRESS(Actions):
             self.read(length=len(s), expect=s)
             skills = e.skills
             s = ''
-            for j in xrange(2):
+            for j in range(2):
                 cts = CRequirement.req_type_to_str(skills[j].counter)
                 s += "   ==> Skill #%d: %s <%s>\n" % (j+1, skills[j].name, 'None' if cts == '' else cts)
             self.read(length=len(s), expect=s)
@@ -432,7 +432,7 @@ class AFORTRESS(Actions):
             self._read_mission_menu()
             self.write('3\n')
             return
-        avail_missions = filter(lambda m: m.avail, fort.missions)
+        avail_missions = [m for m in fort.missions if m.avail]
         s = '\n... Available missions ...\n'
         self.read(length=len(s), expect=s)
         self.print_missions(avail_missions)
@@ -453,7 +453,7 @@ class AFORTRESS(Actions):
             self._read_mission_menu()
             self.write('3\n')
             return
-        avail_exps = filter(lambda e: e.avail and e.hired, fort.explorers)
+        avail_exps = [e for e in fort.explorers if e.avail and e.hired]
         s = '\n... Available explorers ...\n'
         self.read(length=len(s), expect=s)
         self.print_explorers(avail_exps)
@@ -525,7 +525,7 @@ class AFORTRESS(Actions):
             self._read_explorer_menu()
             self.write('5\n')
             return
-        unhired_exps = filter(lambda e: not e.hired, fort.explorers)
+        unhired_exps = [e for e in fort.explorers if not e.hired]
         self.print_explorers(unhired_exps)
         s = '\nselect> '
         self.read(length=len(s), expect=s)
@@ -540,7 +540,7 @@ class AFORTRESS(Actions):
     def do_view_explorers(self):
         self.write('2\n')
 
-        hired_exps = filter(lambda e: e.hired, self.state['fort'].explorers)
+        hired_exps = [e for e in self.state['fort'].explorers if e.hired]
         s = '\n... Current explorers (%d/%d) ...\n' % (len(hired_exps), self.state['fort'].MAX_NUM_EXPLORERS)
         self.read(length=len(s), expect=s)
         if len(hired_exps) == 0:
@@ -555,7 +555,7 @@ class AFORTRESS(Actions):
     def do_remove_explorer(self):
         self.write('3\n')
 
-        hired_exps = filter(lambda e: e.hired and e.avail, self.state['fort'].explorers)
+        hired_exps = [e for e in self.state['fort'].explorers if e.hired and e.avail]
         s = '\n... Removable explorers ...\n'
         self.read(length=len(s), expect=s)
         if len(hired_exps) == 0:
@@ -577,7 +577,7 @@ class AFORTRESS(Actions):
         self.write('4\n')
 
         fort = self.state['fort']
-        avail_exps = filter(lambda e: e.hired and e.avail, fort.explorers)
+        avail_exps = [e for e in fort.explorers if e.hired and e.avail]
         s = '\n... Available explorers ...\n'
         self.read(length=len(s), expect=s)
         if len(avail_exps) == 0:

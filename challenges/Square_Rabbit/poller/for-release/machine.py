@@ -152,7 +152,7 @@ class Deck():
         self.cards = []
         self.top_of_deck = 0
 
-        for i in xrange(52):
+        for i in range(52):
             self.cards.append(Card(i%13 + 1, i/13))
         self.shuffle()
 
@@ -165,7 +165,7 @@ class Deck():
         return ctypes.c_uint32(self.d).value
 
     def shuffle(self):
-        for i in xrange(10000):
+        for i in range(10000):
             pos1 = self.rng() % 52
             pos2 = self.rng() % 52
 
@@ -255,7 +255,7 @@ class Squarerabbit(Actions):
         self.state['dealer_hand'] = Hand()
         self.state['player_hand'] = [Hand()]
         hand = self.state['player_hand'][0]
-        for x in xrange(2):
+        for x in range(2):
             self.state['player_hand'][0].get_card(deck.draw_card())
             self.state['dealer_hand'].get_card(deck.draw_card())
 

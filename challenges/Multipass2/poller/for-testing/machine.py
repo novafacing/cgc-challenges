@@ -55,7 +55,7 @@ class MultiPass(Actions):
 	DEBUG_HISTORY = DEBUG or False
 	DEBUG_REFUND = DEBUG or False
 	DEBUG_ERRORS = DEBUG or False
-	MAX_UINT32 = 2 * sys.maxint + 1
+	MAX_UINT32 = 2 * sys.maxsize + 1
 
 	def start(self):
 		self.state['mp'] = MultiPassSupport()
@@ -71,10 +71,10 @@ class MultiPass(Actions):
 		# set: pkt_type INIT, op_code ISSUE, amount INITAL_CARD_AMOUNT
 		msg_head = self.state['mp'].make_packet_head(pkt_type = 'INIT', op_code = 'ISSUE')
 		if self.DEBUG_ISSUE:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 		msg_issue = self.state['mp'].make_packet_data_issue(amount = self.INITIAL_CARD_AMOUNT)
 		if self.DEBUG_ISSUE:
-			print(' write: msg_issue: {0}'.format(msg_issue))
+			print((' write: msg_issue: {0}'.format(msg_issue)))
 		msg = self.state['mp'].pack_packet_head(msg_head) + self.state['mp'].pack_packet_data_issue(msg_issue)
 		self.write(msg)
 
@@ -90,7 +90,7 @@ class MultiPass(Actions):
 					op_code = 'ISSUE',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_ISSUE:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		# read reply packet header
 		self.read(length=len(msg), expect=msg)
@@ -121,7 +121,7 @@ class MultiPass(Actions):
 					op_code = 'ISSUE',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_ISSUE:
-			print(' write then read: msg_head: {0}'.format(msg_head))
+			print((' write then read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 		self.read(length=len(msg), expect=msg)
@@ -148,7 +148,7 @@ class MultiPass(Actions):
 					pkt_type = 'AUTH', 
 					op_code = 'BALANCE')
 		if self.DEBUG_BALANCE:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 
@@ -162,7 +162,7 @@ class MultiPass(Actions):
 					op_code = 'BALANCE',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_BALANCE:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		# read reply packet header
 		self.read(length=len(msg), expect=msg)
@@ -186,13 +186,13 @@ class MultiPass(Actions):
 					transaction_id = new_transaction_id)
 
 		if self.DEBUG_BALANCE:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 
 		# expected reply header, same as sent packet
 		if self.DEBUG_BALANCE:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 		# read reply packet header
 		self.read(length=len(msg), expect=msg)
 
@@ -200,7 +200,7 @@ class MultiPass(Actions):
 		new_balance = self.state['mp'].make_packet_data_balance(card['balance'])
 
 		if self.DEBUG_BALANCE:
-			print(' read: new_balance: {0}'.format(new_balance))
+			print((' read: new_balance: {0}'.format(new_balance)))
 
 		msg = self.state['mp'].pack_packet_data_balance(new_balance)
 		self.read(length=len(msg), expect=msg)
@@ -221,7 +221,7 @@ class MultiPass(Actions):
 					op_code = 'BALANCE',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_BALANCE:
-			print(' write then read: msg_head: {0}'.format(msg_head))
+			print((' write then read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 		self.read(length=len(msg), expect=msg)
@@ -247,7 +247,7 @@ class MultiPass(Actions):
 					pkt_type = 'AUTH', 
 					op_code = 'RECHARGE')
 		if self.DEBUG_RECHARGE:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 
@@ -261,7 +261,7 @@ class MultiPass(Actions):
 					op_code = 'RECHARGE',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_RECHARGE:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		# read reply packet header
 		self.read(length=len(msg), expect=msg)
@@ -288,7 +288,7 @@ class MultiPass(Actions):
 					transaction_id = new_transaction_id)
 
 		if self.DEBUG_RECHARGE:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 
 		FULL = False
 		# occasionally cause balance to overflow maxint.
@@ -300,7 +300,7 @@ class MultiPass(Actions):
 
 		msg_recharge = self.state['mp'].make_packet_data_recharge(new_recharge_amt)
 		if self.DEBUG_RECHARGE:
-			print(' write: msg_recharge: {0}'.format(msg_recharge))
+			print((' write: msg_recharge: {0}'.format(msg_recharge)))
 		msg = self.state['mp'].pack_packet_head(msg_head) + self.state['mp'].pack_packet_data_recharge(msg_recharge)
 		self.write(msg)
 
@@ -319,7 +319,7 @@ class MultiPass(Actions):
 
 		# expected reply header, same as inital packet head
 		if self.DEBUG_RECHARGE:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		# read reply packet header
 		self.read(length=len(msg), expect=msg)
@@ -328,7 +328,7 @@ class MultiPass(Actions):
 			# read error data
 			msg_err = self.state['mp'].make_packet_data_error('ERRNO_MP_RECHARGE_FULL')
 			if self.DEBUG_RECHARGE:
-				print(' read: msg_err: {0}'.format(msg_err))
+				print((' read: msg_err: {0}'.format(msg_err)))
 			msg = self.state['mp'].pack_packet_data_error(msg_err)
 			self.read(length=len(msg), expect=msg)
 			return -1
@@ -352,7 +352,7 @@ class MultiPass(Actions):
 					op_code = 'RECHARGE',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_RECHARGE:
-			print(' write then read: msg_head: {0}'.format(msg_head))
+			print((' write then read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 		self.read(length=len(msg), expect=msg)
@@ -379,7 +379,7 @@ class MultiPass(Actions):
 					pkt_type = 'AUTH', 
 					op_code = 'PURCHASE')
 		if self.DEBUG_PURCHASE:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 
@@ -393,7 +393,7 @@ class MultiPass(Actions):
 					op_code = 'PURCHASE',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_PURCHASE:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		# read reply packet header
 		self.read(length=len(msg), expect=msg)
@@ -418,7 +418,7 @@ class MultiPass(Actions):
 					transaction_id = new_transaction_id)
 
 		if self.DEBUG_PURCHASE:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 
 		# occassionally select a purchase amount greater than the card's balance
 		if self.chance(0.001):
@@ -427,7 +427,7 @@ class MultiPass(Actions):
 			new_purchase_amt = randint(1, card['balance'] + 1)
 		msg_purchase = self.state['mp'].make_packet_data_purchase(new_purchase_amt)
 		if self.DEBUG_PURCHASE:
-			print(' write: msg_purchase: {0}'.format(msg_purchase))
+			print((' write: msg_purchase: {0}'.format(msg_purchase)))
 		msg = self.state['mp'].pack_packet_head(msg_head) + self.state['mp'].pack_packet_data_purchase(msg_purchase)
 		self.write(msg)
 
@@ -446,7 +446,7 @@ class MultiPass(Actions):
 						transaction_id = new_transaction_id)
 
 		if self.DEBUG_PURCHASE:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		# read reply packet header
 		self.read(length=len(msg), expect=msg)
@@ -455,7 +455,7 @@ class MultiPass(Actions):
 			# read error data
 			msg_err = self.state['mp'].make_packet_data_error('ERRNO_MP_PURCHASE_ISF')
 			if self.DEBUG_PURCHASE:
-				print(' read: msg_err: {0}'.format(msg_err))
+				print((' read: msg_err: {0}'.format(msg_err)))
 			msg = self.state['mp'].pack_packet_data_error(msg_err)
 			self.read(length=len(msg), expect=msg)
 			return -1
@@ -479,7 +479,7 @@ class MultiPass(Actions):
 					op_code = 'PURCHASE',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_PURCHASE:
-			print(' write then read: msg_head: {0}'.format(msg_head))
+			print((' write then read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 		self.read(length=len(msg), expect=msg)
@@ -505,7 +505,7 @@ class MultiPass(Actions):
 					pkt_type = 'AUTH', 
 					op_code = 'HISTORY')
 		if self.DEBUG_HISTORY:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 
@@ -519,7 +519,7 @@ class MultiPass(Actions):
 					op_code = 'HISTORY',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_HISTORY:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		# read reply packet header
 		self.read(length=len(msg), expect=msg)
@@ -543,11 +543,11 @@ class MultiPass(Actions):
 					transaction_id = new_transaction_id)
 
 		if self.DEBUG_HISTORY:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 		history_cnt = randint(1, 20)
 		msg_history = self.state['mp'].make_packet_data_history(history_cnt)
 		if self.DEBUG_HISTORY:
-			print(' write: msg_history: {0}'.format(msg_history))
+			print((' write: msg_history: {0}'.format(msg_history)))
 
 		msg = self.state['mp'].pack_packet_head(msg_head) + self.state['mp'].pack_packet_data_history(msg_history)	
 		self.write(msg)
@@ -560,13 +560,13 @@ class MultiPass(Actions):
 
 		# expected reply header, same as sent packet msg_head
 		if self.DEBUG_HISTORY:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 		# read reply packet header and reply history count (the number of historical records that will be sent)
 		history_cnt_avail = self.state['mp'].get_history_count_avail(card['card_id'], history_cnt)
 		msg_history = self.state['mp'].make_packet_data_history(history_cnt_avail)
 
 		if self.DEBUG_HISTORY:
-			print(' read: msg_history: {0}'.format(msg_history))
+			print((' read: msg_history: {0}'.format(msg_history)))
 
 		msg = self.state['mp'].pack_packet_head(msg_head) + self.state['mp'].pack_packet_data_history(msg_history)
 		self.read(length=len(msg), expect=msg)
@@ -577,7 +577,7 @@ class MultiPass(Actions):
 		for tr in self.state['mp'].get_historical_transactions_iter(card['card_id'], history_cnt_avail):
 			# read transaction header (minus details)
 			if self.DEBUG_HISTORY:
-				print(' read: tr and details: {0}'.format(tr))
+				print((' read: tr and details: {0}'.format(tr)))
 
 			msg = self.state['mp'].pack_transaction_head(tr)
 			self.read(length=len(msg), expect=msg)
@@ -598,7 +598,7 @@ class MultiPass(Actions):
 					op_code = 'HISTORY',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_HISTORY:
-			print(' write then read: msg_head: {0}'.format(msg_head))
+			print((' write then read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 		self.read(length=len(msg), expect=msg)
@@ -630,7 +630,7 @@ class MultiPass(Actions):
 					pkt_type = 'AUTH', 
 					op_code = 'REFUND')
 		if self.DEBUG_REFUND:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 
@@ -644,7 +644,7 @@ class MultiPass(Actions):
 					op_code = 'REFUND',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_REFUND:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		# read reply packet header
 		self.read(length=len(msg), expect=msg)
@@ -668,7 +668,7 @@ class MultiPass(Actions):
 					transaction_id = new_transaction_id)
 
 		if self.DEBUG_REFUND:
-			print(' write: msg_head: {0}'.format(msg_head))
+			print((' write: msg_head: {0}'.format(msg_head)))
 		NOT_FOUND = False
 		msg_refund = self.state['mp'].get_random_refund_data_by_card(card)
 
@@ -685,7 +685,7 @@ class MultiPass(Actions):
 			FULL = True
 
 		if self.DEBUG_REFUND:
-			print(' write: msg_refund: {0}'.format(msg_refund))
+			print((' write: msg_refund: {0}'.format(msg_refund)))
 
 		msg = self.state['mp'].pack_packet_head(msg_head) + self.state['mp'].pack_packet_data_refund(msg_refund)	
 		self.write(msg)
@@ -717,7 +717,7 @@ class MultiPass(Actions):
 						transaction_id = new_transaction_id)
 
 		if self.DEBUG_REFUND:
-			print(' read: msg_head: {0}'.format(msg_head))
+			print((' read: msg_head: {0}'.format(msg_head)))
 
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.read(length=len(msg), expect=msg)
@@ -752,7 +752,7 @@ class MultiPass(Actions):
 					op_code = 'REFUND',
 					transaction_id = new_transaction_id)
 		if self.DEBUG_REFUND:
-			print(' write then read: msg_head: {0}'.format(msg_head))
+			print((' write then read: msg_head: {0}'.format(msg_head)))
 		msg = self.state['mp'].pack_packet_head(msg_head)
 		self.write(msg)
 		self.read(length=len(msg), expect=msg)
@@ -783,7 +783,7 @@ class MultiPass(Actions):
 						pkt_type = 1, 
 						op_code = 10)
 			if self.DEBUG_ERRORS:
-				print(' write: msg_head: {0}'.format(msg_head))
+				print((' write: msg_head: {0}'.format(msg_head)))
 			msg = self.state['mp'].pack_packet_head(msg_head)
 			self.write(msg)
 
@@ -796,7 +796,7 @@ class MultiPass(Actions):
 						op_code = 10,
 						status = 9)
 			if self.DEBUG_ERRORS:
-				print(' read: msg_head: {0}'.format(msg_head))
+				print((' read: msg_head: {0}'.format(msg_head)))
 			msg = self.state['mp'].pack_packet_head(msg_head)
 			# read reply packet header
 			self.read(length=len(msg), expect=msg)
@@ -826,7 +826,7 @@ class MultiPass(Actions):
 						pkt_type = 10, 
 						op_code = 1)
 			if self.DEBUG_ERRORS:
-				print(' write: msg_head: {0}'.format(msg_head))
+				print((' write: msg_head: {0}'.format(msg_head)))
 			msg = self.state['mp'].pack_packet_head(msg_head)
 			self.write(msg)
 
@@ -839,7 +839,7 @@ class MultiPass(Actions):
 						op_code = 1,
 						status = 10)
 			if self.DEBUG_ERRORS:
-				print(' read: msg_head: {0}'.format(msg_head))
+				print((' read: msg_head: {0}'.format(msg_head)))
 			msg = self.state['mp'].pack_packet_head(msg_head)
 			# read reply packet header
 			self.read(length=len(msg), expect=msg)
@@ -877,7 +877,7 @@ class MultiPass(Actions):
 						op_code_int = True)
 
 			if self.DEBUG_ERRORS:
-				print(' write: msg_head: {0}'.format(msg_head))
+				print((' write: msg_head: {0}'.format(msg_head)))
 			msg = self.state['mp'].pack_packet_head(msg_head)
 			self.write(msg)
 
@@ -896,7 +896,7 @@ class MultiPass(Actions):
 						transaction_id = new_transaction_id,
 						op_code_int = True)
 			if self.DEBUG_ERRORS:
-				print(' read: msg_head: {0}'.format(msg_head))
+				print((' read: msg_head: {0}'.format(msg_head)))
 			msg = self.state['mp'].pack_packet_head(msg_head)
 			# read reply packet header
 			self.read(length=len(msg), expect=msg)

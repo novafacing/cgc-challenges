@@ -177,7 +177,7 @@ class GameOfLifeAndDeath(Actions):
             return
 
         self.shots_left -= 1
-        for i in xrange(len(self.living_pixels)):
+        for i in range(len(self.living_pixels)):
             if self.living_pixels[i].x == x and self.living_pixels[i].y == y:
                 self.living_pixels.pop(i)
                 self.current_score += 100
@@ -225,7 +225,7 @@ class GameOfLifeAndDeath(Actions):
 
             bombed_pixels = living_pixels_set & adj_coords_set
 
-            for i in reversed(xrange(len(self.living_pixels))):
+            for i in reversed(range(len(self.living_pixels))):
                 for (x,y) in bombed_pixels:
                     if self.living_pixels[i].x == x and self.living_pixels[i].y == y:
                         self.living_pixels.pop(i)
@@ -234,7 +234,7 @@ class GameOfLifeAndDeath(Actions):
 
             total_score += score
 
-        for i in reversed(xrange(len(self.bomb_pixels))):
+        for i in reversed(range(len(self.bomb_pixels))):
             if self.bomb_pixels[i].bomb_set == 0:
                 self.bomb_pixels.pop(i)
 
@@ -276,7 +276,7 @@ class GameOfLifeAndDeath(Actions):
         self.living_pixels = []
         self.bomb_pixels = []
 
-        for x in xrange(NUM_RUNNERS):
+        for x in range(NUM_RUNNERS):
             self._create_runner()
 
         self.state['board_revealed'] = False
@@ -332,7 +332,7 @@ class GameOfLifeAndDeath(Actions):
         self.write("{0}\n".format(num_steps))
 
         num_steps = self.steps_left if self.steps_left <= num_steps else num_steps
-        for x in xrange(num_steps):
+        for x in range(num_steps):
             self._run_single_generation()
             score += self._bomb_collisions()
 

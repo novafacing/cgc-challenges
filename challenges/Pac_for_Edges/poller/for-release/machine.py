@@ -18,7 +18,7 @@ class customImage(object):
         #check whether or not the data was somewhat reasonably formatted
         if len(seperated_data) != 5 or len(seperated_data[4]) != (512*512):
             # the data was not correctly formatted
-            print "data not correctly formatted"
+            print("data not correctly formatted")
             return
 
         # load the data
@@ -103,9 +103,9 @@ class customImage(object):
                 kgy[m][n] = value_y
                 hold_pixels[m][n] = int(math.sqrt((value_x*value_x)+(value_y*value_y)))%256
                 if hold_pixels[m][n] > 255 or hold_pixels[m][n] < 0:
-                    print value_x
-                    print value_y
-                    print hold_pixels[m][n]
+                    print(value_x)
+                    print(value_y)
+                    print(hold_pixels[m][n])
 
                 hold = float(0)
                 if value_x != 0:
@@ -236,14 +236,14 @@ class pacAttackGame(object):
     def drawBoard(self):
         output = ""
 
-        for x in xrange(22):
+        for x in range(22):
             output += "-"
 
         output += "\x0c"
 
-        for x in xrange(20):
+        for x in range(20):
             output += "|"
-            for y in xrange(20):
+            for y in range(20):
                 if(self.board[x][y] == 0):
                     output += " "
                 elif(self.board[x][y] == 1):
@@ -254,7 +254,7 @@ class pacAttackGame(object):
                     output += "O"
             output += "|\x0c"
 
-        for x in xrange(22):
+        for x in range(22):
             output += "-"
 
         output += "\x0c"
@@ -358,7 +358,7 @@ class game(object):
         return output
 
 def random_string(cnt):
-    return ''.join([chr(random.randint(97, 122)) for x in xrange(cnt)])
+    return ''.join([chr(random.randint(97, 122)) for x in range(cnt)])
 def random_input():
     rndStr = random.choice(['q','a','s','w','d'])
     return rndStr
@@ -375,7 +375,7 @@ class TemplateGenerator(Actions):
 
     def win(self):
         self.gameObj.max_moves = 682
-        shuffled = list(xrange(400))
+        shuffled = list(range(400))
         random.shuffle(shuffled)
         turnCount = 0
         while not self.gameObj.over:

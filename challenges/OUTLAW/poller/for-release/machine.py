@@ -84,7 +84,7 @@ def do_op(req):
         if 0 == req.y: answer = 0
         else: answer = uint32_t(req.x / req.y)
     else:
-        print "[E] invalid op (%d); this shouldn't happen" % req.op
+        print("[E] invalid op (%d); this shouldn't happen" % req.op)
         return -1
     return answer
 
@@ -117,13 +117,13 @@ class Msg():
             self.result)
     
     def dump(self):
-        print "msg:"
-        print "  dst .... 0x%08x (%d)" % (self.dst, self.dst)
-        print "  x ...... 0x%08x (%d)" % (self.x, self.x)
-        print "  y ...... 0x%08x (%d)" % (self.y, self.y)
-        print "  op ..... 0x%02x (%d)" % (self.op, self.op)
+        print("msg:")
+        print("  dst .... 0x%08x (%d)" % (self.dst, self.dst))
+        print("  x ...... 0x%08x (%d)" % (self.x, self.x))
+        print("  y ...... 0x%08x (%d)" % (self.y, self.y))
+        print("  op ..... 0x%02x (%d)" % (self.op, self.op))
         # print "  nmb .... 0x%02x (%d)" % (self.nmb, self.nmb)
-        print "  result . 0x%016lx (%d)" % (self.result, self.result)
+        print("  result . 0x%016lx (%d)" % (self.result, self.result))
 
 
 class Outlaw(Actions):
@@ -133,7 +133,7 @@ class Outlaw(Actions):
         Block size is fixed at 64 bits
         """
         DEBUG = GLOBAL_DEBUG and True
-        if DEBUG: print "_encrypt_block()"
+        if DEBUG: print("_encrypt_block()")
 
         v0 = struct.unpack("<L", v[0:4])[0]
         v1 = struct.unpack("<L", v[4:8])[0]
@@ -163,7 +163,7 @@ class Outlaw(Actions):
         Block size is fixed at 64 bits
         """
         DEBUG = GLOBAL_DEBUG and True
-        if DEBUG: print "_decrypt_block()"
+        if DEBUG: print("_decrypt_block()")
 
         v0 = struct.unpack("<L", v[0:4])[0]
         v1 = struct.unpack("<L", v[4:8])[0]
@@ -193,13 +193,13 @@ class Outlaw(Actions):
         Refill the PRNG cache via prng_buf = decrypt(prng_buf)
         """
         DEBUG = GLOBAL_DEBUG and True
-        if DEBUG: print "_prng_refill_cache()"
+        if DEBUG: print("_prng_refill_cache()")
 
         if DEBUG:
             msg = 'self.state["prng_buf"] before: 0x'
             for i in range(8):
                 msg += "%02x" % struct.unpack("B", self.state["prng_buf"][i])
-            print msg
+            print(msg)
 
         self.state["prng_buf"] = \
             self._decrypt_block(v=self.state["prng_buf"], k=self.state["prng_key"])
@@ -208,13 +208,13 @@ class Outlaw(Actions):
             msg = 'self.state["prng_buf"] after: 0x'
             for i in range(8):
                 msg += "%02x" % struct.unpack("B", self.state["prng_buf"][i])
-            print msg
+            print(msg)
 
         self.state["prng_bytes_remaining"] = SZ_PRNG_BUF
 
     def _prng_get_bytes(self, count):
         DEBUG = GLOBAL_DEBUG and True
-        if DEBUG: print "prng_get_bytes(%d)" % count
+        if DEBUG: print("prng_get_bytes(%d)" % count)
 
         idx_buf = 0
         buf = ""
@@ -233,18 +233,18 @@ class Outlaw(Actions):
 
     def  _next_expected_dst(self):
         DEBUG = GLOBAL_DEBUG and False
-        if DEBUG: print "prng_get_bytes()"
+        if DEBUG: print("prng_get_bytes()")
 
         if DST_CB1 == self.state["expected_dst"]:
-            if DEBUG: print "CB1 -> TAP -> CRS / poller (here) -> TAP -> CB2"
+            if DEBUG: print("CB1 -> TAP -> CRS / poller (here) -> TAP -> CB2")
             self.state["expected_dst"] = DST_CB2
             return DST_CB2
         elif DST_CB2 == self.state["expected_dst"]:
-            if DEBUG: print "CB1 <- TAP <- CRS / poller (here) <- TAP <- CB2"
+            if DEBUG: print("CB1 <- TAP <- CRS / poller (here) <- TAP <- CB2")
             self.state["expected_dst"] = DST_CB1
             return DST_CB1
         else:
-            print "[E] invalid dst; bailing..."
+            print("[E] invalid dst; bailing...")
             return -1
 
     def mitm(self):
@@ -252,7 +252,7 @@ class Outlaw(Actions):
         The node that does all the interesting things.
         """
         DEBUG = GLOBAL_DEBUG and True
-        if DEBUG: print "mitm()"
+        if DEBUG: print("mitm()")
 
         auth_token_num = struct.unpack("<L", self.state["auth_token"])[0]
         req_dst = self._next_expected_dst()
@@ -265,7 +265,7 @@ class Outlaw(Actions):
         x = struct.unpack("<L", self._prng_get_bytes(SZ_UINT32_T))[0]
         y = struct.unpack("<L", self._prng_get_bytes(SZ_UINT32_T))[0]
         true_op = struct.unpack("B", self._prng_get_bytes(SZ_UINT8_T))[0]
-        if DEBUG: print "true_op = %s" % true_op 
+        if DEBUG: print("true_op = %s" % true_op) 
         if OP_MOD == true_op: true_op = OP_ADD
         true_op %= 4
         true_req = Msg(
@@ -283,11 +283,11 @@ class Outlaw(Actions):
 
         # Compute the true RESPONSE.
         true_answer = do_op(true_req)
-        if DEBUG: print "true_answer = %d" % true_answer
+        if DEBUG: print("true_answer = %d" % true_answer)
         true_result_pt = struct.pack("<Q", (uint64_t(true_answer << 32) | auth_token_num))
         true_result_ct = self._encrypt_block(v=true_result_pt, k=self.state["enckey"])
-        if DEBUG: print "[D] true_result_pt = 0x%016lx; true_result_ct = 0x%016lx" % \
-            (struct.unpack("<Q", true_result_pt)[0], struct.unpack("<Q", true_result_ct)[0])
+        if DEBUG: print("[D] true_result_pt = 0x%016lx; true_result_ct = 0x%016lx" % \
+            (struct.unpack("<Q", true_result_pt)[0], struct.unpack("<Q", true_result_ct)[0]))
         true_resp = Msg(
             dst = resp_dst,
             x = 0,
@@ -298,7 +298,7 @@ class Outlaw(Actions):
         # Decide if we're going to modify the REQUEST to the SERVER.
         if randint(0, 1):
             # We're not going to modify.  This one is easy.
-            if DEBUG: print "[D] passing REQUEST verbatim"
+            if DEBUG: print("[D] passing REQUEST verbatim")
             self.write(str(true_req))
             self.read(length=SZ_MSG_BEFORE_GAP, expect=str(true_resp)[:SZ_MSG_BEFORE_GAP])
             self.read(length=SZ_MSG_GAP) # bury GAP
@@ -313,8 +313,8 @@ class Outlaw(Actions):
             mod_answer = do_op(mod_req)
             mod_result_pt = struct.pack("<Q", (uint64_t(mod_answer << 32) | auth_token_num))
             mod_result_ct = self._encrypt_block(v=mod_result_pt, k=self.state["enckey"])
-            if DEBUG: print "[D] mod_result_pt = 0x%016lx; mod_result_ct = 0x%016lx" % \
-                (struct.unpack("<Q", mod_result_pt)[0], struct.unpack("<Q", mod_result_ct)[0])
+            if DEBUG: print("[D] mod_result_pt = 0x%016lx; mod_result_ct = 0x%016lx" % \
+                (struct.unpack("<Q", mod_result_pt)[0], struct.unpack("<Q", mod_result_ct)[0]))
             mod_resp = Msg(
                 dst = resp_dst,
                 x = 0,
@@ -322,7 +322,7 @@ class Outlaw(Actions):
                 op = mod_req.op,
                 result = struct.unpack("<Q", mod_result_ct)[0])
 
-            if DEBUG: print "[D] REQUEST modified"
+            if DEBUG: print("[D] REQUEST modified")
             self.write(str(mod_req))
             self.read(length=SZ_MSG_BEFORE_GAP, expect=str(mod_resp)[:SZ_MSG_BEFORE_GAP])
             self.read(length=SZ_MSG_GAP) # bury GAP
@@ -335,7 +335,7 @@ class Outlaw(Actions):
         Send exit MAGIC as session ID to shut down.
         """
         DEBUG = GLOBAL_DEBUG and True
-        if DEBUG: print "exit()"
+        if DEBUG: print("exit()")
 
         # exit() functionality is implemented with a special dst.
         exit_msg = Msg(
@@ -362,47 +362,47 @@ class Outlaw(Actions):
         """
         self.delay(50)
         DEBUG = GLOBAL_DEBUG and True
-        if DEBUG: print "start()"
+        if DEBUG: print("start()")
 
         # Get enckey_idx
         enckey_idx = struct.unpack("<L", self.magic_page[OFF_ENCKEY_IDX:OFF_ENCKEY_IDX+4])[0]
         enckey_idx_actual = ((enckey_idx % SZ_PAGE) & ~0xF) & 0xFFFFFFFF;
-        if DEBUG: print "enckey_idx = 0x%08x; enckey_idx_actual = 0x%08x" % (enckey_idx, enckey_idx_actual)
+        if DEBUG: print("enckey_idx = 0x%08x; enckey_idx_actual = 0x%08x" % (enckey_idx, enckey_idx_actual))
 
         # Get the enckey: a 4-lengthed array of uint32_ts
         self.state["enckey"] = self.magic_page[enckey_idx_actual:enckey_idx_actual+16]
         # NOTE: this doesn't take LE into account
         if DEBUG: 
-            print "enckey_idx_actual = 0x%02x, enckey = %s" % (enckey_idx_actual, self.state["enckey"])
+            print("enckey_idx_actual = 0x%02x, enckey = %s" % (enckey_idx_actual, self.state["enckey"]))
             msg = "0x"
             for byte in self.state["enckey"]:
                 msg += "%02x" % struct.unpack("B", byte)
-            print "enckey (hex) = %s" % msg
+            print("enckey (hex) = %s" % msg)
 
         # Get auth_token_idx
         auth_token_idx = struct.unpack("<L", self.magic_page[OFF_AUTH_TOKEN_IDX:OFF_AUTH_TOKEN_IDX+4])[0]
         auth_token_idx_actual = ((auth_token_idx % SZ_PAGE) & ~0xF) & 0xFFFFFFFF;
-        if DEBUG: print "auth_token_idx = 0x%08x; auth_token_idx_actual = 0x%08x" % (auth_token_idx, auth_token_idx_actual)
+        if DEBUG: print("auth_token_idx = 0x%08x; auth_token_idx_actual = 0x%08x" % (auth_token_idx, auth_token_idx_actual))
 
         # Get the auth_token: a single uin32_t
         self.state["auth_token"] = self.magic_page[auth_token_idx_actual:auth_token_idx_actual+4]
         # NOTE: this doesn't take LE into account
         if DEBUG: 
-            print "auth_token_idx_actual = 0x%02x, auth_token = %s" % (auth_token_idx_actual, self.state["auth_token"])
+            print("auth_token_idx_actual = 0x%02x, auth_token = %s" % (auth_token_idx_actual, self.state["auth_token"]))
             msg = "0x"
             for byte in self.state["auth_token"]:
                 msg += "%02x" % struct.unpack("B", byte)
-            print "auth_token (hex) = %s" % msg
+            print("auth_token (hex) = %s" % msg)
 
         # Initialize PRNG buf (static)
         self.state["prng_buf"] = struct.pack("<BBBBBBBB", 
             0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77 );
         if DEBUG: 
-            print 'self.state["prng_buf"] = %s' % self.state["prng_buf"] 
+            print('self.state["prng_buf"] = %s' % self.state["prng_buf"]) 
             msg = "0x"
             for byte in self.state["prng_buf"]:
                 msg += "%02x" % struct.unpack("B", byte)
-            print 'self.state["prng_buf"] = %s' % msg
+            print('self.state["prng_buf"] = %s' % msg)
         
         # Get PRNG key (based on flag page)
         self.state["prng_key"] = "".join([ 
@@ -415,11 +415,11 @@ class Outlaw(Actions):
             self.magic_page[41], self.magic_page[43],
             self.magic_page[53], self.magic_page[59] ] )
         if DEBUG: 
-            print 'self.state["prng_key"] = %s' % self.state["prng_key"] 
+            print('self.state["prng_key"] = %s' % self.state["prng_key"]) 
             msg = "0x"
             for byte in self.state["prng_key"]:
                 msg += "%02x" % struct.unpack("B", byte)
-            print 'self.state["prng_key"] = %s' % msg
+            print('self.state["prng_key"] = %s' % msg)
 
         # We start with an empty PRNG cache.
         self.state["prng_bytes_remaining"] = 0

@@ -4,13 +4,13 @@ from generator.actions import Actions
 import random, string, struct
 
 def random_string(size=20):
-    return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(5,size))])
+    return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(5,size))])
 def random_string_s(size=20):
-    return ''.join([random.choice(string.ascii_letters + ' ') for x in xrange(random.randint(1,size))])
+    return ''.join([random.choice(string.ascii_letters + ' ') for x in range(random.randint(1,size))])
 def random_bytes(size=20):
-    return ''.join([chr(random.randint(1,255)) for x in xrange(random.randint(1,size))])
+    return ''.join([chr(random.randint(1,255)) for x in range(random.randint(1,size))])
 def random_bytes_n(size=20):
-    return ''.join([chr(random.randint(0,255)) for x in xrange(size)])
+    return ''.join([chr(random.randint(0,255)) for x in range(size)])
 
 class XPKObject(object):
     def __init__(self, t=None, d=None):
@@ -314,13 +314,13 @@ class AXSTORE(Actions):
     def store(self):
         m = {}
         r = random.randint(1, 5)
-        for i in xrange(r):
+        for i in range(r):
             m[random_string(15)] = self.random_object()
         g_map = self.state['g_map']
         g_ctx = self.state['g_ctx']
         g_ctx.reset()
         g_ctx.pack_map(len(m))
-        for k, v in m.iteritems():
+        for k, v in m.items():
             g_map[k] = v
             g_ctx.pack_str(k)
             self.pack_object(g_ctx, v)
@@ -335,7 +335,7 @@ class AXSTORE(Actions):
 
     def lookup(self):
         g_map = self.state['g_map']
-        a = random.sample(g_map.keys(), min(len(g_map.keys()), random.randint(1, 5)))
+        a = random.sample(list(g_map.keys()), min(len(list(g_map.keys())), random.randint(1, 5)))
         if random.randint(1, 100) <= 10:
             a.append(random_string(15))
         g_ctx = self.state['g_ctx']
@@ -348,7 +348,7 @@ class AXSTORE(Actions):
         g_ctx.reset()
         g_ctx.pack_map(len(a))
         for e in sorted(a):
-            if e in g_map.keys():
+            if e in list(g_map.keys()):
                 o = g_map[e]
             else:
                 o = XPKObject(self.TYPE_NONE)
@@ -359,7 +359,7 @@ class AXSTORE(Actions):
 
     def delete(self):
         g_map = self.state['g_map']
-        a = random.sample(g_map.keys(), min(len(g_map.keys()), random.randint(1, 3)))
+        a = random.sample(list(g_map.keys()), min(len(list(g_map.keys())), random.randint(1, 3)))
         if random.randint(1, 100) <= 10:
             a.append(random_string(15))
         g_ctx = self.state['g_ctx']
@@ -372,7 +372,7 @@ class AXSTORE(Actions):
         g_ctx.reset()
         g_ctx.pack_map(len(a))
         for e in sorted(a):
-            if e in g_map.keys():
+            if e in list(g_map.keys()):
                 o = g_map.pop(e)
             else:
                 o = XPKObject(self.TYPE_NONE)
@@ -431,7 +431,7 @@ class AXSTORE(Actions):
         if depth == self.MAX_PRINT_DEPTH:
             return s,i
         indent = '\t'*depth
-        for k in xrange(len(a)):
+        for k in range(len(a)):
             if i < n or n == 0:
                 s += '%s%d  =>  [VALUE]: ' % (indent, k)
                 s, i = self.print_item(s, depth, a[k], i, n)
@@ -522,14 +522,14 @@ class AXSTORE(Actions):
         elif t == self.TYPE_MAP:
             obj = XPKObject(t, {})
             length = random.randint(1, 5)
-            for x in xrange(length):
+            for x in range(length):
                 o = self.random_object()
                 k = random_string(10)
                 obj.d[k] = o
         elif t == self.TYPE_ARRAY:
             obj = XPKObject(t, [])
             length = random.randint(1, 5)
-            for x in xrange(length):
+            for x in range(length):
                 o = self.random_object()
                 obj.d.append(o)
         return obj

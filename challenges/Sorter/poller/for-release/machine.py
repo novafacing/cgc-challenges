@@ -23,14 +23,14 @@ def kaprica_mixin(self):
             H = (H * 3) & 0xffffffff
             H = ((H << 13) ^ (H >> 19) ^ (H >> 21)) & 0xffffffff
             return H
-        xmap = list(xrange(256))
-        xmap_inv = list(xrange(256))
+        xmap = list(range(256))
+        xmap_inv = list(range(256))
         state = hash_string(seed)
-        for i in xrange(255, 0, -1):
+        for i in range(255, 0, -1):
             j = state % i
             state = hash_iterate(state)
             xmap[i], xmap[j] = xmap[j], xmap[i]
-        for i in xrange(256):
+        for i in range(256):
             xmap_inv[xmap[i]] = i
         self.xlat_map = xmap
         self.xlat_map_inv = xmap_inv
@@ -74,7 +74,7 @@ def random_word(max_size=10, min_size=2):
 def random_text(max_words=10, min_words=3):
     max_words = max_words if max_words >= min_words else min_words
     text = ''
-    for x in xrange(random.randint(min_words, max_words)):
+    for x in range(random.randint(min_words, max_words)):
         text += random_word() + ' '
     return text
 
@@ -132,7 +132,7 @@ class Cs10Fun(Actions):
         self.write('1\n')
         self._read("Enter a list of numbers to sort. End the list with ';;'\n")
         self._cur_array = []
-        for x in xrange(random.randint(1,100)):
+        for x in range(random.randint(1,100)):
             self._cur_array.append(random.randint(-1000000000, 1000000000))
         self.write(','.join([str(x) for x in self._cur_array]) + ',;;\n')
         self._read("New Array\n")

@@ -31,7 +31,7 @@ import os
 
 # NOTE: this is super inefficient, don't care.
 def random_bytes(min, max, mod=255):
-    return ''.join(chr(choice(range(mod))) for _ in range(randint(min,max)))
+    return ''.join(chr(choice(list(range(mod)))) for _ in range(randint(min,max)))
 
 def is_byte_fragmented(byte):
     return (ord(byte) & 0x80)
@@ -91,7 +91,7 @@ class QuietSquare(Actions):
         """
         DEBUG = True and self.GLOBAL_DEBUG
         if DEBUG:
-            print "REFRESH_OTP node"
+            print("REFRESH_OTP node")
         self.state["PKT_OTP"] = random_bytes(16, 16)
 
     def connterm(self):
@@ -103,7 +103,7 @@ class QuietSquare(Actions):
         """
         DEBUG = True and self.GLOBAL_DEBUG
         if DEBUG:
-            print "CONNTERM node"
+            print("CONNTERM node")
         self.write(self.PKT_CONNTERM)
 
         # We should only expect the CONNTERM ACK if the CB was in CONNTERM state.
@@ -125,19 +125,19 @@ class QuietSquare(Actions):
         """
         DEBUG = True and self.GLOBAL_DEBUG
         if DEBUG:
-            print "OTP node"
+            print("OTP node")
 
         if self.STATE_CONNTERM == self.state["state"]:
             # If the CB is in CONNTERM state, it expects a packet with a length 
             # of CONNTERM_SZ.  Any other size (including OTP_SZ) will result in 
             # PKT_INVALID_SZ.
             if DEBUG: 
-                print "send OTP -> CONNTERM state"
+                print("send OTP -> CONNTERM state")
             self.write(self.state["PKT_OTP"])
             self.read(length=len(self.PKT_INVALID_SZ), expect=self.PKT_INVALID_SZ)
         elif self.STATE_OTP == self.state["state"]:
             if DEBUG:
-                print "send OTP -> OTP state"
+                print("send OTP -> OTP state")
             self.write(self.state["PKT_OTP"])
             self.read(length=self.OTP_SZ, expect=self.PKT_OTP_ACK)
             self.state["otp_on_cb"] = self.state["PKT_OTP"]
@@ -147,11 +147,11 @@ class QuietSquare(Actions):
             # of MSG_SZ.  Any other size (including OTP_SZ) will result in 
             # PKT_INVALID_SZ.
             if DEBUG:
-                print "send OTP -> MSG state"
+                print("send OTP -> MSG state")
             self.write(self.state["PKT_OTP"])
             self.read(length=len(self.PKT_INVALID_SZ), expect=self.PKT_INVALID_SZ)
         else:
-            print "[E] THIS SHOULD NEVER HAPPEN"
+            print("[E] THIS SHOULD NEVER HAPPEN")
 
     def msg(self):
         """
@@ -161,7 +161,7 @@ class QuietSquare(Actions):
         """
         DEBUG = True and self.GLOBAL_DEBUG
         if DEBUG:
-            print "MSG node"
+            print("MSG node")
 
         while True:
             # Start with a bunch of random bytes, expect CB to drop bytes that 
@@ -190,11 +190,11 @@ class QuietSquare(Actions):
             # Re-try based on whether we want to trigger the vuln.
             if not self.GLOBAL_POV and self.MAX_DEPTH < depth:
                 if DEBUG:
-                    print "MAX_DEPTH exceeded (depth = %d) and we're not making a POV; looping..." % depth
+                    print("MAX_DEPTH exceeded (depth = %d) and we're not making a POV; looping..." % depth)
                 continue
             if self.GLOBAL_POV and self.MAX_DEPTH >= depth:
                 if DEBUG:
-                    print "MAX_DEPTH not exceeed (depth = %d) and we're making a POV; looping..." % depth
+                    print("MAX_DEPTH not exceeed (depth = %d) and we're making a POV; looping..." % depth)
                 continue
 
             # Cases:
@@ -228,7 +228,7 @@ class QuietSquare(Actions):
         
         if self.STATE_CONNTERM == self.state["state"]:
             if DEBUG: 
-                print "send MSG -> CONNTERM state"
+                print("send MSG -> CONNTERM state")
             # CONNTERM and MSG packet lengths are the same, but a MSG PKT will 
             # never begin with "\x00", so the two cannot be confused.
             # As such, we should expect PKT_CONNTERM_ERR.
@@ -236,21 +236,21 @@ class QuietSquare(Actions):
             self.read(length=len(self.PKT_CONNTERM_ERR), expect=self.PKT_CONNTERM_ERR)
         elif self.STATE_OTP == self.state["state"]:
             if DEBUG:
-                print "send MSG -> OTP state"
+                print("send MSG -> OTP state")
             # MSG and OTP packets are different lengths, so we should expect
             # PKT_INVALID_SZ.
             self.write(PKT_MSG)
             self.read(length=len(self.PKT_INVALID_SZ), expect=self.PKT_INVALID_SZ)
         elif self.STATE_MSG == self.state["state"]:
             if DEBUG:
-                print "send MSG -> MSG state"
+                print("send MSG -> MSG state")
             # The most interesting case. We send a MSG and the CB is in the MSG 
             # state.  Vulns be triggered thar.
             self.write(PKT_MSG)
             self.read(length=len(PKT_MSG_RESPONSE), expect=PKT_MSG_RESPONSE)
         else:
             if DEBUG:
-                print "[E] THIS SHOULD NEVER HAPPEN"
+                print("[E] THIS SHOULD NEVER HAPPEN")
 
     def finish(self):
         """
@@ -260,7 +260,7 @@ class QuietSquare(Actions):
         """
         DEBUG = True and self.GLOBAL_DEBUG
         if DEBUG:
-            print "exit node"
+            print("exit node")
 
         self.write(self.PKT_EXIT)
         self.read(length=len(self.PKT_EXIT_ACK), expect=self.PKT_EXIT_ACK)

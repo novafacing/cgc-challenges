@@ -1,4 +1,4 @@
-from cStringIO import StringIO
+from io import StringIO
 from generator.actions import Actions, Variable
 import random
 import string
@@ -231,7 +231,7 @@ class RemoteStorage(Actions):
         lba = random.randint(0, (0x10000 / 512) - 1)
         length = min(0x10000 - lba * 512, 0x1000)
         length = random.randint(512, length) / 512
-        data = ''.join(chr(random.randint(0,255)) for c in xrange(length * 512))
+        data = ''.join(chr(random.randint(0,255)) for c in range(length * 512))
         self.state['memory'].seek(lba * 512)
         self.state['memory'].write(data)
         self.command('\x2A\x00' + be32(lba) + '\x00' + be16(length), True, data)

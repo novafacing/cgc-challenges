@@ -35,7 +35,7 @@ class Machine(Actions):
             self.write('f')
             self.read(delim='\n', expect='Invalid selection\n')
             return
-        k, v = random.choice(self.state['items'].items())
+        k, v = random.choice(list(self.state['items'].items()))
         count, cost = v
         self.write('b')
         self.write('%s\n' % k)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from __future__ import print_function
+
 from functools import partial
 from generator.actions import Actions
 import copy
@@ -68,11 +68,11 @@ class SLURUser(Actions):
 
     # Util
     def rs(self, l=6):
-        return ''.join(random.choice(self.SS) for _ in xrange(l))
+        return ''.join(random.choice(self.SS) for _ in range(l))
 
     def random_list(self):
         s = '('
-        for i in xrange(random.randint(1, 3)):
+        for i in range(random.randint(1, 3)):
             if self.chance(0.05):
                 s += self.random_list()
             s += self.rs() + ' '
@@ -150,7 +150,7 @@ class SLURUser(Actions):
             s = ' ( equal {} {} ) '.format(e1, e2)
         else:
             s = '(equal '
-            for _ in xrange(random.randint(0, 4)):
+            for _ in range(random.randint(0, 4)):
                 s += random.choice([e1, e2])
             s += ' ) '
 
@@ -167,7 +167,7 @@ class SLURUser(Actions):
 
     def gen_cond(self):
         s = ' (cond '
-        for _ in xrange(0, 4):
+        for _ in range(0, 4):
             p = self.gen_random()
             e = self.gen_random()
             s += ' ( {} {} ) '.format(p, e)
@@ -177,12 +177,11 @@ class SLURUser(Actions):
 
     def gen_lambda(self):
         kw = ['cons', 'lambda', 'cond', 'quote', 'atom', 'lambda', 'car', 'cdr', 'equal', ')', '(']
-        vs = [self.rs(8) for _ in xrange(random.randint(0, 12))]
+        vs = [self.rs(8) for _ in range(random.randint(0, 12))]
         e = self.gen_random()
-        toks = filter(None,
-                      e.replace('(', ' ( ').replace(')', ' ) ').split(' '))
+        toks = [_f for _f in e.replace('(', ' ( ').replace(')', ' ) ').split(' ') if _f]
 
-        for i in xrange(len(toks)):
+        for i in range(len(toks)):
             if toks[i] in kw:
                 continue
 
@@ -197,7 +196,7 @@ class SLURUser(Actions):
             if cnt < 0:
                 cnt = 0
 
-        for _ in xrange(cnt):
+        for _ in range(cnt):
             s += self.gen_atom()
 
         s += ' ) '
@@ -216,7 +215,7 @@ class Cons(object):
     def __getitem__(self, i):
         x = self
         try:
-            for _ in xrange(i):
+            for _ in range(i):
                 x = x.cdr
             return x.car
         except AttributeError:
@@ -268,7 +267,7 @@ class SLURMachine(object):
     def tokenize(self, s):
         s = s.replace('(', ' ( ')
         s = s.replace(')', ' ) ')
-        ret = filter(None, s.split(' '))
+        ret = [_f for _f in s.split(' ') if _f]
         return ret
 
     def parse(self, toks):
@@ -375,7 +374,7 @@ class SLURMachine(object):
             return None
 
         if self.ATOMP(e):
-            for (k, v) in z.iteritems():
+            for (k, v) in z.items():
                 if e.name == k.name:
                     return v
             else:
@@ -490,14 +489,14 @@ class SLURMachine(object):
 
     def loop(self):
         while True:
-            x = raw_input('> ')
+            x = input('> ')
             print(self.run(x))
 
 if __name__ == '__main__':
     def info(type, value, tb):
         import traceback, pdb
         traceback.print_exception(type, value, tb)
-        print
+        print()
         pdb.pm()
     #sys.excepthook = info
     sm = SLURMachine();

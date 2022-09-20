@@ -48,7 +48,7 @@ class FishyXml(Actions):
 		expected = sp.serialize_error(error_name)
 		self.read(length=len(expected), expect=expected)
 		if True == self.DEBUG_ERR:
-			print('exiting due to {0}'.format(error_name))
+			print(('exiting due to {0}'.format(error_name)))
 
 	def _books(self):
 		'''
@@ -58,7 +58,7 @@ class FishyXml(Actions):
 		count = self.state['g'].books_qty()
 
 		if True == self.DEBUG_FUNC:
-			print "pid {0} books this turn: {1}".format(turn, count)
+			print("pid {0} books this turn: {1}".format(turn, count))
 
 		msg = sp.serialize_books(count)
 
@@ -75,7 +75,7 @@ class FishyXml(Actions):
 		'''
 		turn = self.state['g'].get_turn_pid()
 		if True == self.DEBUG_FUNC:
-			print "pid {0} going fishing.".format(turn)
+			print("pid {0} going fishing.".format(turn))
 
 		FAIL = ''
 		if 0 == turn:
@@ -98,7 +98,7 @@ class FishyXml(Actions):
 			self.read(length=len(msg), expect=msg)
 
 		if True == self.DEBUG_FUNC:
-			print " fishing card:{0}, rank:{1}, msg:{2}".format(card, rank, msg)
+			print(" fishing card:{0}, rank:{1}, msg:{2}".format(card, rank, msg))
 
 		ZERO = False
 		if (None != card) and (False == card.has_rank(rank)):
@@ -130,7 +130,7 @@ class FishyXml(Actions):
 		turn = self.state['g'].get_turn_pid()
 		if True == self.state['g'].is_hand_empty():
 			if True == self.DEBUG_FUNC:
-				print "pid {0} drawing hand.".format(turn)
+				print("pid {0} drawing hand.".format(turn))
 
 			FAIL = ''
 			if 0 == turn:
@@ -154,7 +154,7 @@ class FishyXml(Actions):
 					self.read(length=len(msg), expect=msg)
 
 			if True == self.DEBUG_FUNC:
-				print "  new hand: {0}".format(new_hand)
+				print("  new hand: {0}".format(new_hand))
 
 		return 0
 
@@ -166,7 +166,7 @@ class FishyXml(Actions):
 		'''
 		turn = self.state['g'].get_turn_pid()
 		if True == self.DEBUG_FUNC:
-			print "pid {0} accepting cards.".format(turn)
+			print("pid {0} accepting cards.".format(turn))
 
 		FAIL = ''
 		cards = self.state['g'].ask_response_give(rank)
@@ -193,7 +193,7 @@ class FishyXml(Actions):
 		'''
 		turn = self.state['g'].get_turn_pid()
 		if True == self.DEBUG_FUNC:
-			print "pid {0} asking.".format(turn)
+			print("pid {0} asking.".format(turn))
 
 		FAIL = ''
 
@@ -214,7 +214,7 @@ class FishyXml(Actions):
 			self.read(length=len(msg), expect=msg)
 
 		if True == self.DEBUG_FUNC:
-			print "  asked for rank {0}.".format(rank)
+			print("  asked for rank {0}.".format(rank))
 
 		if '' != FAIL:
 			self._recv_error(FAIL)
@@ -238,7 +238,7 @@ class FishyXml(Actions):
 			self.write(msg)
 
 		if True == self.DEBUG_FUNC:
-			print "  asked player has qty {0}.".format(qty)
+			print("  asked player has qty {0}.".format(qty))
 
 		if '' != FAIL:
 			self._recv_error(FAIL)
@@ -277,7 +277,7 @@ class FishyXml(Actions):
 		Run the game logic.
 		'''
 		if True == self.DEBUG_FUNC:
-			print "Starting game."
+			print("Starting game.")
 
 		if 0 > self._name():
 			return -1
@@ -288,14 +288,14 @@ class FishyXml(Actions):
 		self.read(length=len(msg), expect=msg)
 
 		if True == self.DEBUG_FUNC:
-			print "  initial hand: {0}.".format(my_init_hand)
+			print("  initial hand: {0}.".format(my_init_hand))
 
 		# do turns
 		while (False == self.state['g'].is_game_over()):
 			turn = self.state['g'].get_turn_pid()
 			if True == self.DEBUG_FUNC:
 				score = self.state['g'].get_score()
-				print "pid {0} turn; books (p0, p1):{1}".format(turn, score)
+				print("pid {0} turn; books (p0, p1):{1}".format(turn, score))
 
 			msg = sp.serialize_turn(turn)
 			self.read(length=len(msg), expect=msg)

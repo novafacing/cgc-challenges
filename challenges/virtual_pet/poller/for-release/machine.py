@@ -50,14 +50,14 @@ class PetPoller(Actions):
         self.pets = []
         self.go_read(expect='ctors called...\n')
         self.go_read(expect='list init...\n')
-        self.seq = random.randint(-sys.maxint - 1, sys.maxint)
+        self.seq = random.randint(-sys.maxsize - 1, sys.maxsize)
 
     def main(self):
         pass
 
     def create_and_name(self):
         d = {}
-        d['type'] = random.choice(self.pettypes.keys())
+        d['type'] = random.choice(list(self.pettypes.keys()))
         d['name'] = random_string(random.randint(1, 150))
         self.go_write('%d create %s\n' % (self.seq, d['type']))
         self.seq += 1

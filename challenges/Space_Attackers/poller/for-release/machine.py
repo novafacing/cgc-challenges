@@ -135,8 +135,8 @@ class board(object):
 
 		# Add enemies
 		self.rowCount = 2;
-		for i in xrange(self.rowCount):
-			for j in xrange(int(self.columns/2)):
+		for i in range(self.rowCount):
+			for j in range(int(self.columns/2)):
 				newEnemy = enemy(j*2, i*2, self)
 				self.enemies.append(newEnemy)
 
@@ -230,13 +230,13 @@ class board(object):
 		output += "\tWelcome to Attackers General " + username + "!"
 
 		output += '\n'
-		for i in xrange(self.columns+2):
+		for i in range(self.columns+2):
 			output += '-'
 		output += '\n'
 
-		for i in xrange(self.rows):
+		for i in range(self.rows):
 			output += '|'
-			for j in xrange(self.columns):
+			for j in range(self.columns):
 				printed = False;
 				# Check if we should print the user's ship
 				if(self.shipCords[0] == j and self.shipCords[1] == i):
@@ -268,7 +268,7 @@ class board(object):
 					output += ' '
 
 			output += '|\n'
-		for i in xrange(self.columns+2):
+		for i in range(self.columns+2):
 			output += '-'
 		output += '\n'
 
@@ -342,18 +342,18 @@ class game(object):
 			danceX = 4
 			danceY = 5
 			num = 0
-			for i in xrange(100000):
+			for i in range(100000):
 				output += "\t\t!!!DANCE MODE!!!\n\n\n\n\n\n\n\n"
 
 				# Draw top of dance box
-				for j in xrange(12):
+				for j in range(12):
 					output += '-'
 				output += '\n'
 
 				# Draw out board
-				for m in xrange(10):
+				for m in range(10):
 					output += '|'
-					for n in xrange(10):
+					for n in range(10):
 						if (m == danceY) and (n == danceX):
 							output += 'W'
 						else:
@@ -361,13 +361,13 @@ class game(object):
 					output += '|\n'
 
 				# Draw bottom of dance box
-				for j in xrange(12):
+				for j in range(12):
 					output += '-'
 				output += '\n'
 
 				output += "Bust a move (w = +1, s=SaveDigit, d=FIRE)\n"
 				output += str(num) + '\n'
-				input = raw_input()
+				input = input()
 				if len(input) == 0:
 					input = "~"
 				if input[0] == "w":
@@ -402,7 +402,7 @@ class game(object):
 
 
 def random_string(cnt):
-	return ''.join([chr(random.randint(97, 122)) for x in xrange(cnt)])
+	return ''.join([chr(random.randint(97, 122)) for x in range(cnt)])
 def random_input(cnt):
 	rndStr = random_string(cnt)
 	rndInp = ""

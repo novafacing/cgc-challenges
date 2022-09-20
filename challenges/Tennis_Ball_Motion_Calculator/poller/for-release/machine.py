@@ -85,9 +85,9 @@ class Tennisball(Actions):
         self.write('p\n')
          
         #then make sure the values are the same
-        for i in xrange(51):
+        for i in range(51):
 
-            for j in xrange(10):
+            for j in range(10):
                 idx = i * 10 + j
                 tempTime = numpy.float32(self.timecount) / numpy.float32(10)
                 #NOTE: I need to force the calculations to use float64 as the intermediate

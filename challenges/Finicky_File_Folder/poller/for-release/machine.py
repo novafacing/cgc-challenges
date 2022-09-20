@@ -23,14 +23,14 @@ def kaprica_mixin(self):
             H = (H * 3) & 0xffffffff
             H = ((H << 13) ^ (H >> 19) ^ (H >> 21)) & 0xffffffff
             return H
-        xmap = list(xrange(256))
-        xmap_inv = list(xrange(256))
+        xmap = list(range(256))
+        xmap_inv = list(range(256))
         state = hash_string(seed)
-        for i in xrange(255, 0, -1):
+        for i in range(255, 0, -1):
             j = state % i
             state = hash_iterate(state)
             xmap[i], xmap[j] = xmap[j], xmap[i]
-        for i in xrange(256):
+        for i in range(256):
             xmap_inv[xmap[i]] = i
         self.xlat_map = xmap
         self.xlat_map_inv = xmap_inv
@@ -140,9 +140,9 @@ def rs(_max=8 * 1024):
 
 def pcs(p, include_last=True):
     if include_last:
-        return filter(None, p.split('/'))
+        return [_f for _f in p.split('/') if _f]
     else:
-        return filter(None, p.split('/'))[:-1]
+        return [_f for _f in p.split('/') if _f][:-1]
 
 
 class TemplateGenerator(Actions):
@@ -156,7 +156,7 @@ class TemplateGenerator(Actions):
 
         self.readln('FSAAS')
         sig = 0
-        for i in xrange(0, 0x1000, 4):
+        for i in range(0, 0x1000, 4):
             sig ^= struct.unpack('<I', self.magic_page[i: i + 4])[0]
         self.readln(hex(sig)[2:-1])
 
@@ -255,7 +255,7 @@ class TemplateGenerator(Actions):
     def do_read(self):
         r = Request(Request.TYPES['READ_F_NUM'])
 
-        f = random.choice(filter(None, self.fhs) + [None])
+        f = random.choice([_f for _f in self.fhs if _f] + [None])
 
         if f:
             fd = self.fhs.index(f)
@@ -289,7 +289,7 @@ class TemplateGenerator(Actions):
     def do_write(self):
         r = Request(Request.TYPES['WRITE_F_NUM'])
 
-        f = random.choice(filter(None, self.fhs) + [None])
+        f = random.choice([_f for _f in self.fhs if _f] + [None])
         if f:
             fd = self.fhs.index(f)
         else:
@@ -325,7 +325,7 @@ class TemplateGenerator(Actions):
 
         r = Request(Request.TYPES['LSEEK_F_NUM'])
 
-        f = random.choice(filter(None, self.fhs) + [None])
+        f = random.choice([_f for _f in self.fhs if _f] + [None])
 
         if f:
             fd = self.fhs.index(f)
@@ -377,7 +377,7 @@ class TemplateGenerator(Actions):
         if self.fhs:
             possible = list(enumerate(self.fhs))
             try:
-                fd, x = random.choice(filter(all, possible))
+                fd, x = random.choice(list(filter(all, possible)))
             except IndexError:
                 fd, x = 9999, None
         else:

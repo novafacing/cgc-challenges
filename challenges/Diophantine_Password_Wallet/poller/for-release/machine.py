@@ -34,7 +34,7 @@ class DioGame(Actions):
         self.write("%u\n" % chosen_one[z])
 
     def start(self):
-        self.passwords = [ [ [0,0,0] for _ in xrange(MAX_PASSWORDS) ] for _ in xrange(MAX_USERS) ]
+        self.passwords = [ [ [0,0,0] for _ in range(MAX_PASSWORDS) ] for _ in range(MAX_USERS) ]
 
     def login(self):
         self.chosen_one = random.randint(0,len(valid_users)-1)
@@ -77,7 +77,7 @@ class DioGame(Actions):
  
     def menu_add(self):
         self.write("A\n")
-        temp = [ random.randint(0,MAX_UINT) for _ in xrange(4) ]
+        temp = [ random.randint(0,MAX_UINT) for _ in range(4) ]
         self.processSecret(temp)
         for i in self.passwords[self.chosen_one] :
           if i[0] == 0 and i[1] == 0 and i[2] == 0 :
@@ -92,7 +92,7 @@ class DioGame(Actions):
         temp = random.randint(0,MAX_PASSWORDS)
         self.write("%u\n" % temp)
         j = 0
-        for i in xrange(MAX_PASSWORDS) :
+        for i in range(MAX_PASSWORDS) :
           if (self.passwords[self.chosen_one][i][0] != 0) and (self.passwords[self.chosen_one][i][1] != 0) and (self.passwords[self.chosen_one][i][2] != 0) :
             if j == temp :
               self.passwords[self.chosen_one][i] = [0,0,0]

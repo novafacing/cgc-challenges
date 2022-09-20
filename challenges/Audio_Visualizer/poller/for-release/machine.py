@@ -56,8 +56,8 @@ def random_uwfc_file(well_formed):
     chunk_size_p = struct.pack('i', 4 + (8 + sub_chunk1_size) + (8 + sub_chunk2_size))
 
     data_p = ''
-    for x in xrange(0, sub_chunk2_size, block_align):
-        for y in xrange(num_channels):
+    for x in range(0, sub_chunk2_size, block_align):
+        for y in range(num_channels):
             if(bits_per_sample == 8):
                 data_p += struct.pack('B', random.randint(0, 255))
             elif(bits_per_sample == 16):

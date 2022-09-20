@@ -6,7 +6,7 @@ import string
 
 
 def random_string(size=20):
-    return ''.join([random.choice(string.ascii_letters) for x in xrange(random.randint(1,size))])
+    return ''.join([random.choice(string.ascii_letters) for x in range(random.randint(1,size))])
 
 class ARentMovie(Actions):
     def _init_movies(self):
@@ -31,7 +31,7 @@ class ARentMovie(Actions):
 
     def _return_movie(self, idx):
         i = 0
-        for x in xrange(len(self.MOVIES)):
+        for x in range(len(self.MOVIES)):
             if self.MOVIES[x][6]:
                 i += 1
                 if i == idx:
@@ -64,14 +64,14 @@ class ARentMovie(Actions):
 
     def read_movies(self):
         self.read_string('\nMovies (Full)\n--------------\n')
-        for x in xrange(len(self.MOVIES)):
+        for x in range(len(self.MOVIES)):
             self.read_movie(self.MOVIES, x)
         self.read_string('--------------\n%d movie(s)\n' % len(self.MOVIES))
 
     def read_movies_rented(self):
         i = 0
         self.read_string('\nMovies (Rented)\n--------------\n')
-        for x in xrange(len(self.MOVIES)):
+        for x in range(len(self.MOVIES)):
             if self._is_rented(x):
                 self.read_movie2(self.MOVIES[x], i)
                 i += 1
@@ -98,7 +98,7 @@ class ARentMovie(Actions):
 
         idx = random.randint(0, 9)
         if random.randint(1, 100) <= 75:
-            for i in xrange(0, 10):
+            for i in range(0, 10):
                 if not self._is_rented(i):
                     idx = i
                     break

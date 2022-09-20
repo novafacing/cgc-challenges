@@ -99,7 +99,7 @@ BASE_SIGNATURES = [
 
 
 def rs(n, space=string.ascii_letters):
-    return ''.join(random.choice(space) for _ in xrange(n))
+    return ''.join(random.choice(space) for _ in range(n))
 
 
 def b2ul(s):
@@ -171,7 +171,7 @@ class Machine(Actions):
         ds = ''
         rounds = random.randint(3, 20)
 
-        for r in xrange(rounds):
+        for r in range(rounds):
             include_sig = self.chance(1.0 / rounds)
 
             if include_sig:

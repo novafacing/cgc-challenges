@@ -75,8 +75,8 @@ class StrInfo(Actions):
 
         if True == DEBUG:
             r = '\\'.join(hex(ord(c)) for c in result)
-            print "result hex: {0}".format(r)
-            print "result: {0}".format(result)
+            print("result hex: {0}".format(r))
+            print("result: {0}".format(result))
 
         return result
 
@@ -123,7 +123,7 @@ class StrInfo(Actions):
                     r['symbols'] += 1
 
         if True == DEBUG:
-            print "type: {0}".format(r)
+            print("type: {0}".format(r))
         return r
 
     def _compute_grammar_components(self, s, r):
@@ -145,7 +145,7 @@ class StrInfo(Actions):
             ch_prev = ch
 
         if True == DEBUG:
-            print "grammar: {0}".format(r)
+            print("grammar: {0}".format(r))
         return r
 
     def _compute_session_id(self, r):
@@ -178,12 +178,12 @@ class StrInfo(Actions):
 
         r_clear = self._get_results(s)
         if True == DEBUG:
-            print "clear: {0}".format(r_clear)
+            print("clear: {0}".format(r_clear))
 
         r_packed = sp.pack_results(r_clear)
         if True == DEBUG:
             r = '\\'.join(hex(ord(c)) for c in r_packed)
-            print "packed: {0}".format(r)
+            print("packed: {0}".format(r))
 
         self.read(delim=self.TERM, expect=self.DONE)
         self.read(length=4) # read the hash

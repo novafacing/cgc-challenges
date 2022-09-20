@@ -36,7 +36,7 @@ from struct import *
 from zlib import crc32
 
 def chunks(l, n):
-    for i in xrange(0, len(l), n):
+    for i in range(0, len(l), n):
         yield l[i:i+n]
 
 mask64 = 0xffffffffffffffff
@@ -104,7 +104,7 @@ def random_string(a, b):
     return ''.join(choice(chars) for _ in range(randint(a, b)))
 
 def random_data(a,b):
-    chars = ''.join(map(chr, range(256)))
+    chars = ''.join(map(chr, list(range(256))))
     return ''.join(choice(chars) for _ in range(randint(a, b)))
 #   return ''.join(choice
 #   return devrand.read(randint(a,b))

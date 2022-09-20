@@ -28,6 +28,7 @@ import string
 import struct
 import re
 import operator
+from functools import reduce
 
 class Wifi_game(Actions):
 
@@ -155,10 +156,10 @@ class Wifi_game(Actions):
 
 		# seed the PRNG with this random string
 		self.rand = Prng()
-		seed = 0xffffffffffffffffL
+		seed = 0xffffffffffffffff
 		for p in range(len(data)):
-			seed = ((((seed << 4) & 0xffffffffffffffffL)| ((seed >> 60)& 0xffffffffffffffffL))) ^ ((struct.unpack("<b", data[p])[0])&0xff)
-		self.rand.sprng(seed & 0xffffffffffffffffL) 
+			seed = ((((seed << 4) & 0xffffffffffffffff)| ((seed >> 60)& 0xffffffffffffffff))) ^ ((struct.unpack("<b", data[p])[0])&0xff)
+		self.rand.sprng(seed & 0xffffffffffffffff) 
 
 	def send_packet(self):
 		self.read(delim="\n", expect="ready for next packet")
@@ -286,9 +287,9 @@ class Wifi_game(Actions):
 			self.write(pkt)
 
 			self.handle_receive_place_success()
-		except Exception, e:
-			print Exception, e
-			print placement
+		except Exception as e:
+			print(Exception, e)
+			print(placement)
 
 	def _create_first_piece(self):
 		side1 = self.rand.random_in_range(1,3)
@@ -496,12 +497,12 @@ class Prng():
 
 	def sprng(self, seed):
 
-		state_64 = seed & 0xffffffffffffffffL
+		state_64 = seed & 0xffffffffffffffff
 		for i in range(16):
-			state_64 ^= (state_64 >> self.COEFFICIENT_A_64)& 0xffffffffffffffffL
-			state_64 ^= (state_64 << self.COEFFICIENT_B_64)& 0xffffffffffffffffL
-			state_64 ^= (state_64 >> self.COEFFICIENT_C_64)& 0xffffffffffffffffL
-			self.state[i] = (state_64 *self.MULTIPLIER_64)& 0xffffffffffffffffL
+			state_64 ^= (state_64 >> self.COEFFICIENT_A_64)& 0xffffffffffffffff
+			state_64 ^= (state_64 << self.COEFFICIENT_B_64)& 0xffffffffffffffff
+			state_64 ^= (state_64 >> self.COEFFICIENT_C_64)& 0xffffffffffffffff
+			self.state[i] = (state_64 *self.MULTIPLIER_64)& 0xffffffffffffffff
 		self.position = 0
 
 	def prng(self):
@@ -509,11 +510,11 @@ class Prng():
 		self.position = (self.position +1) % 16
 		state1 = self.state[self.position]
 
-		state1 ^= (state1 << self.COEFFICIENT_A_1024)& 0xffffffffffffffffL
-		state1 ^= (state1 >> self.COEFFICIENT_B_1024)& 0xffffffffffffffffL
-		state0 ^= (state0 >> self.COEFFICIENT_C_1024)& 0xffffffffffffffffL
-		self.state[self.position] = (state0 ^ state1)& 0xffffffffffffffffL
-		return (self.state[self.position] * self.MULTIPLIER_1024)& 0xffffffffffffffffL
+		state1 ^= (state1 << self.COEFFICIENT_A_1024)& 0xffffffffffffffff
+		state1 ^= (state1 >> self.COEFFICIENT_B_1024)& 0xffffffffffffffff
+		state0 ^= (state0 >> self.COEFFICIENT_C_1024)& 0xffffffffffffffff
+		self.state[self.position] = (state0 ^ state1)& 0xffffffffffffffff
+		return (self.state[self.position] * self.MULTIPLIER_1024)& 0xffffffffffffffff
 
 	def random_in_range(self, min, max):
 

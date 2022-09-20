@@ -32,7 +32,7 @@ class Matrix(Actions):
 
     def _fill_cur_matrix(self, row, col):
         mtx = ""
-        for x in xrange(row * col):
+        for x in range(row * col):
             mtx += "%d " % (random.randint(-1000, 1000))
         self.state['matrix'][self.state['cur_mtx']] = np.matrix(mtx)
         self.state['matrix'][self.state['cur_mtx']] = self.state['matrix'][self.state['cur_mtx']].reshape(row, col)
@@ -101,7 +101,7 @@ class Matrix(Actions):
         self.state['matrix'][0].astype(int)
         self.state['randdata'] = []
         self.state['randidx'] = 0
-        for x in xrange(1024):
+        for x in range(1024):
             self.state['randdata'].append(struct.unpack('<b', self.magic_page[x*3:x*3+1])[0])
 
 
@@ -296,8 +296,8 @@ class Matrix(Actions):
         row, col = self._select_row_col_size()
         self.state['matrix'][self.state['cur_mtx']] = np.matrix([0] * row * col)
         self.state['matrix'][self.state['cur_mtx']] = self.state['matrix'][self.state['cur_mtx']].reshape(row, col)
-        for i in xrange(row):
-            for j in xrange(col):
+        for i in range(row):
+            for j in range(col):
                 self.state['matrix'][self.state['cur_mtx']][(i,j)] = self.get_rand()
         self.main_menu()
         self.print_matrix()

@@ -42,7 +42,7 @@ def random_string(a, b):
 
 
 def random_data(a,b):
-    chars = ''.join(map(chr, range(256)))
+    chars = ''.join(map(chr, list(range(256))))
     return ''.join(choice(chars) for _ in range(randint(a, b)))
 
 hello = "Hello.*"
@@ -74,7 +74,7 @@ class Heartthrob(Actions):
         self.state['videos'][name] = {'buf':buf}
         
         if self.chance(0.5):
-            csum = 0xffffffff & sum(unpack("<I",buf[i:i+4])[0]^0x42424242 for i in xrange(0,l,4))
+            csum = 0xffffffff & sum(unpack("<I",buf[i:i+4])[0]^0x42424242 for i in range(0,l,4))
             csum = pack("<I",csum)
             self.state['videos'][name]['badcsum'] = False
         else:
@@ -97,7 +97,7 @@ class Heartthrob(Actions):
             self.write("\n")
             self.read(delim="\n",expect="wat")
             return
-        vid = choice(self.state['videos'].items())
+        vid = choice(list(self.state['videos'].items()))
         key = "B" if self.chance(0.5) else chr(randint(0x0b,ord('A')))
         self.write("play %s %s\n" % (vid[0],key))
 
@@ -106,7 +106,7 @@ class Heartthrob(Actions):
         else:
             #calc expected xord, run-length decoded buffer
             xbuf = ''.join(chr(0x42^ord(i)) for i in vid[1]['buf'])
-            xbuf = ''.join((ord(xbuf[i])+1)*xbuf[i+1] for i in xrange(0,len(xbuf),2))
+            xbuf = ''.join((ord(xbuf[i])+1)*xbuf[i+1] for i in range(0,len(xbuf),2))
             self.read(delim="PLAYBACK FINISHED\n",expect=xbuf+"\n")
 
     def list(self):

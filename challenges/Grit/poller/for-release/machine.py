@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from cStringIO import StringIO
+from io import StringIO
 from generator.actions import Actions
 import random
 import struct
@@ -50,7 +50,7 @@ class Compression4(object):
     def best_index(self, sample1, sample2):
         diff = abs(sample2 - sample1)
         best = None
-        for i in xrange(len(self.step_table)):
+        for i in range(len(self.step_table)):
             step = self.step_table[i]
             if best is None or abs(step - diff) < best[1]:
                 best = (i, abs(step - diff))
@@ -60,7 +60,7 @@ class Compression4(object):
         self.pred = []
         self.index = []
         samples = self.next_samples()
-        for x in xrange(len(samples)):
+        for x in range(len(samples)):
             sample = samples[x]
             self.pred.append(sample)
             if self.idx < self.track.samples():
@@ -171,7 +171,7 @@ class AudioStream(object):
     def fromSquareWave(cls, length, hz):
         data = []
         rate = 2 * SAMPLE_RATE / hz
-        for x in xrange(length):
+        for x in range(length):
             if (int(x / rate) % 2) == 0:
                 data.append(-(SAMPLE_MAX / 2))
             else:
@@ -188,18 +188,18 @@ class AudioStream(object):
     def mix(self, other, gain):
         self.extend(len(other.data))
 
-        for x in xrange(len(other.data)):
+        for x in range(len(other.data)):
             sample = other.data[x]
             self.data[x] = saturate(self.data[x] + gain.apply(sample))
 
     def apply_gain(self, gain):
-        for x in xrange(len(self.data)):
+        for x in range(len(self.data)):
             self.data[x] = saturate(gain.apply(self.data[x]))
 
     def apply_echo(self, delay):
         buf = [0] * delay
         gain = Gain.from_rational(-50, 100)
-        for x in xrange(len(self.data)):
+        for x in range(len(self.data)):
             wet = gain.apply(buf.pop(0))
             # mix wet and dry
             self.data[x] = saturate(self.data[x] + wet)
@@ -251,16 +251,16 @@ class AudioTrack(object):
     def compress32(self):
         hdr = struct.pack('<IIIIII', 0x2e617564, 24, self.samples(), 0, SAMPLE_RATE, len(self.channels))
         if len(self.channels) == 1:
-            data = ''.join([struct.pack('<i', self.channels[0].data[x]) for x in xrange(self.samples())])
+            data = ''.join([struct.pack('<i', self.channels[0].data[x]) for x in range(self.samples())])
         else:
-            data = ''.join([struct.pack('<ii', self.channels[0].data[x], self.channels[1].data[x]) for x in xrange(self.samples())])
+            data = ''.join([struct.pack('<ii', self.channels[0].data[x], self.channels[1].data[x]) for x in range(self.samples())])
         return hdr + data
 
     def decompress32(self, data):
         def decode(f):
             return struct.unpack('<i', f.read(4))[0]
         f = StringIO(data)
-        for x in xrange(self.samples()):
+        for x in range(self.samples()):
             if len(self.channels) == 1:
                 self.channels[0].data[x] = decode(f)
             else:
@@ -300,9 +300,9 @@ class AudioTrack(object):
 
         hdr = struct.pack('<IIIIII', 0x2e617564, 24, self.samples(), 2, SAMPLE_RATE, len(self.channels))
         if len(self.channels) == 1:
-            data = ''.join([struct.pack('<B', encode(self.channels[0].data[x])) for x in xrange(self.samples())])
+            data = ''.join([struct.pack('<B', encode(self.channels[0].data[x])) for x in range(self.samples())])
         else:
-            data = ''.join([struct.pack('<BB', encode(self.channels[0].data[x]), encode(self.channels[1].data[x])) for x in xrange(self.samples())])
+            data = ''.join([struct.pack('<BB', encode(self.channels[0].data[x]), encode(self.channels[1].data[x])) for x in range(self.samples())])
         return hdr + data
 
     def decompress8(self, data):
@@ -329,7 +329,7 @@ class AudioTrack(object):
             # scale to (SAMPLE_MIN..SAMPLE_MAX)
             return sample << 18
         f = StringIO(data)
-        for x in xrange(self.samples()):
+        for x in range(self.samples()):
             if len(self.channels) == 1:
                 self.channels[0].data[x] = decode(f)
             else:
@@ -413,7 +413,7 @@ class TemplateGenerator(Actions):
 
     def change_gain(self):
         # choose a random track and adjust gain
-        tracks = list(filter(lambda t: t is not None, self.state['tracks']))
+        tracks = list([t for t in self.state['tracks'] if t is not None])
         if len(tracks) == 0:
             self.write('0\n')
             self.read(delim='\n', expect='Invalid choice\n')
@@ -426,7 +426,7 @@ class TemplateGenerator(Actions):
 
     def change_pan(self):
         # choose a random track and adjust pan
-        tracks = list(filter(lambda t: t is not None, self.state['tracks']))
+        tracks = list([t for t in self.state['tracks'] if t is not None])
         if len(tracks) == 0:
             self.write('0\n')
             self.read(delim='\n', expect='Invalid choice\n')
@@ -440,7 +440,7 @@ class TemplateGenerator(Actions):
     def list_tracks(self):
         self.comment('List tracks')
         self.write('4\n')
-        for x in xrange(len(self.state['tracks'])):
+        for x in range(len(self.state['tracks'])):
             track = self.state['tracks'][x]
             if track is None: continue
             self.read(delim='\n', expect='%d) %s samples=%d\n'%(x, 'mono' if len(track.channels) == 1 else 'stereo', track.samples()))
@@ -448,8 +448,8 @@ class TemplateGenerator(Actions):
     def combine_split(self):
         # choose a random stereo track or choose two random mono tracks
         # XXX what happens if we send the same mono track twice? double-free? UAF?
-        stereo_tracks = list(filter(lambda t: t is not None and len(t.channels) == 2, self.state['tracks']))
-        mono_tracks = list(filter(lambda t: t is not None and len(t.channels) == 1, self.state['tracks']))
+        stereo_tracks = list([t for t in self.state['tracks'] if t is not None and len(t.channels) == 2])
+        mono_tracks = list([t for t in self.state['tracks'] if t is not None and len(t.channels) == 1])
         if len(stereo_tracks) > 0 and (self.chance(0.5) or len(mono_tracks) <= 1):
             self.comment('Split')
             track = random.choice(stereo_tracks)
@@ -493,9 +493,9 @@ class TemplateGenerator(Actions):
 
     def add_entropy(self):
         buf = list([ord(x) ^ 0x55 for x in self.magic_page])
-        for x in xrange(1, len(buf)):
+        for x in range(1, len(buf)):
             buf[x] = buf[x] ^ (buf[x-1] >> 1)
-        for x in xrange(0, len(buf), 4):
+        for x in range(0, len(buf), 4):
             value = buf[x+0]
             value |= buf[x+1] << 8
             value |= buf[x+2] << 16
@@ -515,7 +515,7 @@ class TemplateGenerator(Actions):
     def from_noise(self, samples):
         self.add_entropy()
         data = []
-        for x in xrange(samples):
+        for x in range(samples):
             data.append(self.random_int32() >> 1)
         return AudioStream(data)
 
@@ -557,7 +557,7 @@ class TemplateGenerator(Actions):
         self.read(delim="Cancel\n", expect=prompt)
 
     def effects_gain(self):
-        tracks = list(filter(lambda t: t is not None, self.state['tracks']))
+        tracks = list([t for t in self.state['tracks'] if t is not None])
         if len(tracks) == 0:
             self.write('5\n')
             return
@@ -569,7 +569,7 @@ class TemplateGenerator(Actions):
         track.apply_gain(Gain.from_rational(gain, 100))
 
     def effects_pan(self):
-        tracks = list(filter(lambda t: t is not None, self.state['tracks']))
+        tracks = list([t for t in self.state['tracks'] if t is not None])
         if len(tracks) == 0:
             self.write('5\n')
             return
@@ -581,7 +581,7 @@ class TemplateGenerator(Actions):
         track.apply_pan(int(float(pan) / 100 * SAMPLE_MAX))
 
     def effects_echo(self):
-        tracks = list(filter(lambda t: t is not None, self.state['tracks']))
+        tracks = list([t for t in self.state['tracks'] if t is not None])
         if len(tracks) == 0:
             self.write('5\n')
             return

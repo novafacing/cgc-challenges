@@ -22,16 +22,16 @@ LMT_DATA = 0x41544144
 LMT_TEXT = 0x54584554
 
 def random_string_n(size=20):
-  return ''.join([random.choice(string.printable) for x in xrange(size)])
+  return ''.join([random.choice(string.printable) for x in range(size)])
 
 def random_string(size=20):
-  return ''.join([random.choice(string.printable) for x in xrange(random.randint(1,size))])
+  return ''.join([random.choice(string.printable) for x in range(random.randint(1,size))])
 
 def random_digits(size=20):
-  return ''.join([random.choice(string.digits) for x in xrange(random.randint(1,size))])
+  return ''.join([random.choice(string.digits) for x in range(random.randint(1,size))])
 
 def random_bytes(size=20):
-  return ''.join([chr(random.randint(0,255)) for x in xrange(size)])
+  return ''.join([chr(random.randint(0,255)) for x in range(size)])
 
 def xor_s(s, key, inv=False):
   i = 0
@@ -209,12 +209,12 @@ class AWPLSIMP(Actions):
           pass
         ttl += 1
 
-      self.state['dms'] = filter(lambda x: x[0] in seqs, self.state['dms'].items())
+      self.state['dms'] = [x for x in list(self.state['dms'].items()) if x[0] in seqs]
       if self.state['helo']['secure'] and len(self.state['dms']) > 0:
         #dc = filter(lambda x: x[:4] == 'DATA', self.state['queue'])
         #dcd = OrderedDict([(struct.unpack('<I', x[4:8])[0], x[12:12+struct.unpack('<I', x[8:12])[0]]) for x in dc])
         #out = ''.join([self.decode_msg(x[1]) for x in dcd.items()])
-        exp_out = ''.join(map(lambda x: x[1], self.state['dms']))
+        exp_out = ''.join([x[1] for x in self.state['dms']])
         self.read(length=len('SECURE MESSAGE:\n'), expect='SECURE MESSAGE:\n')
         self.read(length=len(exp_out + '\n'), expect=exp_out + '\n')
 

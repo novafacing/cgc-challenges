@@ -42,7 +42,7 @@ class Collideoscope(Actions):
 
         length = random.randint(1, 100)
 
-        s = ''.join([random.choice(alphabet) for _ in xrange(length)])
+        s = ''.join([random.choice(alphabet) for _ in range(length)])
         # Make sure this is invalid
         s += '(\n'
 

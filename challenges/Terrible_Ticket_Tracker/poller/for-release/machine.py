@@ -28,14 +28,14 @@ def kaprica_mixin(self):
             H = (H * 3) & 0xffffffff
             H = ((H << 13) ^ (H >> 19) ^ (H >> 21)) & 0xffffffff
             return H
-        xmap = list(xrange(256))
-        xmap_inv = list(xrange(256))
+        xmap = list(range(256))
+        xmap_inv = list(range(256))
         state = hash_string(seed)
-        for i in xrange(255, 0, -1):
+        for i in range(255, 0, -1):
             j = state % i
             state = hash_iterate(state)
             xmap[i], xmap[j] = xmap[j], xmap[i]
-        for i in xrange(256):
+        for i in range(256):
             xmap_inv[xmap[i]] = i
         self.xlat_map = xmap
         self.xlat_map_inv = xmap_inv
@@ -228,7 +228,7 @@ class Dispatcher(object):
         self.r = r
 
         self.tickets = []
-        for _ in xrange(CRITICAL):
+        for _ in range(CRITICAL):
             self.tickets.append(deque())
 
     def add_ticket(self, ticket):
@@ -282,7 +282,7 @@ class Dispatcher(object):
         return s
 
     def get_ticket(self, prio):
-        for p in xrange(prio, 0, -1):
+        for p in range(prio, 0, -1):
             if len(self.tickets[p - 1]):
                 return self.tickets[p - 1].popleft()
 
@@ -294,7 +294,7 @@ class Dispatcher(object):
 
 def rs():
     n = random.randint(2, 16)
-    return ''.join([random.choice(string.letters) for _ in xrange(n)])
+    return ''.join([random.choice(string.letters) for _ in range(n)])
 
 
 class TemplateGenerator(Actions):
@@ -371,7 +371,7 @@ class TemplateGenerator(Actions):
         self.read_prompt()
 
         if self.chance(0.3):
-            t = random.choice(xrange(tid))
+            t = random.choice(range(tid))
         else:
             t = tid * 2
 
@@ -385,7 +385,7 @@ class TemplateGenerator(Actions):
         self.read_prompt()
 
         if self.chance(0.3):
-            t = random.choice(xrange(tid))
+            t = random.choice(range(tid))
         else:
             t = tid * 2
 
@@ -417,7 +417,7 @@ class TemplateGenerator(Actions):
         self.read_delim_s('OK')
 
     def hire(self):
-        p = random.choice(xrange(SEVERE + 2))
+        p = random.choice(range(SEVERE + 2))
 
         if LOW <= p <= CRITICAL and len(self.workers) < MAX_WORKERS:
             self.workers.append(Support(0, p))
@@ -427,11 +427,11 @@ class TemplateGenerator(Actions):
         self.read_delim_s('OK')
 
     def fire(self):
-        p = random.choice(xrange(SEVERE + 2))
+        p = random.choice(range(SEVERE + 2))
 
         if LOW <= p <= CRITICAL and len(self.workers) > 0:
             try:
-                to_fire = filter(lambda x: x.priority == p, self.workers)[0]
+                to_fire = [x for x in self.workers if x.priority == p][0]
             except IndexError:
                 to_fire = None
 

@@ -87,7 +87,7 @@ class TemplatePoller(Actions):
     def start(self):
         #self.delay(100)
         if DEBUG:
-            print "------- start -----------"
+            print("------- start -----------")
         self._gen_status_msgs()
         self.order_id = self.INITIAL_ORDER_ID
 
@@ -96,7 +96,7 @@ class TemplatePoller(Actions):
         Communicate using plain data (not serialized).
         '''
         if DEBUG:
-            print "cmd: plain -----------"
+            print("cmd: plain -----------")
 
         breakfast = self.create_random_breakfast(randint(3,16))
         breakfast = list(set(breakfast)) # rm dups
@@ -126,7 +126,7 @@ class TemplatePoller(Actions):
         Communicate using serialized data.
         '''
         if DEBUG:
-            print "cmd: serialized -----------"
+            print("cmd: serialized -----------")
 
         breakfast = self.create_random_breakfast(randint(3,16))
         breakfast = list(set(breakfast)) # rm dups
@@ -156,7 +156,7 @@ class TemplatePoller(Actions):
         Quit cleanly
         '''
         if DEBUG:
-            print "cmd: quit -----------"
+            print("cmd: quit -----------")
 
         return -1
 

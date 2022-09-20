@@ -58,7 +58,7 @@ class LMS(Actions):
         
         #dat list comprehension
         sessions = [LMSSession(urand(randint(1,256*100)),valid_tnum,valid_fnum,i) 
-                   for i in set([randint(0,2**16-1) for i in xrange(0,num_sessions)])]
+                   for i in set([randint(0,2**16-1) for i in range(0,num_sessions)])]
 
         for sess in sessions:
             for msg in sorted(sess.msgs, key=lambda k: random()):
@@ -73,7 +73,7 @@ class LMS(Actions):
         #dat list comprehension
         sessions = [LMSSession(urand(randint(1,256*100)),valid_tnum,
                     valid_fnum,i,randsize=True) for i in
-                    set([randint(0,2**16-1) for i in xrange(0,num_sessions)])]
+                    set([randint(0,2**16-1) for i in range(0,num_sessions)])]
 
         for sess in sessions:
             for msg in sorted(sess.msgs, key=lambda k: random()):

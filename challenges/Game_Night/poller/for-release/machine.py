@@ -50,7 +50,7 @@ class GameNight(Actions):
 
     def hugman(self):
         self.write('1\n')
-        for i in xrange(7):
+        for i in range(7):
             self.read(delim='\n', expect_format='pcre', expect='                     --------\n')
             self.read(delim='\n', expect_format='pcre', expect='                     |      |\n')
             self.read(delim='\n', expect_format='pcre', expect='                     .      |\n')

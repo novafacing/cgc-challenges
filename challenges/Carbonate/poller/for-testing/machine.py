@@ -22,22 +22,22 @@ class Scrambler():
 
         self.initialize_phases()
     def initialize_phases(self):
-        self.phases = list(xrange(8))
+        self.phases = list(range(8))
         scramble_args = [ScrambleItem, ScrambleItem]
-        for i in xrange(8):
+        for i in range(8):
             f = self.dll.__getattr__('cgc_phase_'+str(i))
             f.argtypes = scramble_args
             f.restype = ScrambleItem
             self.phases[i] = f
     def find_evil(self):
         return [243, 0, 60, 0, 25, 0, 155, 0]
-        evils = list(xrange(8))
+        evils = list(range(8))
         desired = 21
-        for i in xrange(7, -1, -1):
+        for i in range(7, -1, -1):
             # print "phase", i, "desired", desired
             found = False
 
-            for j in xrange(2**16):
+            for j in range(2**16):
                 current = j >> 8
                 my_state = j & 0xFF
                 first = current
@@ -62,8 +62,8 @@ class Scrambler():
                     found = True
                     break
             if not found:
-                raise StandardError("couldn't find an evil thing :(")
-        print evils
+                raise Exception("couldn't find an evil thing :(")
+        print(evils)
         return evils
 
 class Carbonate(Actions):
@@ -80,7 +80,7 @@ class Carbonate(Actions):
         self.write(self.p.empty_frame(0))
 
     def scramble(self):
-        for i in xrange(8):
+        for i in range(8):
             idk = randint(0, 2**8 - 1)
             self.comment("scramble step %d sending %d", i, idk)
             self.write(self.p.frame(1, pack('<H', idk)))

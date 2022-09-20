@@ -9,7 +9,7 @@ class Cqltor(Actions):
     def start(self):
        #self.delay(100)
        magic_prefix = self.magic_page[0:4]
-       chk = sum(map(lambda c: ord(c), magic_prefix))
+       chk = sum([ord(c) for c in magic_prefix])
        self.expect_str("cqltor ready " + str(chk))
 
     def menu(self):
@@ -18,11 +18,9 @@ class Cqltor(Actions):
     def intmath(self):
         self.comment("intmath")
 
-        pairs = map(lambda _x:
-                  str(random.randint(1,64)) +
+        pairs = [str(random.randint(1,64)) +
                     " " +
-                    random.sample(["+", "-", "/", "*"], 1)[0],
-                    xrange(random.randint(2,4)))
+                    random.sample(["+", "-", "/", "*"], 1)[0] for _x in range(random.randint(2,4))]
 
         math = " ".join(pairs)[0:-2]
         goal = eval(math)
@@ -42,9 +40,7 @@ class Cqltor(Actions):
         
         in_text = (
             start_spaces +
-            ''.join(map(lambda _x:
-                        chr(random.randint(0x41, 0x7a)),
-                        xrange(in_strlen))) +
+            ''.join([chr(random.randint(0x41, 0x7a)) for _x in range(in_strlen)]) +
             end_spaces)
 
         case_fun = 'upcase'

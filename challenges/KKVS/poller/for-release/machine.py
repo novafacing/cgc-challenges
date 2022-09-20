@@ -8,12 +8,13 @@ import re
 import string
 import struct
 import sys
+from functools import reduce
 
 def rs(n=16):
-    return ''.join([random.choice(string.letters) for _ in xrange(1, n + 1)])
+    return ''.join([random.choice(string.letters) for _ in range(1, n + 1)])
 
 def rls(_min=32, _max=256):
-    return rs(random.choice(xrange(_min, _max + 1)))
+    return rs(random.choice(range(_min, _max + 1)))
 
 def strtol(s):
     s = s.strip()
@@ -52,7 +53,7 @@ class Machine(Actions):
 
     def append(self):
         try:
-            key = random.choice(self.state['store'].keys())
+            key = random.choice(list(self.state['store'].keys()))
         except IndexError:
             return
         app_val = rls(_max=32)
@@ -72,12 +73,12 @@ class Machine(Actions):
 
     def bitcount(self):
         try:
-            key = random.choice(self.state['store'].keys())
+            key = random.choice(list(self.state['store'].keys()))
         except IndexError:
             return
 
         count = reduce(lambda acc, x: acc + x.count("1"),
-                       map(bin, map(ord, str(self.state['store'][key]))), 0)
+                       list(map(bin, list(map(ord, str(self.state['store'][key]))))), 0)
 
         self.read_prompt()
         self.write("bitcount {}\n".format(key))
@@ -85,9 +86,9 @@ class Machine(Actions):
 
     def bitop(self):
         try:
-            k1 = random.choice(self.state['store'].keys())
-            for _ in xrange(3):
-                k2 = random.choice(self.state['store'].keys())
+            k1 = random.choice(list(self.state['store'].keys()))
+            for _ in range(3):
+                k2 = random.choice(list(self.state['store'].keys()))
                 if k1 != k2:
                     break
             else:
@@ -107,7 +108,7 @@ class Machine(Actions):
         v1 = str(self.state['store'][k1])
         v2 = str(self.state['store'][k2])
 
-        z = itertools.izip_longest(v1, v2, fillvalue='\x00')
+        z = itertools.zip_longest(v1, v2, fillvalue='\x00')
 
         res = ""
         for a, b, in z:
@@ -123,7 +124,7 @@ class Machine(Actions):
 
     def decr(self):
         try:
-            key = random.choice(self.state['store'].keys())
+            key = random.choice(list(self.state['store'].keys()))
             if isinstance(self.state['store'][key], int):
                 val = self.state['store'][key]
             else:
@@ -151,7 +152,7 @@ class Machine(Actions):
             self.write("del {}\n".format(key))
             self.read(expect="0\n", delim="\n")
         else:
-            key = random.choice(self.state['store'].keys())
+            key = random.choice(list(self.state['store'].keys()))
             self.write("del {}\n".format(key))
             self.read(expect="1\n", delim="\n")
             self.state['store'].pop(key)
@@ -171,7 +172,7 @@ class Machine(Actions):
 
     def get(self):
         try:
-            key = random.choice(self.state['store'].keys())
+            key = random.choice(list(self.state['store'].keys()))
         except IndexError:
             return
         self.read_prompt()
@@ -181,7 +182,7 @@ class Machine(Actions):
     def incr(self):
 
         try:
-            key = random.choice(self.state['store'].keys())
+            key = random.choice(list(self.state['store'].keys()))
             if isinstance(self.state['store'][key], int):
                 val = self.state['store'][key]
             else:
@@ -210,7 +211,7 @@ class Machine(Actions):
 
     def rename(self):
         try:
-            old_key = random.choice(self.state['store'].keys())
+            old_key = random.choice(list(self.state['store'].keys()))
         except IndexError:
             return
 

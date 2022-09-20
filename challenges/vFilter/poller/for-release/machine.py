@@ -6,7 +6,7 @@ import struct
 
 def random_bytes(minlen, maxlen):
     length = random.randint(minlen, maxlen)
-    return ''.join([chr(random.randint(0,255)) for x in xrange(length)])
+    return ''.join([chr(random.randint(0,255)) for x in range(length)])
 
 class Filter(object):
     def __init__(self):
@@ -156,7 +156,7 @@ class Filter(object):
             lambda: self.st_fp(random.randint(0, 32))
         ]
 
-        for x in xrange(count):
+        for x in range(count):
             random.choice(INSN)()
 
     def execute(self, pkt, action):
@@ -187,7 +187,7 @@ class TemplateGenerator(Actions):
         self.read(length=0x1000, expect=self.magic_page)
 
     def random_pkts(self):
-        for x in xrange(int(25 * random.paretovariate(2))):
+        for x in range(int(25 * random.paretovariate(2))):
             self.random_pkt()
 
     def random_pkt(self):

@@ -43,41 +43,41 @@ class TemplateGenerator(Actions):
         self.write(struct.pack('>HII', INSERT, r, value))
 
     def retr(self):
-        r = random.choice(self.state['r'].keys())
+        r = random.choice(list(self.state['r'].keys()))
         self.write(struct.pack('>HI', RETR, r))
         self.read(length=4, expect=struct.pack('>I', self.state['r'][r]))
 
     def retr_all(self):
-        for r in self.state['r'].keys():
+        for r in list(self.state['r'].keys()):
             self.write(struct.pack('>HI', RETR, r))
             self.read(length=4, expect=struct.pack('>I', self.state['r'][r]))
 
     def add(self):
         dst = random_r()
-        a = random.choice(self.state['r'].keys())
-        b = random.choice(self.state['r'].keys())
+        a = random.choice(list(self.state['r'].keys()))
+        b = random.choice(list(self.state['r'].keys()))
         self.state['r'][dst] = self.state['r'][a] + self.state['r'][b]
 
         self.write(struct.pack('>HIII', ADD, a, b, dst))
 
     def sub(self):
         dst = random_r()
-        a = random.choice(self.state['r'].keys())
-        b = random.choice(self.state['r'].keys())
+        a = random.choice(list(self.state['r'].keys()))
+        b = random.choice(list(self.state['r'].keys()))
         self.state['r'][dst] = self.state['r'][a] - self.state['r'][b]
 
         self.write(struct.pack('>HIII', SUB, a, b, dst))
 
     def mul(self):
         dst = random_r()
-        a = random.choice(self.state['r'].keys())
-        b = random.choice(self.state['r'].keys())
+        a = random.choice(list(self.state['r'].keys()))
+        b = random.choice(list(self.state['r'].keys()))
         self.state['r'][dst] = self.state['r'][a] * self.state['r'][b]
 
         self.write(struct.pack('>HIII', MUL, a, b, dst))
 
     def sum(self):
-        start = random.choice(self.state['r'].keys())
+        start = random.choice(list(self.state['r'].keys()))
         end = start
         x = 0
         while end in self.state['r']:
@@ -89,7 +89,7 @@ class TemplateGenerator(Actions):
         self.write(struct.pack('>HIII', SUM, start, end, r))
 
     def prod(self):
-        start = random.choice(self.state['r'].keys())
+        start = random.choice(list(self.state['r'].keys()))
         end = start
         x = 1
         while end in self.state['r']:

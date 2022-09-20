@@ -34,7 +34,7 @@ class Machine(Actions):
     def do_tolower(self):
         self.write(self.progs['tolower'] + '\n')
 
-        for _ in xrange(10):
+        for _ in range(10):
             test_string = ''.join(random.sample(string.letters, 8))
             self.write(test_string.upper() + '\x04')
             self.read(length=len(test_string) + 1, expect=test_string.lower() + '$')
@@ -45,7 +45,7 @@ class Machine(Actions):
 
         n1 = 0
         n2 = 0
-        for i in xrange(random.randint(1, 7)):
+        for i in range(random.randint(1, 7)):
             n1 += (10 ** i) * random.randint(1, 9)
             n2 += (10 ** i) * random.randint(1, 9)
 

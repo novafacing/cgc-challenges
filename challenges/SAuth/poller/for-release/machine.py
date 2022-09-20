@@ -16,7 +16,7 @@ MSG_USERAUTH_BANNER = 113
 MSG_USERAUTH_PASSWD_CHANGEREQ = 120
 
 def random_bytes(n):
-    return ''.join([chr(random.randint(0,255)) for x in xrange(n)])
+    return ''.join([chr(random.randint(0,255)) for x in range(n)])
 
 def byte(x):
     return struct.pack('>B', x)
@@ -64,7 +64,7 @@ class TemplateGenerator(Actions):
         self.state['magic_offset'] = 0
         self.state['service'] = None
 
-        for x in xrange(16):
+        for x in range(16):
             username = self.magic_string(8)
             password = self.magic_string(8)
             self.state['creds'][username] = password
@@ -86,7 +86,7 @@ class TemplateGenerator(Actions):
         self.read_packet(byte(MSG_SERVICE_ACCEPT) + string(service_name))
 
     def userauth_request(self):
-        username = random.choice(self.state['creds'].keys() + [random_bytes(random.randint(0, 32))])
+        username = random.choice(list(self.state['creds'].keys()) + [random_bytes(random.randint(0, 32))])
         service_name = random_bytes(10)
         auth_name = 'password' if self.chance(0.9) else random_bytes(random.randint(0, 32))
         password = self.state['creds'].get(username, 'fakepassword')
@@ -119,6 +119,6 @@ class TemplateGenerator(Actions):
             self.read_packet(byte(MSG_USERAUTH_FAILURE) + string("password") + byte(0))
 
     def unimplemented(self):
-        msg = random.choice(list(set(xrange(256)) - set([MSG_DISCONNECT, MSG_IGNORE, MSG_UNRECOGNIZED, MSG_SERVICE_ACCEPT, MSG_SERVICE_REQUEST, MSG_USERAUTH_REQUEST, MSG_USERAUTH_FAILURE, MSG_USERAUTH_SUCCESS, MSG_USERAUTH_BANNER, MSG_USERAUTH_PASSWD_CHANGEREQ])))
+        msg = random.choice(list(set(range(256)) - set([MSG_DISCONNECT, MSG_IGNORE, MSG_UNRECOGNIZED, MSG_SERVICE_ACCEPT, MSG_SERVICE_REQUEST, MSG_USERAUTH_REQUEST, MSG_USERAUTH_FAILURE, MSG_USERAUTH_SUCCESS, MSG_USERAUTH_BANNER, MSG_USERAUTH_PASSWD_CHANGEREQ])))
         self.write_packet(byte(msg) + random_bytes(random.randint(0, 1024)))
         self.read_packet(byte(MSG_UNRECOGNIZED) + uint32(self.state['seq'] - 1))

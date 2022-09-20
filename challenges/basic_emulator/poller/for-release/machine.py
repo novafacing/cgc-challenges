@@ -191,18 +191,18 @@ class Game(Actions):
         self.read(delim='\n', expect='SP = %04X, PC = %04X\n' % (sp, pc))
 
     def add_insn(self):
-        opr = random.choice(['a', 'b', 'c', 'd', 'e', 'h', 'l'] + range(0, 255))
+        opr = random.choice(['a', 'b', 'c', 'd', 'e', 'h', 'l'] + list(range(0, 255)))
         self.state['instructions'] += [(I_ADD, opr)]
 
     def sub_insn(self):
-        opr = random.choice(['a', 'b', 'c', 'd', 'e', 'h', 'l'] + range(0, 255))
+        opr = random.choice(['a', 'b', 'c', 'd', 'e', 'h', 'l'] + list(range(0, 255)))
         self.state['instructions'] += [(I_SUB, opr)]
 
     def xor_insn(self):
-        opr = random.choice(['a', 'b', 'c', 'd', 'e', 'h', 'l'] + range(0, 255))
+        opr = random.choice(['a', 'b', 'c', 'd', 'e', 'h', 'l'] + list(range(0, 255)))
         self.state['instructions'] += [(I_XOR, opr)]
 
     def ld_insn(self):
         dst = random.choice(['a', 'b', 'c', 'd', 'e', 'h', 'l'])
-        opr = random.choice(['a', 'b', 'c', 'd', 'e', 'h', 'l'] + range(0, 255))
+        opr = random.choice(['a', 'b', 'c', 'd', 'e', 'h', 'l'] + list(range(0, 255)))
         self.state['instructions'] += [(I_LD, dst, opr)]

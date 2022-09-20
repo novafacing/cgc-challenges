@@ -73,13 +73,13 @@ class Estadio(Actions):
         self.read(length=8, expect=self.p.empty_frame(2))
 
     def gauntlet(self):
-        for x in xrange(0, 32):
+        for x in range(0, 32):
             self.write(self.p.frame(20, pack("<Q", self.g.churn_read_uint64())))
             self.read(length=8, expect=self.p.empty_frame(21))
 
     def fail_gauntlet(self):
         fail_at = randint(0, 30)
-        for x in xrange(0, 32):
+        for x in range(0, 32):
             if x == fail_at:
                 self.write(self.p.frame(20, pack("<Q", self.g.churn_read_uint64() + 1)))
                 return
@@ -101,7 +101,7 @@ class Estadio(Actions):
         length = randint(1, 78)
         s = BytesIO()
 
-        for x in xrange(0, length):
+        for x in range(0, length):
             s.write(pack("b", randint(32, 126)))
         s.write(pack("b", 0))
 

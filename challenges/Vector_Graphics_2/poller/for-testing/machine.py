@@ -1049,7 +1049,7 @@ class VGFSimulator(Actions):
         return
 
     def do_test(self):
-        print "Testing"
+        print("Testing")
 
 if __name__ == "__main__":
     sim = VGFSimulator()

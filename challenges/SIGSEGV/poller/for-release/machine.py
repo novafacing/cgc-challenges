@@ -29,6 +29,7 @@ import os
 from generator.actions import Actions
 from random import choice,randint
 from struct import *
+from functools import reduce
 
 
 #dropped here because external files aren't allowed....

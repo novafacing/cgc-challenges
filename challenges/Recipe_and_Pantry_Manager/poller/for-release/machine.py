@@ -567,7 +567,7 @@ class CROMU00087(Actions):
 				return
 
 		if ( self.pantry_count <= 0 ):
-			print "WHAT THE HELL: %d" %self.pantry_count
+			print("WHAT THE HELL: %d" %self.pantry_count)
 
 		r = random.randint( 1, self.pantry_count)
 		i = 0

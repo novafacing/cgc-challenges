@@ -2,11 +2,12 @@ from generator.actions import Actions
 import array
 import random
 import struct
+from functools import reduce
 
 def random_alpha():
-    alphabet = list(set([chr(x) for x in xrange(256)]) - set(['\0']))
+    alphabet = list(set([chr(x) for x in range(256)]) - set(['\0']))
     length = random.randint(10, 50)
-    return ''.join([random.choice(alphabet) for x in xrange(length)])
+    return ''.join([random.choice(alphabet) for x in range(length)])
 
 def random_price():
     return random.randint(10, 100000)
@@ -22,20 +23,20 @@ class SystemPrng(object):
         pass
 
     def get_bytes(self, cnt):
-        return ''.join([chr(random.randint(0, 255)) for x in xrange(cnt)])
+        return ''.join([chr(random.randint(0, 255)) for x in range(cnt)])
 
 class Prng(object):
     def __init__(self):
         self.state = 1
 
-    def next(self):
+    def __next__(self):
         self.state = (self.state * 6364136223846793005 + 1) & ((1 << 64) - 1)
         return self.state >> 32
 
     def get_bytes(self, cnt):
         s = ''
         while cnt:
-            x = struct.pack('>I', self.next())
+            x = struct.pack('>I', next(self))
             if cnt > 4:
                 s += x
                 cnt -= 4
@@ -66,8 +67,8 @@ class CBest(object):
         k1 = [ord(x) for x in k[8:]]
         k1 += [reduce(lambda x,y: x^y, k1)]
         self.K1 = array.array('B')
-        for x in xrange(9):
-            for y in xrange(8):
+        for x in range(9):
+            for y in range(8):
                 i = (x + y) % 9
                 k1[i] = ((k1[i] << 3) | (k1[i] >> 5)) & 0xff
                 self.K1.append(k1[i] ^ self.Kconst[x*8 + y])
@@ -75,8 +76,8 @@ class CBest(object):
         k2 = [ord(x) for x in k[0:8]]
         k2 += [reduce(lambda x,y: x^y, k2)]
         self.K2 = array.array('B')
-        for x in xrange(9):
-            for y in xrange(8):
+        for x in range(9):
+            for y in range(8):
                 i = (x + y) % 9
                 k2[i] = ((k2[i] << 3) | (k2[i] >> 5)) & 0xff
                 self.K2.append(k2[i] ^ self.Kconst[(9 + x)*8 + y])
@@ -111,7 +112,7 @@ class CBest(object):
     def encode(self, b):
         b = [ord(x) for x in b]
 
-        for x in xrange(8):
+        for x in range(8):
             b = self.R(8 * x, 8 * x, b)
 
         b[0] ^= self.K1[64]
@@ -157,7 +158,7 @@ class CFaith(object):
         self.K = array.array('H')
         L1, L2, R1, R2 = struct.unpack('<IIII', k)
         A, B, D = L1, L2, 0
-        for x in xrange(20):
+        for x in range(20):
             if (x % 3) == 0:
                 Q = R1 ^ R2
             elif (x % 3) == 1:
@@ -175,7 +176,7 @@ class CFaith(object):
         R ^= (self.K[34] << 16) | self.K[35]
         R ^= L
 
-        for x in xrange(32):
+        for x in range(32):
             L, R = self.F(x, L, R)
 
         L ^= R
@@ -201,11 +202,11 @@ class CDolphin(object):
         self.S2 = array.array('I', self.const[18+512:18+768])
         self.S3 = array.array('I', self.const[18+768:18+1024])
 
-        for x in xrange(18):
+        for x in range(18):
             self.P[x] ^= K[x % len(K)]
 
         def mix(A):
-            for x in xrange(0, len(A), 2):
+            for x in range(0, len(A), 2):
                 b = struct.pack('<II', A[x], A[x+1])
                 b = self.encode(b)
                 A[x], A[x+1] = struct.unpack('<II', b)
@@ -217,7 +218,7 @@ class CDolphin(object):
 
     def encode(self, b):
         L, R = struct.unpack('<II', b)
-        for x in xrange(16):
+        for x in range(16):
             L ^= self.P[x]
             L, R = R ^ self.F(L), L
         L, R = R ^ self.P[17], L ^ self.P[16]
@@ -230,7 +231,7 @@ class CCoffee(object):
 
         self.K = array.array('I')
         D = 0
-        for x in xrange(32):
+        for x in range(32):
             self.K.append((longs[D % 4] + D) & 0xffffffff)
             D = (D + 0x517CC1B7) & 0xFFFFFFFF
             self.K.append((longs[((D >> 14) ^ (D << 3)) % 4] + D) & 0xffffffff)
@@ -252,7 +253,7 @@ class CCoffee(object):
 
     def encode(self, b):
         L, R = struct.unpack('<II', b)
-        for x in xrange(32):
+        for x in range(32):
             L, R = self.F(x, L, R)
         return struct.pack('<II', R, L)
 
@@ -269,7 +270,7 @@ class Mode(object):
             return data + '\x00' * bytesize
 
     def xor(self, a, b):
-        return ''.join([chr(ord(a[x]) ^ ord(b[x])) for x in xrange(len(a))])
+        return ''.join([chr(ord(a[x]) ^ ord(b[x])) for x in range(len(a))])
 
 class MNull(Mode):
     def __init__(self, code):
@@ -289,7 +290,7 @@ class MBcm(Mode):
         bytesize = self.code.bsize / 8
         data = self.pad(data, self.code.bsize)
         result = ''
-        for x in xrange(0, len(data), bytesize):
+        for x in range(0, len(data), bytesize):
             b = data[x:x+bytesize]
             c = struct.pack('>Q', self.ctr)[-bytesize:]
             c = self.code.encode(c)
@@ -307,7 +308,7 @@ class MXim(Mode):
         bytesize = self.code.bsize / 8
         data = self.pad(data, self.code.bsize)
         result = ''
-        for x in xrange(0, len(data), bytesize):
+        for x in range(0, len(data), bytesize):
             b = data[x:x+bytesize]
             b = self.xor(b, self.state)
             b = self.code.encode(b)
@@ -324,7 +325,7 @@ class MXom(Mode):
         bytesize = self.code.bsize / 8
         data = self.pad(data, self.code.bsize)
         result = ''
-        for x in xrange(0, len(data), bytesize):
+        for x in range(0, len(data), bytesize):
             b = data[x:x+bytesize]
             d = self.xor(b, self.state)
             d = self.code.encode(d)
@@ -353,7 +354,7 @@ class Kx(object):
 
     def _rand(self, rng):
         def from_bytes(s):
-            longs = [struct.unpack('<I', s[x:x+4])[0] for x in xrange(0, len(s), 4)]
+            longs = [struct.unpack('<I', s[x:x+4])[0] for x in range(0, len(s), 4)]
             return int(''.join(['%08x' % x for x in reversed(longs)]),16)
         bytesize = ((self.Q.bit_length() + 31) / 32) * 4
         mask = (1 << self.Q.bit_length())-1
@@ -455,11 +456,11 @@ class Silk(Actions):
         self.state['products'] = []
 
     def negotiate(self):
-        everything = reduce(lambda x, y: (1 << y)|x, self.CODES.keys() + self.MODES.keys(), 0)
+        everything = reduce(lambda x, y: (1 << y)|x, list(self.CODES.keys()) + list(self.MODES.keys()), 0)
         self.recv(self.PKT_NEGOTIATE, struct.pack('<I', everything))
 
-        code = random.choice(self.CODES.keys())
-        mode = random.choice(self.MODES.keys())
+        code = random.choice(list(self.CODES.keys()))
+        mode = random.choice(list(self.MODES.keys()))
         self.send(self.PKT_NEGOTIATE, struct.pack('<I', (1 << code) | (1 << mode)))
 
         self.state['cdef'] = self.CODES[code]
@@ -469,7 +470,7 @@ class Silk(Actions):
         s = '%x' % n
         if len(s) % 2:
             s = '0' + s
-        result = ''.join([chr(int(s[x:x+2],16)) for x in xrange(0, len(s), 2)])
+        result = ''.join([chr(int(s[x:x+2],16)) for x in range(0, len(s), 2)])
         if bits is not None:
             bytesize = bits / 8
             result = ('\x00' * bytesize + result)[-bytesize:]

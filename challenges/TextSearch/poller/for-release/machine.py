@@ -27,7 +27,7 @@ def random_operator():
 def random_text():
     it = random.randint(1, 50)
     text = ""
-    for i in xrange(it):
+    for i in range(it):
         text += random_printable(10) + ' '
         if i % 3:
             text += '\n'
@@ -40,7 +40,7 @@ def random_text():
 def random_search_str():
     it = random.randint(1, 5)
     sstr = ''
-    for i in xrange(it):
+    for i in range(it):
         sstr = random_printable(1, False)
         if random.randint(0,7) == 0:
             sstr = '(' + sstr + ')'

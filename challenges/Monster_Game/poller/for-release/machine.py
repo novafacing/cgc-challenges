@@ -35,7 +35,7 @@ class CROMU00076(Actions):
 			elif self.prev_solution[move] == 'r':
 				self.arena['current_x'] += 1
 			else:
-				print '[ERROR] This should not be hit: %d' %(self.prev_solution[move])
+				print('[ERROR] This should not be hit: %d' %(self.prev_solution[move]))
 				return
 
 			self.set_marker( self.arena['current_x'], self.arena['current_y'], '@')
@@ -536,8 +536,8 @@ class CROMU00076(Actions):
 				else:
 					z += str(x)
 			z += '\n'
-			print z
-		print '\n'
+			print(z)
+		print('\n')
 
 	def print_map( self ):
 		for y in self.arena['map']:
