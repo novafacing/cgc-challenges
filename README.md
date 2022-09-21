@@ -13,6 +13,9 @@ recommended by [Klees et. al](https://arxiv.org/pdf/1808.09700.pdf) and most oth
 Fuzzing evaluation papers, alongside the
 [LAVA-M](https://sites.google.com/site/steelix2017/home/lava) dataset from Gavitt et. al.
 
+This repository will build all CGC binaries and generate the "polls" for them, which
+are essentially input seeds.
+
 ## Build Instructions
 
 ### Install Dependencies
