@@ -254,17 +254,18 @@ from typing import Tuple
 
 @dataclass
 class ChallengeStatus:
+    num: int
     name: str
     codename: str
     building: bool
     polls: bool
 
-    def tostr(self, widths: Tuple[int, int, int, int]) -> str:
+    def tostr(self, widths: Tuple[int, int, int, int, int]) -> str:
         check = "\u2705"
         cross = "\u274C"
         return (
-            f"| {self.name:<{widths[0]}} | {self.codename:<{widths[1]}} | "
-            f"{check if self.building else cross:<{widths[2]}} | {check if self.polls else cross:<{widths[3]}} |"
+            f"| {self.num:<{widths[0]}} | {self.name:<{widths[1]}} | {self.codename:<{widths[2]}} | "
+            f"{check if self.building else cross:<{widths[3]}} | {check if self.polls else cross:<{widths[4]}} |"
         )
 
 
@@ -275,14 +276,16 @@ def main(output_dir: Path) -> None:
         output_dir: The output directory
     """
     status = []
-    for chal, ident in KNOWN_CHALLENGE_IDS.items():
+    for i, chal_ident in enumerate(KNOWN_CHALLENGE_IDS.items()):
+        chal, ident = chal_ident
         name = f"[{chal}](challenges/{chal}/README.md)"
         codename = ident
         building = (output_dir / "bin" / chal).is_file()
         polls = (output_dir / "share" / "polls" / chal).is_dir()
-        status.append(ChallengeStatus(name, codename, building, polls))
+        status.append(ChallengeStatus(i, name, codename, building, polls))
 
     widths = (
+        len(str(len(status))),
         max(map(lambda x: len(x.name), status)),
         max(map(lambda x: len(x.codename), status)),
         len("Building"),
@@ -290,13 +293,13 @@ def main(output_dir: Path) -> None:
     )
 
     print(
-        f"| {'Challenge':<{widths[0]}} | {'Codename':<{widths[1]}} | "
-        f"{'Building':<{widths[2]}} | {'Polls Generated':<{widths[3]}} |"
+        f"| {'#':<{widths[0]}}  | {'Challenge':<{widths[1]}} | {'Codename':<{widths[2]}} | "
+        f"{'Building':<{widths[3]}} | {'Polls Generated':<{widths[4]}} |"
     )
 
     print(
         f"| {'-' * widths[0]} | {'-' * widths[1]} | "
-        f"{'-' * widths[2]} | {'-' * widths[3]} |"
+        f"{'-' * widths[2]} | {'-' * widths[3]} | {'-' * widths[4]} |"
     )
 
     for s in status:
