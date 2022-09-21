@@ -140,6 +140,8 @@ def main():
     parser.add_argument('--depth', required=False, type=int, default=0xFFFFF,
                         help='Maximum number of state transitions per '
                         'iteration')
+    parser.add_argument("--runpath", required=False, type=str,
+        default=None, help="Directory to chdir to before starting")
     parser.add_argument('name', metavar='name', type=str,
                         help='name of the poll')
     parser.add_argument('machine', metavar='machine', type=str,
@@ -156,6 +158,9 @@ def main():
     args.rounds = 1
     args.store_seed = True
     args.seed = None
+
+    if args.runpath is not None:
+        os.chdir(args.runpath)
     
     if args.seed:
         random.seed(args.seed)

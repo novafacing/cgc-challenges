@@ -3,6 +3,7 @@ disabled = get_option('disabled')
 enable_broken = get_option('enable_broken')
 
 broken = [
+    # Disabled due to build errors
     'Accel',
     'A_Game_of_Chance',
     'BIRC',
@@ -58,6 +59,27 @@ broken = [
     'university_enrollment',
     'virtual_pet',
     'Water_Treatment_Facility_Simulator',
+]
+
+polls_broken = [
+    # Disabled due to poller errors -- rely on dll for pollgen
+    '3D_Image_Toolkit',
+    'Azurad',
+    'Estadio',
+    'Image_Compressor',
+    'Lazybox',
+    'Material_Temperature_Simulation',
+    'Network_File_System',
+    'Network_Queuing_Simulator',
+    'PTaaS',
+    'REMATCH_2--Mail_Server--Crackaddr',
+    'RRPN',
+    'Recipe_and_Pantry_Manager',
+    'payroll',
+    'WordCompletion',
+    # Output error
+    'One_Vote',
+    'Snail_Mail',
 ]
 
 challenges_directory = meson.current_source_dir()
