@@ -276,7 +276,7 @@ def main(output_dir: Path) -> None:
     """
     status = []
     for chal, ident in KNOWN_CHALLENGE_IDS.items():
-        name = chal
+        name = f"[{chal}](challenges/{chal}/README.md)"
         codename = ident
         building = (output_dir / "bin" / chal).is_file()
         polls = (output_dir / "share" / "polls" / chal).is_dir()
