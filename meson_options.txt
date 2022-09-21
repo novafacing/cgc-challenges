@@ -806,3 +806,17 @@ option(
     value: 'output',
     description: 'Path to install built challenges into. Defaults to the ./output in the project root.'
 )
+
+option(
+    'no_polls',
+    type: 'boolean',
+    value: false,
+    description: 'Whether to disable poller seed generation. Defaults to YES polls.'
+)
+
+option(
+    'install_pip_modules',
+    type: 'boolean',
+    value: false,
+    description: 'Whether to automatically install python pip module dependencies. Defaults to NOT automatically install.'
+)

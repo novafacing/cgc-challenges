@@ -12,5 +12,6 @@ if install_path == 'output'
     endif
 endif
 
+subdir('polls')
 subdir('lib')
 subdir('challenges')
