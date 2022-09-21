@@ -50,6 +50,23 @@ easily:
 - Custom `CFLAGS` example: `meson -Dc_args='-fno-pie -no-pie'`
 - Custom `LDFLAGS` example: `meson -Dc_link_args='-fuse-ld=mold`
 
+## Do NOT Build Polls
+
+Poll building can be disabled entirely with `meson -Dno_polls=true`
+
+## Automatic Python2 Module Installs
+
+Four Python2 modules are required to build this project's polls (which are basically
+just input seeds):
+
+* `pycryptodome`
+* `pyyaml`
+* `matplotlib`
+
+These will *NOT* be installed automatically by default, but if you are missing these
+modules *or* missing Python2 pip, the build system can install them for you and set
+up Python2. Just pass `-Dinstall_pip_modules`.
+
 ## Enabling and Disabling Challenges
 
 By default all working challenges are enabled and will be built. The build is reasonably fast, but you may for some reason want to disable challenges.
