@@ -28,12 +28,12 @@ ChurnInitializer = ctypes.POINTER(ChurnInitializerArray)
 class Gyre:
     def __init__(self):
         # self.dll = ctypes.CDLL('build/patched/so/CROMU_90001.so')
-        root = os.getenv("CORPUS_ROOT", None)
+        root = os.getenv("BUILD_LIB_DIR", None)
 
         if root is None:
-            raise Exception("CORPUS_ROOT environment variable not set")
+            raise Exception("BUILD_LIB_DIR environment variable not set")
 
-        self.dll = ctypes.CDLL(root + "/Estadio/libCROMU_00020.so")
+        self.dll = ctypes.CDLL(root + "/libEstadio.so")
 
         self.churn_initialize = self.dll.cgc_churn_initialize
         self.churn_initialize.argtypes = [ChurnInitializer]
@@ -50,7 +50,7 @@ class Gyre:
         self.churn_initialize(churn_items)
 
     def random_seed(self):
-        return randint(0, 2 ** 60)
+        return randint(0, 2**60)
 
 
 class Estadio(Actions):

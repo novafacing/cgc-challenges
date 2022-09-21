@@ -60,12 +60,18 @@ broken = [
     'Water_Treatment_Facility_Simulator',
 ]
 
+challenges_directory = meson.current_source_dir()
+challenges_to_build = []
 foreach challenge : enabled
     if challenge not in disabled
         if challenge in broken and enable_broken
-                subdir(challenge)
+            challenges_to_build += challenge
         elif challenge not in broken
-            subdir(challenge)
+            challenges_to_build += challenge
         endif
     endif
+endforeach
+
+foreach challenge : challenges_to_build
+    subdir(challenge)
 endforeach

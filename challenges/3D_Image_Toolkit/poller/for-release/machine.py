@@ -44,10 +44,10 @@ class Poller(Actions):
         self.count = 0
 
         # setup ctypes for prng functions
-        root = os.getenv("CORPUS_ROOT", None)
+        root = os.getenv("BUILD_LIB_DIR", None)
         if root is None:
-            raise Exception("CORPUS_ROOT environment variable not set")
-        self.dll = CDLL(root + "/3D_Image_Toolkit/libCROMU_00078.so")
+            raise Exception("BUILD_LIB_DIR environment variable not set")
+        self.dll = CDLL(root + "/lib3D_Image_Toolkit.so")
         self.seed_prng = self.dll.cgc_seed_prng
         self.seed_prng.argtypes = [c_uint]
         self.seed_prng.restype = None

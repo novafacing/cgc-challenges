@@ -244,6 +244,21 @@ option(
         'yolodex',
     ],
     value: [
+        # Disabled due to poller errors
+        '3D_Image_Toolkit',
+        'Azurad',
+        'Estadio',
+        'Image_Compressor',
+        'Lazybox',
+        'Material_Temperature_Simulation',
+        'Network_File_System',
+        'Network_Queuing_Simulator',
+        'PTaaS',
+        'REMATCH_2--Mail_Server--Crackaddr',
+        'RRPN',
+        'Recipe_and_Pantry_Manager',
+        'payroll',
+        # Disabled due to build errors
         'Accel',
         'A_Game_of_Chance',
         'BIRC',

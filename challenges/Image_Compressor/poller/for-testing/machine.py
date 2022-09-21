@@ -67,10 +67,11 @@ class Bitmap(Actions):
         self.state["bitmap"] = bmp_file + bmp_info + data
 
     def end(self):
-        root = os.getenv("CORPUS_ROOT", None)
+        root = os.getenv("BUILD_BIN_DIR", None)
+        libs = os.getenv("BUILD_LIB_DIR", None)
 
         if root is None:
-            raise Exception("CORPUS_ROOT environment variable not set")
+            raise Exception("BUILD_BIN_DIR environment variable not set")
 
         binary = os.path.join(
             root,
@@ -78,7 +79,7 @@ class Bitmap(Actions):
 
         p = Popen(
             ["Image_Compressor"],
-            cwd=root,
+            cwd=libs,
             env={"LD_LIBRARY_PATH": root},
             stdin=PIPE,
             stdout=PIPE,
