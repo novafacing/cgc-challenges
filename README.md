@@ -50,8 +50,13 @@ You can specify a custom install directory with:
 Because this repository uses `meson` as a build system, you can customize the build
 easily:
 
-- Custom `CFLAGS` example: `meson -Dc_args='-fno-pie -no-pie'`
+- Custom `CFLAGS` example: `meson -Dc_args='-fno-inline'`
 - Custom `LDFLAGS` example: `meson -Dc_link_args='-fuse-ld=mold`
+
+There are a lot of included build options that you can find [here](https://mesonbuild.com/Builtin-options.html)
+probably, you will want:
+
+- To enable/disable PIE: `-Db_pie=true` or `-Db_pie=false`
 
 ## Do NOT Build Polls
 
