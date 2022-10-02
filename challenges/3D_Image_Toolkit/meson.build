@@ -23,7 +23,8 @@ challenge_3D_Image_Toolkit = executable(
     link_with: [libcgc],
     install_dir: install_path / 'bin',
     install: true,
-    pie: challenges_pie
+    pie: challenges_pie,
+    c_args: challenges_extra_c_args
 )
 
 challenge_lib_3D_Image_Toolkit = library(
@@ -33,5 +34,6 @@ challenge_lib_3D_Image_Toolkit = library(
     link_with: [libcgc],
     install_dir: install_path / 'lib',
     install: true,
-    pie: challenges_pie
+    pie: challenges_pie,
+    c_args: challenges_extra_c_args
 )

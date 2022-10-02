@@ -87,9 +87,13 @@ challenges_to_build = []
 challenges_force_nopie = get_option('force_nopie')
 build_pie = get_option('b_pie')
 if not build_pie or challenges_force_nopie
+    message('Building challenges without PIE')
     challenges_pie = false
+    challenges_extra_c_args = ['-fno-pie', '-no-pie']
 else
+    message('Building challenges with PIE')
     challenges_pie = true
+    challenges_extra_c_args = []
 endif
 
 foreach challenge : enabled
