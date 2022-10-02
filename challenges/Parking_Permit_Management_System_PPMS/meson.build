@@ -36,6 +36,5 @@ challenge_Parking_Permit_Management_System_PPMS = executable(
     link_with: [libcgc],
     install_dir: install_path / 'bin',
     install: true,
-    pie: challenges_pie,
-    c_args: challenges_extra_c_args
+    pie: challenges_pie
 )

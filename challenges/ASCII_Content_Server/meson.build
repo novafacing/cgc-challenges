@@ -18,6 +18,5 @@ challenge_ASCII_Content_Server = executable(
     link_with: [libcgc],
     install_dir: install_path / 'bin',
     install: true,
-    pie: challenges_pie,
-    c_args: challenges_extra_c_args
+    pie: challenges_pie
 )

@@ -18,8 +18,7 @@ challenge_Estadio = executable(
     link_with: [libcgc],
     install_dir: install_path / 'bin',
     install: true,
-    pie: challenges_pie,
-    c_args: challenges_extra_c_args
+    pie: challenges_pie
 )
 
 challenge_lib_Estadio = library(
@@ -29,6 +28,5 @@ challenge_lib_Estadio = library(
     link_with: [libcgc],
     install_dir: install_path / 'lib',
     install: true,
-    pie: challenges_pie,
-    c_args: challenges_extra_c_args
+    pie: challenges_pie
 )
