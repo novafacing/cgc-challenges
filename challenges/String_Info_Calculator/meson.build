@@ -16,5 +16,6 @@ challenge_String_Info_Calculator = executable(
     include_directories: [challenge_String_Info_Calculator_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

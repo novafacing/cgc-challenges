@@ -13,5 +13,6 @@ challenge_Eddy = executable(
     include_directories: [challenge_Eddy_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

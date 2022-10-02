@@ -23,5 +23,6 @@ challenge_ECM_TCM_Simulator = executable(
     include_directories: [challenge_ECM_TCM_Simulator_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

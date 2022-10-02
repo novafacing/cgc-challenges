@@ -36,5 +36,6 @@ challenge_Bloomy_Sunday = executable(
     include_directories: [challenge_Bloomy_Sunday_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

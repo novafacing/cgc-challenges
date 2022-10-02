@@ -10,5 +10,6 @@ challenge_Music_Store_Client = executable(
     include_directories: [challenge_Music_Store_Client_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

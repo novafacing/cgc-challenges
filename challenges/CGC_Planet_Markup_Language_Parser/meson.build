@@ -20,5 +20,6 @@ challenge_CGC_Planet_Markup_Language_Parser = executable(
     include_directories: [challenge_CGC_Planet_Markup_Language_Parser_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

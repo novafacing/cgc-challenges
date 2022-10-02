@@ -24,5 +24,6 @@ challenge_Scrum_Database = executable(
     include_directories: [challenge_Scrum_Database_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

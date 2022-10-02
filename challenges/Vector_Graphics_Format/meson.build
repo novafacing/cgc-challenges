@@ -15,5 +15,6 @@ challenge_Vector_Graphics_Format = executable(
     include_directories: [challenge_Vector_Graphics_Format_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

@@ -33,5 +33,6 @@ challenge_online_job_application2 = executable(
     include_directories: [challenge_online_job_application2_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

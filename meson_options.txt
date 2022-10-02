@@ -835,3 +835,10 @@ option(
     value: false,
     description: 'Whether to automatically install python pip module dependencies. Defaults to NOT automatically install.'
 )
+
+option(
+    'force_nopie',
+    type: 'boolean',
+    value: false,
+    description: 'Whether to force no-pie on all challenges. This addresses a meson bug filed as issue 10885. Defaults to NOT force no-pie.'
+)

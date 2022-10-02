@@ -17,7 +17,8 @@ challenge_Estadio = executable(
     include_directories: [challenge_Estadio_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )
 
 challenge_lib_Estadio = library(
@@ -26,5 +27,6 @@ challenge_lib_Estadio = library(
     include_directories: [challenge_Estadio_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'lib',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

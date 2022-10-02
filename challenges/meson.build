@@ -84,6 +84,14 @@ polls_broken = [
 
 challenges_directory = meson.current_source_dir()
 challenges_to_build = []
+challenges_force_nopie = get_option('force_nopie')
+build_pie = get_option('b_pie')
+if not build_pie or challenges_force_nopie
+    challenges_pie = false
+else
+    challenges_pie = true
+endif
+
 foreach challenge : enabled
     if challenge not in disabled
         if challenge in broken and enable_broken

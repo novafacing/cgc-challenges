@@ -19,5 +19,6 @@ challenge_Thermal_Controller_v3 = executable(
     include_directories: [challenge_Thermal_Controller_v3_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

@@ -29,5 +29,6 @@ challenge_netstorage = executable(
     include_directories: [challenge_netstorage_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

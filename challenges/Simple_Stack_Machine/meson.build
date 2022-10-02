@@ -8,5 +8,6 @@ challenge_Simple_Stack_Machine = executable(
     include_directories: [libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

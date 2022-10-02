@@ -15,5 +15,6 @@ challenge_CGC_Video_Format_Parser_and_Viewer = executable(
     include_directories: [challenge_CGC_Video_Format_Parser_and_Viewer_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )

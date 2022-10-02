@@ -41,5 +41,6 @@ challenge_Space_Attackers = executable(
     include_directories: [challenge_Space_Attackers_inc, libcgc_inc],
     link_with: [libcgc],
     install_dir: install_path / 'bin',
-    install: true
+    install: true,
+    pie: challenges_pie
 )
