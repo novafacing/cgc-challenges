@@ -25,5 +25,6 @@ challenge_Virtual_Machine = executable(
     link_with: [libcgc],
     install_dir: install_path / 'bin',
     install: true,
-    pie: challenges_pie
+    pie: challenges_pie,
+    c_args: challenges_extra_c_args
 )
