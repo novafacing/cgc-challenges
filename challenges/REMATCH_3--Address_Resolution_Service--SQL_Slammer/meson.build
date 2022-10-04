@@ -21,6 +21,5 @@ challenge_REMATCH_3__Address_Resolution_Service__SQL_Slammer = executable(
     install_dir: install_path / 'bin',
     install: true,
     pie: challenges_pie,
-    c_args: challenges_extra_c_args,
     link_args: challenges_extra_link_args
 )

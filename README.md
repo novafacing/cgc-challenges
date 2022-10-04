@@ -57,6 +57,9 @@ There are a lot of included build options that you can find [here](https://meson
 probably, you will want:
 
 - To enable/disable PIE: `-Db_pie=true` or `-Db_pie=false`
+- NOTE: on some compilers for some reason, `b_pie` does not affect PIE executable building.
+  in this case, you can use `-Dforce_nopie=true` to force no-pie building. This is
+  tracked as issue [10885](https://github.com/mesonbuildmeson/issues/10885).
 
 ## Do NOT Build Polls
 

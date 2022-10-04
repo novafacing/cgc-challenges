@@ -52,6 +52,5 @@ challenge_Terrible_Ticket_Tracker = executable(
     install_dir: install_path / 'bin',
     install: true,
     pie: challenges_pie,
-    c_args: challenges_extra_c_args,
     link_args: challenges_extra_link_args
 )
