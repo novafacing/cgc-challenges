@@ -24,7 +24,8 @@ challenge_3D_Image_Toolkit = executable(
     install_dir: install_path / 'bin',
     install: true,
     pie: challenges_pie,
-    c_args: challenges_extra_c_args
+    c_args: challenges_extra_c_args,
+    link_args: challenges_extra_link_args
 )
 
 challenge_lib_3D_Image_Toolkit = library(
@@ -35,5 +36,6 @@ challenge_lib_3D_Image_Toolkit = library(
     install_dir: install_path / 'lib',
     install: true,
     pie: challenges_pie,
-    c_args: challenges_extra_c_args
+    c_args: challenges_extra_c_args,
+    link_args: challenges_extra_link_args
 )

@@ -89,6 +89,7 @@ build_pie = get_option('b_pie')
 if not build_pie or challenges_force_nopie
     challenges_pie = false
     challenges_extra_c_args = ['-no-pie']
+    challenges_extra_link_args = ['-no-pie']
 else
     challenges_pie = true
     challenges_extra_c_args = []
