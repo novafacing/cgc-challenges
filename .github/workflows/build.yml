@@ -27,4 +27,5 @@ jobs:
           body: "Release containing PIE and NO-PIE builds from Ubuntu 20.04"
           token: ${{ secrets.GITHUB_TOKEN }}
           commit: "main"
+          tag: "main"
 
