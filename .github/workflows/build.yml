@@ -9,8 +9,8 @@ jobs:
       - uses: actions/checkout@v3
       - run: sudo apt-get install -y python3 python3-pip python2
       - run: python3 -m pip install meson ninja pwntools
-      - run: meson -Dinstall_pip_modules=true -Dinstall_path=./cgc-pie builddir-pie
-      - run: meson -Db_pie=false -Dforce_nopie=true -Dinstall_pip_modules=true -Dinstall_path=./cgc-nopie builddir-nopie
+      - run: meson -Dinstall_pip_modules=true -Dinstall_path=$PWD/cgc-pie builddir-pie
+      - run: meson -Db_pie=false -Dforce_nopie=true -Dinstall_pip_modules=true -Dinstall_path=$PWD/cgc-nopie builddir-nopie
       - run: meson compile -C builddir-pie
       - run: meson compile -C builddir-nopie
       - run: meson install -C builddir-pie
