@@ -26,7 +26,7 @@ foreach challenge : challenges_to_build
 
     poller_targets += custom_target(
         challenge + '_polls',
-        output: poll_names,
+        output: challenge,
         input: [machine_file, state_file],
         command : [
             'env',
@@ -39,9 +39,9 @@ foreach challenge : challenges_to_build
             challenge_dir,
             challenge,
             '@INPUT@',
-            meson.current_build_dir()
+            meson.current_build_dir() / challenge,
         ],
-        install_dir : install_path / 'share' / 'polls' / challenge,
+        install_dir : install_path / 'share' / 'polls',
         install : true
     )
 endforeach

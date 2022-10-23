@@ -263,7 +263,7 @@ def main():
             pass
 
 
-    graph.plot(args.output)
+    # graph.plot(args.output)
 
 if __name__ == '__main__':
     main()
