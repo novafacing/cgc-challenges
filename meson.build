@@ -2,8 +2,9 @@ project('cb-multios-meson', 'c', 'cpp')
 
 
 # There are a lot of uninit errors in the code that this fixes
-add_project_arguments('-ftrivial-auto-var-init=zero', language: 'c')
-add_project_arguments('-ftrivial-auto-var-init=zero', language: 'cpp')
+# Only supported with gcc-12 :/
+# add_project_arguments('-ftrivial-auto-var-init=zero', language: 'c')
+# add_project_arguments('-ftrivial-auto-var-init=zero', language: 'cpp')
 
 # Set up install directory
 fs = import('fs')
