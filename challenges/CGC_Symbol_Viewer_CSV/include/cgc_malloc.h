@@ -35,6 +35,8 @@
 #define NEW_CHUNK_SIZE 262144
 #define ALIGNMENT 8
 
+typedef unsigned long int cgc_size_t;
+
 extern struct blk_t *cgc_free_lists[NUM_FREE_LISTS];
 extern cgc_size_t size_class_limits[NUM_FREE_LISTS];
 

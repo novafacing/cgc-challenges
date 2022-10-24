@@ -23,29 +23,11 @@
  *
  */
 
-#include "libcgc.h"
 #include "cgc_malloc.h"
 #include "cgc_stdlib.h"
+#include "libcgc.h"
+#include <stdlib.h>
 
-static void cgc_free_huge(struct blk_t *blk)
-{
-    cgc_deallocate(blk, blk->size);
-}
+static void cgc_free_huge(struct blk_t *blk) { cgc_deallocate(blk, blk->size); }
 
-void cgc_free(void *ptr)
-{
-  if (ptr == NULL)
-    return;
-
-  struct blk_t *blk = (struct blk_t *)((intptr_t)ptr - HEADER_PADDING);
-
-  if (blk->free != 0)
-    return;
-
-  if (blk->size >= NEW_CHUNK_SIZE) {
-    cgc_free_huge(blk);
-  } else {
-    cgc_insert_into_flist(blk);
-    cgc_coalesce(blk);
-  }
-}
+void cgc_free(void *ptr) { free(ptr); }
