@@ -1,4 +1,4 @@
-poller_targets = []
+poller_targets = {}
 foreach challenge : challenges_to_build
     if challenge in polls_broken
         continue
@@ -24,7 +24,7 @@ foreach challenge : challenges_to_build
         continue
     endif
 
-    poller_targets += custom_target(
+    poller_targets += {challenge: custom_target(
         challenge + '_polls',
         output: challenge,
         input: [machine_file, state_file],
@@ -43,5 +43,5 @@ foreach challenge : challenges_to_build
         ],
         install_dir : install_path / 'share' / 'polls',
         install : true
-    )
+    )}
 endforeach

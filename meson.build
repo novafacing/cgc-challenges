@@ -81,3 +81,5 @@ subdir('challenges')
 if not get_option('no_polls')
     subdir('polls')
 endif
+
+subdir('test')
