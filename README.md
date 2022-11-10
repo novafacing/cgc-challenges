@@ -14,14 +14,37 @@ Fuzzing evaluation papers, alongside the
 [LAVA-M](https://sites.google.com/site/steelix2017/home/lava) dataset from Gavitt et. al.
 
 This repository will build all CGC binaries and generate the "polls" for them, which
-are essentially input seeds.
+are essentially input seeds. It also provides a one-shot test for each binary, as many
+binaries are broken (for example `cgc_malloc` from Kaprica does not run correctly and
+the fix is to replace its body with a call to `malloc` but this is not done yet for all
+binaries).
+
+## Table of Contents
+
+- [CGC Challenges](#cgc-challenges)
+  - [Table of Contents](#table-of-contents)
+  - [Build Instructions](#build-instructions)
+    - [Install Dependencies](#install-dependencies)
+    - [Compile Challenges](#compile-challenges)
+    - [Install Challenges](#install-challenges)
+    - [Test Challenges](#test-challenges)
+  - [Customizing Build](#customizing-build)
+    - [Change Output Directory](#change-output-directory)
+    - [Custom Flags](#custom-flags)
+    - [Turn off poll building](#turn-off-poll-building)
+    - [Automatic Python2 Module Installs](#automatic-python2-module-installs)
+    - [Enabling and Disabling Challenges](#enabling-and-disabling-challenges)
+      - [Disable Challenges](#disable-challenges)
+      - [Enable Challenges](#enable-challenges)
+      - [Enable Broken Challenges](#enable-broken-challenges)
+  - [Challenge Status](#challenge-status)
 
 ## Build Instructions
 
 ### Install Dependencies
 
 ```sh
-$ sudo apt-get install meson ninja-build build-essential
+$ sudo apt-get install meson ninja-build build-essential python2
 ```
 
 ### Compile Challenges
@@ -31,7 +54,7 @@ $ meson builddir
 $ meson compile -C builddir
 ```
 
-### "Install" Challenges
+### Install Challenges
 
 By default, challenges will be "installed" to `./output/`.
 
@@ -39,16 +62,24 @@ By default, challenges will be "installed" to `./output/`.
 $ meson install -C builddir
 ```
 
-## Change Output Directory
+### Test Challenges
+
+You can test the challenges with their generated polls with:
+
+```sh
+$ meson test -C builddir
+```
+
+## Customizing Build
+
+### Change Output Directory
 
 You can specify a custom install directory with:
 
 `meson "-Dinstall_path=/path/to/install/dir" builddir`
 
-## Customizing Build
+### Custom Flags
 
-Because this repository uses `meson` as a build system, you can customize the build
-easily:
 
 - Custom `CFLAGS` example: `meson -Dc_args='-fno-inline'`
 - Custom `LDFLAGS` example: `meson -Dc_link_args='-fuse-ld=mold`
@@ -61,11 +92,11 @@ probably, you will want:
   in this case, you can use `-Dforce_nopie=true` to force no-pie building. This is
   tracked as issue [10885](https://github.com/mesonbuildmeson/issues/10885).
 
-## Do NOT Build Polls
+### Turn off poll building
 
 Poll building can be disabled entirely with `meson -Dno_polls=true`
 
-## Automatic Python2 Module Installs
+### Automatic Python2 Module Installs
 
 Four Python2 modules are required to build this project's polls (which are basically
 just input seeds):
@@ -78,11 +109,11 @@ These will *NOT* be installed automatically by default, but if you are missing t
 modules *or* missing Python2 pip, the build system can install them for you and set
 up Python2. Just pass `-Dinstall_pip_modules`.
 
-## Enabling and Disabling Challenges
+### Enabling and Disabling Challenges
 
 By default all working challenges are enabled and will be built. The build is reasonably fast, but you may for some reason want to disable challenges.
 
-### Disable Challenges
+#### Disable Challenges
 
 You can specify a list of challenges to disable with:
 
@@ -93,7 +124,7 @@ challenges will toggle it off. The list of disabled challenges defaults to the l
 broken challenges, but if this option is passed the passed list will *not* override the
 list of broken challenges unless `"-Denable_broken"` is also passed.
 
-### Enable Challenges
+#### Enable Challenges
 
 You can specify a list of challenges to enable with:
 
@@ -101,7 +132,7 @@ You can specify a list of challenges to enable with:
 
 *Only* challenges that are explicitly enabled will be built if this option is provided.
 
-### Enable Broken Challenges
+#### Enable Broken Challenges
 
 You can enable broken challenges (for testing purposes if you are trying to fix one, in
 which case, thanks!) with:

@@ -243,6 +243,7 @@ option(
         'XStore',
         'yolodex',
     ],
+
     value: [
         # Disabled due to poller errors
         '3D_Image_Toolkit',
@@ -563,6 +564,7 @@ option(
         'XStore',
         'yolodex',
     ],
+
     value: [
         '3D_Image_Toolkit',
         'Accel',
