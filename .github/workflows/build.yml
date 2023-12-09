@@ -26,5 +26,5 @@ jobs:
       - run: tar -czvf cgc.tar.gz cgc-pie cgc-nopie
       - run: |
           gh release create "main/${{ github.sha }}" \
-            --repo "${{ github.repository }}" --title "Main ${{ github.sha }}" cgc-pie cgc-nopie
+            --repo "${{ github.repository }}" --title "Main ${{ github.sha }}" cgc.tar.gz
 
