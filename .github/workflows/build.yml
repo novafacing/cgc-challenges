@@ -16,17 +16,10 @@ jobs:
       - run: meson compile -C builddir-nopie
       - run: meson install -C builddir-pie
       - run: meson install -C builddir-nopie
-      - uses: thedoctor0/zip-release@main
-        with:
-          type: 'tar'
-          filename: release.tar.gz
-          directory: .
-          path: cgc-pie cgc-nopie
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "release.tar.gz"
+          artifacts: "cgc-pie,cgc-nopie"
           body: "Release containing PIE and NO-PIE builds from Ubuntu 20.04"
           token: ${{ secrets.GITHUB_TOKEN }}
           commit: "main"
-          tag: "main"
-
+          tag: "main/${{ github.sha }}"
