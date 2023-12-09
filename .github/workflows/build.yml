@@ -23,6 +23,7 @@ jobs:
       - run: meson compile -C builddir-nopie
       - run: meson install -C builddir-pie
       - run: meson install -C builddir-nopie
+      - run: tar -czvf cgc.tar.gz cgc-pie cgc-nopie
       - run: |
           gh release create "main/${{ github.sha }}" \
             --repo "${{ github.repository }}" --title "Main ${{ github.sha }}" cgc-pie cgc-nopie
