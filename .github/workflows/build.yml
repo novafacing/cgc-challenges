@@ -6,23 +6,33 @@ on:
 
 
 jobs:
-  check-build:
-    runs-on: ubuntu-latest
+  build_and_publish:
+    name: Build and Publish
     container: ubuntu:22.04
+    runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
       - run: apt-get -y update && apt-get install -y python3 python3-pip python2 gh
       - run: python3 -m pip install meson ninja pwntools
+      - uses: actions/checkout@v3
       - run: meson -Dinstall_pip_modules=true -Dinstall_path=$PWD/cgc-pie builddir-pie
       - run: meson -Db_pie=false -Dforce_nopie=true -Dinstall_pip_modules=true -Dinstall_path=$PWD/cgc-nopie builddir-nopie
       - run: meson compile -C builddir-pie
       - run: meson compile -C builddir-nopie
       - run: meson install -C builddir-pie
       - run: meson install -C builddir-nopie
-      - run: tar -czvf cgc.tar.gz cgc-pie cgc-nopie
+      - run: tar -czvf cgc.tar.gz cgc-pie cgc-nopie && chmod 755 cgc.tar.gz
       - run: |
-          gh release create "main/${{ github.sha }}" \
-            --repo "${{ github.repository }}" --title "Main ${{ github.sha }}" cgc.tar.gz
+          cat <<'EOF' >> release-notes
+          Automated release of built binaries (both PIE and no-PIE). See the README.md for the matrix of compiling,
+          polls working, and non-segfaulting CBs.
+          EOF
+
+          gh release create \
+            "release/${{ github.sha }}" \
+            --repo "${{ github.repository }}" \
+            --title "Release ${{ github.sha }}" \
+            --notes-file release-notes \
+            cgc.tar.gz
 
